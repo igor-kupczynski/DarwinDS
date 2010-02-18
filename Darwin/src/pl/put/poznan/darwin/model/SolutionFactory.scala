@@ -2,6 +2,7 @@ package pl.put.poznan.darwin.model
 
 import Config.Solution
 import scala.util.Random
+import collection.mutable.HashMap
 
 
 abstract class SolutionFactory {
@@ -13,7 +14,7 @@ object SimpleSolutionFactory extends SolutionFactory {
   private val rng: Random = Config.getRNG()
 
   def generate(p: Problem): Solution = {
-    var result: Map[String, Double] = Map()
+    val result = new HashMap[String, Double]
     p.getVariables() foreach ((v: Variable) => {
       result(v.name) = rng.nextDouble() * Config.MAX_VARIABLE;
     })
