@@ -1,6 +1,7 @@
 package pl.put.poznan.darwin.model
 
 import Config.{Scenario, Solution};
+import scala.Iterator.range
 
 object Runner {
   def main(args: Array[String]) {
@@ -20,5 +21,17 @@ object Runner {
     }
 
     p.goals foreach ((g : Goal) => println(g.name + ": " + ExpressionEvaluator.evaluate(g.exp, scenario, solution)))
+
+    var solutions: List[Solution] = Nil
+    for (idx <- range(0, Config.SOLUTIONS)) {
+      solutions = SimpleSolutionFactory.generate(p) :: solutions
+    }
+    println(solutions.head)
+
+    var scenarios: List[Scenario] = Nil
+    for (idx <- range(0, Config.SCENARIOS)) {
+      scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
+    }
+    println(scenarios.head)
   }
 }

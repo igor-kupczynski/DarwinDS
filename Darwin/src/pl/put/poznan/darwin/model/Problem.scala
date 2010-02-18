@@ -1,7 +1,43 @@
 package pl.put.poznan.darwin.model
 
 case class Problem(name: String, goals: List[Goal], constraints: List[Expression]) {
-  
+
+  private var variables: List[Variable] = null
+  private var intervals: List[Interval] = null
+
+  def getVariables(): List[Variable] = {
+    if (variables == null) {
+      variables = Nil
+      goals foreach ((g: Goal) => {
+        ExpressionExtractor.getVariables(g.exp) foreach ((v: Variable) => {
+          if (!variables.contains(v)) variables = v :: variables
+        })
+      })
+      constraints foreach ((e: Expression) => {
+        ExpressionExtractor.getVariables(e) foreach ((v: Variable) => {
+          if (!variables.contains(v)) variables = v :: variables
+        })
+      })
+    }
+    variables
+  }
+
+  def getIntervals(): List[Interval] = {
+    if (intervals == null) {
+      intervals = Nil
+      goals foreach ((g: Goal) => {
+        ExpressionExtractor.getIntervals(g.exp) foreach ((i: Interval) => {
+          if (!intervals.contains(i)) intervals = i :: intervals
+        })
+      })
+      constraints foreach ((e: Expression) => {
+        ExpressionExtractor.getIntervals(e) foreach ((i: Interval) => {
+          if (!intervals.contains(i)) intervals = i :: intervals
+        })
+      })
+    }
+    intervals
+  }
 }
 
 
