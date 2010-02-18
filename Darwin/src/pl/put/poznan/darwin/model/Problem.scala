@@ -1,4 +1,8 @@
-case class Problem(name: String, goals: List[Goal], constraints: List[Expr])
+package pl.put.poznan.darwin.model
+
+case class Problem(name: String, goals: List[Goal], constraints: List[Expression]) {
+  
+}
 
 
 object DefaultProblemFactory {
