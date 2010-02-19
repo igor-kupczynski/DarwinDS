@@ -8,17 +8,12 @@ object Experiment {
 
   def perform(problem: Problem,
               scenarios: List[Scenario],
-              solutions: List[Solution]): HashMap[Solution, HashMap[Goal, List[Double]]] = {
-    val result = new HashMap[Solution, HashMap[Goal, List[Double]]]
+              solutions: List[Solution]): HashMap[Solution, SolutionResult] = {
+    val result = new HashMap[Solution, SolutionResult]
 
     solutions foreach ((sol: Solution) => {
-      val solutionResult = new HashMap[Goal, List[Double]]
-      problem.goals foreach {case g => solutionResult(g) = Nil}
-
-      scenarios foreach {(scen: Scenario) =>
-        problem.evaluate(scen, sol) foreach {case (g, res) => solutionResult(g) = res :: solutionResult(g)}
-      }
-
+      val solutionResult: SolutionResult = new SolutionResult
+      scenarios foreach ((scen: Scenario) => solutionResult.addResult(problem.evaluate(scen, sol)))
       result(sol) = solutionResult
     })
     result
