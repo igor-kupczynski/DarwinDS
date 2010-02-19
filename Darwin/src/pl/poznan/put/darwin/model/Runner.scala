@@ -1,6 +1,7 @@
-package pl.put.poznan.darwin.model
+package pl.poznan.put.darwin.model
 
-import Config.{Scenario, Solution};
+import Config.{Scenario, Solution}
+import pl.poznan.put.darwin.experiment.Experiment;
 import scala.Iterator.range
 
 object Runner {
@@ -33,5 +34,8 @@ object Runner {
       scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
     }
     println(scenarios.head)
+
+    val result = Experiment.perform(p, scenarios, solutions)
+    println(result)
   }
 }

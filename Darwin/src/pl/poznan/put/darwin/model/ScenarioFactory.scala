@@ -1,4 +1,4 @@
-package pl.put.poznan.darwin.model
+package pl.poznan.put.darwin.model
 
 import Config.Scenario
 import scala.util.Random
