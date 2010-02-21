@@ -1,7 +1,8 @@
 package pl.poznan.put.darwin.model
 
 import Config.{Scenario, Solution}
-import pl.poznan.put.darwin.experiment.Experiment;
+import pl.poznan.put.darwin.experiment.{SolutionResult, Experiment}
+
 import scala.Iterator.range
 
 object Runner {
@@ -37,5 +38,11 @@ object Runner {
 
     val result = Experiment.perform(p, scenarios, solutions)
     println(result)
+    val tmp: SolutionResult = result(solutions.head)
+    p.goals foreach ((g: Goal) => {
+      println("[%s] 1 => %f, 25 => %f, 50 => %f (good: %s)" format (g.name,
+              tmp.getPercentil(g, 1.0), tmp.getPercentil(g, 25.0),
+              tmp.getPercentil(g, 50.0),tmp.isGood))
+    })
   }
 }
