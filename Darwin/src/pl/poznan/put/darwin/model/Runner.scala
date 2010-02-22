@@ -3,6 +3,7 @@ package pl.poznan.put.darwin.model
 import Config.{Scenario, Solution}
 import scala.Iterator.range
 import pl.poznan.put.darwin.experiment.{AutoEvaluator, SolutionResult, Experiment}
+import pl.poznan.put.darwin.utils.SysOutPresenter
 
 object Runner {
   def main(args: Array[String]) {
@@ -50,16 +51,6 @@ object Runner {
     val result = Experiment.perform(p, scenarios, solutions)
     println(result)
 
-    val evaluatedResult = AutoEvaluator.evaluate(result)
-    evaluatedResult foreach {
-      case (sol, res) => {
-        p.goals foreach ((g: Goal) => {
-          println("[%s] 1 => %f, 25 => %f, 50 => %f (good: %s)" format (g.name,
-                  res.getPercentile(g, 1.0), res.getPercentile(g, 25.0),
-                  res.getPercentile(g, 50.0), res.isGood))
-        })
-      }
-    }
-
+    SysOutPresenter showOutput AutoEvaluator.evaluate(result)
   }
 }
