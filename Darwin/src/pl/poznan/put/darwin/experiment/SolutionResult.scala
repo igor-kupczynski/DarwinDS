@@ -9,7 +9,12 @@ class SolutionResult {
   private var data: HashMap[Goal, List[Double]] = null
   private var percentiles: HashMap[(Goal, Int), Double] = null
 
+  
+
   var isGood: Boolean = _
+
+  var primaryScore: Double = _
+  var secondaryScore: Double = _
 
   def addResult(result: HashMap[Goal, Double]) {
 

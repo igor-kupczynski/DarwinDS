@@ -37,13 +37,13 @@ object Runner {
     p.goals foreach ((g: Goal) => println(g.name + ": " + ExpressionEvaluator.evaluate(g.exp, scenario, solution)))
 
     var solutions: List[Solution] = Nil
-    for (idx <- range(0, Config.SOLUTIONS)) {
+    for (idx <- range(0, Config.SOLUTION_COUNT)) {
       solutions = SimpleSolutionFactory.generate(p) :: solutions
     }
     println(solutions.head)
 
     var scenarios: List[Scenario] = Nil
-    for (idx <- range(0, Config.SCENARIOS)) {
+    for (idx <- range(0, Config.SCENARIO_COUNT)) {
       scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
     }
     println(scenarios.head)
