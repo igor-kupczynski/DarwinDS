@@ -9,7 +9,6 @@ import pl.poznan.put.cs.idss.jrs.types._
 import pl.poznan.put.darwin.model.Goal
 
 class RulesInput(result: HashMap[Solution, SolutionResult]) extends SerialInput {
-
   private var metadata: Metadata = createMetadata()
   private var examples: List[Example] = createExamples()
 
@@ -47,39 +46,39 @@ class RulesInput(result: HashMap[Solution, SolutionResult]) extends SerialInput 
     new Example(fields.toArray)
   }
 
-  private def createMetadata():Metadata = {
+  private def createMetadata(): Metadata = {
     var attributes: List[Attribute] = Nil
     var desc = new Attribute("Name", new StringField(""))
     desc.setPreferenceType(Attribute.GAIN)
-		desc.setKind(Attribute.DESCRIPTION)
-		desc.setActive(true)
-		desc.setMembership(false)
-		desc.setDiscretization(null)
-		attributes = desc :: attributes
+    desc.setKind(Attribute.DESCRIPTION)
+    desc.setActive(true)
+    desc.setMembership(false)
+    desc.setDiscretization(null)
+    attributes = desc :: attributes
 
     val anyResult = result.values.next()
-    anyResult.goals foreach ( (g: Goal) => {
+    anyResult.goals foreach ((g: Goal) => {
       Config.PERCENTILES foreach (p => {
         val attribute = new Attribute(
-						g.name + "_" + p, new FloatField())
-				attribute.setPreferenceType(if(g.isMax) Attribute.GAIN else Attribute.COST)
-				attribute.setKind(Attribute.NONE)
-				attribute.setActive(true)
-				attribute.setMembership(false)
-				attribute.setDiscretization(null)
+          g.name + "_" + p, new FloatField())
+        attribute.setPreferenceType(if (g.isMax) Attribute.GAIN else Attribute.COST)
+        attribute.setKind(Attribute.NONE)
+        attribute.setActive(true)
+        attribute.setMembership(false)
+        attribute.setDiscretization(null)
         attributes = attribute :: attributes
       })
     })
 
     var dec = new Attribute("GOOD", new EnumField(0, enumDomain));
-		dec.setPreferenceType(Attribute.GAIN)
-		dec.setKind(Attribute.DECISION)
-		dec.setActive(true)
-		dec.setMembership(false)
-		dec.setDiscretization(null)
+    dec.setPreferenceType(Attribute.GAIN)
+    dec.setKind(Attribute.DECISION)
+    dec.setActive(true)
+    dec.setMembership(false)
+    dec.setDiscretization(null)
     attributes = dec :: attributes
     attributes = attributes.reverse
-		new Metadata(attributes.toArray[Attribute], null)
+    new Metadata(attributes.toArray[Attribute], null)
   }
-  
+
 }

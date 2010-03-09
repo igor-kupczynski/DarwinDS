@@ -5,7 +5,6 @@ import collection.mutable.HashMap
 import pl.poznan.put.darwin.model.{Goal, Problem}
 
 object Experiment {
-
   def perform(problem: Problem,
               scenarios: List[Scenario],
               solutions: List[Solution]): HashMap[Solution, SolutionResult] = {

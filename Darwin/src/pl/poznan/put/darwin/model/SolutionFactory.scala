@@ -10,7 +10,6 @@ abstract class SolutionFactory {
 }
 
 object SimpleSolutionFactory extends SolutionFactory {
-
   private val rng: Random = Config.getRNG()
 
   def generate(p: Problem): Solution = {

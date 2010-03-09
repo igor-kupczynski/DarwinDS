@@ -30,15 +30,14 @@ object ExpressionEvaluator {
       if (x < lower || x > upper) error("Value of scenario '" + x + "' => " + n + " outside interval")
       x
     }
-    case Sum(exps) => (exps foldLeft 0.0){(x, y) => x + evaluate(y, scenario, solution)}
+    case Sum(exps) => (exps foldLeft 0.0) {(x, y) => x + evaluate(y, scenario, solution)}
     case Minus(exp) => -evaluate(exp, scenario, solution)
-    case Product(exps) => (exps foldLeft 1.0){(x, y) => x * evaluate(y, scenario, solution)}
+    case Product(exps) => (exps foldLeft 1.0) {(x, y) => x * evaluate(y, scenario, solution)}
     case Min(exps) => (exps foldLeft Double.MaxValue) {(x, y) => Math.min(x, evaluate(y, scenario, solution))}
   }
 }
 
 object ExpressionExtractor {
-
   def getVariables(exp: Expression): List[Variable] = exp match {
     case Constant(_) => Nil
     case Variable(n) => Variable(n) :: Nil
@@ -65,7 +64,7 @@ object ExpressionExtractor {
     case Minus(exp) => getIntervals(exp)
     case Min(exps) => getIntervals(Sum(exps))
     case Product(exps) => getIntervals(Sum(exps))
-    case Sum(exps)  => {
+    case Sum(exps) => {
       var result: List[Interval] = Nil
       exps foreach (e => {
         val subResult = getIntervals(e)

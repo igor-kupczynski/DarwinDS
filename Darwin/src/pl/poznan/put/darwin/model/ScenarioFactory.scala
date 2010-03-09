@@ -9,7 +9,6 @@ abstract class ScenarioFactory {
 }
 
 object MonteCarloScenarioFactory extends ScenarioFactory {
-
   private val rng: Random = Config.getRNG()
 
   def generate(p: Problem): Scenario = {

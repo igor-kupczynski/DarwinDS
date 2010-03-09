@@ -44,7 +44,7 @@ case class Problem(name: String, goals: List[Goal], constraints: List[Expression
   def evaluate(scenario: Scenario, solution: Solution): HashMap[Goal, Double] = {
     val result = new HashMap[Goal, Double]
     goals foreach ((g: Goal) => {
-       result(g) = ExpressionEvaluator.evaluate(g.exp, scenario, solution)
+      result(g) = ExpressionEvaluator.evaluate(g.exp, scenario, solution)
     })
     result
   }

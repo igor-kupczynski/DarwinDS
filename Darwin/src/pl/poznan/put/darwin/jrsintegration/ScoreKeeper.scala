@@ -10,13 +10,14 @@ import collection.jcl.MutableIterator.Wrapper
 
 
 class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, SolutionResult]) {
+  implicit def javaIteratorToScalaIterator[A](it: java.util.Iterator[A]) = new Wrapper(it)
 
-  implicit def javaIteratorToScalaIterator[A](it : java.util.Iterator[A]) = new Wrapper(it)
-
-  private var weights = calculateWeights()
-  private var crowdingDistance = calculateCrowding()
-
-  def getPrimaryScore(s: Solution): Double = {
+  private var goals = result.values.collect(0).goals.collect
+  private var weights: HashMap[Rule, Double] = _
+  private var crowdingDistance: HashMap[Solution, Double] = _
+  updateResult(result)
+  
+  private def getPrimaryScore(s: Solution): Double = {
     var sum: Double = 0.0
     container.getRules(Rule.CERTAIN, Rule.AT_LEAST).iterator() foreach ((rule: Rule) => {
       val fields: List[Field] = SolutionConverter getFields result(s)
@@ -26,14 +27,19 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
     sum
   }
 
-  def getSecondaryScore(s: Solution): Double = {
+  private def getSecondaryScore(s: Solution): Double = {
     crowdingDistance(s)
   }
 
-  def updateResult(newResult: HashMap[Solution, SolutionResult]) {
+  def updateResult(newResult: HashMap[Solution, SolutionResult]): HashMap[Solution, SolutionResult] = {
     result = newResult
     weights = calculateWeights()
     crowdingDistance = calculateCrowding()
+    result foreach {case (s, sr: SolutionResult) => {
+      sr.primaryScore = getPrimaryScore(s)
+      sr.secondaryScore = getSecondaryScore(s)
+    }}
+    result
   }
 
   private def calculateWeights(): HashMap[Rule, Double] = {
@@ -55,7 +61,7 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
     result.keys foreach ((s: Solution) => {
       crowdingDistance(s) = 0.0
     })
-    result.values.next().goals foreach ((g: Goal) => {
+    goals foreach ((g: Goal) => {
       Config.PERCENTILES foreach (p => {
         var solutions: List[Solution] = result.keys.toList
         solutions.sort(crowdingDistanceLT(g, p))
@@ -63,10 +69,10 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
         crowdingDistance(s0) = Math.MAX_DOUBLE
         val sn = solutions.last
         crowdingDistance(sn) = Math.MAX_DOUBLE
-        Iterator.range(1, solutions.length-1) foreach ((idx) => {
-          val sPrev = solutions(idx-1)
+        Iterator.range(1, solutions.length - 1) foreach ((idx) => {
+          val sPrev = solutions(idx - 1)
           val s = solutions(idx)
-          val sNext = solutions(idx+1)
+          val sNext = solutions(idx + 1)
           val value = result(sNext).getPercentile(g, p) - result(sPrev).getPercentile(g, p)
           crowdingDistance(s) = incrementDistance(crowdingDistance(s), value)
         })

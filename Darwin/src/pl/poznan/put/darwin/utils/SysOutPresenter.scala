@@ -6,7 +6,6 @@ import pl.poznan.put.darwin.model.Config.Solution
 import pl.poznan.put.darwin.model.Goal
 
 object SysOutPresenter {
-
   def showOutput(result: HashMap[Solution, SolutionResult]) {
     result foreach {
       case (sol, res: SolutionResult) => {

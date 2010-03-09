@@ -1,4 +1,5 @@
 package pl.poznan.put.darwin.model
+
 import scala.util.Random
 
 object Config {
@@ -18,4 +19,5 @@ object Config {
   val PERCENTILES: List[Int] = 1 :: 25 :: 50 :: Nil;
 
   val DELTA = 0.1
+  val GAMMA = 2
 }

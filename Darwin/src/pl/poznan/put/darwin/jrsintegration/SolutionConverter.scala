@@ -5,7 +5,6 @@ import pl.poznan.put.darwin.experiment.SolutionResult
 import pl.poznan.put.cs.idss.jrs.types.{StringField, FloatField, Field}
 
 object SolutionConverter {
-
   def getFields(solutionResult: SolutionResult): List[Field] = {
     var fields: List[Field] = new StringField("Solution") :: Nil
     solutionResult.goals foreach ((g: Goal) => {
