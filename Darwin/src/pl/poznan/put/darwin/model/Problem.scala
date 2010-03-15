@@ -2,10 +2,43 @@ package pl.poznan.put.darwin.model
 
 import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
 import collection.mutable.HashMap
+import java.util.Random
 
 case class Problem(name: String, goals: List[Goal], constraints: List[Expression]) {
   private var variables: List[Variable] = null
   private var intervals: List[Interval] = null
+
+  def getDefaultScenario(): Scenario = {
+    val s = new HashMap[String, Double]()
+    getIntervals().map((i: Interval) => {
+      s(i.name) = i.lower + (i.upper - i.lower) / 2
+    })
+    s
+  }
+
+  def isFeasible(s: Solution): Boolean = {
+    val default = getDefaultScenario()
+    constraints foreach ((e: Expression) => {
+       if (ExpressionEvaluator.evaluate(e, default, s) < 0) return(false)
+    })
+    true
+  }
+
+  def randomNeighbour(s: Solution) = {
+    var result: HashMap[String, Double] = null
+    val rng: Random = Config.getRNG()
+    while (result != null || !isFeasible(result)) {
+      val idx = rng.nextInt(variables.length)
+      val variable = variables(idx)
+      val value = s(variable.name) + rng.nextGaussian()
+      result = new HashMap[String, Double]()
+      variables foreach ((v: Variable) => {
+        result(v.name) = if (v.name == variable.name) value else s(v.name)
+      })
+    }
+    result
+    
+  }
 
   def getVariables(): List[Variable] = {
     if (variables == null) {

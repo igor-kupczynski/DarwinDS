@@ -11,7 +11,11 @@ abstract class Expression {
 
 case class Constant(value: Double) extends Expression
 case class Variable(name: String) extends Expression
-case class Interval(name: String, lower: Double, upper: Double) extends Expression
+case class Interval(name: String, lower: Double, upper: Double) extends Expression {
+  def getMiddleValue(): Double = {
+    upper + ((upper - lower) / 2)
+  }
+}
 case class Minus(exp: Expression) extends Expression
 
 case class Sum(exps: List[Expression]) extends Expression

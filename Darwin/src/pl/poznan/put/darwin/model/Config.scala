@@ -1,13 +1,14 @@
 package pl.poznan.put.darwin.model
 
-import scala.util.Random
+import java.util.Random
 
 object Config {
   type Scenario = String => Double
   type Solution = String => Double
 
+  private val rng: Random = new Random()
   def getRNG(): Random = {
-    new Random()
+    rng
   }
 
   val MAX_VARIABLE: Int = 20

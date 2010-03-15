@@ -1,7 +1,7 @@
 package pl.poznan.put.darwin.model
 
 import Config.Solution
-import scala.util.Random
+import java.util.Random
 import collection.mutable.HashMap
 
 

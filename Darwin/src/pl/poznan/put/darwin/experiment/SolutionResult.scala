@@ -15,6 +15,7 @@ class SolutionResult {
 
   var primaryScore: Double = _
   var secondaryScore: Double = _
+  var fitness: Double = _
 
   def addResult(result: HashMap[Goal, Double]) {
 

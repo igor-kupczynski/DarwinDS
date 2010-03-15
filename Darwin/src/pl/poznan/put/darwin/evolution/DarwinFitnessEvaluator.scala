@@ -6,6 +6,12 @@ import pl.poznan.put.darwin.model.{MonteCarloScenarioFactory, Config, Problem}
 import collection.mutable.HashMap
 import pl.poznan.put.darwin.experiment.{Experiment, SolutionResult}
 
+
+/**
+ * Class for evaluating solutions population on set of scenarios
+ *
+ * @author Igor Kupczynski
+ */
 class DarwinFitnessEvaluator(problem: Problem, scores: ScoreKeeper)  {
 
   private var scenarios = _regenerate()
