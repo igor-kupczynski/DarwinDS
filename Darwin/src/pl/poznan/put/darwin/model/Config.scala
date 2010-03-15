@@ -21,4 +21,16 @@ object Config {
 
   val DELTA = 0.1
   val GAMMA = 2
+
+  /**
+   *  Initial mutation probability
+   */
+  val ETA = 0.5
+
+
+  /**
+   *  Mutation decay rate
+   */
+  val OMEGA = 0.1
+
 }
