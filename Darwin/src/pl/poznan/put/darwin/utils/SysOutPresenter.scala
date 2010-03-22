@@ -6,15 +6,20 @@ import pl.poznan.put.darwin.model.Config.Solution
 import pl.poznan.put.darwin.model.Goal
 
 object SysOutPresenter {
-  def showOutput(result: HashMap[Solution, SolutionResult]) {
+
+  def showOutput(result: List[Tuple2[Solution, SolutionResult]]) {
     result foreach {
       case (sol, res: SolutionResult) => {
-        res.goals foreach ((g: Goal) => {
+      res.goals foreach ((g: Goal) => {
           println("[%s] 1 => %f, 25 => %f, 50 => %f (good: %s)" format (g.name,
-                  res.getPercentile(g, 1.0), res.getPercentile(g, 25.0),
-                  res.getPercentile(g, 50.0), res.isGood))
+                    res.getPercentile(g, 1.0), res.getPercentile(g, 25.0),
+                    res.getPercentile(g, 50.0), res.isGood))
         })
       }
     }
+  }
+
+  def showOutput(result: HashMap[Solution, SolutionResult]) {
+    this.showOutput(result.toList)
   }
 }

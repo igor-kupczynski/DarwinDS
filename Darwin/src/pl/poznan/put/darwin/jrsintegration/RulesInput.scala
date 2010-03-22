@@ -9,13 +9,13 @@ import pl.poznan.put.cs.idss.jrs.types._
 import pl.poznan.put.darwin.model.Goal
 
 class RulesInput(result: HashMap[Solution, SolutionResult]) extends SerialInput {
-  private var metadata: Metadata = createMetadata()
-  private var examples: List[Example] = createExamples()
-
   private val enumDomain: EnumDomain = new EnumDomain() {
     addElement("NOT_GOOD")
     addElement("GOOD")
   }
+
+  private var metadata: Metadata = createMetadata()
+  private var examples: List[Example] = createExamples()
 
   override def inputExample(): Example = {
     if (examples.length > 0) {

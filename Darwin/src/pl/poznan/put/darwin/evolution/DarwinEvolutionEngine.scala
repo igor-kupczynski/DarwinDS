@@ -56,7 +56,9 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
   }
 
   private def mutateAll(individuals: List[Solution]): List[Solution] = {
-    individuals.map((s: Solution) => DarwinMutation.mutate(params.problem, s, generation))
+    individuals.map((s: Solution) => {
+      DarwinMutation.mutate(params.problem, s, generation)
+    })
   }
 
   private def mateAll(parents: List[Solution]): List[Solution] = {

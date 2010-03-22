@@ -27,7 +27,8 @@ case class Problem(name: String, goals: List[Goal], constraints: List[Expression
   def randomNeighbour(s: Solution) = {
     var result: HashMap[String, Double] = null
     val rng: Random = Config.getRNG()
-    while (result != null || !isFeasible(result)) {
+    var tries = 0
+    while (tries < Config.MUTATION_TRIES && (result == null || !isFeasible(result))) {
       val idx = rng.nextInt(variables.length)
       val variable = variables(idx)
       val value = s(variable.name) + rng.nextGaussian()
@@ -35,6 +36,7 @@ case class Problem(name: String, goals: List[Goal], constraints: List[Expression
       variables foreach ((v: Variable) => {
         result(v.name) = if (v.name == variable.name) value else s(v.name)
       })
+      tries += 1
     }
     result
     

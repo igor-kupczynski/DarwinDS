@@ -22,6 +22,8 @@ object Config {
   val DELTA = 0.1
   val GAMMA = 2
 
+  val MUTATION_TRIES = 100
+
   /**
    *  Initial mutation probability
    */

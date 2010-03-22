@@ -4,6 +4,7 @@ import Config.{Scenario, Solution}
 import scala.Iterator.range
 import pl.poznan.put.darwin.experiment.{AutoEvaluator, SolutionResult, Experiment}
 import pl.poznan.put.darwin.utils.SysOutPresenter
+import pl.poznan.put.darwin.evolution.Evolver
 
 object Runner {
   def main(args: Array[String]) {
@@ -51,6 +52,12 @@ object Runner {
     val result = Experiment.perform(p, scenarios, solutions)
     println(result)
 
-    SysOutPresenter showOutput AutoEvaluator.evaluate(result)
+    val evaluatedResult = AutoEvaluator.evaluate(result)
+    SysOutPresenter showOutput evaluatedResult
+
+    val evolver = new Evolver(p)
+    val evolvedResult = evolver.preformEvolution(evaluatedResult)
+    SysOutPresenter showOutput evolvedResult
   }
 }
+

@@ -7,6 +7,7 @@ import pl.poznan.put.cs.idss.jrs.core.Transfer
 import pl.poznan.put.cs.idss.jrs.core.mem.{MemoryOutput, MemoryContainer}
 import pl.poznan.put.cs.idss.jrs.wrappers.{VCdomLEMWrapperOpt, RulesGeneratorWrapper}
 import pl.poznan.put.cs.idss.jrs.rules.{RulesContainer, VCDomLem}
+import java.io.File
 
 object JrsIntegration {
   var counter = 0
@@ -20,6 +21,7 @@ object JrsIntegration {
       VCDomLem.COVER_NONE_OF_NEGATIVE_EXAMPLES)
     wrapper.setInducePossibleRules(false);
     val container: RulesContainer = wrapper.generateRules(mc)
+    val cwd = new File(".").getAbsolutePath
     container.writeRules("rules/rule_%03d.txt".format(counter), true, true)
     counter = counter + 1
     new ScoreKeeper(container, result)
