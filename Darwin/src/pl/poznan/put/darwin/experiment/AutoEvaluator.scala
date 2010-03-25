@@ -6,22 +6,23 @@ import collection.mutable.HashMap
 import pl.poznan.put.darwin.model.Config
 
 object AutoEvaluator {
-  private def autoCompare(one: SolutionResult, other: SolutionResult): Boolean = {
-    val valA = one.autoValue
-    val valB = other.autoValue
-    if (valA < valB) true else false
+  private def compareByResultAutovalue(one: Tuple2[Solution, SolutionResult],
+                                       other: Tuple2[Solution, SolutionResult]): Boolean = {
+    one._2.autoValue >= other._2.autoValue // from highest to lowest
   }
 
-  def evaluate(items: HashMap[Solution, SolutionResult]): HashMap[Solution, SolutionResult] = {
+  def evaluate(items: HashMap[Solution, SolutionResult]): List[Tuple2[Solution, SolutionResult]] = {
+    evaluate(items.toList)
+  }
 
+  def evaluate(items: List[Tuple2[Solution, SolutionResult]]): List[Tuple2[Solution, SolutionResult]] = {
 
-    val sols: List[SolutionResult] = List.fromIterator(items.values)
-    sols.sort(autoCompare)
+    val sortedItems = items.sort(compareByResultAutovalue)
 
     for (idx <- Iterator.range(0, Config.GOOD_COUNT)) {
-      sols(idx).isGood = true
+      sortedItems(idx)._2.isGood = true
     }
 
-    items
+    sortedItems
   }
 }

@@ -49,15 +49,18 @@ object Runner {
     }
     println(scenarios.head)
 
-    val result = Experiment.perform(p, scenarios, solutions)
+    var result = Experiment.perform(p, scenarios, solutions)
     println(result)
 
-    val evaluatedResult = AutoEvaluator.evaluate(result)
-    SysOutPresenter showOutput evaluatedResult
-
     val evolver = new Evolver(p)
-    val evolvedResult = evolver.preformEvolution(evaluatedResult)
-    SysOutPresenter showOutput evolvedResult
+    var idx = 0
+    while (idx < 3) {
+      println("loop " + idx)
+      idx += 1
+      val evaluatedResult = AutoEvaluator.evaluate(result)
+      SysOutPresenter showOutput evaluatedResult
+      result = evolver.preformEvolution(evaluatedResult)
+    }
   }
 }
 

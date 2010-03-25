@@ -8,7 +8,7 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.cs.idss.jrs.types._
 import pl.poznan.put.darwin.model.Goal
 
-class RulesInput(result: HashMap[Solution, SolutionResult]) extends SerialInput {
+class RulesInput(result: List[Tuple2[Solution, SolutionResult]]) extends SerialInput {
   private val enumDomain: EnumDomain = new EnumDomain() {
     addElement("NOT_GOOD")
     addElement("GOOD")
@@ -33,9 +33,9 @@ class RulesInput(result: HashMap[Solution, SolutionResult]) extends SerialInput 
 
   private def createExamples(): List[Example] = {
     var examples: List[Example] = Nil
-    result.values foreach ((sr: SolutionResult) => {
+    result foreach {case (_, sr: SolutionResult) => {
       examples = createExample(sr) :: examples
-    })
+    }}
     examples.reverse
   }
 
@@ -56,7 +56,7 @@ class RulesInput(result: HashMap[Solution, SolutionResult]) extends SerialInput 
     desc.setDiscretization(null)
     attributes = desc :: attributes
 
-    val anyResult = result.values.next()
+    val anyResult = result(0)._2
     anyResult.goals foreach ((g: Goal) => {
       Config.PERCENTILES foreach (p => {
         val attribute = new Attribute(

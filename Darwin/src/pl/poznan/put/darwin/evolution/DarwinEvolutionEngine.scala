@@ -18,7 +18,7 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
   private var solutions: List[Solution] = _
   private val crossOver = new DarwinCrossOver(params.problem)
 
-  def start(baseResult: HashMap[Solution, SolutionResult]): List[Tuple2[Solution, SolutionResult]] = {
+  def start(baseResult: List[Tuple2[Solution, SolutionResult]]): List[Tuple2[Solution, SolutionResult]] = {
     generation = 0
     scenarios = null
     solutions = range(0, params.individualCount).map[Solution](idx =>

@@ -15,7 +15,7 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
   private var goals = result.values.collect(0).goals.collect
   private var weights: HashMap[Rule, Double] = _
   private var crowdingDistance: HashMap[Solution, Double] = _
-  updateResult(result)
+  updateResult(result.toList)
   
   private def getPrimaryScore(s: Solution): Double = {
     var sum: Double = 0.0
@@ -31,11 +31,16 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
     crowdingDistance(s)
   }
 
-  def updateResult(newResult: HashMap[Solution, SolutionResult]): HashMap[Solution, SolutionResult] = {
-    result = newResult
+  def updateResult(newResult: List[Tuple2[Solution, SolutionResult]]): HashMap[Solution, SolutionResult] = {
+    result = new HashMap[Solution, SolutionResult]()
+
+   newResult foreach {case (s: Solution, sr: SolutionResult) => {
+     result(s) = sr
+   }}
+
     weights = calculateWeights()
     crowdingDistance = calculateCrowding()
-    result foreach {case (s, sr: SolutionResult) => {
+    result foreach {case (s: Solution, sr: SolutionResult) => {
       sr.primaryScore = getPrimaryScore(s)
       sr.secondaryScore = getSecondaryScore(s)
     }}
@@ -44,7 +49,9 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
 
   private def calculateWeights(): HashMap[Rule, Double] = {
     val weights = new HashMap[Rule, Double]()
-    container.getRules(Rule.CERTAIN, Rule.AT_LEAST).iterator() foreach ((rule: Rule) => {
+    val rules = container.getRules(Rule.CERTAIN, Rule.AT_LEAST)
+    println(rules.size)
+    rules.iterator() foreach ((rule: Rule) => {
       var count = 0
       result.values foreach ((sr: SolutionResult) => {
         val fields: List[Field] = SolutionConverter getFields sr
@@ -90,5 +97,17 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
   private def incrementDistance(a: Double, b: Double): Double = {
     if (a == Math.MAX_DOUBLE || b == Math.MAX_DOUBLE) Math.MAX_DOUBLE
     else a + b
+  }
+}
+
+object ScoreKeeper {
+  def apply(container: RulesContainer, result: List[Tuple2[Solution, SolutionResult]]): ScoreKeeper = {
+    var hashResult = new HashMap[Solution, SolutionResult]()
+
+   result foreach {case (s: Solution, sr: SolutionResult) => {
+     hashResult(s) = sr
+   }}
+
+    new ScoreKeeper(container, hashResult)
   }
 }

@@ -19,22 +19,27 @@ class SolutionResult {
 
   def addResult(result: HashMap[Goal, Double]) {
 
-    def insert(x: Double, xs: List[Double]): List[Double] = xs match {
+    def insertMax(x: Double, xs: List[Double]): List[Double] = xs match {
       case List() => List(x)
-      case y :: ys => if (x <= y) x :: xs else y :: insert(x, ys)
+      case y :: ys => if (x <= y) x :: xs else y :: insertMax(x, ys)
     }
 
+    def insertMin(x: Double, xs: List[Double]): List[Double] = xs match {
+      case List() => List(x)
+      case y :: ys => if (x >= y) x :: xs else y :: insertMin(x, ys)
+    }
 
     if (data == null) {
       data = new HashMap[Goal, List[Double]]
       result foreach {case (g, res) => data(g) = res :: Nil}
     } else {
-      result foreach {case (g, res) => data(g) = insert(res, data(g))}
+      result foreach {case (g: Goal, res) => data(g) = if (g.isMax) insertMax(res, data(g)) else insertMin(res, data(g))}
     }
   }
 
   def getPercentile(g: Goal, p: Double): Double = {
-    val idx: Int = (Math.round(data(g).length * p / 100.0 + 0.5) - 1).asInstanceOf[Int]
+    val floatIdx = data(g).length * p / 100.0
+    val idx: Int = (Math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
     data(g)(idx)
   }
 

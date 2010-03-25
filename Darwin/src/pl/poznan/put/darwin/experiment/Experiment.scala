@@ -7,13 +7,13 @@ import pl.poznan.put.darwin.model.{Goal, Problem}
 object Experiment {
   def perform(problem: Problem,
               scenarios: List[Scenario],
-              solutions: List[Solution]): HashMap[Solution, SolutionResult] = {
-    val result = new HashMap[Solution, SolutionResult]
+              solutions: List[Solution]): List[Tuple2[Solution, SolutionResult]] = {
+    var result: List[Tuple2[Solution, SolutionResult]] = Nil
 
     solutions foreach ((sol: Solution) => {
       val solutionResult: SolutionResult = new SolutionResult
       scenarios foreach ((scen: Scenario) => solutionResult.addResult(problem.evaluate(scen, sol)))
-      result(sol) = solutionResult
+      result = (sol, solutionResult) :: result
     })
     result
   }

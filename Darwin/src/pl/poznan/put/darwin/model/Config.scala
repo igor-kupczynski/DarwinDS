@@ -15,7 +15,7 @@ object Config {
   val SOLUTION_COUNT: Int = 30
   val SCENARIO_COUNT: Int = 30
 
-  val GOOD_COUNT: Int = 10
+  val GOOD_COUNT: Int = 5
 
   val PERCENTILES: List[Int] = 1 :: 25 :: 50 :: Nil;
 

@@ -7,8 +7,8 @@ import pl.poznan.put.darwin.model.Config.Solution
 import pl.poznan.put.darwin.jrsintegration.{JrsIntegration, ScoreKeeper}
 
 class Evolver(problem: Problem) {
-  def preformEvolution(baseResult: HashMap[Solution, SolutionResult]): List[Tuple2[Solution, SolutionResult]] = {
-    print("Started evolution")
+  def preformEvolution(baseResult: List[Tuple2[Solution, SolutionResult]]): List[Tuple2[Solution, SolutionResult]] = {
+    println("Started evolution")
     var sk: ScoreKeeper = JrsIntegration.getScores(baseResult)
     val params: EvolutionParameters = new EvolutionParameters(problem, sk)
     val engine = new DarwinEvolutionEngine(params)

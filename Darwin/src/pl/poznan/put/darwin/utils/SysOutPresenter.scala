@@ -11,9 +11,9 @@ object SysOutPresenter {
     result foreach {
       case (sol, res: SolutionResult) => {
       res.goals foreach ((g: Goal) => {
-          println("[%s] 1 => %f, 25 => %f, 50 => %f (good: %s)" format (g.name,
+          println("[%s] 1 => %f, 25 => %f, 50 => %f (good: %s) ::: value = %f" format (g.name,
                     res.getPercentile(g, 1.0), res.getPercentile(g, 25.0),
-                    res.getPercentile(g, 50.0), res.isGood))
+                    res.getPercentile(g, 50.0), res.isGood, res.autoValue))
         })
       }
     }

@@ -17,7 +17,7 @@ class DarwinFitnessEvaluator(problem: Problem, scores: ScoreKeeper)  {
   private var scenarios = _regenerate()
 
   def evaluate(solutions: List[Solution]): HashMap[Solution, SolutionResult] = {
-    val results: HashMap[Solution, SolutionResult] = Experiment.perform(problem, scenarios, solutions)
+    val results = Experiment.perform(problem, scenarios, solutions)
     scores.updateResult(results)   
   }
 
