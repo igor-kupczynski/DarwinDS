@@ -12,9 +12,9 @@ case class EvolutionParameters(problem: Problem, scoreKeeper: ScoreKeeper) {
 
   var individualCount: Int = 30
   var scenarioCount: Int = 40
-  var generationCount: Int = 30
-  var regenerateEveryGenerations: Int = 10
-  var regeneratePercent: Double = 0.5
+  var generationCount: Int = 60
+  var regenerateEveryGenerations: Int = 5
+  var regeneratePercent: Double = 0.3
 
   val solutionFactory: SolutionFactory = SimpleSolutionFactory
 }

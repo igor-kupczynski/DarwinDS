@@ -50,7 +50,6 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
   private def calculateWeights(): HashMap[Rule, Double] = {
     val weights = new HashMap[Rule, Double]()
     val rules = container.getRules(Rule.CERTAIN, Rule.AT_LEAST)
-    println(rules.size)
     rules.iterator() foreach ((rule: Rule) => {
       var count = 0
       result.values foreach ((sr: SolutionResult) => {

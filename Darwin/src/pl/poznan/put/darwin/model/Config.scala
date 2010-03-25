@@ -12,8 +12,8 @@ object Config {
   }
 
   val MAX_VARIABLE: Int = 20
-  val SOLUTION_COUNT: Int = 30
-  val SCENARIO_COUNT: Int = 30
+  val SOLUTION_COUNT: Int = 100
+  val SCENARIO_COUNT: Int = 1000
 
   val GOOD_COUNT: Int = 5
 
