@@ -1,8 +1,8 @@
 package pl.poznan.put.darwin.experiment
 
-import pl.poznan.put.darwin.model.Goal
 import collection.mutable.HashMap
 import scala.Iterator.empty
+import pl.poznan.put.darwin.model.{Config, Goal}
 
 
 class SolutionResult {
@@ -40,7 +40,7 @@ class SolutionResult {
   def getPercentile(g: Goal, p: Double): Double = {
     val floatIdx = data(g).length * p / 100.0
     val idx: Int = (Math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
-    data(g)(idx)
+    if (Config.USE_AVG) avgUpToIdx(g, idx) else data(g)(idx)
   }
 
   def goals(): Iterator[Goal] = {
@@ -56,5 +56,11 @@ class SolutionResult {
       value += (if (g.isMax) tmp else (-1) * tmp)
     })
     value
+  }
+
+  private def avgUpToIdx(g: Goal, idx: Int): Double = {
+    val toAvg = data(g).take(idx + 1)
+    val sum = toAvg.reduceLeft[Double]((a, b) => {a + b})
+    sum / toAvg.size
   }
 }
