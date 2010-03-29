@@ -10,7 +10,7 @@ abstract class Expression {
 }
 
 case class Constant(value: Double) extends Expression
-case class Variable(name: String) extends Expression
+case class Variable(name: String, min: Double, max: Double) extends Expression
 case class Interval(name: String, lower: Double, upper: Double) extends Expression {
   def getMiddleValue(): Double = {
     upper + ((upper - lower) / 2)
@@ -28,7 +28,7 @@ case class Goal(name: String, exp: Expression, isMax: Boolean)
 object ExpressionEvaluator {
   def evaluate(exp: Expression, scenario: Scenario, solution: Solution): Double = exp match {
     case Constant(x) => x
-    case Variable(n) => solution(n)
+    case Variable(n, _, _) => solution(n)
     case Interval(n, lower, upper) => {
       val x = scenario(n)
       if (x < lower || x > upper) error("Value of scenario '" + x + "' => " + n + " outside interval")
@@ -44,7 +44,7 @@ object ExpressionEvaluator {
 object ExpressionExtractor {
   def getVariables(exp: Expression): List[Variable] = exp match {
     case Constant(_) => Nil
-    case Variable(n) => Variable(n) :: Nil
+    case Variable(n, min, max) => Variable(n, min, max) :: Nil
     case Interval(_, _, _) => Nil
     case Minus(exp) => getVariables(exp)
     case Min(exps) => getVariables(Sum(exps))
@@ -63,7 +63,7 @@ object ExpressionExtractor {
 
   def getIntervals(exp: Expression): List[Interval] = exp match {
     case Constant(_) => Nil
-    case Variable(_) => Nil
+    case Variable(_, _, _) => Nil
     case Interval(n, lower, upper) => Interval(n, lower, upper) :: Nil
     case Minus(exp) => getIntervals(exp)
     case Min(exps) => getIntervals(Sum(exps))
