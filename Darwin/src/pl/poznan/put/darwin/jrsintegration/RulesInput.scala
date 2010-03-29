@@ -8,7 +8,8 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.cs.idss.jrs.types._
 import pl.poznan.put.darwin.model.Goal
 
-class RulesInput(result: List[Tuple2[Solution, SolutionResult]]) extends SerialInput {
+class RulesInput(result: List[Tuple2[Solution, SolutionResult]], shuffleSpec: List[Tuple2[Int, Int]])
+        extends SerialInput {
   private val enumDomain: EnumDomain = new EnumDomain() {
     addElement("NOT_GOOD")
     addElement("GOOD")
@@ -43,6 +44,7 @@ class RulesInput(result: List[Tuple2[Solution, SolutionResult]]) extends SerialI
     var fields: List[Field] = SolutionConverter.getFields(sr)
     val decision = new EnumField(if (sr.isGood) 1 else 0, enumDomain)
     fields = fields ::: List(decision)
+    shuffle(fields)
     new Example(fields.toArray)
   }
 
@@ -78,7 +80,14 @@ class RulesInput(result: List[Tuple2[Solution, SolutionResult]]) extends SerialI
     dec.setDiscretization(null)
     attributes = dec :: attributes
     attributes = attributes.reverse
+
+    shuffle(attributes)
+
     new Metadata(attributes.toArray[Attribute], null)
+  }
+
+  private def shuffle(items: List[Any]) {
+    
   }
 
 }

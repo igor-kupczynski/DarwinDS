@@ -15,7 +15,7 @@ object JrsIntegration {
 
   def getScores(result: List[Tuple2[Solution, SolutionResult]]): ScoreKeeper = {
     val uberContainer = new ContainerOfContainers()
-    val rulesInput = new RulesInput(result)
+    val rulesInput = new RulesInput(result, Nil)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
     val wrapper: RulesGeneratorWrapper = new VCdomLEMWrapperOpt(mc, Config.DOMLEM_CONFIDECE_LEVEL,
