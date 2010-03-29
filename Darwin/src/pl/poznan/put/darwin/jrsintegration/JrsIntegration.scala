@@ -8,6 +8,7 @@ import pl.poznan.put.cs.idss.jrs.core.mem.{MemoryOutput, MemoryContainer}
 import pl.poznan.put.cs.idss.jrs.wrappers.{VCdomLEMWrapperOpt, RulesGeneratorWrapper}
 import pl.poznan.put.cs.idss.jrs.rules.{RulesContainer, VCDomLem}
 import java.io.File
+import pl.poznan.put.darwin.model.Config
 
 object JrsIntegration {
   var counter = 0
@@ -16,7 +17,7 @@ object JrsIntegration {
     val rulesInput = new RulesInput(result)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
-    val wrapper: RulesGeneratorWrapper = new VCdomLEMWrapperOpt(mc, 1.0,
+    val wrapper: RulesGeneratorWrapper = new VCdomLEMWrapperOpt(mc, Config.DOMLEM_CONFIDECE_LEVEL,
       VCDomLem.MIX_CONDITIONS_FROM_DIFFERENT_OBJECTS,
       VCDomLem.COVER_NONE_OF_NEGATIVE_EXAMPLES)
     wrapper.setInducePossibleRules(false);

@@ -15,7 +15,7 @@ object Config {
   val SOLUTION_COUNT: Int = 30
   val SCENARIO_COUNT: Int = 1000
 
-  val GOOD_COUNT: Int = 5
+  val GOOD_COUNT: Int = 10
 
   val PERCENTILES: List[Int] = 1 :: 25 :: 50 :: Nil;
 
@@ -35,4 +35,9 @@ object Config {
    */
   val OMEGA = 0.1
 
+
+  /**
+   * Confidence level
+   */
+  val DOMLEM_CONFIDECE_LEVEL = 1.0
 }
