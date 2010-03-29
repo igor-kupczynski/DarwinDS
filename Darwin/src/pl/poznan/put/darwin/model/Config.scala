@@ -1,6 +1,7 @@
 package pl.poznan.put.darwin.model
 
 import java.util.Random
+import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
 
 object Config {
   type Scenario = String => Double
@@ -36,8 +37,10 @@ object Config {
   val OMEGA = 0.1
 
 
-  /**
-   * Confidence level
+  /*
+   * DOMLEM CONFIG
    */
   val DOMLEM_CONFIDECE_LEVEL = 1.0
+  val CONDITION_SELECTION_METHOD = VCDomLem.MIX_CONDITIONS_FROM_DIFFERENT_OBJECTS
+  val NEGATIVE_EXAMPLES_TREATMENT = VCDomLem.COVER_NONE_OF_NEGATIVE_EXAMPLES
 }
