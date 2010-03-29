@@ -15,7 +15,7 @@ object SimpleSolutionFactory extends SolutionFactory {
   def generate(p: Problem): Solution = {
     val result = new HashMap[String, Double]
     p.getVariables() foreach ((v: Variable) => {
-      result(v.name) = rng.nextDouble() * Config.MAX_VARIABLE;
+      result(v.name) = rng.nextDouble() * (v.max - v.min) + v.min;
     })
     result
   }

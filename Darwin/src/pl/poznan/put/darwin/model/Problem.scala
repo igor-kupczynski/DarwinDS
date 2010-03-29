@@ -90,9 +90,9 @@ object DefaultProblemFactory {
   def getProblem(): Problem = {
 
     // Variables
-    val xa = Variable("xa", 0, 25)
-    val xb = Variable("xb", 0, 25)
-    val xc = Variable("xc", 0, 25)
+    val xa = Variable("xa", 0, 20)
+    val xb = Variable("xb", 0, 20)
+    val xc = Variable("xc", 0, 20)
 
     // Coefficients
 
