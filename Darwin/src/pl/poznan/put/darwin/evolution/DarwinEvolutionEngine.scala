@@ -1,5 +1,6 @@
 package pl.poznan.put.darwin.evolution
 
+import observer.EvolutionObserver
 import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
 import scala.Iterator.range
 import pl.poznan.put.darwin.model.{SimpleSolutionFactory, MonteCarloScenarioFactory}
@@ -17,6 +18,7 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
   private var scenarios: List[Scenario] = _
   private var solutions: List[Solution] = _
   private val crossOver = new DarwinCrossOver(params.problem)
+  private var generationObservers: List[EvolutionObserver] = Nil
 
   def start(baseResult: List[Tuple2[Solution, SolutionResult]]): List[Tuple2[Solution, SolutionResult]] = {
     generation = 0
@@ -25,10 +27,22 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
             {params.solutionFactory.generate(params.problem)}).toList
     var currentResult = sortList(baseResult.toList)
     while (generation < params.generationCount) {
+      notifyGenerationObservers(generation, currentResult)
       currentResult = nextGeneration(currentResult)
       generation += 1
     }
     currentResult
+  }
+
+  def registerGenerationObserver(obs: EvolutionObserver) {
+    generationObservers = obs :: generationObservers
+  }
+
+  private def notifyGenerationObservers(number: Int, generation: List[Tuple2[Solution, SolutionResult]]) {
+    val params: HashMap[String, Any] = new HashMap[String, Any]()
+    params("number") = number
+    params("generation") = generation
+    generationObservers.foreach((o: EvolutionObserver) => o.notify(params))
   }
 
   private def nextGeneration(result: List[Tuple2[Solution, SolutionResult]]):List[Tuple2[Solution, SolutionResult]] = {

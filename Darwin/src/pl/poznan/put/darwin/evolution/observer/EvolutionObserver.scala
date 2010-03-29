@@ -1,11 +1,13 @@
 package pl.poznan.put.darwin.evolution.observer
 
-/**
- * Created by IntelliJ IDEA.
- * User: puszczyk
- * Date: Mar 25, 2010
- * Time: 2:21:48 PM
- * To change this template use File | Settings | File Templates.
- */
+import collection.mutable.HashMap
 
-class EvolutionObserver
+/**
+ * Abstract base class for evolution observers
+ *
+ * @author: Igor Kupczynski
+ */
+abstract class EvolutionObserver {
+
+  def notify(params: HashMap[String, Any])
+}

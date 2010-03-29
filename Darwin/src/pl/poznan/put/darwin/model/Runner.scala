@@ -58,7 +58,7 @@ object Runner {
       println("loop " + idx)
       idx += 1
       val evaluatedResult = AutoEvaluator.evaluate(result)
-      SysOutPresenter showOutput evaluatedResult
+      //SysOutPresenter showOutput evaluatedResult
       result = evolver.preformEvolution(evaluatedResult)
     }
   }
