@@ -1,0 +1,23 @@
+# Project files
+Darwin/.classpath
+Darwin/.idea/ant.xml
+Darwin/.idea/compiler.xml
+Darwin/.idea/copyright/
+Darwin/.idea/encodings.xml
+Darwin/.idea/libraries/
+Darwin/.idea/misc.xml
+Darwin/.idea/modules.xml
+Darwin/.idea/uiDesigner.xml
+Darwin/.idea/vcs.xml
+Darwin/.idea/workspace.xml
+Darwin/.project
+Darwin/.scala_dependencies
+Darwin/DarwinCore.iml
+
+# Binary files
+Darwin/bin/
+Darwin/lib/
+
+# Files generated during run
+Darwin/rules/
+
