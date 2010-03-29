@@ -14,6 +14,7 @@ object JrsIntegration {
   var counter = 0
 
   def getScores(result: List[Tuple2[Solution, SolutionResult]]): ScoreKeeper = {
+    val uberContainer = new ContainerOfContainers()
     val rulesInput = new RulesInput(result)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
@@ -25,6 +26,7 @@ object JrsIntegration {
     val cwd = new File(".").getAbsolutePath
     container.writeRules("rules/rule_%03d.txt".format(counter), true, true)
     counter = counter + 1
-    ScoreKeeper(container, result)
+    uberContainer.addContainer(container)
+    ScoreKeeper(uberContainer, result)
   }
 }

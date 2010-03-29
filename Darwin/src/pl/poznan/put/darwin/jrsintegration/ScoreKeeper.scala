@@ -9,9 +9,7 @@ import pl.poznan.put.darwin.model.{Goal, Config}
 import collection.jcl.MutableIterator.Wrapper
 
 
-class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, SolutionResult]) {
-  implicit def javaIteratorToScalaIterator[A](it: java.util.Iterator[A]) = new Wrapper(it)
-
+class ScoreKeeper(container: ContainerOfContainers, var result: HashMap[Solution, SolutionResult]) {
   private var goals = result.values.collect(0).goals.collect
   private var weights: HashMap[Rule, Double] = _
   private var crowdingDistance: HashMap[Solution, Double] = _
@@ -19,7 +17,7 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
   
   private def getPrimaryScore(s: Solution): Double = {
     var sum: Double = 0.0
-    container.getRules(Rule.CERTAIN, Rule.AT_LEAST).iterator() foreach ((rule: Rule) => {
+    container.getRules() foreach ((rule: Rule) => {
       val fields: List[Field] = SolutionConverter getFields result(s)
       val e: Example = new Example(fields.toArray[Field])
       if (rule covers e) sum += weights(rule)
@@ -49,8 +47,8 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
 
   private def calculateWeights(): HashMap[Rule, Double] = {
     val weights = new HashMap[Rule, Double]()
-    val rules = container.getRules(Rule.CERTAIN, Rule.AT_LEAST)
-    rules.iterator() foreach ((rule: Rule) => {
+    val rules = container.getRules()
+    rules foreach ((rule: Rule) => {
       var count = 0
       result.values foreach ((sr: SolutionResult) => {
         val fields: List[Field] = SolutionConverter getFields sr
@@ -100,7 +98,7 @@ class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, Solut
 }
 
 object ScoreKeeper {
-  def apply(container: RulesContainer, result: List[Tuple2[Solution, SolutionResult]]): ScoreKeeper = {
+  def apply(container: ContainerOfContainers, result: List[Tuple2[Solution, SolutionResult]]): ScoreKeeper = {
     var hashResult = new HashMap[Solution, SolutionResult]()
 
    result foreach {case (s: Solution, sr: SolutionResult) => {
