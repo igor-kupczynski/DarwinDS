@@ -1,0 +1,48 @@
+package pl.poznan.put.darwin.model.problem
+
+import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
+
+class EvaluatorTest {
+  import org.junit._, Assert._
+
+
+  @Test def EvaluatorTest = {
+
+    val scenario: Scenario = { case "limit" => 10.0 }
+    val solution: Solution = { case "x" => 5.0 }
+
+    def eval(e: Expr): Double = {
+      Evaluator.evaluate(e, scenario, solution)
+    }
+
+    val limit = Interval("limit", 0, 20)
+    val x = Variable("x", 0, 10)
+
+    val e1 = UnaryOp("-", x)
+    assertEquals(-5.0, eval(e1), 0.0)
+
+    val e2 = BinaryOp("+", x, limit)
+    assertEquals(15.0, eval(e2), 0.0)
+
+    val e3 = BinaryOp("-", x, limit)
+    assertEquals(-5.0, eval(e3), 0.0)
+
+    val e4 = BinaryOp("*", x, limit)
+    assertEquals(50.0, eval(e4), 0.0)
+
+    val e5 = BinaryOp("/", x, limit)
+    assertEquals(0.5, eval(e5), 0.0)
+
+    val e6 = AggregateOp("min", limit :: x :: Constant(25) :: Nil)
+    assertEquals(5.0, eval(e6), 0.0)
+
+    val one = Constant(1)
+    val zero = Constant(0)
+
+    //  ( (15 + 0) * -(-1) ) / (+1) = 15
+    val e7 = BinaryOp("/", BinaryOp("*", BinaryOp("+", Constant(15), zero),
+      UnaryOp("-", UnaryOp("-", one))), UnaryOp("+", one))
+    assertEquals(15.0, eval(e7), 0.0)
+  }
+
+}
