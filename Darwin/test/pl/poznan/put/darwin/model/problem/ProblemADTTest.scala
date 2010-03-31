@@ -7,10 +7,8 @@ class ProblemADTTest {
     val c1 = Constant(-15)
     assertEquals(-15.0, c1.value, 0.0)
 
-    val v1 = Variable("x1", 0, 1)
+    val v1 = Variable("x1")
     assertEquals("x1", v1.name)
-    assertEquals(0.0, v1.min, 0.0)
-    assertEquals(1.0, v1.max, 0.0)
 
     val i1 = Interval("limit1", -1, 10)
     assertEquals("limit1", i1.name)
@@ -43,15 +41,15 @@ class ProblemADTTest {
   @Test def GoalConstraintTest = {
 
     // max: x1
-    val g1 = Goal("profit", Variable("x1", 0, 100), true)
+    val g1 = Goal("profit", Variable("x1"), true)
     assertEquals("profit", g1.name)
-    assertEquals(Variable("x1", 0, 100), g1.expr)
+    assertEquals(Variable("x1"), g1.expr)
     assertEquals(true, g1.max)
 
     // x2 <= 15
-    val c1 = Constraint("limit", Variable("x2", 0, 100), Constant(15), false)
+    val c1 = Constraint("limit", Variable("x2"), Constant(15), false)
     assertEquals("limit", c1.name)
-    assertEquals(Variable("x2", 0, 100), c1.lhs)
+    assertEquals(Variable("x2"), c1.lhs)
     assertEquals(Constant(15), c1.rhs)
     assertEquals(false, c1.gte)
 

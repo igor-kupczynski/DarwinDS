@@ -16,7 +16,7 @@ class EvaluatorTest {
     }
 
     val limit = Interval("limit", 0, 20)
-    val x = Variable("x", 0, 10)
+    val x = Variable("x")
 
     val e1 = UnaryOp("-", x)
     assertEquals(-5.0, eval(e1), 0.0)

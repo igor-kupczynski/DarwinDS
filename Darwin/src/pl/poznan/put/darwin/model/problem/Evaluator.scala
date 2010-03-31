@@ -22,7 +22,7 @@ object Evaluator {
       case BinaryOp(op, l, r) => BinaryOp(op, simplify(l, scenario, solution), simplify(r, scenario, solution))
       case UnaryOp(op, x) => UnaryOp(op, simplify(x, scenario, solution))
       case Interval(x, _, _) => Constant(scenario(x))
-      case Variable(x, _, _) => Constant(solution(x))
+      case Variable(x) => Constant(solution(x))
       case _ => exp
     }
 
