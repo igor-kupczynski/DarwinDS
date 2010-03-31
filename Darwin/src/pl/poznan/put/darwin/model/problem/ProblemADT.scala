@@ -23,5 +23,11 @@ case class UnaryOp(operator: String, arg: Expr) extends Expr
 case class BinaryOp(operator: String, lhs: Expr, rhs: Expr) extends Expr
 case class AggregateOp(operator: String, args: List[Expr]) extends Expr
 
+/* Goal: name, expr, max or min */
+case class Goal(name: String, expr: Expr, max: Boolean)
+
+/* Constraint: name, left expr, right expr, >= or <= */
+case class Constraint(name: String, lhs: Expr, rhs: Expr, gte: Boolean)
+
 
 

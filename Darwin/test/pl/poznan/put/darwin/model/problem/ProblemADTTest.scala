@@ -40,4 +40,21 @@ class ProblemADTTest {
     assertEquals(Constant(1.0) :: Constant(2.0) :: Constant(3.0) :: Nil, a1.args)
   }
 
+  @Test def GoalConstraintTest = {
+
+    // max: x1
+    val g1 = Goal("profit", Variable("x1", 0, 100), true)
+    assertEquals("profit", g1.name)
+    assertEquals(Variable("x1", 0, 100), g1.expr)
+    assertEquals(true, g1.max)
+
+    // x2 <= 15
+    val c1 = Constraint("limit", Variable("x2", 0, 100), Constant(15), false)
+    assertEquals("limit", c1.name)
+    assertEquals(Variable("x2", 0, 100), c1.lhs)
+    assertEquals(Constant(15), c1.rhs)
+    assertEquals(false, c1.gte)
+
+  }
+
 }
