@@ -34,6 +34,10 @@ class ProblemADTTest {
     assertEquals("+", b1.operator)
     assertEquals(Constant(5.0), b1.lhs)
     assertEquals(Constant(15.0), b1.rhs)
+
+    val a1 = AggregateOp("min", Constant(1.0) :: Constant(2.0) :: Constant(3.0) :: Nil)
+    assertEquals("min", a1.operator)
+    assertEquals(Constant(1.0) :: Constant(2.0) :: Constant(3.0) :: Nil, a1.args)
   }
 
 }

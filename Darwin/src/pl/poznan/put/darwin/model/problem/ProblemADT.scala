@@ -21,5 +21,7 @@ case class Interval(name: String, lower: Double, upper: Double) extends Expr {
 /* Operators */
 case class UnaryOp(operator: String, arg: Expr) extends Expr
 case class BinaryOp(operator: String, lhs: Expr, rhs: Expr) extends Expr
-  
+case class AggregateOp(operator: String, args: List[Expr]) extends Expr
+
+
 
