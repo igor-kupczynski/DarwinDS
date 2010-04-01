@@ -49,6 +49,10 @@ object Parser {
     def factor: Parser[Expr] =
         floatingPointNumber ^^ {case x => Constant(x.toDouble)} |
         aggregate ^^ {case e => e} |
+        ((("+" | "-")) ~ factor) ^^ {
+          case "+" ~ e => e
+          case "-" ~ e => UnaryOp("-", e)
+        } |
         ident ^^ {case name => Variable(name)} |
         "(" ~ math ~ ")"  ^^ {case _ ~ e ~ _ => e}
 
