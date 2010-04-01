@@ -38,7 +38,7 @@ class ProblemADTTest {
     assertEquals(Constant(1.0) :: Constant(2.0) :: Constant(3.0) :: Nil, a1.args)
   }
 
-  @Test def GoalConstraintTest = {
+  @Test def ProblemElementTest = {
 
     // max: x1
     val g1 = Goal("profit", Variable("x1"), true)
@@ -52,6 +52,12 @@ class ProblemADTTest {
     assertEquals(Variable("x2"), c1.lhs)
     assertEquals(Constant(15), c1.rhs)
     assertEquals(false, c1.gte)
+
+    // Variable a[0, 10]
+    val v1 = VariableDef("a", 0, 10)
+    assertEquals("a", v1.name)
+    assertEquals(0.0, v1.min, 0.0)
+    assertEquals(10.0, v1.max, 0.0)
 
   }
 
