@@ -14,13 +14,13 @@ class ProblemADTTest {
     assertEquals("limit1", i1.name)
     assertEquals(-1.0, i1.lower, 0.0)
     assertEquals(10.0, i1.upper, 0.0)
-    assertEquals(4.5, i1.getMiddleValue(), 0.0)
+    assertEquals(4.5, i1.getMediumValue(), 0.0)
 
     val i2 = Interval("limit2", 3.14, 3.14)
     assertEquals("limit2", i2.name)
     assertEquals(3.14, i2.lower, 0.0)
     assertEquals(3.14, i2.upper, 0.0)
-    assertEquals(3.14, i2.getMiddleValue(), 0.0)
+    assertEquals(3.14, i2.getMediumValue(), 0.0)
   }
 
   @Test def OperatorTest = {

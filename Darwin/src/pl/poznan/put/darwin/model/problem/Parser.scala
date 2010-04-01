@@ -1,12 +1,12 @@
 package pl.poznan.put.darwin.model.problem
 import scala.util.parsing.combinator._
-import pl.poznan.put.darwin.model.Problem
 
 object Parser {
 
   object ProblemParser extends JavaTokenParsers {
 
-    def problem: Parser[Any] = rep(line)
+    def problem: Parser[Problem] =
+        rep(line) ^^ { case ll => Problem(ll) }
 
     def line: Parser[ProblemElement] =
         (expr ~ ";") ^^ {case e ~ _ => e}
@@ -66,5 +66,4 @@ object Parser {
     }
 
   }
-
 }

@@ -79,4 +79,41 @@ object Evaluator {
   def evaluate(expr: Expr, scenario: Scenario, solution: Solution): Double = {
     evaluateSim(simplify(expr, scenario, solution))
   }
+
+
+  /**
+   * Extracts all intervals from the expression
+   */
+  def extractIntervals(exp: Expr): List[Interval] = {
+
+    def extractAll(exp: Expr): List[Interval] = {
+      exp match {
+        case i: Interval => i :: Nil
+        case UnaryOp(name, e) => extractAll(e)
+        case BinaryOp(name, l, r) => extractAll(l) ::: extractAll(r)
+        case AggregateOp(name, eList) =>  (eList.foldLeft[List[Interval]](Nil))((ll, e) => extractAll(e) ::: ll)
+        case _ => Nil
+      }
+    }
+
+    ((extractAll(exp)).foldLeft[List[Interval]](Nil))((ll: List[Interval], i) => if (ll.contains(i)) ll else i :: ll)
+  }
+
+  /**
+   * Extracts all variables from the expression
+   */
+  def extractVariables(exp: Expr): List[Variable] = {
+
+    def extractAll(exp: Expr): List[Variable] = {
+      exp match {
+        case v: Variable => v :: Nil
+        case UnaryOp(name, e) => extractAll(e)
+        case BinaryOp(name, l, r) => extractAll(l) ::: extractAll(r)
+        case AggregateOp(name, eList) =>  (eList.foldLeft[List[Variable]](Nil))((ll, e) => extractAll(e) ::: ll)
+        case _ => Nil
+      }
+  }
+
+  ((extractAll(exp)).foldLeft[List[Variable]](Nil))((ll: List[Variable], i) => if (ll.contains(i)) ll else i :: ll)
+  }
 }

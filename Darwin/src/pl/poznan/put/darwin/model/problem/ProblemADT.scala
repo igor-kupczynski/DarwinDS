@@ -11,7 +11,7 @@ abstract class Expr
 case class Constant(value: Double) extends Expr
 case class Variable(name: String) extends Expr
 case class Interval(name: String, lower: Double, upper: Double) extends Expr {
-  def getMiddleValue(): Double = {
+  def getMediumValue(): Double = {
     lower + ((upper - lower) / 2)
   }
 }
