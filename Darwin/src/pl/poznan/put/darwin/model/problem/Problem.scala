@@ -96,6 +96,23 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constrai
     })
     result
   }
+
+
+  override def toString(): String = {
+    val result = new StringBuilder()
+    vars foreach ((v: VariableDef) => {
+      result.append("%s;\n" format v)
+    })
+    result.append("\n")
+    goals foreach ((g: Goal) => {
+      result.append("%s;\n" format g)
+    })
+    result.append("\n")
+    constraints foreach ((c: Constraint) => {
+      result.append("%s;\n" format c)
+    })
+    return result.toString()
+  }
 }
 
 
