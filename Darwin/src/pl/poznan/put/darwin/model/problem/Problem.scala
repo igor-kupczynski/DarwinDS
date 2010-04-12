@@ -59,6 +59,9 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constrai
 
   }
 
+  /**
+   * Returns all the intervals from problem
+   */
   def getIntervals(): List[Interval] = {
     if (intervals == null) {
       intervals = Nil
@@ -76,6 +79,16 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constrai
     intervals
   }
 
+  /**
+   * Returns all the variables from problem
+   */
+  def getVariables(): List[VariableDef] = {
+    vars
+  }
+
+  /**
+   * Evaluates solution on given scenario
+   */
   def evaluate(scenario: Scenario, solution: Solution): HashMap[Goal, Double] = {
     val result = new HashMap[Goal, Double]
     goals foreach ((g: Goal) => {
@@ -83,13 +96,14 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constrai
     })
     result
   }
-
-  def getVariables(): List[VariableDef] = {
-    vars
-  }
 }
 
 
+/**
+ * Companion object for Problem class, makes problem creation easier for parser.
+ *
+ * @author: Igor Kupczynski
+ */
 object Problem {
   def apply(elements: List[ProblemElement]): Problem = {
     var vars: List[VariableDef] = Nil
