@@ -3,7 +3,7 @@ package pl.poznan.put.darwin.utils
 import pl.poznan.put.darwin.experiment.SolutionResult
 import collection.mutable.HashMap
 import pl.poznan.put.darwin.model.Config.Solution
-import pl.poznan.put.darwin.model.Goal
+import pl.poznan.put.darwin.model.problem.Goal
 
 object SysOutPresenter {
 

@@ -83,6 +83,10 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constrai
     })
     result
   }
+
+  def getVariables(): List[VariableDef] = {
+    vars
+  }
 }
 
 

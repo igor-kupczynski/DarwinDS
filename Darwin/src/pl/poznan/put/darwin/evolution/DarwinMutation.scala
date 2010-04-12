@@ -1,7 +1,8 @@
 package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.Config.{Solution}
-import pl.poznan.put.darwin.model.{Config, Problem}
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.problem.Problem
 
 /**
  * Mutation operator

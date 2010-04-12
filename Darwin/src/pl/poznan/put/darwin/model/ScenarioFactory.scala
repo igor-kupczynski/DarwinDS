@@ -3,6 +3,7 @@ package pl.poznan.put.darwin.model
 import Config.Scenario
 import java.util.Random
 import collection.mutable.HashMap
+import problem.{Interval, Problem}
 
 abstract class ScenarioFactory {
   def generate(p: Problem): Scenario

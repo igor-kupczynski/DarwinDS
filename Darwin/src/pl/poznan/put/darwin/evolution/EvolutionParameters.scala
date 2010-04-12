@@ -1,7 +1,8 @@
 package pl.poznan.put.darwin.evolution
 
-import pl.poznan.put.darwin.model.{SimpleSolutionFactory, SolutionFactory, Problem}
+import pl.poznan.put.darwin.model.{SimpleSolutionFactory, SolutionFactory}
 import pl.poznan.put.darwin.jrsintegration.ScoreKeeper
+import pl.poznan.put.darwin.model.problem.Problem
 
 /**
  * Class for storing evolution experiment parameters

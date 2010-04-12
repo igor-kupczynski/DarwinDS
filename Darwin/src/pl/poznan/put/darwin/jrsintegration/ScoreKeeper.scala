@@ -5,8 +5,9 @@ import pl.poznan.put.darwin.experiment.SolutionResult
 import pl.poznan.put.darwin.model.Config.Solution
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import pl.poznan.put.cs.idss.jrs.types.{Example, Field}
-import pl.poznan.put.darwin.model.{Goal, Config}
+import pl.poznan.put.darwin.model.Config
 import collection.jcl.MutableIterator.Wrapper
+import pl.poznan.put.darwin.model.problem.Goal
 
 
 class ScoreKeeper(container: RulesContainer, var result: HashMap[Solution, SolutionResult]) {

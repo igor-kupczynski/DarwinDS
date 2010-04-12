@@ -2,7 +2,8 @@ package pl.poznan.put.darwin.experiment
 
 import collection.mutable.HashMap
 import scala.Iterator.empty
-import pl.poznan.put.darwin.model.{Config, Goal}
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.problem.Goal
 
 
 class SolutionResult {
@@ -33,7 +34,7 @@ class SolutionResult {
       data = new HashMap[Goal, List[Double]]
       result foreach {case (g, res) => data(g) = res :: Nil}
     } else {
-      result foreach {case (g: Goal, res) => data(g) = if (g.isMax) insertMax(res, data(g)) else insertMin(res, data(g))}
+      result foreach {case (g: Goal, res) => data(g) = if (g.max) insertMax(res, data(g)) else insertMin(res, data(g))}
     }
   }
 
@@ -53,7 +54,7 @@ class SolutionResult {
       var tmp = getPercentile(g, 1.0)
       tmp += 3 * getPercentile(g, 25.0)
       tmp += 2 * getPercentile(g, 50.0)
-      value += (if (g.isMax) tmp else (-1) * tmp)
+      value += (if (g.max) tmp else (-1) * tmp)
     })
     value
   }

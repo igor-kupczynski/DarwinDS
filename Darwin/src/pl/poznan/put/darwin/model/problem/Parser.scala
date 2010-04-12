@@ -3,6 +3,11 @@ import scala.util.parsing.combinator._
 
 object Parser {
 
+  def fromText(text: String): Problem = {
+    val result: ProblemParser.ParseResult[Problem] = ProblemParser.parse(text)
+    result.get
+  }
+
   object ProblemParser extends JavaTokenParsers {
 
     def problem: Parser[Problem] =

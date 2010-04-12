@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.experiment
 
 import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
 import collection.mutable.HashMap
-import pl.poznan.put.darwin.model.{Goal, Problem}
+import pl.poznan.put.darwin.model.problem.Problem
 
 object Experiment {
   def perform(problem: Problem,

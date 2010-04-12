@@ -2,9 +2,10 @@ package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.jrsintegration.ScoreKeeper
 import pl.poznan.put.darwin.model.Config.{Solution, Scenario}
-import pl.poznan.put.darwin.model.{MonteCarloScenarioFactory, Config, Problem}
+import pl.poznan.put.darwin.model.{MonteCarloScenarioFactory, Config}
 import collection.mutable.HashMap
 import pl.poznan.put.darwin.experiment.{Experiment, SolutionResult}
+import pl.poznan.put.darwin.model.problem.Problem
 
 
 /**

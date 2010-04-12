@@ -12,6 +12,8 @@ object Config {
     rng
   }
 
+  val FILENAME: String = "problems/test.mod"
+
   val SOLUTION_COUNT: Int = 30
   val SCENARIO_COUNT: Int = 1000
 

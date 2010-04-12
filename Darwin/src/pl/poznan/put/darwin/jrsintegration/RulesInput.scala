@@ -6,7 +6,7 @@ import collection.mutable.HashMap
 import pl.poznan.put.darwin.model.Config.Solution
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.cs.idss.jrs.types._
-import pl.poznan.put.darwin.model.Goal
+import pl.poznan.put.darwin.model.problem.Goal
 
 class RulesInput(result: List[Tuple2[Solution, SolutionResult]]) extends SerialInput {
   private val enumDomain: EnumDomain = new EnumDomain() {
@@ -61,7 +61,7 @@ class RulesInput(result: List[Tuple2[Solution, SolutionResult]]) extends SerialI
       Config.PERCENTILES foreach (p => {
         val attribute = new Attribute(
           g.name + "_" + p, new FloatField())
-        attribute.setPreferenceType(if (g.isMax) Attribute.GAIN else Attribute.COST)
+        attribute.setPreferenceType(if (g.max) Attribute.GAIN else Attribute.COST)
         attribute.setKind(Attribute.NONE)
         attribute.setActive(true)
         attribute.setMembership(false)
