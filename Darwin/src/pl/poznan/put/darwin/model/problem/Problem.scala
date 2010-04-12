@@ -151,6 +151,6 @@ object Problem {
       }
     })
 
-    new Problem("----", vars, goals, constraints)
+    new Problem("----", vars.reverse, goals.reverse, constraints.reverse)
   }
 }

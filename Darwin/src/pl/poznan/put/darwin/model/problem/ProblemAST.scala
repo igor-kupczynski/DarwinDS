@@ -72,7 +72,7 @@ case class Constraint(name: String, lhs: Expr, rhs: Expr, gte: Boolean) extends 
 /* Variable definition: name, min and max value */
 case class VariableDef(name: String, min: Double, max: Double) extends ProblemElement {
   override def toString: String = {
-    "var[%s,%s] %s" format (min, max, name)
+    "var[%s, %s] %s" format (min, max, name)
   }
 }
 
