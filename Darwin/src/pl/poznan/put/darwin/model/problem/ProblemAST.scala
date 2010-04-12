@@ -1,7 +1,7 @@
 package pl.poznan.put.darwin.model.problem
 
 /**
- * Module containing abstract data types for problem.
+ * Module containing abstract syntax tree elements for problem.
  *
  * @author: Igor Kupczynski
  */
