@@ -7,14 +7,14 @@ Ant build for the project
 <project name="MyProject" basedir="." default="build">
 
     <description>
-    Buildfile for DARWIN project.
+        Buildfile for DARWIN project.
     </description>
 
-    <property name="sources.dir" value="${basedir}/src" />
-    <property name="test.dir" value="${basedir}/test" />
-    <property name="build.dir" value="${basedir}/bin" />
+    <property name="sources.dir" value="${basedir}/src"/>
+    <property name="test.dir" value="${basedir}/test"/>
+    <property name="build.dir" value="${basedir}/bin"/>
 
-    <property name="with.unchecked" value="no" />
+    <property name="with.unchecked" value="no"/>
 
 
     <target name="init">
@@ -32,15 +32,15 @@ Ant build for the project
         <path id="build.classpath">
             <pathelement location="${scala-library.jar}"/>
             <fileset dir="lib">
-                    <include name="**/*.jar"/>
-                    <exclude name="junit*.jar"/>
-            </fileset>            
+                <include name="**/*.jar"/>
+                <exclude name="junit*.jar"/>
+            </fileset>
             <pathelement location="${build.dir}"/>
         </path>
         <path id="test.classpath">
-            <path refid="build.classpath" />
+            <path refid="build.classpath"/>
             <fileset dir="lib">
-               <include name="junit*.jar"/>
+                <include name="junit*.jar"/>
             </fileset>
             <pathelement location="${test.dir}"/>
         </path>
@@ -50,6 +50,23 @@ Ant build for the project
                 <pathelement location="${scala-library.jar}"/>
             </classpath>
         </taskdef>
+    </target>
+
+
+    <target name="get-libraries" description="Downloads libraries required by project">
+        <mkdir dir="${basedir}/lib"/>
+        <get src="http://github.com/downloads/puszczyk/DarwinDS/trove-2.1.0.jar"
+             dest="${basedir}/lib/trove-2.1.0.jar"
+             verbose="true"
+             usetimestamp="true"/>
+        <get src="http://github.com/downloads/puszczyk/DarwinDS/junit-4.8.1.jar"
+             dest="${basedir}/lib/junit-4.8.1.jar"
+             verbose="true"
+             usetimestamp="true"/>
+        <get src="http://github.com/downloads/puszczyk/DarwinDS/jrs-0.0.1-SNAPSHOT.jar"
+             dest="${basedir}/lib/jrs-0.0.1-SNAPSHOT.jar"
+             verbose="true"
+             usetimestamp="true"/>
     </target>
 
 
@@ -75,16 +92,16 @@ Ant build for the project
         </scalac>
     </target>
 
-    
+
     <target name="test" depends="build-test" description="Runs all tests">
         <junit>
-          <classpath refid="test.classpath" />
-          <formatter type="plain" usefile="false" />
-          <batchtest fork="true">
-              <fileset dir="${build.dir}"
-                       includes="**/*Test.class"
-                       excludes="**/*$*.class" />
-          </batchtest>
+            <classpath refid="test.classpath"/>
+            <formatter type="plain" usefile="false"/>
+            <batchtest fork="true">
+                <fileset dir="${build.dir}"
+                         includes="**/*Test.class"
+                         excludes="**/*$*.class"/>
+            </batchtest>
         </junit>
     </target>
 
@@ -95,6 +112,6 @@ Ant build for the project
     </target>
 
     <target name="clean" description="Removes compiled classes">
-	    <delete dir="${build.dir}" />
+        <delete dir="${build.dir}"/>
     </target>
 </project>
