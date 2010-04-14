@@ -11,6 +11,7 @@ Ant build for the project
     </description>
 
     <property name="sources.dir" value="${basedir}/src" />
+    <property name="test.dir" value="${basedir}/test" />
     <property name="build.dir" value="${basedir}/bin" />
 
     <property name="with.unchecked" value="no" />
@@ -32,8 +33,16 @@ Ant build for the project
             <pathelement location="${scala-library.jar}"/>
             <fileset dir="lib">
                     <include name="**/*.jar"/>
+                    <exclude name="junit*.jar"/>
             </fileset>            
             <pathelement location="${build.dir}"/>
+        </path>
+        <path id="test.classpath">
+            <path refid="build.classpath" />
+            <fileset dir="lib">
+               <include name="junit*.jar"/>
+            </fileset>
+            <pathelement location="${test.dir}"/>
         </path>
         <taskdef resource="scala/tools/ant/antlib.xml">
             <classpath>
@@ -54,6 +63,30 @@ Ant build for the project
         </scalac>
     </target>
 
+
+    <target name="build-test" depends="init">
+        <mkdir dir="${build.dir}"/>
+        <scalac srcdir="${basedir}"
+                destdir="${build.dir}"
+                classpathref="test.classpath"
+                unchecked="${with.unchecked}">
+            <include name="src/**/*.scala"/>
+            <include name="test/**/*.scala"/>
+        </scalac>
+    </target>
+
+    
+    <target name="test" depends="build-test" description="Runs all tests">
+        <junit>
+          <classpath refid="test.classpath" />
+          <formatter type="plain" usefile="false" />
+          <batchtest fork="true">
+              <fileset dir="${build.dir}"
+                       includes="**/*Test.class"
+                       excludes="**/*$*.class" />
+          </batchtest>
+        </junit>
+    </target>
 
     <target name="run" depends="build" description="Runs project">
         <java classname="pl.poznan.put.darwin.model.Runner"
