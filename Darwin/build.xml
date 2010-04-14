@@ -4,7 +4,7 @@ Ant build for the project
 @author: Igor Kupczynski
 -->
 
-<project name="MyProject" basedir="." default="build">
+<project name="MyProject" basedir="." default="clean-build-test">
 
     <description>
         Buildfile for DARWIN project.
@@ -81,13 +81,12 @@ Ant build for the project
     </target>
 
 
-    <target name="build-test" depends="init">
+    <target name="build-test" depends="build">
         <mkdir dir="${build.dir}"/>
         <scalac srcdir="${basedir}"
                 destdir="${build.dir}"
                 classpathref="test.classpath"
                 unchecked="${with.unchecked}">
-            <include name="src/**/*.scala"/>
             <include name="test/**/*.scala"/>
         </scalac>
     </target>
@@ -114,4 +113,6 @@ Ant build for the project
     <target name="clean" description="Removes compiled classes">
         <delete dir="${build.dir}"/>
     </target>
+
+    <target name="clean-build-test" description="Cleans, builds and tests project" depends="clean,build,test" />
 </project>
