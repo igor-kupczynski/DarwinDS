@@ -117,4 +117,35 @@ class ProblemTest {
     result = trainsSoldiersNoIntervals.utilityValue({case "z" => 120})
     assertEquals(120, result, 0)
   }
+
+
+  @Test def toStringTest() {
+    var expected = "" +
+    "var[0.0, 200.0] x;\n\n" +
+    "max profit: x;\n\n" +
+    "!dec: profit;\n\n" +
+    "non-zero: x >= 0.0;\n" +
+    "limit: x <= 100.0;\n"
+    assertEquals(expected, simpleNoIntervals.toString)
+
+    expected = "" +
+    "var[0.0, 200.0] x;\n\n" +
+    "max profit: x;\n\n" +
+    "!dec: profit;\n\n" +
+    "non-zero: x >= 0.0;\n" +
+    "limit: ([i1: 0.9, 1.1] * x) <= 100.0;\n"
+    assertEquals(expected, simpleWithIntervals.toString)
+
+    expected = "" +
+    "var[0.0, 200.0] x1;\n" +
+    "var[0.0, 200.0] x2;\n\n" +
+    "max z: ((3.0 * x1) + (2.0 * x2));\n\n" +
+    "!dec: z;\n\n" +
+    "Finishing: ((2.0 * x1) + x2) <= 100.0;\n" +
+    "Carpentr: (x1 + x2) <= 80.0;\n" +
+    "Demand: x1 <= 40.0;\n" +
+    "nonZero1: x1 >= 0.0;\n" +
+    "nonZero2: x2 >= 0.0;\n"
+    assertEquals(expected, trainsSoldiersNoIntervals.toString)
+  }
 }
