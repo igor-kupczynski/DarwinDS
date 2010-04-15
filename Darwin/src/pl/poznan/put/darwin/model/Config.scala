@@ -15,7 +15,7 @@ object Config {
   val FILENAME: String = "problems/simple_1crit.mod"
 
   val SOLUTION_COUNT: Int = 30
-  val SCENARIO_COUNT: Int = 1000
+  val SCENARIO_COUNT: Int = 1
 
   val GOOD_COUNT: Int = 10
 
