@@ -32,6 +32,6 @@ class OneCriterionBestSolutionPrinter extends EvolutionObserver {
       }
     }}
 
-    println("best[%s]: %s <= %s".format(criterion.name, bestVal, bestS))
+    println("best[%s]: %s (%s) <= %s".format(criterion.name, bestVal, bestSR.utilityFunctionValue, bestS))
    }
 }

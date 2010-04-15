@@ -3,10 +3,9 @@ package pl.poznan.put.darwin.experiment
 import collection.mutable.HashMap
 import scala.Iterator.empty
 import pl.poznan.put.darwin.model.Config
-import pl.poznan.put.darwin.model.problem.Goal
+import pl.poznan.put.darwin.model.problem.{Evaluator, Problem, Goal}
 
-
-class SolutionResult {
+class SolutionResult(problem: Problem) {
   private var data: HashMap[Goal, List[Double]] = null
   private var percentiles: HashMap[(Goal, Int), Double] = null
 
@@ -48,15 +47,13 @@ class SolutionResult {
     if (data != null) data.keys else empty
   }
 
-  def autoValue: Double = {
-    var value: Double = 0.0;
-    goals() foreach ((g: Goal) => {
-      var tmp = getPercentile(g, 1.0)
-      tmp += 3 * getPercentile(g, 25.0)
-      tmp += 2 * getPercentile(g, 50.0)
-      value += (if (g.max) tmp else (-1) * tmp)
+  def utilityFunctionValue: Double = {
+    val result = new HashMap[String, Double]
+    goals foreach ((g: Goal) => {
+      //TODO: generalize to interval case
+      result(g.name) = getPercentile(g, 0)
     })
-    value
+    return problem.utilityValue(result)
   }
 
   private def avgUpToIdx(g: Goal, idx: Int): Double = {

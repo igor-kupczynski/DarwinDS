@@ -32,7 +32,7 @@ class GenerationObserver(val loop: Int) extends EvolutionObserver {
     var autoValue: List[Double] = Nil
     generation foreach {case (s: Solution, sr: SolutionResult) => {
       ps = sr.primaryScore :: ps
-      autoValue = sr.autoValue :: autoValue
+      autoValue = sr.utilityFunctionValue :: autoValue
     }}
 
     val minPs = ps reduceLeft min

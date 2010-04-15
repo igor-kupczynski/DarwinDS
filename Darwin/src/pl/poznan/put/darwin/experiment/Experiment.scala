@@ -11,7 +11,7 @@ object Experiment {
     var result: List[Tuple2[Solution, SolutionResult]] = Nil
 
     solutions foreach ((sol: Solution) => {
-      val solutionResult: SolutionResult = new SolutionResult
+      val solutionResult: SolutionResult = new SolutionResult(problem)
       scenarios foreach ((scen: Scenario) => solutionResult.addResult(problem.evaluate(scen, sol)))
       result = (sol, solutionResult) :: result
     })

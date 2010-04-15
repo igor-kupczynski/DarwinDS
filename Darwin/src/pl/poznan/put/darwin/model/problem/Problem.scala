@@ -98,6 +98,13 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityF
     result
   }
 
+  /**
+   * Calculates utility value for given solution and scenario
+   */
+  def utilityValue(resultSol: Solution): Double = {
+    Evaluator.evaluate(utilityFunction.expr, new HashMap[String, Double](), resultSol)
+  }
+
 
   override def toString(): String = {
     val result = new StringBuilder()
@@ -121,11 +128,11 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityF
 }
 
 
-/**
- * Companion object for Problem class, makes problem creation easier for parser.
- *
- * @author: Igor Kupczynski
- */
+  /**
+   *  Companion object for Problem class, makes problem creation easier for parser.
+   *
+   * @author: Igor Kupczynski
+   */
 object Problem {
   def apply(elements: List[ProblemElement]): Problem = {
     var vars: List[VariableDef] = Nil
