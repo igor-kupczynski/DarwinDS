@@ -1,7 +1,7 @@
 package pl.poznan.put.darwin.evolution
 
 import collection.mutable.HashMap
-import observer.GenerationObserver
+import observer.{OneCriterionBestSolutionPrinter, GenerationObserver}
 import pl.poznan.put.darwin.experiment.SolutionResult
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.Config.Solution
@@ -14,7 +14,8 @@ class Evolver(problem: Problem) {
     var sk: ScoreKeeper = JrsIntegration.getScores(baseResult)
     val params: EvolutionParameters = new EvolutionParameters(problem, sk)
     val engine = new DarwinEvolutionEngine(params)
-    engine.registerGenerationObserver(GenerationObserver())
+    //engine.registerGenerationObserver(GenerationObserver())
+    engine.registerGenerationObserver(new OneCriterionBestSolutionPrinter())
     engine.start(baseResult)
   }
 }
