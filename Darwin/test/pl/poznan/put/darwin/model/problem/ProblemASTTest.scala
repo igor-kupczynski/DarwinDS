@@ -68,6 +68,11 @@ class ProblemADTTest {
     assertEquals(0.0, v1.min, 0.0)
     assertEquals(10.0, v1.max, 0.0)
     assertEquals("var[0.0, 10.0] a", v1.toString)
+
+    // Supposed utility function *dec: z
+    val u1 = UtilityFunction(Variable("z"))
+    assertEquals(Variable("z"), u1.expr)
+    assertEquals("!dec: z", u1.toString)
   }
 
 }

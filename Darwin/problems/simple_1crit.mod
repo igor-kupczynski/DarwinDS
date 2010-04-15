@@ -3,6 +3,8 @@ var[0,200] x2;
 
 max z: 3*x1 + 2*x2;
 
+*dec: z; 
+
 Finishing: 2*x1 + x2 <= 100;
 Carpentr: x1 + x2 <= 80;
 Demand: x1 <= 40;

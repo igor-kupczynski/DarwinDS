@@ -76,5 +76,9 @@ case class VariableDef(name: String, min: Double, max: Double) extends ProblemEl
   }
 }
 
-
-
+/* Supposed UtilityFunction: expr */
+case class  UtilityFunction(expr: Expr) extends ProblemElement {
+  override def toString: String = {
+    "!dec: %s" format (expr)
+  }
+}

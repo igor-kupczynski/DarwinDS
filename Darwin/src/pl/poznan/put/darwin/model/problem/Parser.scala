@@ -17,6 +17,7 @@ object Parser {
         (expr ~ ";") ^^ {case e ~ _ => e}
 
     def expr: Parser[ProblemElement] =
+        utilityFunc ^^ {case e => e} |
         variable ^^ {case e => e} |
         goal ^^ {case e => e} |
         constraint ^^ {case e => e}
@@ -34,6 +35,11 @@ object Parser {
     def constraint: Parser[Constraint] =
         (ident ~ ":" ~ math ~ (">=" | "<=") ~ math) ^^ {
            case name ~ _ ~ lhs ~ gte ~ rhs => Constraint(name, lhs, rhs, gte == ">=")
+        }
+
+    def utilityFunc: Parser[UtilityFunction] =
+        ("!dec:" ~ math) ^^ {
+          case _ ~ e => UtilityFunction(e)
         }
 
     def math: Parser[Expr] =

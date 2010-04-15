@@ -11,7 +11,8 @@ import java.util.Random
  * @author: Igor Kupczynski
  */
 
-class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constraints: List[Constraint]) {
+class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityFunction: UtilityFunction,
+              constraints: List[Constraint]) {
 
   private var intervals: List[Interval] = null
 
@@ -104,10 +105,14 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], constrai
       result.append("%s;\n" format v)
     })
     result.append("\n")
+
     goals foreach ((g: Goal) => {
       result.append("%s;\n" format g)
     })
     result.append("\n")
+
+    if (utilityFunction != null) result.append("%s;\n\n" format utilityFunction)
+
     constraints foreach ((c: Constraint) => {
       result.append("%s;\n" format c)
     })
@@ -126,15 +131,27 @@ object Problem {
     var vars: List[VariableDef] = Nil
     var goals: List[Goal] = Nil
     var constraints: List[Constraint] = Nil
+    var utilityFunction: UtilityFunction = null
 
     def isDefined(v: Variable): Boolean = {
       vars foreach ((vDef: VariableDef) => if (vDef.name == v.name) return(true))
       return false
     }
 
+    def goalDefined(v: Variable): Boolean = {
+      goals foreach ((g: Goal) => if (g.name == v.name) return(true))
+      return false
+    }
+
     def checkVars(e: Expr) = {
       Evaluator.extractVariables(e) foreach ((v: Variable) =>
         if (!isDefined(v)) throw new Exception("Variable " + v.name + " is not defined")
+      )
+    }
+
+    def checkGoals(e: Expr) = {
+      Evaluator.extractVariables(e) foreach ((v: Variable) =>
+        if (!goalDefined(v)) throw new Exception("!dec: Goal " + v.name + " is not defined")
       )
     }
 
@@ -149,8 +166,13 @@ object Problem {
         checkVars(rhs)
         constraints = Constraint(name, lhs, rhs, gte) :: constraints 
       }
+      case UtilityFunction(expr) => {
+        if (utilityFunction != null) throw new Exception("Utility function redefinition")
+        checkGoals(expr)
+        utilityFunction = UtilityFunction(expr)
+      }
     })
 
-    new Problem("----", vars.reverse, goals.reverse, constraints.reverse)
+    new Problem("----", vars.reverse, goals.reverse, utilityFunction, constraints.reverse)
   }
 }
