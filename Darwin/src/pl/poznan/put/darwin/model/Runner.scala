@@ -27,7 +27,7 @@ object Runner {
 
     val evolver = new Evolver(p)
     var idx = 0
-    while (idx < 10) {
+    while (idx < 30) {
       println("loop " + idx)
       idx += 1
       val evaluatedResult = AutoEvaluator.evaluate(result)

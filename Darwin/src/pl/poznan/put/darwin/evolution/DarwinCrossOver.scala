@@ -4,6 +4,13 @@ import pl.poznan.put.darwin.model.Config
 import collection.mutable.HashMap
 import pl.poznan.put.darwin.model.problem.{VariableDef, Problem}
 
+/** 
+* DarwinCrossOver
+*
+* Crossover operaror for darwin evolution framework
+*
+* @author Igor Kupczynski 
+*/
 class DarwinCrossOver(problem: Problem)  {
 
   def mate(a: Solution, b: Solution): Solution = {
