@@ -24,6 +24,10 @@ class DarwinCrossOverTest extends BaseEvolutionTestCase {
       assertTrue(c("x1") <= 10)
       assertTrue(c("x2") >= 0)
       assertTrue(c("x2") <= 10)
+      assertTrue(c("x1") != a("x1"))
+      assertTrue(c("x2") != a("x2"))
+      assertTrue(c("x1") != b("x1"))
+      assertTrue(c("x2") != b("x2"))
       assertTrue(trainsSoldiersNoIntervals.isFeasible(c))
     }
     

@@ -1,3 +1,5 @@
+package pl.poznan.put.darwin.evolution
+
 import pl.poznan.put.darwin.model.problem.{Problem, Parser}
 
 /**
