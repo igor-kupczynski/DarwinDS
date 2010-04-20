@@ -1,6 +1,7 @@
 package pl.poznan.put.darwin.model.problem
 
-import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
+import pl.poznan.put.darwin.model.Config.Scenario
+import collection.immutable.HashMap
 
 class EvaluatorTest {
   import org.junit._, Assert._
@@ -9,7 +10,7 @@ class EvaluatorTest {
   @Test def EvaluatorTest = {
 
     val scenario: Scenario = { case "limit" => 10.0 }
-    val solution: Solution = { case "x" => 5.0 }
+    val solution: Map[String, Double] = Map("x" -> 5.0)
 
     def eval(e: Expr): Double = {
       Evaluator.evaluate(e, scenario, solution)

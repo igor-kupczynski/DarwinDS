@@ -1,6 +1,7 @@
 package pl.poznan.put.darwin.model.problem
 
 import collection.mutable.HashMap
+import pl.poznan.put.darwin.model.Solution
 
 class ProblemTest {
 
@@ -46,33 +47,33 @@ class ProblemTest {
   }
 
   @Test def isFeasibleTest() {
-    assertEquals(false, simpleNoIntervals.isFeasible({case "x" => -199.0}))
-    assertEquals(false, simpleNoIntervals.isFeasible({case "x" => -1}))
-    assertEquals(true, simpleNoIntervals.isFeasible({case "x" => 0}))
-    assertEquals(true, simpleNoIntervals.isFeasible({case "x" => 1}))
-    assertEquals(true, simpleNoIntervals.isFeasible({case "x" => 50}))
-    assertEquals(true, simpleNoIntervals.isFeasible({case "x" => 99}))
-    assertEquals(true, simpleNoIntervals.isFeasible({case "x" => 100}))
-    assertEquals(false, simpleNoIntervals.isFeasible({case "x" => 101}))
-    assertEquals(false, simpleNoIntervals.isFeasible({case "x" => 199}))
-    assertEquals(false, simpleNoIntervals.isFeasible({case "x" => 400}))
+    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" -> -199.0)))
+    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  -1.0)))
+    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  0.0)))
+    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  1.0)))
+    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  50.0)))
+    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  99.0)))
+    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  100.0)))
+    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  101.0)))
+    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  199.0)))
+    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  400.0)))
 
-    assertEquals(false, simpleWithIntervals.isFeasible({case "x" => -199.0}))
-    assertEquals(false, simpleWithIntervals.isFeasible({case "x" => -1}))
-    assertEquals(true, simpleWithIntervals.isFeasible({case "x" => 0}))
-    assertEquals(true, simpleWithIntervals.isFeasible({case "x" => 1}))
-    assertEquals(true, simpleWithIntervals.isFeasible({case "x" => 50}))
-    assertEquals(true, simpleWithIntervals.isFeasible({case "x" => 99}))
-    assertEquals(true, simpleWithIntervals.isFeasible({case "x" => 100}))
-    assertEquals(false, simpleWithIntervals.isFeasible({case "x" => 101}))
-    assertEquals(false, simpleWithIntervals.isFeasible({case "x" => 199}))
-    assertEquals(false, simpleWithIntervals.isFeasible({case "x" => 400}))
+    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  -199.0)))
+    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  -1.0)))
+    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  0.0)))
+    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  1.0)))
+    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  50.0)))
+    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  99.0)))
+    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  100.0)))
+    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  101.0)))
+    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  199.0)))
+    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  400.0)))
 
-    assertEquals(false, trainsSoldiersNoIntervals.isFeasible({case "x1" => -1; case "x2" => -1}))
-    assertEquals(true, trainsSoldiersNoIntervals.isFeasible({case "x1" => 1; case "x2" => 1}))
-    assertEquals(true, trainsSoldiersNoIntervals.isFeasible({case "x1" => 40; case "x2" => 1}))
-    assertEquals(false, trainsSoldiersNoIntervals.isFeasible({case "x1" => 41; case "x2" => 1}))
-    assertEquals(false, trainsSoldiersNoIntervals.isFeasible({case "x1" => 198; case "x2" => 168}))
+    assertEquals(false, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> -1.0, "x2" -> -1.0)))
+    assertEquals(true, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 1.0, "x2" -> 1.0)))
+    assertEquals(true, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 40.0, "x2" -> 1.0)))
+    assertEquals(false, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 41.0, "x2" -> 1.0)))
+    assertEquals(false, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 198.0, "x2" -> 168.0)))
   }
 
   @Test def getIntervalsTest() {
@@ -89,32 +90,18 @@ class ProblemTest {
       trainsSoldiersNoIntervals.getVariables())
   }
 
-  @Test def evaluateTest() {
-    var result = simpleNoIntervals.evaluate(emptyScenario, {case "x" => 100})
-    assertEquals(100, result.values.next, 0)
-
-    result = simpleNoIntervals.evaluate(emptyScenario, {case "x" => 20})
-    assertEquals(20, result.values.next, 0)
-
-    result = simpleWithIntervals.evaluate({case "i1" => 0.9}, {case "x" => 100})
-    assertEquals(100, result.values.next, 0)
-
-    result = trainsSoldiersNoIntervals.evaluate(emptyScenario, {case "x1" => 20; case "x2" => 30})
-    assertEquals(120, result.values.next, 0)
-  }
-
 
   @Test def utilityValueTest() {
-    var result = simpleNoIntervals.utilityValue({case "profit" => 100})
+    var result = simpleNoIntervals.utilityValue(new Solution(simpleNoIntervals, Map("profit" -> 100.0)))
     assertEquals(100, result, 0)
 
-    result = simpleNoIntervals.utilityValue({case "profit" => 20})
+    result = simpleNoIntervals.utilityValue(new Solution(simpleNoIntervals,Map("profit" -> 20.0)))
     assertEquals(20, result, 0)
 
-    result = simpleWithIntervals.utilityValue({case "profit" => 100})
+    result = simpleWithIntervals.utilityValue(new Solution(simpleWithIntervals,Map("profit" -> 100.0)))
     assertEquals(100, result, 0)
 
-    result = trainsSoldiersNoIntervals.utilityValue({case "z" => 120})
+    result = trainsSoldiersNoIntervals.utilityValue(new Solution(trainsSoldiersNoIntervals,Map("z" -> 120.0)))
     assertEquals(120, result, 0)
   }
 

@@ -1,8 +1,7 @@
 package pl.poznan.put.darwin.evolution
 
-import pl.poznan.put.darwin.model.Config.{Solution}
-import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.Problem
+import pl.poznan.put.darwin.model.{Solution, Config}
 
 /**
  * Mutation operator
@@ -11,9 +10,9 @@ import pl.poznan.put.darwin.model.problem.Problem
  */
 object DarwinMutation {
 
-  def mutate(p: Problem, s: Solution, generation: Int): Solution = {
+  def mutate(s: Solution, generation: Int): Solution = {
     if (Config.getRNG().nextDouble() > Config.ETA * Math.pow(1 - Config.OMEGA, generation - 1))
-      p.randomNeighbour(s)
+      s.problem.randomNeighbour(s)
     else s
   }
 }

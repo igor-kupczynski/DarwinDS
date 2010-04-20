@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.evolution
 
-import collection.mutable.HashMap
+import pl.poznan.put.darwin.model.Solution
 
 class DarwinMutationTest extends BaseEvolutionTestCase {
 
@@ -9,15 +9,14 @@ class DarwinMutationTest extends BaseEvolutionTestCase {
   @Test def mutationTest = {
     // It'll be quite hard to test mutation because it is random. We'll
     // just create a mutant few times and see if it is feasible
-    val a = new HashMap[String, Double]
-    a("x1") = 10;
-    a("x2") = 10;
+    val a = Map("x1" -> 10.0, "x2" -> 10.0)
 
     for (idx <- 1 to 100) {
-      val c = DarwinMutation.mutate(trainsSoldiersNoIntervals, a, 1)
+      val c = DarwinMutation.mutate(new Solution(trainsSoldiersNoIntervals, a), 1)
       assertTrue(trainsSoldiersNoIntervals.isFeasible(c))
-      assertTrue(c("x1") != null)
-      assertTrue(c("x2") != null)
+      assertEquals(c.values.keySet.size, 2)
+      assertTrue(c.values.contains("x1"))
+      assertTrue(c.values.contains("x2"))
     }
     
   }

@@ -5,7 +5,6 @@ import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
 
 object Config {
   type Scenario = String => Double
-  type Solution = String => Double
 
   private val rng: Random = new Random()
   def getRNG(): Random = {

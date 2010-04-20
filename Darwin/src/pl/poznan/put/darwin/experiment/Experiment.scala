@@ -1,19 +1,19 @@
 package pl.poznan.put.darwin.experiment
 
-import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
-import collection.mutable.HashMap
+import pl.poznan.put.darwin.model.Config.Scenario
 import pl.poznan.put.darwin.model.problem.Problem
+import pl.poznan.put.darwin.model.Solution
 
 object Experiment {
   def perform(problem: Problem,
               scenarios: List[Scenario],
-              solutions: List[Solution]): List[Tuple2[Solution, SolutionResult]] = {
-    var result: List[Tuple2[Solution, SolutionResult]] = Nil
+              solutions: List[Solution]): List[Solution] = {
+    var result: List[Solution] = Nil
 
     solutions foreach ((sol: Solution) => {
-      val solutionResult: SolutionResult = new SolutionResult(problem)
-      scenarios foreach ((scen: Scenario) => solutionResult.addResult(problem.evaluate(scen, sol)))
-      result = (sol, solutionResult) :: result
+      val solution: Solution = new Solution(sol.problem, sol.values)
+      scenarios foreach ((scen: Scenario) => solution.evaluateScenario(scen))
+      result = solution :: result
     })
     result
   }

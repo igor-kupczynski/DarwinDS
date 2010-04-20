@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model
 
 import Config.Scenario
 import java.util.Random
-import collection.mutable.HashMap
+import collection.immutable.HashMap
 import problem.{Interval, Problem}
 
 abstract class ScenarioFactory {
@@ -13,9 +13,9 @@ object MonteCarloScenarioFactory extends ScenarioFactory {
   private val rng: Random = Config.getRNG()
 
   def generate(p: Problem): Scenario = {
-    val result = new HashMap[String, Double]
+    var result: Map[String, Double] = new HashMap[String, Double]
     p.getIntervals() foreach ((i: Interval) => {
-      result(i.name) = rng.nextDouble() * (i.upper - i.lower) + i.lower
+      result += (i.name -> (rng.nextDouble() * (i.upper - i.lower) + i.lower))
     })
     result
   }

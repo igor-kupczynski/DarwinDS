@@ -1,8 +1,7 @@
 package pl.poznan.put.darwin.evolution.observer
 
-import pl.poznan.put.darwin.model.Config.Solution
-import collection.mutable.HashMap
-import pl.poznan.put.darwin.experiment.SolutionResult
+import collection.immutable.HashMap
+import pl.poznan.put.darwin.model.Solution
 
 /**
  * Observer being notified about new generations prints some statistics about the generation
@@ -23,17 +22,17 @@ class GenerationObserver(val loop: Int) extends EvolutionObserver {
     a + b
   }
 
-  def notify(params: HashMap[String, Any]) {
-    val generation: List[Tuple2[Solution, SolutionResult]] = params("generation").asInstanceOf[List[Tuple2[Solution, SolutionResult]]]
+  def notify(params: Map[String, Any]) {
+    val generation: List[Solution] = params("generation").asInstanceOf[List[Solution]]
 
     val number: Int = params("number").asInstanceOf[Int]
 
     var ps: List[Double] = Nil
     var autoValue: List[Double] = Nil
-    generation foreach {case (s: Solution, sr: SolutionResult) => {
-      ps = sr.primaryScore :: ps
-      autoValue = sr.utilityFunctionValue :: autoValue
-    }}
+    generation foreach ((s: Solution) => {
+      ps = s.getPrimaryScore() :: ps
+      autoValue = s.utilityFunctionValue :: autoValue
+    })
 
     val minPs = ps reduceLeft min
     val minAutoValue = autoValue reduceLeft min

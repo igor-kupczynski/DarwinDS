@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.model.problem
 
-import  pl.poznan.put.darwin.model.Config.{Solution, Scenario}
+import  pl.poznan.put.darwin.model.Config.Scenario
 
 /**
  * Object for manipulation expressions:
@@ -14,7 +14,7 @@ object Evaluator {
   /**
    * Simplify mathematical expression and convert variables/intervals to constants
    */
-  private def simplify(exp: Expr, scenario: Scenario, solution: Solution): Expr = {
+  private def simplify(exp: Expr, scenario: Scenario, solution: Map[String, Double]): Expr = {
 
     // first simplify sub expressions
     val simpSub: Expr = exp match {
@@ -76,7 +76,7 @@ object Evaluator {
   /**
    * Simplify and evaluated expression
    */
-  def evaluate(expr: Expr, scenario: Scenario, solution: Solution): Double = {
+  def evaluate(expr: Expr, scenario: Scenario, solution: Map[String, Double]): Double = {
     evaluateSim(simplify(expr, scenario, solution))
   }
 

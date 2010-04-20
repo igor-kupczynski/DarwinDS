@@ -1,9 +1,9 @@
 package pl.poznan.put.darwin.model.problem
 
-import collection.mutable.HashMap
-import pl.poznan.put.darwin.model.Config.{Scenario, Solution}
-import pl.poznan.put.darwin.model.Config
+import collection.immutable.HashMap
+import pl.poznan.put.darwin.model.Config.Scenario
 import java.util.Random
+import pl.poznan.put.darwin.model.{Solution, Config}
 
 /**
  *  Class representing MMO problem to be solved by the darwin method.
@@ -11,7 +11,7 @@ import java.util.Random
  * @author: Igor Kupczynski
  */
 
-class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityFunction: UtilityFunction,
+class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], utilityFunction: UtilityFunction,
               constraints: List[Constraint]) {
 
   private var intervals: List[Interval] = null
@@ -20,9 +20,9 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityF
    * Returns scenario with medium values on each interval.
    */
   def getDefaultScenario(): Scenario = {
-    val s = new HashMap[String, Double]()
+    var s: Map[String, Double] = new HashMap[String, Double]()
     getIntervals().map((i: Interval) => {
-      s(i.name) = i.getMediumValue()
+      s += (i.name -> i.getMediumValue())
     })
     s
   }
@@ -33,31 +33,34 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityF
   def isFeasible(s: Solution): Boolean = {
     val default = getDefaultScenario()
     constraints foreach ((c: Constraint) => {
-       val lVal = Evaluator.evaluate(c.lhs, default, s)
-       val rVal = Evaluator.evaluate(c.rhs, default, s)
+       val lVal = Evaluator.evaluate(c.lhs, default, s.values)
+       val rVal = Evaluator.evaluate(c.rhs, default, s.values)
        if ( c.gte && lVal < rVal) return(false)
        if (!c.gte && lVal > rVal) return (false)
     })
     true
   }
 
+  def isFeasible(values: Map[String, Double]): Boolean = {
+    isFeasible(new Solution(this, values))
+  }
+
   // TODO: Move! This should be part of solution or companion object
   def randomNeighbour(s: Solution) = {
-    var result: HashMap[String, Double] = null
+    var result: Map[String, Double] = null
     val rng: Random = Config.getRNG()
     var tries = 0
     while (tries < Config.MUTATION_TRIES && (result == null || !isFeasible(result))) {
       val idx = rng.nextInt(vars.length)
       val variable = vars(idx)
-      val value = s(variable.name) + rng.nextGaussian()
+      val value = s.values(variable.name) + rng.nextGaussian()
       result = new HashMap[String, Double]()
       vars foreach ((v: VariableDef) => {
-        result(v.name) = if (v.name == variable.name) value else s(v.name)
+        result += (v.name -> (if (v.name == variable.name) value else s.values(v.name)))
       })
       tries += 1
     }
-    result
-
+    new Solution(this, result)
   }
 
   /**
@@ -86,23 +89,13 @@ class Problem(name: String, vars: List[VariableDef], goals: List[Goal], utilityF
   def getVariables(): List[VariableDef] = {
     vars
   }
-
-  /**
-   * Evaluates solution on given scenario
-   */
-  def evaluate(scenario: Scenario, solution: Solution): HashMap[Goal, Double] = {
-    val result = new HashMap[Goal, Double]
-    goals foreach ((g: Goal) => {
-      result(g) = Evaluator.evaluate(g.expr, scenario, solution)
-    })
-    result
-  }
+  
 
   /**
    * Calculates utility value for given solution and scenario
    */
   def utilityValue(resultSol: Solution): Double = {
-    Evaluator.evaluate(utilityFunction.expr, new HashMap[String, Double](), resultSol)
+    Evaluator.evaluate(utilityFunction.expr, new HashMap[String, Double](), resultSol.values)
   }
 
 

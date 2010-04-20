@@ -1,9 +1,9 @@
 package pl.poznan.put.darwin.model
 
-import Config.{Scenario, Solution}
+import Config.Scenario
 import problem.Parser
 import scala.Iterator.range
-import pl.poznan.put.darwin.experiment.{AutoEvaluator, SolutionResult, Experiment}
+import pl.poznan.put.darwin.experiment.{AutoEvaluator, Experiment}
 import pl.poznan.put.darwin.evolution.Evolver
 
 object Runner {

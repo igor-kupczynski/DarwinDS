@@ -1,6 +1,5 @@
-package pl.poznan.put.darwin.model.problem
-import pl.poznan.put.darwin.evolution.DarwinCrossOver
-import collection.mutable.HashMap
+package pl.poznan.put.darwin.evolution
+import pl.poznan.put.darwin.model.Solution
 
 class DarwinCrossOverTest extends BaseEvolutionTestCase {
 
@@ -10,24 +9,20 @@ class DarwinCrossOverTest extends BaseEvolutionTestCase {
     // It'll be quite hard to test crossover because is random. We'll
     // just create child few times and see if it is feasible and stays
     // between parents' values
-    val a = new HashMap[String, Double]
-    a("x1") = 0;
-    a("x2") = 10;
-    val b = new HashMap[String, Double]
-    b("x1") = 10;
-    b("x2") = 0;
+    val a = Map("x1" -> 0.0, "x2" -> 10.0)
+    val b = Map("x1" -> 10.0, "x2" -> 0.0)
 
-    val xo = new DarwinCrossOver(trainsSoldiersNoIntervals)
     for (idx <- 1 to 10) {
-      val c = xo.mate(a, b)
-      assertTrue(c("x1") >= 0)
-      assertTrue(c("x1") <= 10)
-      assertTrue(c("x2") >= 0)
-      assertTrue(c("x2") <= 10)
-      assertTrue(c("x1") != a("x1"))
-      assertTrue(c("x2") != a("x2"))
-      assertTrue(c("x1") != b("x1"))
-      assertTrue(c("x2") != b("x2"))
+      val c = DarwinCrossOver.mate(new Solution(trainsSoldiersNoIntervals, a),
+          new Solution(trainsSoldiersNoIntervals, b))
+      assertTrue(c.values("x1") >= 0)
+      assertTrue(c.values("x1") <= 10)
+      assertTrue(c.values("x2") >= 0)
+      assertTrue(c.values("x2") <= 10)
+      assertTrue(c.values("x1") != a("x1"))
+      assertTrue(c.values("x2") != a("x2"))
+      assertTrue(c.values("x1") != b("x1"))
+      assertTrue(c.values("x2") != b("x2"))
       assertTrue(trainsSoldiersNoIntervals.isFeasible(c))
     }
     
