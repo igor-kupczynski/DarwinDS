@@ -138,13 +138,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
     }
 
     result foreach {case (g: Goal, res) =>
-      data(g) =
-              if (g.max)
-                insertMax(res,
-                  data(g))
-              else
-                insertMin(res,
-                  data(g))}
+      data(g) = if (g.max) insertMax(res, data(g)) else insertMin(res, data(g))}
   }
 
 
