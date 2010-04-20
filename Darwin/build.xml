@@ -105,6 +105,9 @@ Ant build for the project
     </target>
 
     <target name="run" depends="build" description="Runs project">
+        <delete>
+            <fileset dir="rules" includes="rule*"/>
+        </delete>
         <java classname="pl.poznan.put.darwin.model.Runner"
               classpathref="build.classpath">
         </java>
