@@ -18,7 +18,8 @@ class DarwinFitnessEvaluator(problem: Problem, scores: ScoreKeeper)  {
 
   def evaluate(solutions: List[Solution]): List[Solution] = {
     val results = Experiment.perform(problem, scenarios, solutions)
-    scores.updateResult(results)   
+    scores.updateResult(results)
+    results
   }
 
   def regenerate() = {

@@ -22,7 +22,7 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
     scenarios = null
     solutions = (0 to params.individualCount-1).map[Solution](idx =>
             {params.solutionFactory.generate(params.problem)}).toList
-    var currentResult = sortList(baseResult.toList)
+    var currentResult = sortList(baseResult)
     while (generation < params.generationCount) {
       notifyGenerationObservers(generation, currentResult)
       currentResult = nextGeneration(currentResult)

@@ -30,16 +30,14 @@ class ScoreKeeper(container: RulesContainer, var result: List[Solution]) {
     crowdingDistance(s)
   }
 
-  def updateResult(newResult: List[Solution]): List[Solution] = {
+  def updateResult(newResult: List[Solution]) {
     result = newResult
-
     weights = calculateWeights()
     crowdingDistance = calculateCrowding()
     result foreach ((s: Solution) => {
-      s.setPrimaryScore(getPrimaryScore(s))
-      s.setSecondaryScore(getSecondaryScore(s))
+      s.setPrimaryScore(this.getPrimaryScore(s))
+      s.setSecondaryScore(this.getSecondaryScore(s))
     })
-    result
   }
 
   private def calculateWeights(): Map[Rule, Double] = {
@@ -70,7 +68,7 @@ class ScoreKeeper(container: RulesContainer, var result: List[Solution]) {
         crowdingDistance += (s0 -> Math.MAX_DOUBLE)
         val sn = solutions.last
         crowdingDistance += (sn -> Math.MAX_DOUBLE)
-        for (idx <- 1 to solutions.length - 1) {
+        for (idx <- 1 to solutions.length - 2) {
           val sPrev = solutions(idx - 1)
           val s = solutions(idx)
           val sNext = solutions(idx + 1)

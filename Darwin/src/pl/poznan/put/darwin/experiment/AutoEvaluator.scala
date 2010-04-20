@@ -11,7 +11,7 @@ object AutoEvaluator {
   def evaluate(items: List[Solution]): List[Solution] = {
     val sortedItems = items.sort(compareByResultUtilityFunctionValue)
 
-    for (idx <- 0 to sortedItems.length) {
+    for (idx <- 0 to sortedItems.length - 1) {
       if (idx < Config.GOOD_COUNT) {
         sortedItems(idx).markGood()
       } else {

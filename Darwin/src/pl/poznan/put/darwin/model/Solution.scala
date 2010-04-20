@@ -48,15 +48,18 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
   }
 
   def getPrimaryScore(): Double = {
-    if (state < SCORED) {
+    if (state != SCORED) {
       throw new Exception("No primary score. Score solution first")
     }
     primaryScore
   }
 
   def setPrimaryScore(x: Double) {
-    if (state != MARKED) {
-      throw new Exception("Can not set primary score in state %s. It is possible in MARKED" format state)
+    if (state != EVALUATED) {
+      throw new Exception("Can not set primary score in state %s. It is possible in EVALUATED" format state)
+    }
+    if (primaryScore != Math.MIN_DOUBLE) {
+      throw new Exception("Primary score has been set before")
     }
     primaryScore = x
     if (secondaryScore != Math.MIN_DOUBLE) {
@@ -65,15 +68,18 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
   }
 
   def getSecondaryScore(): Double = {
-    if (state < SCORED) {
+    if (state != SCORED) {
       throw new Exception("No secondary score. Score solution first")
     }
     secondaryScore
   }
 
     def setSecondaryScore(x: Double) {
-    if (state != MARKED) {
-      throw new Exception("Can not set secondary score in state %s. It is possible in MARKED" format state)
+    if (state != EVALUATED) {
+      throw new Exception("Can not set secondary score in state %s. It is possible in EVALUATED" format state)
+    }
+    if (secondaryScore != Math.MIN_DOUBLE) {
+      throw new Exception("Secondary score has been set before")
     }
     secondaryScore = x
     if (primaryScore != Math.MIN_DOUBLE) {
@@ -114,6 +120,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
     if (state == CREATED) {
       state = EVALUATING
       data = new mutable.HashMap[Goal, List[Double]]
+      problem.goals foreach ((g: Goal) => data(g) = Nil)
     }
 
     if (state != EVALUATING) {
@@ -131,7 +138,13 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
     }
 
     result foreach {case (g: Goal, res) =>
-      data(g) = if (g.max) insertMax(res, data(g)) else insertMin(res, data(g))}
+      data(g) =
+              if (g.max)
+                insertMax(res,
+                  data(g))
+              else
+                insertMin(res,
+                  data(g))}
   }
 
 
@@ -144,7 +157,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
   }
 
   def goals: Iterator[Goal] = {
-    if (state >= EVALUATED) {
+    if (state < EVALUATED) {
       throw new Exception("Finish evaluation to get goals first")
     }
     data.keys
@@ -152,7 +165,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
 
 
   def getPercentile(g: Goal, p: Double): Double = {
-    if (state >= EVALUATED) {
+    if (state < EVALUATED) {
       throw new Exception("Finish evaluation to get goals first")
     }
     val floatIdx = data(g).length * p / 100.0
@@ -162,7 +175,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
 
 
   def utilityFunctionValue: Double = {
-    if (state >= EVALUATED) {
+    if (state < EVALUATED) {
       throw new Exception("Finish evaluation to get goals first")
     }
     var result: Map[String, Double] = new HashMap[String, Double]

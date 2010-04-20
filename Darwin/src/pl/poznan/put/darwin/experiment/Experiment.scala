@@ -13,6 +13,7 @@ object Experiment {
     solutions foreach ((sol: Solution) => {
       val solution: Solution = new Solution(sol.problem, sol.values)
       scenarios foreach ((scen: Scenario) => solution.evaluateScenario(scen))
+      solution.finishEvaluation()
       result = solution :: result
     })
     result
