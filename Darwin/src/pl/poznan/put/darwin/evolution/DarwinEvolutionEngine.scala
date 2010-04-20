@@ -28,7 +28,8 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
       currentResult = nextGeneration(currentResult)
       generation += 1
     }
-    currentResult
+    val finalSolutions = currentResult.map[Solution]((s: Solution) => new Solution(s.problem, s.values))
+    Experiment.perform(params.problem, scenarios, finalSolutions)
   }
 
   def registerGenerationObserver(obs: EvolutionObserver) {
@@ -54,10 +55,7 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
     val rankedOffspring = Experiment.perform(params.problem, scenarios, solutions)
     params.scoreKeeper.updateResult(rankedOffspring)
     val offspringList = sortList(rankedOffspring)
-    sortList(
-      (parents.take(parents.length / 2) map (s => new Solution(params.problem, s.values))) :::
-      offspringList.take(parents.length /2)
-    )
+    sortList(parents.take(parents.length / 2) ::: offspringList.take(parents.length /2))
   }
 
   private def sortList(arg: List[Solution]): List[Solution] = {

@@ -30,18 +30,18 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
   private var good: Boolean = _
   private var primaryScore: Double = Math.MIN_DOUBLE
   private var secondaryScore: Double = Math.MIN_DOUBLE
-  private var fitness: Double = _
+  private var fitness: Int = _
 
-  def getFitness(): Double = {
+  def getFitness(): Int = {
     if (state < FITNESS) {
       throw new Exception("No fitness. Set one first")
     }
     fitness
   }
 
-  def setFitness(x: Double) {
+  def setFitness(x: Int) {
     if (state != SCORED) {
-      throw new Exception("Can not set primary score in state %s. It is possible in SCORED" format state)
+      throw new Exception("Can not set fitness in state %s. It is possible in SCORED" format state)
     }
     fitness = x
     state = FITNESS
@@ -156,17 +156,14 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
     state = EVALUATED
   }
 
-  def goals: Iterator[Goal] = {
-    if (state < EVALUATED) {
-      throw new Exception("Finish evaluation to get goals first")
-    }
-    data.keys
+  def goals: List[Goal] = {
+    problem.goals
   }
 
 
   def getPercentile(g: Goal, p: Double): Double = {
     if (state < EVALUATED) {
-      throw new Exception("Finish evaluation to get goals first")
+      throw new Exception("Finish evaluation to get percentiles first")
     }
     val floatIdx = data(g).length * p / 100.0
     val idx: Int = (Math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
@@ -176,7 +173,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
 
   def utilityFunctionValue: Double = {
     if (state < EVALUATED) {
-      throw new Exception("Finish evaluation to get goals first")
+      throw new Exception("Finish evaluation to get utilityFunctionValue first")
     }
     var result: Map[String, Double] = new HashMap[String, Double]
     goals foreach ((g: Goal) => {

@@ -11,7 +11,7 @@ import pl.poznan.put.darwin.model.{Solution, Config}
 class ScoreKeeper(container: RulesContainer, var result: List[Solution]) {
   implicit def javaIteratorToScalaIterator[A](it: java.util.Iterator[A]) = new Wrapper(it)
 
-  private var goals = result(0).goals.collect
+  private var goals = result(0).goals
   private var weights: Map[Rule, Double] = _
   private var crowdingDistance: Map[Solution, Double] = _
   updateResult(result.toList)
@@ -38,6 +38,21 @@ class ScoreKeeper(container: RulesContainer, var result: List[Solution]) {
       s.setPrimaryScore(this.getPrimaryScore(s))
       s.setSecondaryScore(this.getSecondaryScore(s))
     })
+    result = setFitness()
+    for (idx <- 0 to result.length - 1) {
+      result(idx).setFitness(idx)
+    }
+  }
+
+  private def setFitness(): List[Solution] = {
+    def lessThat(a: Solution, b: Solution): Boolean = {
+      if (a.getPrimaryScore > b.getPrimaryScore ||
+              (a.getPrimaryScore == b.getPrimaryScore && a.getSecondaryScore > b.getSecondaryScore))
+        true
+      else
+        false
+    }
+    result.sort(lessThat)
   }
 
   private def calculateWeights(): Map[Rule, Double] = {

@@ -15,7 +15,7 @@ class OneCriterionBestSolutionPrinter extends EvolutionObserver {
 
     val number: Int = params("number").asInstanceOf[Int]
 
-    val criterion = generation(0).goals.next()
+    val criterion = generation(0).goals(0)
 
     var bestS = generation(0)
     var bestVal = bestS.getPercentile(criterion, 0)
