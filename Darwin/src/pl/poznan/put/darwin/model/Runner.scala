@@ -1,6 +1,5 @@
 package pl.poznan.put.darwin.model
 
-import Config.Scenario
 import problem.Parser
 import scala.Iterator.range
 import pl.poznan.put.darwin.experiment.{AutoEvaluator, Experiment}
@@ -17,7 +16,7 @@ object Runner {
       solutions = SimpleSolutionFactory.generate(p) :: solutions
     }
 
-    var scenarios: List[Scenario] = Nil
+    var scenarios: List[Map[String, Double]] = Nil
     for (idx <- range(0, Config.SCENARIO_COUNT)) {
       scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
     }

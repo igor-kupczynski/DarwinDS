@@ -4,7 +4,7 @@ import java.util.Random
 import collection.immutable.HashMap
 import problem.{VariableDef, Problem}
 
-abstract class SolutionFactory {
+trait SolutionFactory {
   def generate(p: Problem): Solution
 }
 

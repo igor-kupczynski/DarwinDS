@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.jrsintegration.ScoreKeeper
-import pl.poznan.put.darwin.model.Config.Scenario
 import pl.poznan.put.darwin.experiment.Experiment
 import pl.poznan.put.darwin.model.problem.Problem
 import pl.poznan.put.darwin.model.{Solution, MonteCarloScenarioFactory, Config}
@@ -26,7 +25,7 @@ class DarwinFitnessEvaluator(problem: Problem, scores: ScoreKeeper)  {
     scenarios = _regenerate()
   }
 
-  private def _regenerate(): List[Scenario] = {
+  private def _regenerate(): List[Map[String, Double]] = {
     Iterator.range(0, Config.SCENARIO_COUNT).map((idx: Int) => {
       MonteCarloScenarioFactory.generate(problem)
     }).toList

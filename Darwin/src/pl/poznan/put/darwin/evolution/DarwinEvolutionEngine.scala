@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.evolution
 
 import observer.EvolutionObserver
-import pl.poznan.put.darwin.model.Config.Scenario
 import collection.immutable.HashMap
 import pl.poznan.put.darwin.experiment.Experiment
 import pl.poznan.put.darwin.model.{Solution, MonteCarloScenarioFactory}
@@ -13,7 +12,7 @@ import pl.poznan.put.darwin.model.{Solution, MonteCarloScenarioFactory}
  */
 class DarwinEvolutionEngine(params: EvolutionParameters) {
   private var generation: Int = _
-  private var scenarios: List[Scenario] = _
+  private var scenarios: List[Map[String, Double]] = _
   private var solutions: List[Solution] = _
   private var generationObservers: List[EvolutionObserver] = Nil
 
@@ -77,11 +76,12 @@ class DarwinEvolutionEngine(params: EvolutionParameters) {
     }).toList
   }
 
-  private def regenerateScenarios(): List[Scenario] = {
+  private def regenerateScenarios(): List[Map[String, Double]] = {
     val toRegenerate: Double = if (scenarios == null) 1.0 else params.regeneratePercent
-    var newScenarios: List[Scenario] = (0 to (toRegenerate * params.scenarioCount).asInstanceOf[Int] -1).map[Scenario](
-      idx => MonteCarloScenarioFactory.generate(params.problem)
-      ) .toList
+    var newScenarios: List[Map[String, Double]] =
+      (0 to (toRegenerate * params.scenarioCount).asInstanceOf[Int] -1).map[Map[String, Double]](
+          idx => MonteCarloScenarioFactory.generate(params.problem)
+       ).toList
     val left = params.scenarioCount - newScenarios.length
     if (left > 0) {
       scenarios.takeRight(left) ::: newScenarios

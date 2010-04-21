@@ -1,6 +1,5 @@
 package pl.poznan.put.darwin.model
 
-import Config.Scenario
 import collection.immutable.HashMap
 import collection.mutable
 import problem.{Evaluator, Goal, Problem}
@@ -108,7 +107,7 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
     good
   }
 
-  def evaluateScenario(scenario: Scenario) {
+  def evaluateScenario(scenario: Map[String, Double]) {
     var result: Map[Goal, Double] = new HashMap[Goal, Double]
     problem.goals foreach ((g: Goal) => {
       result += (g -> Evaluator.evaluate(g.expr, scenario, values))
