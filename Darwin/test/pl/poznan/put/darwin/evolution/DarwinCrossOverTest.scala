@@ -1,5 +1,6 @@
 package pl.poznan.put.darwin.evolution
-import pl.poznan.put.darwin.model.Solution
+
+import pl.poznan.put.darwin.model.solution.Solution
 
 class DarwinCrossOverTest extends BaseEvolutionTestCase {
 
@@ -13,7 +14,7 @@ class DarwinCrossOverTest extends BaseEvolutionTestCase {
     val b = Map("x1" -> 10.0, "x2" -> 0.0)
 
     for (idx <- 1 to 10) {
-      val c = DarwinCrossOver.mate(new Solution(trainsSoldiersNoIntervals, a),
+      val c = CrossOver(new Solution(trainsSoldiersNoIntervals, a),
           new Solution(trainsSoldiersNoIntervals, b))
       assertTrue(c.values("x1") >= 0)
       assertTrue(c.values("x1") <= 10)

@@ -1,7 +1,8 @@
 package pl.poznan.put.darwin.evolution
 
 import scala.Iterator.range
-import pl.poznan.put.darwin.model.{Solution, Config}
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.solution.RankedSolution
 
 
 /**
@@ -9,12 +10,12 @@ import pl.poznan.put.darwin.model.{Solution, Config}
  *
  * @author Igor Kupczynski
  */
-object DarwinSelectionStrategy {
+object SelectionStrategy {
 
   /**
    * From list of evaluated solutions return list of parents. Two parents for one child.
    */
-  def select(individuals: List[Solution], childToGenerate: Int): List[Solution] = {
+  def apply(individuals: List[RankedSolution], childToGenerate: Int): List[RankedSolution] = {
     val probabilities: Array[Double] = computeProbabilities(individuals)
 
     // 2*|Children| = |Parent|
@@ -25,11 +26,11 @@ object DarwinSelectionStrategy {
   }
 
 
-  private def computeProbabilities(individuals: List[Solution]): Array[Double] = {
+  private def computeProbabilities(individuals: List[RankedSolution]): Array[Double] = {
     val card = individuals.length
-    val prob: List[Double] = individuals map ((s: Solution) => {
-        Math.pow((card - s.getFitness() + 1).asInstanceOf[Double] / card, Config.GAMMA) -
-                Math.pow((card - s.getFitness()).asInstanceOf[Double] / card, Config.GAMMA)
+    val prob: List[Double] = individuals map ((s: RankedSolution) => {
+        Math.pow((card - s.rank + 1).asInstanceOf[Double] / card, Config.GAMMA) -
+                Math.pow((card - s.rank).asInstanceOf[Double] / card, Config.GAMMA)
       }
     )
     var acc: Double = 0

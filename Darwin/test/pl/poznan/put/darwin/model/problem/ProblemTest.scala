@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.model.problem
 
 import collection.mutable.HashMap
-import pl.poznan.put.darwin.model.Solution
 
 class ProblemTest {
 
@@ -88,21 +87,6 @@ class ProblemTest {
     assertEquals(VariableDef("x", 0, 200) :: Nil, simpleWithIntervals.getVariables())
     assertEquals(VariableDef("x1", 0, 200) :: VariableDef("x2", 0, 200) :: Nil,
       trainsSoldiersNoIntervals.getVariables())
-  }
-
-
-  @Test def utilityValueTest() {
-    var result = simpleNoIntervals.utilityValue(new Solution(simpleNoIntervals, Map("profit" -> 100.0)))
-    assertEquals(100, result, 0)
-
-    result = simpleNoIntervals.utilityValue(new Solution(simpleNoIntervals,Map("profit" -> 20.0)))
-    assertEquals(20, result, 0)
-
-    result = simpleWithIntervals.utilityValue(new Solution(simpleWithIntervals,Map("profit" -> 100.0)))
-    assertEquals(100, result, 0)
-
-    result = trainsSoldiersNoIntervals.utilityValue(new Solution(trainsSoldiersNoIntervals,Map("z" -> 120.0)))
-    assertEquals(120, result, 0)
   }
 
 

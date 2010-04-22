@@ -3,6 +3,7 @@ package pl.poznan.put.darwin.model.solution
 import pl.poznan.put.darwin.model.Config
 import scala.collection.mutable.{HashMap => MutableHashMap}
 import pl.poznan.put.darwin.model.problem.{Problem, Evaluator, Goal}
+import collection.immutable.HashMap
 
 /**
  * Solution evaluated on set of scenarios
@@ -14,6 +15,16 @@ import pl.poznan.put.darwin.model.problem.{Problem, Evaluator, Goal}
 class EvaluatedSolution(problem: Problem, values: Map[String, Double],
                         protected[solution] val performances: Map[Goal, List[Double]])
         extends Solution(problem, values) {
+
+  def utilityFunctionValue: Double = {
+    var values: Map[String, Double] = Map()
+    goals foreach ((g: Goal) => {
+      //TODO: generalize to interval case
+      values += (g.name -> getPercentile(g, 0))
+    })
+    Evaluator.evaluate(problem.utilityFunction.expr, Map(), values)
+  }
+
 
   /**
    * Returns value of given percentile on specified goal
@@ -39,7 +50,7 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
  */
 object EvaluatedSolution {
 
-  def apply(s: Solution, scenarios: List[Map[String, Double]]) {
+  def apply(s: Solution, scenarios: List[Map[String, Double]]): EvaluatedSolution = {
     val problem = s.problem
 
     val performances = new MutableHashMap[Goal, List[Double]]()

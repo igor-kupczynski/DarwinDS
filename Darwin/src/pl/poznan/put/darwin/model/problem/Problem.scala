@@ -2,7 +2,8 @@ package pl.poznan.put.darwin.model.problem
 
 import collection.immutable.HashMap
 import java.util.Random
-import pl.poznan.put.darwin.model.{Solution, Config}
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.solution.Solution
 
 /**
  *  Class representing MMO problem to be solved by the darwin method.
@@ -10,7 +11,7 @@ import pl.poznan.put.darwin.model.{Solution, Config}
  * @author: Igor Kupczynski
  */
 
-class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], utilityFunction: UtilityFunction,
+class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val utilityFunction: UtilityFunction,
               constraints: List[Constraint]) {
 
   private var intervals: List[Interval] = null
@@ -59,7 +60,7 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], util
       })
       tries += 1
     }
-    new Solution(this, result)
+    Solution(this, result)
   }
 
   /**
@@ -87,14 +88,6 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], util
    */
   def getVariables(): List[VariableDef] = {
     vars
-  }
-  
-
-  /**
-   * Calculates utility value for given solution and scenario
-   */
-  def utilityValue(resultSol: Solution): Double = {
-    Evaluator.evaluate(utilityFunction.expr, new HashMap[String, Double](), resultSol.values)
   }
 
 

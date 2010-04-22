@@ -1,29 +1,27 @@
 package pl.poznan.put.darwin.evolution
-import collection.immutable.HashMap
-import pl.poznan.put.darwin.model.problem.{VariableDef, Problem}
-import pl.poznan.put.darwin.model.{Solution, Config}
+import pl.poznan.put.darwin.model.problem.VariableDef
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.solution.{Solution, RankedSolution}
 
-/** 
+/**
 * DarwinCrossOver
 *
 * Crossover operaror for darwin evolution framework
 *
 * @author Igor Kupczynski 
 */
-object DarwinCrossOver  {
+object CrossOver  {
 
-  def mate(a: Solution, b: Solution): Solution = {
-    if (a.problem != b.problem) {
-      throw new Exception("Solutions comes from different problems")
-    }
+  def apply(a: Solution, b: Solution): Solution = {
     var c: Map[String, Double] = null
     while (c == null || !a.problem.isFeasible(c)) {
       val gamma: Double = Config.getRNG().nextDouble()
-      c = new HashMap[String, Double]()
+      c = Map()
       a.problem.getVariables().map((v: VariableDef) => {
         c += (v.name -> (gamma * a.values(v.name) + (1-gamma) * b.values(v.name)))
       })
     }
-    new Solution(a.problem, c)
+
+    Solution(a.problem, c)
   }
 }

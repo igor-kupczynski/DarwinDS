@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.evolution.observer
 
-import pl.poznan.put.darwin.model.Solution
+import pl.poznan.put.darwin.model.solution.EvaluatedSolution
 
 
 /**
@@ -11,7 +11,7 @@ class OneCriterionBestSolutionPrinter extends EvolutionObserver {
   println("--- CREATED ---")
 
   override def notify(params: Map[String, Any]) {
-    val generation: List[Solution] = params("generation").asInstanceOf[List[Solution]]
+    val generation: List[EvaluatedSolution] = params("generation").asInstanceOf[List[EvaluatedSolution]]
 
     val number: Int = params("number").asInstanceOf[Int]
 
@@ -20,7 +20,7 @@ class OneCriterionBestSolutionPrinter extends EvolutionObserver {
     var bestS = generation(0)
     var bestVal = bestS.getPercentile(criterion, 0)
 
-    generation foreach ((s: Solution) => {
+    generation foreach ((s: EvaluatedSolution) => {
       if ((criterion.max && s.getPercentile(criterion, 0) > bestVal) ||
           (!criterion.max && s.getPercentile(criterion, 0) < bestVal)) {
         bestS = s

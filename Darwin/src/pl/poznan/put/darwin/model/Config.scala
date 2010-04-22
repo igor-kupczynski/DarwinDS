@@ -31,7 +31,7 @@ object Config {
 
 
   /**
-   *  Mutation decay rate
+   *  Mutate decay rate
    */
   val OMEGA = 0.1
 

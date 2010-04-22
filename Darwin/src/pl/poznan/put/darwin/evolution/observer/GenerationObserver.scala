@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.evolution.observer
 
-import collection.immutable.HashMap
-import pl.poznan.put.darwin.model.Solution
+import pl.poznan.put.darwin.model.solution.RankedSolution
 
 /**
  * Observer being notified about new generations prints some statistics about the generation
@@ -23,25 +22,25 @@ class GenerationObserver(val loop: Int) extends EvolutionObserver {
   }
 
   def notify(params: Map[String, Any]) {
-    val generation: List[Solution] = params("generation").asInstanceOf[List[Solution]]
+    val generation: List[RankedSolution] = params("generation").asInstanceOf[List[RankedSolution]]
 
     val number: Int = params("number").asInstanceOf[Int]
 
     var ps: List[Double] = Nil
-    var autoValue: List[Double] = Nil
-    generation foreach ((s: Solution) => {
-      ps = s.getPrimaryScore() :: ps
-      autoValue = s.utilityFunctionValue :: autoValue
+    var utilityFuncValue: List[Double] = Nil
+    generation foreach ((s: RankedSolution) => {
+      ps = s.primaryScore :: ps
+      utilityFuncValue = s.utilityFunctionValue :: utilityFuncValue
     })
 
     val minPs = ps reduceLeft min
-    val minAutoValue = autoValue reduceLeft min
+    val minAutoValue = utilityFuncValue reduceLeft min
 
     val maxPs = ps reduceLeft max
-    val maxAutoValue = autoValue reduceLeft max
+    val maxAutoValue = utilityFuncValue reduceLeft max
 
     val avgPs = (ps reduceLeft sum) / ps.length
-    val avgAutoValue = (autoValue reduceLeft sum) / autoValue.length
+    val avgAutoValue = (utilityFuncValue reduceLeft sum) / utilityFuncValue.length
 
     println("%d,%d,%f,%f,%f,%f,%f,%f".format(
       loop,number,

@@ -2,8 +2,9 @@ package pl.poznan.put.darwin.model
 
 import problem.Parser
 import scala.Iterator.range
-import pl.poznan.put.darwin.experiment.{AutoEvaluator, Experiment}
-import pl.poznan.put.darwin.evolution.Evolver
+import pl.poznan.put.darwin.experiment.{DMMock, Experiment}
+import pl.poznan.put.darwin.evolution.DarwinEvolver
+import solution.{MarkedSolution, EvaluatedSolution, Solution}
 
 object Runner {
   def main(args: Array[String]) {
@@ -13,7 +14,7 @@ object Runner {
 
     var solutions: List[Solution] = Nil
     for (idx <- range(0, Config.SOLUTION_COUNT)) {
-      solutions = SimpleSolutionFactory.generate(p) :: solutions
+      solutions = Solution.random(p) :: solutions
     }
 
     var scenarios: List[Map[String, Double]] = Nil
@@ -21,16 +22,15 @@ object Runner {
       scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
     }
 
-    var result = Experiment.perform(p, scenarios, solutions)
-    println(result)
+    var evaluatedSolutions: List[EvaluatedSolution] = Experiment(p, scenarios, solutions)
 
-    val evolver = new Evolver(p)
+    val evolver = new DarwinEvolver()
     var idx = 0
     while (idx < 30) {
       println("loop " + idx)
       idx += 1
-      val evaluatedResult = AutoEvaluator.evaluate(result)
-      result = evolver.preformEvolution(evaluatedResult)
+      val markedResult: List[MarkedSolution] = DMMock(evaluatedSolutions)
+      evaluatedSolutions = evolver.preformEvolution(markedResult)
     }
   }
 }

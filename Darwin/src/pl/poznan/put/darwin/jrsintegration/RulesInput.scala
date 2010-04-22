@@ -3,9 +3,10 @@ package pl.poznan.put.darwin.jrsintegration
 import pl.poznan.put.cs.idss.jrs.core.SerialInput
 import pl.poznan.put.cs.idss.jrs.types._
 import pl.poznan.put.darwin.model.problem.Goal
-import pl.poznan.put.darwin.model.{Solution, Config}
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.solution.MarkedSolution
 
-class RulesInput(result: List[Solution]) extends SerialInput {
+class RulesInput(result: List[MarkedSolution]) extends SerialInput {
   private val enumDomain: EnumDomain = new EnumDomain() {
     addElement("NOT_GOOD")
     addElement("GOOD")
@@ -30,15 +31,8 @@ class RulesInput(result: List[Solution]) extends SerialInput {
 
   private def createExamples(): List[Example] = {
     var examples: List[Example] = Nil
-    result foreach (s => examples = createExample(s) :: examples)
+    result foreach (s => examples = ExampleFactory(s, enumDomain) :: examples)
     examples.reverse
-  }
-
-  private def createExample(s: Solution): Example = {
-    var fields: List[Field] = SolutionConverter.getFields(s)
-    val decision = new EnumField(if (s.isGood) 1 else 0, enumDomain)
-    fields = fields ::: List(decision)
-    new Example(fields.toArray)
   }
 
   private def createMetadata(): Metadata = {
