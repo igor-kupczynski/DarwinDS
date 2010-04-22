@@ -34,8 +34,9 @@ Ant build for the project
             <fileset dir="lib">
                 <include name="**/*.jar"/>
                 <exclude name="junit*.jar"/>
-                <exclude name="specs*.jar"/>
                 <exclude name="mockito*.jar"/>
+                <exclude name="scalatest*.jar"/>
+                <exclude name="specs*.jar"/>
             </fileset>
             <pathelement location="${build.dir}"/>
         </path>
@@ -43,8 +44,9 @@ Ant build for the project
             <path refid="build.classpath"/>
             <fileset dir="lib">
                 <include name="junit*.jar"/>
-                <include name="specs*.jar"/>
                 <include name="mockito*.jar"/>
+                <include name="scalatest*.jar"/>
+                <include name="specs*.jar"/>
             </fileset>
             <pathelement location="${test.dir}"/>
         </path>
@@ -77,6 +79,10 @@ Ant build for the project
              usetimestamp="true"/>
         <get src="http://github.com/downloads/puszczyk/DarwinDS/specs-1.6.2.1.jar"
              dest="${basedir}/lib/specs-1.6.2.1.jar"
+             verbose="true"
+             usetimestamp="true"/>
+        <get src="http://github.com/downloads/puszczyk/DarwinDS/scalatest-1.0.jar"
+             dest="${basedir}/lib/scalatest-1.0.jar"
              verbose="true"
              usetimestamp="true"/>
     </target>
