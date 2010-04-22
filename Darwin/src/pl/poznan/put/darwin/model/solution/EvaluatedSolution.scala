@@ -30,13 +30,15 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
    * Returns value of given percentile on specified goal
    */
   def getPercentile(g: Goal, p: Double): Double = {
-    val floatIdx = performances(g).length * p / 100.0
+    // To low percentile (eg. 0%) will yield lowest percentile possible
+    val floatIdx = performances(g).length * p / 100.0 - 1 // (-1 -> starting from 0
     val idx: Int = (Math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
     if (Config.USE_AVG) avgUpToIdx(g, idx) else performances(g)(idx)
   }
 
   private def avgUpToIdx(g: Goal, idx: Int): Double = {
-    val toAvg = performances(g).take(idx + 1)
+    val realIdx = if (idx > 0) idx else 0
+    val toAvg = performances(g).take(realIdx + 1)
     val sum = toAvg.reduceLeft[Double]((a, b) => {a + b})
     sum / toAvg.size
   }
