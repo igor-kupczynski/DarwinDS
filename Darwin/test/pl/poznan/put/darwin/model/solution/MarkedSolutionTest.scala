@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model.solution
 
 import pl.poznan.put.darwin.model.problem.Goal
 
-class MarkedSolutionTest extends SolutionTest {
+class MarkedSolutionTest extends EvaluatedSolutionTest {
   import org.junit._, Assert._
 
 
