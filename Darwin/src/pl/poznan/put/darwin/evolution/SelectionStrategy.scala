@@ -26,7 +26,7 @@ object SelectionStrategy {
   }
 
 
-  private def computeProbabilities(individuals: List[RankedSolution]): Array[Double] = {
+  private[evolution] def computeProbabilities(individuals: List[RankedSolution]): Array[Double] = {
     val card = individuals.length
     val prob: List[Double] = individuals map ((s: RankedSolution) => {
         Math.pow((card - s.rank + 1).asInstanceOf[Double] / card, Config.GAMMA) -
@@ -37,7 +37,7 @@ object SelectionStrategy {
     (prob map ((p:Double) => {acc += p; acc})).toArray[Double]
   }
 
-  private def getIndexForProbability(p: Double, probabilities: Array[Double]): Int = {
+  private[evolution] def getIndexForProbability(p: Double, probabilities: Array[Double]): Int = {
     var idx = 0
     probabilities foreach ((probability: Double) => {
       if (probability > p) return(idx)

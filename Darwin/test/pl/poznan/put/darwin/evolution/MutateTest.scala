@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.solution.Solution
 
-class DarwinMutationTest extends BaseEvolutionTestCase {
+class MutateTest extends BaseEvolutionTestCase {
 
   import org.junit._, Assert._
 

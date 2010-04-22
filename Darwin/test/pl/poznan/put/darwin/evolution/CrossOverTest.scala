@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.solution.Solution
 
-class DarwinCrossOverTest extends BaseEvolutionTestCase {
+class CrossOverTest extends BaseEvolutionTestCase {
 
   import org.junit._, Assert._
 
