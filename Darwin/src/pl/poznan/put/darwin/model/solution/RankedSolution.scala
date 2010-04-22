@@ -39,8 +39,8 @@ object RankedSolution {
     val crowdingDistances = calculateCrowding(solutions)
 
     def fitnessLT(self: EvaluatedSolution, other: EvaluatedSolution): Boolean =
-      if (primaryScores(self) < primaryScores (other) ||
-              (primaryScores(self) == primaryScores (other) && crowdingDistances(self) < crowdingDistances(other)))
+      if (primaryScores(self) > primaryScores (other) ||
+              (primaryScores(self) == primaryScores (other) && crowdingDistances(self) > crowdingDistances(other)))
         true
       else
         false
