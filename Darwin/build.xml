@@ -34,6 +34,8 @@ Ant build for the project
             <fileset dir="lib">
                 <include name="**/*.jar"/>
                 <exclude name="junit*.jar"/>
+                <exclude name="specs*.jar"/>
+                <exclude name="mockito*.jar"/>
             </fileset>
             <pathelement location="${build.dir}"/>
         </path>
@@ -41,6 +43,8 @@ Ant build for the project
             <path refid="build.classpath"/>
             <fileset dir="lib">
                 <include name="junit*.jar"/>
+                <include name="specs*.jar"/>
+                <include name="mockito*.jar"/>
             </fileset>
             <pathelement location="${test.dir}"/>
         </path>
@@ -65,6 +69,14 @@ Ant build for the project
              usetimestamp="true"/>
         <get src="http://github.com/downloads/puszczyk/DarwinDS/jrs-0.0.1-SNAPSHOT.jar"
              dest="${basedir}/lib/jrs-0.0.1-SNAPSHOT.jar"
+             verbose="true"
+             usetimestamp="true"/>
+        <get src="http://github.com/downloads/puszczyk/DarwinDS/mockito-all-1.8.4.jar"
+             dest="${basedir}/lib/mockito-all-1.8.4.jar"
+             verbose="true"
+             usetimestamp="true"/>
+        <get src="http://github.com/downloads/puszczyk/DarwinDS/specs-1.6.2.1.jar"
+             dest="${basedir}/lib/specs-1.6.2.1.jar"
              verbose="true"
              usetimestamp="true"/>
     </target>
@@ -93,13 +105,12 @@ Ant build for the project
 
 
     <target name="test" depends="build-test" description="Runs all tests">
-        <junit>
+        <junit showoutput="true">
             <classpath refid="test.classpath"/>
-            <formatter type="plain" usefile="false"/>
+            <formatter type="brief" usefile="false"/>
             <batchtest fork="true">
                 <fileset dir="${build.dir}"
-                         includes="**/*Test.class"
-                         excludes="**/*$*.class"/>
+                         includes="**/*Test.class" />
             </batchtest>
         </junit>
     </target>
