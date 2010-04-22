@@ -85,7 +85,10 @@ object RankedSolution {
   // Part for calculate crowding distance. So secondary score 
 
   private def crowdingDistanceLT(goal: Goal, p: Double)(self: EvaluatedSolution, other: EvaluatedSolution): Boolean = {
-    if (self.getPercentile(goal, p) < other.getPercentile(goal, p)) true else false
+    if (goal.max)
+      { if (self.getPercentile(goal, p) < other.getPercentile(goal, p)) true else false }
+    else
+      { if (self.getPercentile(goal, p) > other.getPercentile(goal, p)) true else false }
   }
 
   private def incrementDistance(a: Double, b: Double): Double = {
