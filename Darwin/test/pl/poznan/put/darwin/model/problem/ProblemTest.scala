@@ -1,10 +1,10 @@
 package pl.poznan.put.darwin.model.problem
-
+import org.junit.Test
+import org.junit.Assert._
 import collection.mutable.HashMap
+import org.scalatest.junit.JUnitSuite
 
-class ProblemTest {
-
-  import org.junit._, Assert._
+class ProblemTest extends JUnitSuite {
 
   val x = Variable("x")
   val zero = Constant(0)

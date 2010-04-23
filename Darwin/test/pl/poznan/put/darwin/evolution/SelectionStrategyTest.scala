@@ -2,10 +2,11 @@ package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.solution.{RankedSolution, Solution}
 import pl.poznan.put.darwin.model.Config
+import org.junit.Test
+import org.junit.Assert._
+import org.scalatest.junit.JUnitSuite
 
-class SelectionStrategyTest extends BaseEvolutionTestCase {
-
-  import org.junit._, Assert._
+class SelectionStrategyTest extends JUnitSuite with BaseEvolution {
 
   @Test def probabilitiesTest = {
     val solutions: List[RankedSolution] =

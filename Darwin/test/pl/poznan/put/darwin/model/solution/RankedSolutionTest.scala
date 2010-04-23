@@ -3,15 +3,14 @@ package pl.poznan.put.darwin.model.solution
 import org.specs._
 import org.specs.runner._
 import mock.Mockito
-import org.mockito.Matchers._
 import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import java.util.ArrayList
-import pl.poznan.put.cs.idss.jrs.types.{FloatField, Field, Example}
+import pl.poznan.put.cs.idss.jrs.types.{FloatField, Example}
 import pl.poznan.put.darwin.model.Config
 
 
-class RankedSolutionTest extends SpecificationWithJUnit with ScalaTest with Mockito {
+class RankedSolutionTestclass extends Specification with JUnit with ScalaTest with Mockito {
 
   val maxX = Goal("x", Variable("x"), true)
   val minY = Goal("y", Variable("y"), false)

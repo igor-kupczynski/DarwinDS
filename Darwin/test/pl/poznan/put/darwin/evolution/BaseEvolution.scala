@@ -3,13 +3,13 @@ package pl.poznan.put.darwin.evolution
 import pl.poznan.put.darwin.model.problem.{Problem, Parser}
 
 /**
-* Base class for unittesting evolutionary part of Darwin
+* Base trait for unittesting evolutionary part of Darwin
 *
 * @author Igor Kupczynski
 */
-class BaseEvolutionTestCase {
+trait BaseEvolution {
 
-  val trainsSoldiersNoIntervals: Problem = Parser.ProblemParser.parse(
+  def trainsSoldiersNoIntervals: Problem = Parser.ProblemParser.parse(
     "var[0,200] x1;\n" +
     "var[0,200] x2;\n" +
     "max z: 3*x1 + 2*x2;\n" +

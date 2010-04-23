@@ -1,10 +1,9 @@
 package pl.poznan.put.darwin.model.problem
+import org.junit.Test
+import org.junit.Assert._
+import org.scalatest.junit.JUnitSuite
 
-import collection.immutable.HashMap
-
-class EvaluatorTest {
-  import org.junit._, Assert._
-
+class EvaluatorTest extends JUnitSuite {
 
   @Test def EvaluatorTest = {
 

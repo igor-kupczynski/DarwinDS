@@ -1,8 +1,9 @@
 package pl.poznan.put.darwin.model.problem
+import org.junit.Test
+import org.junit.Assert._
+import org.scalatest.junit.JUnitSuite
 
-class ParserTest {
-
-  import org.junit._, Assert._
+class ParserTest extends JUnitSuite {
 
   @Test def parserTest = {
     val exprs = "var[0, 10] x1;var [0,15] x2 ;" ::

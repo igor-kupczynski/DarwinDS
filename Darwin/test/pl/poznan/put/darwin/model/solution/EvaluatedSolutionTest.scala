@@ -2,9 +2,11 @@ package pl.poznan.put.darwin.model.solution
 
 import pl.poznan.put.darwin.model.problem._
 import pl.poznan.put.darwin.model.Config
+import org.scalatest.junit.JUnitSuite
+import org.junit.Assert._
+import org.junit.Test
 
-class EvaluatedSolutionTest extends SolutionTest {
-  import org.junit._, Assert._
+class EvaluatedSolutionTest extends JUnitSuite {
 
   @Test def evaluationTest() {
     val goalMax = Goal("z", Variable("z"), true)

@@ -1,7 +1,9 @@
 package pl.poznan.put.darwin.model.problem
+import org.junit.Test
+import org.junit.Assert._
+import org.scalatest.junit.JUnitSuite
 
-class ProblemADTTest {
-  import org.junit._, Assert._
+class ProblemADTTest extends JUnitSuite {
 
   @Test def LeafTest = {
     val c1 = Constant(-15)

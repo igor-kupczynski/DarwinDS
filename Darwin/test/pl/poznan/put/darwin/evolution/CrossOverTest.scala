@@ -1,10 +1,11 @@
 package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.solution.Solution
+import org.junit.Test
+import org.junit.Assert._
+import org.scalatest.junit.JUnitSuite
 
-class CrossOverTest extends BaseEvolutionTestCase {
-
-  import org.junit._, Assert._
+class CrossOverTest extends JUnitSuite with BaseEvolution {
 
   @Test def crossOverTest = {
     // It'll be quite hard to test crossover because is random. We'll

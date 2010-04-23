@@ -1,10 +1,11 @@
 package pl.poznan.put.darwin.model.solution
-
+import org.junit.Assert._
 import pl.poznan.put.darwin.model.problem.Goal
+import org.scalatest.junit.JUnitSuite
+import org.junit.Test
 
-class MarkedSolutionTest extends EvaluatedSolutionTest {
-  import org.junit._, Assert._
-
+class MarkedSolutionTest extends JUnitSuite {
+  val trainsSoldiersNoIntervals = SolutionTest.trainsSoldiersNoIntervals
 
   @Test def markedSolutionTest() {
     val vals: Map[String, Double] = Map()
