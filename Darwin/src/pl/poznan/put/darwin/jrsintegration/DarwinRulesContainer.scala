@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.jrsintegration
 
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
-import java.util.ArrayList
 import pl.poznan.put.darwin.model.solution.EvaluatedSolution
 import pl.poznan.put.darwin.model.Config
 
