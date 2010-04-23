@@ -85,10 +85,7 @@ object RankedSolution {
   // Part for calculate crowding distance. So secondary score 
 
   private def crowdingDistanceLT(goal: Goal, p: Double)(self: EvaluatedSolution, other: EvaluatedSolution): Boolean = {
-    if (goal.max)
-      { if (self.getPercentile(goal, p) < other.getPercentile(goal, p)) true else false }
-    else
-      { if (self.getPercentile(goal, p) > other.getPercentile(goal, p)) true else false }
+    if (self.getPercentile(goal, p) < other.getPercentile(goal, p)) true else false
   }
 
   private def incrementDistance(a: Double, b: Double): Double = {
@@ -105,15 +102,15 @@ object RankedSolution {
     val goals = solutions(0).goals
     goals foreach ((g: Goal) => {
       Config.PERCENTILES foreach (p => {
-        solutions.sort(crowdingDistanceLT(g, p))
-        val s0 = solutions(0)
+        val sorted = solutions.sort(crowdingDistanceLT(g, p))
+        val s0 = sorted(0)
         crowdingDistance += (s0 -> Math.MAX_DOUBLE)
-        val sn = solutions.last
+        val sn = sorted.last
         crowdingDistance += (sn -> Math.MAX_DOUBLE)
-        for (idx <- 1 to solutions.length - 2) {
-          val sPrev = solutions(idx - 1)
-          val s = solutions(idx)
-          val sNext = solutions(idx + 1)
+        for (idx <- 1 to sorted.length - 2) {
+          val sPrev = sorted(idx - 1)
+          val s = sorted(idx)
+          val sNext = sorted(idx + 1)
           val value = sNext.getPercentile(g, p) - sPrev.getPercentile(g, p)
           crowdingDistance += (s -> incrementDistance(crowdingDistance(s), value))
         }

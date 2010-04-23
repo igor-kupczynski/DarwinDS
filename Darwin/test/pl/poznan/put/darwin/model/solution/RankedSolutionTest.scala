@@ -8,6 +8,7 @@ import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import java.util.ArrayList
 import pl.poznan.put.cs.idss.jrs.types.{FloatField, Field, Example}
+import pl.poznan.put.darwin.model.Config
 
 
 class RankedSolutionTest extends SpecificationWithJUnit with ScalaTest with Mockito {
@@ -21,7 +22,11 @@ class RankedSolutionTest extends SpecificationWithJUnit with ScalaTest with Mock
                       null,
                       List())
 
+  // Two tests to perform
   val sols = List((1.0, 4.0), (2.0, 3.0), (2.0, 4.0), (1.0, 3.0)).map[EvaluatedSolution]({case (x, y) =>
+    new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
+  })
+  val sols2 = List((1.0, 4.0), (3.0, 2.0), (6.0, 1.0)).map[EvaluatedSolution]({case (x, y) =>
     new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
   })
 
@@ -48,13 +53,35 @@ class RankedSolutionTest extends SpecificationWithJUnit with ScalaTest with Mock
   rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST) returns rulesArray
 
   val rankedSolutions: List[RankedSolution] = RankedSolution(sols, rulesContainer)
+  val rankedSolutions2: List[RankedSolution] = RankedSolution(sols2, rulesContainer)
 
   "Pack of Rankend solutions" should {
-    "have a rank value calculated" in {
-      rankedSolutions foreach (s => {
-        println("%s ::: %s, %s, %s" format (s.values, s.rank, s.primaryScore, s.secondaryScore))
-        1 must be_==(1)
-      })
+    "be in a rank order" in {
+      for (idx <- 0 to 3) {
+        rankedSolutions(idx).rank must be_==(idx+1)
+      }
+      for (idx <- 0 to 2) {
+        rankedSolutions2(idx).rank must be_==(idx+1)
+      }
+    }
+    "have correctly calculated primary scores" in {
+      val pScores1 = List(2 * Math.pow(1-Config.DELTA, 2), Math.pow(1-Config.DELTA, 2), Math.pow(1-Config.DELTA, 2), 0)
+      for (idx <- 0 to 3) {
+        rankedSolutions(idx).primaryScore must be_==(pScores1(idx))
+      }
+      val pScores2 = List(2 * Math.pow(1-Config.DELTA, 2), 2 * Math.pow(1-Config.DELTA, 2), 0)
+      for (idx <- 0 to 2) {
+        rankedSolutions2(idx).primaryScore must be_==(pScores2(idx))
+      }
+    }
+    "have calulated secondary scores" in {
+      for ((sol: RankedSolution) <- rankedSolutions) {
+        sol.secondaryScore must be_>(0.0)
+      }
+      val sScores = List(Math.MAX_DOUBLE, 24.0, Math.MAX_DOUBLE) // Yeap, 24. Because of percentile space
+      for (idx <- 0 to 2) {
+        rankedSolutions2(idx).secondaryScore must be_==(sScores(idx))
+      }
     }
   }
 }
