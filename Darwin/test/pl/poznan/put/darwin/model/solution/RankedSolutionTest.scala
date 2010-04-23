@@ -52,8 +52,8 @@ class RankedSolutionTestclass extends Specification with JUnit with ScalaTest wi
   val rulesContainer = mock[RulesContainer]
   rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST) returns rulesArray
 
-  val rankedSolutions: List[RankedSolution] = RankedSolution(sols, new DarwinRulesContainer(rulesContainer))
-  val rankedSolutions2: List[RankedSolution] = RankedSolution(sols2, new DarwinRulesContainer(rulesContainer))
+  val rankedSolutions: List[RankedSolution] = RankedSolution(sols, DarwinRulesContainer(rulesContainer, sols))
+  val rankedSolutions2: List[RankedSolution] = RankedSolution(sols2, DarwinRulesContainer(rulesContainer, sols2))
 
   "Pack of Rankend solutions" should {
     "be in a rank order" in {

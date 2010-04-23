@@ -34,8 +34,7 @@ object RankedSolution {
    * Create gang of RankedSolutions from pack of EvaluatedSolutions. Solutions are sorted at the end
    */
   def apply(solutions: List[EvaluatedSolution], rulesContainer: DarwinRulesContainer): List[RankedSolution] = {
-    val rules: List[Rule] = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST).toArray(new Array[Rule](0)).toList
-    val primaryScores: Map[EvaluatedSolution, Double] = calculatePrimary(rules, solutions)
+    val primaryScores: Map[EvaluatedSolution, Double] = calculatePrimary(rulesContainer.rules, solutions)
     val crowdingDistances = calculateCrowding(solutions)
 
     def fitnessLT(self: EvaluatedSolution, other: EvaluatedSolution): Boolean =
@@ -55,26 +54,21 @@ object RankedSolution {
 
 
   // Part for calculating primary score
+  private def calculatePrimary(rules: List[(Rule, Double)],
+                               solutions: List[EvaluatedSolution]):
+        Map[EvaluatedSolution, Double] = {
 
-  private def calculateWeights(rules: List[Rule], solutions: List[EvaluatedSolution]): Map[Rule, Double] = {
-    var weights: Map[Rule, Double] = new HashMap[Rule, Double]()
-    rules foreach ((rule: Rule) => {
-      val count = solutions.filter(s => rule covers ExampleFactory(s)).length
-      weights += (rule -> Math.pow(1 - Config.DELTA, count))
-    })
-    weights
-  }
-
-  private def calculatePrimary(rules: List[Rule], solutions: List[EvaluatedSolution]): Map[EvaluatedSolution, Double] = {
-    val weights = calculateWeights(rules, solutions)
     var scores: Map[EvaluatedSolution, Double] = new HashMap[EvaluatedSolution, Double]()
     solutions foreach ((s: EvaluatedSolution) => {
       val sum = rules.foldLeft[Double](0.0)(
-        (sum: Double, r: Rule) =>
+        (sum: Double, pair: Tuple2[Rule, Double]) => {
+          val r = pair._1
+          val w = pair._2
           if (r covers ExampleFactory(s))
-            sum + weights(r)
+            sum + w
           else
             sum
+        }
       )
       scores += (s -> sum)
     })

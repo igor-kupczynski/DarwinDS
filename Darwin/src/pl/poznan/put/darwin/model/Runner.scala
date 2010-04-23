@@ -26,7 +26,7 @@ object Runner {
 
     val evolver = new DarwinEvolver()
     var idx = 0
-    while (idx < 30) {
+    while (idx < 10) {
       println("loop " + idx)
       idx += 1
       val markedResult: List[MarkedSolution] = DMMock(evaluatedSolutions)
