@@ -1,10 +1,10 @@
 package pl.poznan.put.darwin.model.solution
 
 import pl.poznan.put.darwin.model.problem.{Problem, Goal}
-import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
+import pl.poznan.put.cs.idss.jrs.rules.{Rule}
 import pl.poznan.put.darwin.model.Config
 import collection.immutable.HashMap
-import pl.poznan.put.darwin.jrsintegration.ExampleFactory
+import pl.poznan.put.darwin.jrsintegration.{DarwinRulesContainer, ExampleFactory}
 
 /**
  * Solution evaluated on set of scenarios and with primary and secondary score calculated.
@@ -33,7 +33,7 @@ object RankedSolution {
   /**
    * Create gang of RankedSolutions from pack of EvaluatedSolutions. Solutions are sorted at the end
    */
-  def apply(solutions: List[EvaluatedSolution], rulesContainer: RulesContainer): List[RankedSolution] = {
+  def apply(solutions: List[EvaluatedSolution], rulesContainer: DarwinRulesContainer): List[RankedSolution] = {
     val rules: List[Rule] = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST).toArray(new Array[Rule](0)).toList
     val primaryScores: Map[EvaluatedSolution, Double] = calculatePrimary(rules, solutions)
     val crowdingDistances = calculateCrowding(solutions)

@@ -8,6 +8,7 @@ import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import java.util.ArrayList
 import pl.poznan.put.cs.idss.jrs.types.{FloatField, Example}
 import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 
 
 class RankedSolutionTestclass extends Specification with JUnit with ScalaTest with Mockito {
@@ -51,8 +52,8 @@ class RankedSolutionTestclass extends Specification with JUnit with ScalaTest wi
   val rulesContainer = mock[RulesContainer]
   rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST) returns rulesArray
 
-  val rankedSolutions: List[RankedSolution] = RankedSolution(sols, rulesContainer)
-  val rankedSolutions2: List[RankedSolution] = RankedSolution(sols2, rulesContainer)
+  val rankedSolutions: List[RankedSolution] = RankedSolution(sols, new DarwinRulesContainer(rulesContainer))
+  val rankedSolutions2: List[RankedSolution] = RankedSolution(sols2, new DarwinRulesContainer(rulesContainer))
 
   "Pack of Rankend solutions" should {
     "be in a rank order" in {

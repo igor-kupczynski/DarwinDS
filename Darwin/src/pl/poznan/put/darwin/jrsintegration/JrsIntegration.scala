@@ -11,7 +11,7 @@ import pl.poznan.put.darwin.model.solution.MarkedSolution
 object JrsIntegration {
   var counter = 0
 
-  def apply(result: List[MarkedSolution]): RulesContainer = {
+  def apply(result: List[MarkedSolution]): DarwinRulesContainer = {
     val rulesInput = new RulesInput(result)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
@@ -23,6 +23,6 @@ object JrsIntegration {
     val cwd = new File(".").getAbsolutePath
     container.writeRules("rules/rule_%03d.txt".format(counter), true, true)
     counter = counter + 1
-    container
+    new DarwinRulesContainer(container)
   }
 }
