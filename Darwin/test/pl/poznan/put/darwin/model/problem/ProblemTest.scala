@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.model.problem
 import org.specs.SpecificationWithJUnit
 import org.specs.runner.ScalaTest
-import pl.poznan.put.darwin.model.solution.Solution
 
 class ProblemTest extends SpecificationWithJUnit with ScalaTest {
 
@@ -18,35 +17,6 @@ class ProblemTest extends SpecificationWithJUnit with ScalaTest {
     "return default scenario with medium values for intervals" in {
       val expected: Map[String, Double] = Map("i1" -> 1.0)
       simpleWithIntervals.getDefaultScenario must be_==(expected)
-    }
-    "correctly evaluate feasibility of solution" in {
-      (new Solution(simpleNoIntervals, Map("x" -> -199.0))).isFeasible must be(false)
-      (new Solution(simpleNoIntervals, Map("x" ->   -1.0))).isFeasible must be(false)
-      (new Solution(simpleNoIntervals, Map("x" ->    0.0))).isFeasible must be(true)
-      (new Solution(simpleNoIntervals, Map("x" ->    1.0))).isFeasible must be(true)
-      (new Solution(simpleNoIntervals, Map("x" ->   50.0))).isFeasible must be(true)
-      (new Solution(simpleNoIntervals, Map("x" ->   99.0))).isFeasible must be(true)
-      (new Solution(simpleNoIntervals, Map("x" ->  100.0))).isFeasible must be(true)
-      (new Solution(simpleNoIntervals, Map("x" ->  101.0))).isFeasible must be(false)
-      (new Solution(simpleNoIntervals, Map("x" ->  199.0))).isFeasible must be(false)
-      (new Solution(simpleNoIntervals, Map("x" ->  400.0))).isFeasible must be(false)
-
-      (new Solution(simpleWithIntervals, Map("x" -> -199.0))).isFeasible must be(false)
-      (new Solution(simpleWithIntervals, Map("x" ->   -1.0))).isFeasible must be(false)
-      (new Solution(simpleWithIntervals, Map("x" ->    0.0))).isFeasible must be(true)
-      (new Solution(simpleWithIntervals, Map("x" ->    1.0))).isFeasible must be(true)
-      (new Solution(simpleWithIntervals, Map("x" ->   50.0))).isFeasible must be(true)
-      (new Solution(simpleWithIntervals, Map("x" ->   99.0))).isFeasible must be(true)
-      (new Solution(simpleWithIntervals, Map("x" ->  100.0))).isFeasible must be(true)
-      (new Solution(simpleWithIntervals, Map("x" ->  101.0))).isFeasible must be(false)
-      (new Solution(simpleWithIntervals, Map("x" ->  199.0))).isFeasible must be(false)
-      (new Solution(simpleWithIntervals, Map("x" ->  400.0))).isFeasible must be(false)
-
-      (new Solution(trainsSoldiersNoIntervals, Map("x1" -> -1.0, "x2" -> -1.0))).isFeasible must be(false)
-      (new Solution(trainsSoldiersNoIntervals, Map("x1" ->  1.0, "x2" ->  1.0))).isFeasible must be(true)
-      (new Solution(trainsSoldiersNoIntervals, Map("x1" -> 40.0, "x2" ->  1.0))).isFeasible must be(true)
-      (new Solution(trainsSoldiersNoIntervals, Map("x1" -> 41.0, "x2" ->  1.0))).isFeasible must be(false)
-      (new Solution(trainsSoldiersNoIntervals, Map("x1" ->198.0, "x2" ->168.0))).isFeasible must be(false)
     }
     "return intervals that it contains" in {
       simpleNoIntervals.getIntervals() must be_==(Nil)
