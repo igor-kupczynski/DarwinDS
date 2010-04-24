@@ -1,13 +1,18 @@
-# Project files
+# IDEA Project files
 Darwin/.classpath
 Darwin/.idea
 Darwin/.project
 Darwin/.scala_dependencies
 Darwin/DarwinCore.iml
 
-# Binary files
-Darwin/bin/
-Darwin/lib/
+# Libs
+lib/
+
+# SBT files
+target/
+lib_managed/
+src_managed/
+project/boot/
 
 # Files generated during run
 Darwin/rules/
