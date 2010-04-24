@@ -1,9 +1,8 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.model.problem.{VariableDef, Problem}
 import pl.poznan.put.darwin.model.Config
 import java.util.Random
-
+import pl.poznan.put.darwin.model.problem.{Evaluator, Constraint, VariableDef, Problem}
 
 /**
  * Base class for solution hierarchy.
@@ -14,11 +13,47 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
 
   def goals = problem.goals
 
+
+    /**
+   * Checks if given solution is feasible (on default scenario)
+   */
+  def isFeasible: Boolean = {
+    val default = problem.getDefaultScenario()
+    problem.constraints foreach ((c: Constraint) => {
+       val lVal = Evaluator.evaluate(c.lhs, default, values)
+       val rVal = Evaluator.evaluate(c.rhs, default, values)
+       if ( c.gte && lVal < rVal) return(false)
+       if (!c.gte && lVal > rVal) return (false)
+    })
+    true
+  }
+
+  /**
+   *  Generate neighbour
+   */
+  def randomNeighbour(): Solution = {
+    var resultValues: Map[String, Double] = null
+    val rng: Random = Config.getRNG()
+    var tries = 0
+    while (tries < Config.MUTATION_TRIES &&
+            (resultValues == null || !(new Solution(problem, resultValues)).isFeasible)) {
+      val idx = rng.nextInt(values.size)
+      val variable = (values.keys.toList)(idx)
+      val value = values(variable) + rng.nextGaussian()
+      resultValues = Map()
+      values.keys foreach ((v: String) => {
+        resultValues += (v -> (if (v == variable) value else values(v)))
+      })
+      tries += 1
+    }
+    Solution(problem, resultValues)
+  }
+
 }
 
 
 /**
- * Companion object for creating solutions
+ *  Companion object for creating solutions
  */
 object Solution {
 
@@ -29,7 +64,7 @@ object Solution {
   def random(p: Problem): Solution = {
     val rng: Random = Config.getRNG()
     var result: Map[String, Double] = null
-    while (result == null || !p.isFeasible(result)) {
+    while (result == null || !(new Solution(p, result)).isFeasible) {
       result = Map()
       p.getVariables foreach ((v: VariableDef) => {
         result += (v.name -> (rng.nextDouble() * (v.max - v.min) + v.min))

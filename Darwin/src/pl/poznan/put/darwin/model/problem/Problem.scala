@@ -11,7 +11,7 @@ import pl.poznan.put.darwin.model.solution.Solution
  */
 
 class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val utilityFunction: UtilityFunction,
-              constraints: List[Constraint]) {
+              val constraints: List[Constraint]) {
 
   private var intervals: List[Interval] = null
 
@@ -26,41 +26,6 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
     s
   }
 
-  /**
-   * Checks if given solution is feasible (on default scenario)
-   */
-  def isFeasible(s: Solution): Boolean = {
-    val default = getDefaultScenario()
-    constraints foreach ((c: Constraint) => {
-       val lVal = Evaluator.evaluate(c.lhs, default, s.values)
-       val rVal = Evaluator.evaluate(c.rhs, default, s.values)
-       if ( c.gte && lVal < rVal) return(false)
-       if (!c.gte && lVal > rVal) return (false)
-    })
-    true
-  }
-
-  def isFeasible(values: Map[String, Double]): Boolean = {
-    isFeasible(new Solution(this, values))
-  }
-
-  // TODO: Move! This should be part of solution or companion object
-  def randomNeighbour(s: Solution) = {
-    var result: Map[String, Double] = null
-    val rng: Random = Config.getRNG()
-    var tries = 0
-    while (tries < Config.MUTATION_TRIES && (result == null || !isFeasible(result))) {
-      val idx = rng.nextInt(vars.length)
-      val variable = vars(idx)
-      val value = s.values(variable.name) + rng.nextGaussian()
-      result = Map()
-      vars foreach ((v: VariableDef) => {
-        result += (v.name -> (if (v.name == variable.name) value else s.values(v.name)))
-      })
-      tries += 1
-    }
-    Solution(this, result)
-  }
 
   /**
    * Returns all the intervals from problem

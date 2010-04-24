@@ -1,120 +1,126 @@
 package pl.poznan.put.darwin.model.problem
-import org.junit.Test
-import org.junit.Assert._
-import org.scalatest.junit.JUnitSuite
+import org.specs.SpecificationWithJUnit
+import org.specs.runner.ScalaTest
+import pl.poznan.put.darwin.model.solution.Solution
 
-class ProblemTest extends JUnitSuite {
+class ProblemTest extends SpecificationWithJUnit with ScalaTest {
 
-  val x = Variable("x")
-  val zero = Constant(0)
-  val max = Constant(100)
-  val i = Interval("i1", 0.9, 1.1)
+  var simpleNoIntervals: Problem = _
+  var simpleWithIntervals: Problem = _
+  var trainsSoldiersNoIntervals: Problem = _
 
-  val emptyScenario:Map[String, Double] = Map()
+  "Problem" should {
+    doPreparations()
+    "return empty default scenario if no intervals" in {
+      simpleNoIntervals.getDefaultScenario must be_==(Map())
+      trainsSoldiersNoIntervals.getDefaultScenario must be_==(Map())
+    }
+    "return default scenario with medium values for intervals" in {
+      val expected: Map[String, Double] = Map("i1" -> 1.0)
+      simpleWithIntervals.getDefaultScenario must be_==(expected)
+    }
+    "correctly evaluate feasibility of solution" in {
+      (new Solution(simpleNoIntervals, Map("x" -> -199.0))).isFeasible must be(false)
+      (new Solution(simpleNoIntervals, Map("x" ->   -1.0))).isFeasible must be(false)
+      (new Solution(simpleNoIntervals, Map("x" ->    0.0))).isFeasible must be(true)
+      (new Solution(simpleNoIntervals, Map("x" ->    1.0))).isFeasible must be(true)
+      (new Solution(simpleNoIntervals, Map("x" ->   50.0))).isFeasible must be(true)
+      (new Solution(simpleNoIntervals, Map("x" ->   99.0))).isFeasible must be(true)
+      (new Solution(simpleNoIntervals, Map("x" ->  100.0))).isFeasible must be(true)
+      (new Solution(simpleNoIntervals, Map("x" ->  101.0))).isFeasible must be(false)
+      (new Solution(simpleNoIntervals, Map("x" ->  199.0))).isFeasible must be(false)
+      (new Solution(simpleNoIntervals, Map("x" ->  400.0))).isFeasible must be(false)
 
-  val simpleNoIntervals = new Problem("Simple, no intervals",
-        VariableDef("x", 0, 200) :: Nil,
-        Goal("profit", x, true) :: Nil,
-        UtilityFunction(Variable("profit")),
-        Constraint("non-zero", x, zero, true) :: Constraint("limit", x, max, false) :: Nil)
+      (new Solution(simpleWithIntervals, Map("x" -> -199.0))).isFeasible must be(false)
+      (new Solution(simpleWithIntervals, Map("x" ->   -1.0))).isFeasible must be(false)
+      (new Solution(simpleWithIntervals, Map("x" ->    0.0))).isFeasible must be(true)
+      (new Solution(simpleWithIntervals, Map("x" ->    1.0))).isFeasible must be(true)
+      (new Solution(simpleWithIntervals, Map("x" ->   50.0))).isFeasible must be(true)
+      (new Solution(simpleWithIntervals, Map("x" ->   99.0))).isFeasible must be(true)
+      (new Solution(simpleWithIntervals, Map("x" ->  100.0))).isFeasible must be(true)
+      (new Solution(simpleWithIntervals, Map("x" ->  101.0))).isFeasible must be(false)
+      (new Solution(simpleWithIntervals, Map("x" ->  199.0))).isFeasible must be(false)
+      (new Solution(simpleWithIntervals, Map("x" ->  400.0))).isFeasible must be(false)
 
-  val simpleWithIntervals = new Problem("Simple, with intervals",
-        VariableDef("x", 0, 200) :: Nil,
-        Goal("profit", x, true) :: Nil,
-        UtilityFunction(Variable("profit")),
-        Constraint("non-zero", x, zero, true) :: Constraint("limit", BinaryOp("*", i, x), max, false) :: Nil)
-
-  val trainsSoldiersNoIntervals = Parser.ProblemParser.parse(
-    "var[0,200] x1;\n" +
-    "var[0,200] x2;\n" +
-    "max z: 3*x1 + 2*x2;\n" +
-    "!dec: z;\n" +
-    "Finishing: 2*x1 + x2 <= 100;\n" +
-    "Carpentr: x1 + x2 <= 80;\n" +
-    "Demand: x1 <= 40;\n" +
-    "nonZero1: x1 >= 0;\n" +
-    "nonZero2: x2 >= 0;\n"
-  ).get
-
-  @Test def getDefaultScenarioTest() {
-    assertEquals(Map(), simpleNoIntervals.getDefaultScenario)
-    assertEquals(Map(), trainsSoldiersNoIntervals.getDefaultScenario)
-    val expected: Map[String, Double] = Map(i.name -> 1.0)
-    assertEquals(expected, simpleWithIntervals.getDefaultScenario)
-  }
-
-  @Test def isFeasibleTest() {
-    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" -> -199.0)))
-    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  -1.0)))
-    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  0.0)))
-    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  1.0)))
-    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  50.0)))
-    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  99.0)))
-    assertEquals(true, simpleNoIntervals.isFeasible(Map("x" ->  100.0)))
-    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  101.0)))
-    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  199.0)))
-    assertEquals(false, simpleNoIntervals.isFeasible(Map("x" ->  400.0)))
-
-    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  -199.0)))
-    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  -1.0)))
-    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  0.0)))
-    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  1.0)))
-    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  50.0)))
-    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  99.0)))
-    assertEquals(true, simpleWithIntervals.isFeasible(Map("x" ->  100.0)))
-    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  101.0)))
-    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  199.0)))
-    assertEquals(false, simpleWithIntervals.isFeasible(Map("x" ->  400.0)))
-
-    assertEquals(false, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> -1.0, "x2" -> -1.0)))
-    assertEquals(true, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 1.0, "x2" -> 1.0)))
-    assertEquals(true, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 40.0, "x2" -> 1.0)))
-    assertEquals(false, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 41.0, "x2" -> 1.0)))
-    assertEquals(false, trainsSoldiersNoIntervals.isFeasible(Map("x1" -> 198.0, "x2" -> 168.0)))
-  }
-
-  @Test def getIntervalsTest() {
-    assertEquals(Nil, simpleNoIntervals.getIntervals())
-    assertEquals(i :: Nil, simpleWithIntervals.getIntervals())
-    assertEquals(Nil, trainsSoldiersNoIntervals.getIntervals())
-  }
-
-
-  @Test def getVariablesTest() {
-    assertEquals(VariableDef("x", 0, 200) :: Nil, simpleNoIntervals.getVariables())
-    assertEquals(VariableDef("x", 0, 200) :: Nil, simpleWithIntervals.getVariables())
-    assertEquals(VariableDef("x1", 0, 200) :: VariableDef("x2", 0, 200) :: Nil,
-      trainsSoldiersNoIntervals.getVariables())
-  }
-
-
-  @Test def toStringTest() {
+      (new Solution(trainsSoldiersNoIntervals, Map("x1" -> -1.0, "x2" -> -1.0))).isFeasible must be(false)
+      (new Solution(trainsSoldiersNoIntervals, Map("x1" ->  1.0, "x2" ->  1.0))).isFeasible must be(true)
+      (new Solution(trainsSoldiersNoIntervals, Map("x1" -> 40.0, "x2" ->  1.0))).isFeasible must be(true)
+      (new Solution(trainsSoldiersNoIntervals, Map("x1" -> 41.0, "x2" ->  1.0))).isFeasible must be(false)
+      (new Solution(trainsSoldiersNoIntervals, Map("x1" ->198.0, "x2" ->168.0))).isFeasible must be(false)
+    }
+    "return intervals that it contains" in {
+      simpleNoIntervals.getIntervals() must be_==(Nil)
+      simpleWithIntervals.getIntervals() must be_==(List(Interval("i1", 0.9, 1.1)))
+      trainsSoldiersNoIntervals.getIntervals() must be_==(Nil)
+    }
+    "return variables that it contains" in {
+      simpleNoIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200)))
+      simpleWithIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200)))
+      trainsSoldiersNoIntervals.getVariables() must
+              be_==(List(VariableDef("x1", 0, 200), VariableDef("x2", 0, 200)))
+    }
+    "print nice decription using toString method" in {
     var expected = "" +
-    "var[0.0, 200.0] x;\n\n" +
-    "max profit: x;\n\n" +
-    "!dec: profit;\n\n" +
-    "non-zero: x >= 0.0;\n" +
-    "limit: x <= 100.0;\n"
-    assertEquals(expected, simpleNoIntervals.toString)
+      "var[0.0, 200.0] x;\n\n" +
+      "max profit: x;\n\n" +
+      "!dec: profit;\n\n" +
+      "non-zero: x >= 0.0;\n" +
+      "limit: x <= 100.0;\n"
+    simpleNoIntervals.toString must be_==(expected)
 
     expected = "" +
-    "var[0.0, 200.0] x;\n\n" +
-    "max profit: x;\n\n" +
-    "!dec: profit;\n\n" +
-    "non-zero: x >= 0.0;\n" +
-    "limit: ([i1: 0.9, 1.1] * x) <= 100.0;\n"
-    assertEquals(expected, simpleWithIntervals.toString)
+      "var[0.0, 200.0] x;\n\n" +
+      "max profit: x;\n\n" +
+      "!dec: profit;\n\n" +
+      "non-zero: x >= 0.0;\n" +
+      "limit: ([i1: 0.9, 1.1] * x) <= 100.0;\n"
+    simpleWithIntervals.toString must be_==(expected)
 
     expected = "" +
-    "var[0.0, 200.0] x1;\n" +
-    "var[0.0, 200.0] x2;\n\n" +
-    "max z: ((3.0 * x1) + (2.0 * x2));\n\n" +
-    "!dec: z;\n\n" +
-    "Finishing: ((2.0 * x1) + x2) <= 100.0;\n" +
-    "Carpentr: (x1 + x2) <= 80.0;\n" +
-    "Demand: x1 <= 40.0;\n" +
-    "nonZero1: x1 >= 0.0;\n" +
-    "nonZero2: x2 >= 0.0;\n"
-    assertEquals(expected, trainsSoldiersNoIntervals.toString)
+      "var[0.0, 200.0] x1;\n" +
+      "var[0.0, 200.0] x2;\n\n" +
+      "max z: ((3.0 * x1) + (2.0 * x2));\n\n" +
+      "!dec: z;\n\n" +
+      "Finishing: ((2.0 * x1) + x2) <= 100.0;\n" +
+      "Carpentr: (x1 + x2) <= 80.0;\n" +
+      "Demand: x1 <= 40.0;\n" +
+      "nonZero1: x1 >= 0.0;\n" +
+      "nonZero2: x2 >= 0.0;\n"
+     trainsSoldiersNoIntervals.toString must be_==(expected)
+    }
+
+  }
+
+
+  def doPreparations() {
+    val x = Variable("x")
+    val zero = Constant(0)
+    val max = Constant(100)
+    val i = Interval("i1", 0.9, 1.1)
+
+
+    simpleNoIntervals = new Problem("Simple, no intervals",
+          VariableDef("x", 0, 200) :: Nil,
+          Goal("profit", x, true) :: Nil,
+          UtilityFunction(Variable("profit")),
+          Constraint("non-zero", x, zero, true) :: Constraint("limit", x, max, false) :: Nil)
+
+    simpleWithIntervals = new Problem("Simple, with intervals",
+          VariableDef("x", 0, 200) :: Nil,
+          Goal("profit", x, true) :: Nil,
+          UtilityFunction(Variable("profit")),
+          Constraint("non-zero", x, zero, true) :: Constraint("limit", BinaryOp("*", i, x), max, false) :: Nil)
+
+    trainsSoldiersNoIntervals = Parser.ProblemParser.parse(
+      "var[0,200] x1;\n" +
+      "var[0,200] x2;\n" +
+      "max z: 3*x1 + 2*x2;\n" +
+      "!dec: z;\n" +
+      "Finishing: 2*x1 + x2 <= 100;\n" +
+      "Carpentr: x1 + x2 <= 80;\n" +
+      "Demand: x1 <= 40;\n" +
+      "nonZero1: x1 >= 0;\n" +
+      "nonZero2: x2 >= 0;\n"
+    ).get
   }
 }

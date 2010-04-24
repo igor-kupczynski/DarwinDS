@@ -14,7 +14,7 @@ class MutateTest extends JUnitSuite with BaseEvolution {
 
     for (idx <- 1 to 100) {
       val c = Mutate(new Solution(trainsSoldiersNoIntervals, a), 1)
-      assertTrue(trainsSoldiersNoIntervals.isFeasible(c))
+      assertTrue(c.isFeasible)
       assertEquals(c.values.keySet.size, 2)
       assertTrue(c.values.contains("x1"))
       assertTrue(c.values.contains("x2"))

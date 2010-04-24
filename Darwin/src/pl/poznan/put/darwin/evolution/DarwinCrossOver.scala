@@ -14,7 +14,7 @@ object CrossOver  {
 
   def apply(a: Solution, b: Solution): Solution = {
     var c: Map[String, Double] = null
-    while (c == null || !a.problem.isFeasible(c)) {
+    while (c == null || !(new Solution(a.problem, c)).isFeasible) {
       val gamma: Double = Config.getRNG().nextDouble()
       c = Map()
       a.problem.getVariables().map((v: VariableDef) => {
