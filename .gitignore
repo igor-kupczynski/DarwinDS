@@ -12,7 +12,7 @@ lib/
 target/
 lib_managed/
 src_managed/
-project/boot/
+Darwin/project/boot/
 
 # Files generated during run
 Darwin/rules/
