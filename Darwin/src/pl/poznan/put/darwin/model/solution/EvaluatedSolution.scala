@@ -3,7 +3,6 @@ package pl.poznan.put.darwin.model.solution
 import pl.poznan.put.darwin.model.Config
 import scala.collection.mutable.{HashMap => MutableHashMap}
 import pl.poznan.put.darwin.model.problem.{Problem, Evaluator, Goal}
-import collection.immutable.HashMap
 
 /**
  * Solution evaluated on set of scenarios

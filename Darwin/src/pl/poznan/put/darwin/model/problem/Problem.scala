@@ -1,6 +1,5 @@
 package pl.poznan.put.darwin.model.problem
 
-import collection.immutable.HashMap
 import java.util.Random
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.Solution
@@ -20,7 +19,7 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
    * Returns scenario with medium values on each interval.
    */
   def getDefaultScenario(): Map[String, Double] = {
-    var s: Map[String, Double] = new HashMap[String, Double]()
+    var s: Map[String, Double] = Map()
     getIntervals().map((i: Interval) => {
       s += (i.name -> i.getMediumValue())
     })
@@ -54,7 +53,7 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
       val idx = rng.nextInt(vars.length)
       val variable = vars(idx)
       val value = s.values(variable.name) + rng.nextGaussian()
-      result = new HashMap[String, Double]()
+      result = Map()
       vars foreach ((v: VariableDef) => {
         result += (v.name -> (if (v.name == variable.name) value else s.values(v.name)))
       })

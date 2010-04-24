@@ -3,7 +3,6 @@ package pl.poznan.put.darwin.model.solution
 import pl.poznan.put.darwin.model.problem.{Problem, Goal}
 import pl.poznan.put.cs.idss.jrs.rules.{Rule}
 import pl.poznan.put.darwin.model.Config
-import collection.immutable.HashMap
 import pl.poznan.put.darwin.jrsintegration.{DarwinRulesContainer, ExampleFactory}
 
 /**
@@ -58,7 +57,7 @@ object RankedSolution {
                                solutions: List[EvaluatedSolution]):
         Map[EvaluatedSolution, Double] = {
 
-    var scores: Map[EvaluatedSolution, Double] = new HashMap[EvaluatedSolution, Double]()
+    var scores: Map[EvaluatedSolution, Double] = Map()
     solutions foreach ((s: EvaluatedSolution) => {
       val sum = rules.foldLeft[Double](0.0)(
         (sum: Double, pair: Tuple2[Rule, Double]) => {
@@ -89,7 +88,7 @@ object RankedSolution {
   }
 
   private def calculateCrowding(solutions: List[EvaluatedSolution]): Map[EvaluatedSolution, Double] = {
-    var crowdingDistance: Map[EvaluatedSolution, Double] = new HashMap[EvaluatedSolution, Double]
+    var crowdingDistance: Map[EvaluatedSolution, Double] = Map()
     solutions foreach ((s: EvaluatedSolution) => {
       crowdingDistance += (s -> 0.0)
     })

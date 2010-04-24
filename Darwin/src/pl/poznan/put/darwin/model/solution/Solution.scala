@@ -1,6 +1,5 @@
 package pl.poznan.put.darwin.model.solution
 
-import collection.immutable.HashMap
 import pl.poznan.put.darwin.model.problem.{VariableDef, Problem}
 import pl.poznan.put.darwin.model.Config
 import java.util.Random
@@ -31,7 +30,7 @@ object Solution {
     val rng: Random = Config.getRNG()
     var result: Map[String, Double] = null
     while (result == null || !p.isFeasible(result)) {
-      result = new HashMap[String, Double]
+      result = Map()
       p.getVariables foreach ((v: VariableDef) => {
         result += (v.name -> (rng.nextDouble() * (v.max - v.min) + v.min))
       })

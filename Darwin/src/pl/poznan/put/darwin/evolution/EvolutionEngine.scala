@@ -1,10 +1,8 @@
 package pl.poznan.put.darwin.evolution
 
 import observer.EvolutionObserver
-import collection.immutable.HashMap
-import pl.poznan.put.darwin.experiment.Experiment
 import pl.poznan.put.darwin.model.MonteCarloScenarioFactory
-import pl.poznan.put.darwin.model.solution.{Solution, EvaluatedSolution, RankedSolution}
+import pl.poznan.put.darwin.model.solution.{EvaluatedSolution, RankedSolution}
 
 /**
  * Main class performing the evolution
@@ -39,7 +37,7 @@ class EvolutionEngine(params: EvolutionParameters) {
   }
 
   private def notifyGenerationObservers(number: Int, generation: List[RankedSolution]) {
-    var params: Map[String, Any] = new HashMap[String, Any]()
+    var params: Map[String, Any] = Map()
     params += ("number" -> number.asInstanceOf[Any])
     params += ("generation" -> generation)
     generationObservers.foreach((o: EvolutionObserver) => o.notify(params))

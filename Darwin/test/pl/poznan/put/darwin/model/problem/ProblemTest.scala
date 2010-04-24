@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.model.problem
 import org.junit.Test
 import org.junit.Assert._
-import collection.mutable.HashMap
 import org.scalatest.junit.JUnitSuite
 
 class ProblemTest extends JUnitSuite {
@@ -11,7 +10,7 @@ class ProblemTest extends JUnitSuite {
   val max = Constant(100)
   val i = Interval("i1", 0.9, 1.1)
 
-  val emptyScenario = new HashMap[String, Double]()
+  val emptyScenario:Map[String, Double] = Map()
 
   val simpleNoIntervals = new Problem("Simple, no intervals",
         VariableDef("x", 0, 200) :: Nil,
@@ -38,10 +37,9 @@ class ProblemTest extends JUnitSuite {
   ).get
 
   @Test def getDefaultScenarioTest() {
-    assertEquals(new HashMap(), simpleNoIntervals.getDefaultScenario)
-    assertEquals(new HashMap(), trainsSoldiersNoIntervals.getDefaultScenario)
-    val expected = new HashMap[String, Double]()
-    expected(i.name) = 1.0
+    assertEquals(Map(), simpleNoIntervals.getDefaultScenario)
+    assertEquals(Map(), trainsSoldiersNoIntervals.getDefaultScenario)
+    val expected: Map[String, Double] = Map(i.name -> 1.0)
     assertEquals(expected, simpleWithIntervals.getDefaultScenario)
   }
 
