@@ -3,7 +3,7 @@ package pl.poznan.put.darwin.model
 import java.util.Random
 import problem.{Interval, Problem}
 
-abstract class ScenarioFactory {
+trait ScenarioFactory {
   def generate(p: Problem): Map[String, Double]
 }
 
