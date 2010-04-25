@@ -8,9 +8,9 @@ import java.util.ArrayList
 import pl.poznan.put.darwin.model.solution.EvaluatedSolution
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Goal, Variable, Problem, VariableDef}
-import org.specs.SpecificationWithJUnit
+import org.specs.Specification
 
-class DarwinRulesContainerTest extends SpecificationWithJUnit with ScalaTest with Mockito {
+class DarwinRulesContainerTest extends Specification with ScalaTest with Mockito {
 
   "DarwinRulesContainer" should {
     val drc = DarwinRulesContainer(mockJrsIntegration(), sampleSolutions())

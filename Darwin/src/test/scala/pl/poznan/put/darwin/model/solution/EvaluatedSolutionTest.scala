@@ -5,8 +5,9 @@ import pl.poznan.put.darwin.model.Config
 import org.scalatest.junit.JUnitSuite
 import org.junit.Assert._
 import org.junit.Test
+import org.scalatest.Suite
 
-class EvaluatedSolutionTest extends JUnitSuite {
+class EvaluatedSolutionTest extends Suite {
 
   @Test def evaluationTest() {
     val goalMax = Goal("z", Variable("z"), true)
@@ -82,7 +83,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
 
     // Test companion object acting as factory here
     val i = Interval("i", 0, 10)
-    
+
     val goalMax2 = Goal("z", BinaryOp("*", i, Variable("z")), true)
     val goalMin2 = Goal("y", BinaryOp("*", i, Variable("y")), false)
 

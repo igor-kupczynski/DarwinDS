@@ -2,8 +2,9 @@ package pl.poznan.put.darwin.model.problem
 import org.junit.Test
 import org.junit.Assert._
 import org.scalatest.junit.JUnitSuite
+import org.scalatest.Suite
 
-class ParserTest extends JUnitSuite {
+class ParserTest extends Suite {
 
   @Test def parserTest = {
     val exprs = "var[0, 10] x1;var [0,15] x2 ;" ::
@@ -30,7 +31,7 @@ class ParserTest extends JUnitSuite {
     ( "var[0.0, 200.0] x1;\n" +
     "var[0.0, 200.0] x2;\n\n" +
     "max z: ((3.0 * x1) + (2.0 * x2));\n\n" +
-    "!dec: z;\n\n" + 
+    "!dec: z;\n\n" +
     "Finishing: ((2.0 * x1) + x2) <= 100.0;\n" +
     "Carpentr: (x1 + x2) <= 80.0;\n" +
     "Demand: x1 <= 40.0;\n" +

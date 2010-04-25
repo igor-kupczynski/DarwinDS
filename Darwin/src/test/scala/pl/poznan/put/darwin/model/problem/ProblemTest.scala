@@ -1,8 +1,8 @@
 package pl.poznan.put.darwin.model.problem
-import org.specs.SpecificationWithJUnit
 import org.specs.runner.ScalaTest
+import org.specs.{Specification, SpecificationWithJUnit}
 
-class ProblemTest extends SpecificationWithJUnit with ScalaTest {
+class ProblemTest extends Specification with ScalaTest {
 
   var simpleNoIntervals: Problem = _
   var simpleWithIntervals: Problem = _

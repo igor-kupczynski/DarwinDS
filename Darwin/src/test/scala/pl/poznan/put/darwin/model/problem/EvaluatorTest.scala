@@ -1,9 +1,9 @@
 package pl.poznan.put.darwin.model.problem
 import org.junit.Test
 import org.junit.Assert._
-import org.scalatest.junit.JUnitSuite
+import org.scalatest.Suite
 
-class EvaluatorTest extends JUnitSuite {
+class EvaluatorTest extends Suite {
 
   @Test def EvaluatorTest = {
 

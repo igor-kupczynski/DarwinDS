@@ -1,12 +1,12 @@
 package pl.poznan.put.darwin.evolution
 
-import pl.poznan.put.darwin.model.solution.{RankedSolution, Solution}
+import pl.poznan.put.darwin.model.solution.RankedSolution
 import pl.poznan.put.darwin.model.Config
 import org.junit.Test
 import org.junit.Assert._
-import org.scalatest.junit.JUnitSuite
+import org.scalatest.Suite
 
-class SelectionStrategyTest extends JUnitSuite with BaseEvolution {
+class SelectionStrategyTest extends Suite with ProblemRepository {
 
   @Test def probabilitiesTest = {
     val solutions: List[RankedSolution] =
@@ -32,7 +32,7 @@ class SelectionStrategyTest extends JUnitSuite with BaseEvolution {
     val values = List(0.35, 0.63, 0.83, 0.95, 0.99)
     for (idx <- 0 to len - 1) {
       assertEquals(solutions(idx),
-        solutions(SelectionStrategy.getIndexForProbability(values(idx), probabilities)))  
+        solutions(SelectionStrategy.getIndexForProbability(values(idx), probabilities)))
     }
   }
 }
