@@ -100,7 +100,7 @@ class EvaluatedSolutionTest extends Suite {
 
 
     val s = Solution(problem2, Map("z" -> 1, "y" -> 1))
-    val scenarios = perfs.map[Map[String, Double]](n => Map("i" -> n))
+    val scenarios = perfs.map(n => Map("i" -> n))
     val evaluated2 = EvaluatedSolution(s, scenarios)
 
     val goals2 = Map(goalMax2 -> perfs.sort((a, b) => a < b), goalMin2 -> perfs.sort((a, b) => a < b).reverse)

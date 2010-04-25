@@ -8,7 +8,7 @@ object DMMock {
     val sortedItems = items.sort((one, other) => one.utilityFunctionValue > other.utilityFunctionValue)
 
     var idx = -1
-    sortedItems.map[MarkedSolution]((s: EvaluatedSolution) => {
+    sortedItems.map((s: EvaluatedSolution) => {
       idx += 1
       if (idx < Config.GOOD_COUNT) MarkedSolution(s, true) else MarkedSolution(s, false)
     })

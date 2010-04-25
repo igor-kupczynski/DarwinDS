@@ -45,7 +45,7 @@ object RankedSolution {
 
     val sortedSolutions = solutions.sort(fitnessLT)
     var count = 0
-    (0 to (sortedSolutions.length - 1)).map[RankedSolution](idx => {
+    (0 to (sortedSolutions.length - 1)).map(idx => {
       val s = sortedSolutions(idx)
       new RankedSolution(s.problem, s.values, s.performances, primaryScores(s), crowdingDistances(s), idx+1)
     }).toList

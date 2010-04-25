@@ -32,7 +32,7 @@ class DarwinRulesContainerTest extends Specification with ScalaTest with Mockito
                       null,
                       List())
 
-    List((1.0, 4.0), (3.0, 4.0), (6.0, 1.0)).map[EvaluatedSolution]({case (x, y) =>
+    List((1.0, 4.0), (3.0, 4.0), (6.0, 1.0)).map({case (x, y) =>
       new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
     })
   }

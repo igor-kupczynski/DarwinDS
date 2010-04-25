@@ -9,7 +9,7 @@ import solution.{MarkedSolution, EvaluatedSolution, Solution}
 object Runner {
   def main(args: Array[String]) {
     
-    val lines = io.Source.fromFile(Config.FILENAME).mkString
+    val lines = io.Source.fromPath(Config.FILENAME).mkString
     val p = Parser.fromText(lines)
 
     var solutions: List[Solution] = Nil

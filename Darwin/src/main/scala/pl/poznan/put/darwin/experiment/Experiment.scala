@@ -7,5 +7,5 @@ object Experiment {
   def apply(problem: Problem,
               scenarios: List[Map[String, Double]],
               solutions: List[Solution]): List[EvaluatedSolution] =
-    solutions.map[EvaluatedSolution](s => EvaluatedSolution(s, scenarios))
+    solutions.map(s => EvaluatedSolution(s, scenarios))
 }

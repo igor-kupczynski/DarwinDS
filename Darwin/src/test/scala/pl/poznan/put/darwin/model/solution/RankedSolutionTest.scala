@@ -23,10 +23,10 @@ class RankedSolutionTest extends Specification with ScalaTest with Mockito {
                       List())
 
   // Two tests to perform
-  val sols = List((1.0, 4.0), (2.0, 3.0), (2.0, 4.0), (1.0, 3.0)).map[EvaluatedSolution]({case (x, y) =>
+  val sols = List((1.0, 4.0), (2.0, 3.0), (2.0, 4.0), (1.0, 3.0)).map({case (x, y) =>
     new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
   })
-  val sols2 = List((1.0, 4.0), (3.0, 2.0), (6.0, 1.0)).map[EvaluatedSolution]({case (x, y) =>
+  val sols2 = List((1.0, 4.0), (3.0, 2.0), (6.0, 1.0)).map({case (x, y) =>
     new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
   })
 
