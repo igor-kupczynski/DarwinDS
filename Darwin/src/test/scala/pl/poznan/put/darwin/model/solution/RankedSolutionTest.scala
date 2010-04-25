@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.model.solution
 
 import org.specs._
-import org.specs.runner._
 import mock.Mockito
 import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}

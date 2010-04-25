@@ -1,5 +1,4 @@
 package pl.poznan.put.darwin.model.problem
-import org.specs.runner.ScalaTest
 import org.specs.{Specification}
 
 class ProblemTest extends Specification {

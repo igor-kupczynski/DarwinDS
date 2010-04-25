@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.jrsintegration
 
 import org.specs.mock.Mockito
-import org.specs.runner.ScalaTest
 import pl.poznan.put.cs.idss.jrs.rules.{RulesContainer, Rule}
 import pl.poznan.put.cs.idss.jrs.types.{Example, FloatField}
 import java.util.ArrayList
