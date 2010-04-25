@@ -43,7 +43,7 @@ object RankedSolution {
       else
         false
 
-    val sortedSolutions = solutions.sort(fitnessLT)
+    val sortedSolutions = solutions.sortWith(fitnessLT)
     var count = 0
     (0 to (sortedSolutions.length - 1)).map(idx => {
       val s = sortedSolutions(idx)
@@ -82,8 +82,8 @@ object RankedSolution {
   }
 
   private def incrementDistance(a: Double, b: Double): Double = {
-    if (a == Math.MAX_DOUBLE || b == Math.MAX_DOUBLE)
-      Math.MAX_DOUBLE
+    if (a == Double.MaxValue || b == Double.MaxValue)
+      Double.MaxValue
     else a + b
   }
 
@@ -95,11 +95,11 @@ object RankedSolution {
     val goals = solutions(0).goals
     goals foreach ((g: Goal) => {
       Config.PERCENTILES foreach (p => {
-        val sorted = solutions.sort(crowdingDistanceLT(g, p))
+        val sorted = solutions.sortWith(crowdingDistanceLT(g, p))
         val s0 = sorted(0)
-        crowdingDistance += (s0 -> Math.MAX_DOUBLE)
+        crowdingDistance += (s0 -> Double.MaxValue)
         val sn = sorted.last
-        crowdingDistance += (sn -> Math.MAX_DOUBLE)
+        crowdingDistance += (sn -> Double.MaxValue)
         for (idx <- 1 to sorted.length - 2) {
           val sPrev = sorted(idx - 1)
           val s = sorted(idx)

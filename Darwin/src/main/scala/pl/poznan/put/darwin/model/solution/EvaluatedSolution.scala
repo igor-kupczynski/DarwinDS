@@ -31,7 +31,7 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
   def getPercentile(g: Goal, p: Double): Double = {
     // To low percentile (eg. 0%) will yield lowest percentile possible
     val floatIdx = performances(g).length * p / 100.0 - 1 // (-1 -> starting from 0
-    val idx: Int = (Math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
+    val idx: Int = (math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
     val nonZeroIdx = if (idx < 0) 0 else idx
     if (Config.USE_AVG) avgUpToIdx(g, nonZeroIdx) else performances(g)(nonZeroIdx)
   }

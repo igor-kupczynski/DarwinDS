@@ -18,8 +18,8 @@ class DarwinRulesContainerTest extends Specification with ScalaTest with Mockito
       drc.rules.length must be_==(2)
     }
     "calculate weights correctly" in {
-      drc.rules(0)._2 must be_==(Math.pow(1 - Config.DELTA, 2))
-      drc.rules(1)._2 must be_==(Math.pow(1 - Config.DELTA, 1))
+      drc.rules(0)._2 must be_==(math.pow(1 - Config.DELTA, 2))
+      drc.rules(1)._2 must be_==(math.pow(1 - Config.DELTA, 1))
     }
   }
 

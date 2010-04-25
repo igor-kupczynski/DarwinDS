@@ -65,11 +65,11 @@ class RankedSolutionTest extends Specification with ScalaTest with Mockito {
       }
     }
     "have correctly calculated primary scores" in {
-      val pScores1 = List(2 * Math.pow(1-Config.DELTA, 2), Math.pow(1-Config.DELTA, 2), Math.pow(1-Config.DELTA, 2), 0)
+      val pScores1 = List(2 * math.pow(1-Config.DELTA, 2), math.pow(1-Config.DELTA, 2), math.pow(1-Config.DELTA, 2), 0)
       for (idx <- 0 to 3) {
         rankedSolutions(idx).primaryScore must be_==(pScores1(idx))
       }
-      val pScores2 = List(2 * Math.pow(1-Config.DELTA, 2), 2 * Math.pow(1-Config.DELTA, 2), 0)
+      val pScores2 = List(2 * math.pow(1-Config.DELTA, 2), 2 * math.pow(1-Config.DELTA, 2), 0)
       for (idx <- 0 to 2) {
         rankedSolutions2(idx).primaryScore must be_==(pScores2(idx))
       }
@@ -78,7 +78,7 @@ class RankedSolutionTest extends Specification with ScalaTest with Mockito {
       for ((sol: RankedSolution) <- rankedSolutions) {
         sol.secondaryScore must be_>(0.0)
       }
-      val sScores = List(Math.MAX_DOUBLE, 24.0, Math.MAX_DOUBLE) // Yeap, 24. Because of percentile space
+      val sScores = List(Double.MaxValue, 24.0, Double.MaxValue) // Yeap, 24. Because of percentile space
       for (idx <- 0 to 2) {
         rankedSolutions2(idx).secondaryScore must be_==(sScores(idx))
       }

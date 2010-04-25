@@ -32,7 +32,7 @@ object DarwinRulesContainer {
     var weights: Map[Rule, Double] = Map()
     rules foreach ((rule: Rule) => {
       val count = solutions.filter(s => rule covers ExampleFactory(s)).length
-      weights += (rule -> Math.pow(1 - Config.DELTA, count))
+      weights += (rule -> math.pow(1 - Config.DELTA, count))
     })
     weights
   }

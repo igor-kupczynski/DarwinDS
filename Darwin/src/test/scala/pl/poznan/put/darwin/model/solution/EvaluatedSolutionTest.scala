@@ -20,7 +20,7 @@ class EvaluatedSolutionTest extends Suite {
     )
 
     val perfs = List(10.0, 2.0, 7.0, 4.0, 5.0, 6.0, 8.0, 3.0, 9.0, 1.0)
-    val goals = Map(goalMax -> perfs.sort((a, b) => a < b), goalMin -> perfs.sort((a, b) => a < b).reverse)
+    val goals = Map(goalMax -> perfs.sortWith((a, b) => a < b), goalMin -> perfs.sortWith((a, b) => a < b).reverse)
 
 
     // Test EvaluatedSolution itself
@@ -103,7 +103,7 @@ class EvaluatedSolutionTest extends Suite {
     val scenarios = perfs.map(n => Map("i" -> n))
     val evaluated2 = EvaluatedSolution(s, scenarios)
 
-    val goals2 = Map(goalMax2 -> perfs.sort((a, b) => a < b), goalMin2 -> perfs.sort((a, b) => a < b).reverse)
+    val goals2 = Map(goalMax2 -> perfs.sortWith((a, b) => a < b), goalMin2 -> perfs.sortWith((a, b) => a < b).reverse)
 
     assertEquals(problem2, evaluated2.problem)
     assertEquals(Map("z" -> 1, "y" -> 1), evaluated2.values)

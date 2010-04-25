@@ -64,7 +64,7 @@ object Evaluator {
       case BinaryOp("-", x, y) => evaluateSim(x) - evaluateSim(y)
       case BinaryOp("*", x, y) => evaluateSim(x) * evaluateSim(y)
       case BinaryOp("/", x, y) => evaluateSim(x) / evaluateSim(y)
-      case AggregateOp("min", exps) => (exps.foldLeft[Double](Double.MaxValue))((x, exp) => Math.min(x,
+      case AggregateOp("min", exps) => (exps.foldLeft[Double](Double.MaxValue))((x, exp) => math.min(x,
                                                                                                      evaluateSim(exp)))
     }
 

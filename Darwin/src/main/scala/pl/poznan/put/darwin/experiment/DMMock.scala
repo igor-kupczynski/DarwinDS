@@ -5,7 +5,7 @@ import pl.poznan.put.darwin.model.solution.{MarkedSolution, EvaluatedSolution}
 
 object DMMock {
   def apply(items: List[EvaluatedSolution]): List[MarkedSolution] = {
-    val sortedItems = items.sort((one, other) => one.utilityFunctionValue > other.utilityFunctionValue)
+    val sortedItems = items.sortWith((one, other) => one.utilityFunctionValue > other.utilityFunctionValue)
 
     var idx = -1
     sortedItems.map((s: EvaluatedSolution) => {
