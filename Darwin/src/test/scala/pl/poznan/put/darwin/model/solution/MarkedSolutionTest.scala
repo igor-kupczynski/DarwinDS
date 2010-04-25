@@ -3,9 +3,9 @@ import org.junit.Assert._
 import pl.poznan.put.darwin.model.problem.Goal
 import org.junit.Test
 import pl.poznan.put.darwin.evolution.ProblemRepository
-import org.scalatest.Suite
+import org.scalatest.junit.JUnitSuite
 
-class MarkedSolutionTest extends Suite with ProblemRepository {
+class MarkedSolutionTest extends JUnitSuite with ProblemRepository {
 
   @Test def markedSolutionTest() {
     val vals: Map[String, Double] = Map()

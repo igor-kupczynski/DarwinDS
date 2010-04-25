@@ -11,7 +11,7 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 
 
-class RankedSolutionTest extends Specification with ScalaTest with Mockito {
+class RankedSolutionTest extends Specification with Mockito {
 
   val maxX = Goal("x", Variable("x"), true)
   val minY = Goal("y", Variable("y"), false)

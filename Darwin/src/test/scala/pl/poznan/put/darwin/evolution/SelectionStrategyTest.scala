@@ -4,9 +4,9 @@ import pl.poznan.put.darwin.model.solution.RankedSolution
 import pl.poznan.put.darwin.model.Config
 import org.junit.Test
 import org.junit.Assert._
-import org.scalatest.Suite
+import org.scalatest.junit.JUnitSuite
 
-class SelectionStrategyTest extends Suite with ProblemRepository {
+class SelectionStrategyTest extends JUnitSuite with ProblemRepository {
 
   @Test def probabilitiesTest = {
     val solutions: List[RankedSolution] =

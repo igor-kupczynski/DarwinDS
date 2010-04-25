@@ -4,7 +4,7 @@ import org.specs.runner.ScalaTest
 import pl.poznan.put.darwin.evolution.ProblemRepository
 import org.specs.{Specification}
 
-class SolutionTest extends Specification with ScalaTest with ProblemRepository  {
+class SolutionTest extends Specification with ProblemRepository  {
 
   "Solution" should {
     "remember values stored in it" in {

@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model.problem
 import org.specs.runner.ScalaTest
 import org.specs.{Specification}
 
-class ProblemTest extends Specification with ScalaTest {
+class ProblemTest extends Specification {
 
   var simpleNoIntervals: Problem = _
   var simpleWithIntervals: Problem = _

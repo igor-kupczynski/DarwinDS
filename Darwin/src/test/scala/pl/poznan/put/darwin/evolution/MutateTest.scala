@@ -3,9 +3,9 @@ package pl.poznan.put.darwin.evolution
 import pl.poznan.put.darwin.model.solution.Solution
 import org.junit.Test
 import org.junit.Assert._
-import org.scalatest.Suite
+import org.scalatest.junit.JUnitSuite
 
-class MutateTest extends Suite with ProblemRepository {
+class MutateTest extends JUnitSuite with ProblemRepository {
 
   @Test def mutationTest = {
     // It'll be quite hard to test mutation because it is random. We'll

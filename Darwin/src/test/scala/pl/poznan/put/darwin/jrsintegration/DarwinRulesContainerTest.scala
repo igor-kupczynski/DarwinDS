@@ -10,7 +10,7 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Goal, Variable, Problem, VariableDef}
 import org.specs.Specification
 
-class DarwinRulesContainerTest extends Specification with ScalaTest with Mockito {
+class DarwinRulesContainerTest extends Specification with Mockito {
 
   "DarwinRulesContainer" should {
     val drc = DarwinRulesContainer(mockJrsIntegration(), sampleSolutions())
