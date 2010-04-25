@@ -1,9 +1,9 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.model.problem.{Problem, Goal}
 import pl.poznan.put.cs.idss.jrs.rules.{Rule}
-import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.jrsintegration.{DarwinRulesContainer, ExampleFactory}
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.problem.{Problem, Goal}
 
 /**
  * Solution evaluated on set of scenarios and with primary and secondary score calculated.
