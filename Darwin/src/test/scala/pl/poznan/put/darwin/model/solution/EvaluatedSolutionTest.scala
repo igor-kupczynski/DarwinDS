@@ -2,7 +2,6 @@ package pl.poznan.put.darwin.model.solution
 
 import pl.poznan.put.darwin.model.problem._
 import pl.poznan.put.darwin.model.Config
-import org.scalatest.junit.JUnitSuite
 import org.junit.Assert._
 import org.junit.Test
 import org.scalatest.Suite

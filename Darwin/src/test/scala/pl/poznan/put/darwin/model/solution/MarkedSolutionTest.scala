@@ -1,7 +1,6 @@
 package pl.poznan.put.darwin.model.solution
 import org.junit.Assert._
 import pl.poznan.put.darwin.model.problem.Goal
-import org.scalatest.junit.JUnitSuite
 import org.junit.Test
 import pl.poznan.put.darwin.evolution.ProblemRepository
 import org.scalatest.Suite

@@ -1,9 +1,5 @@
 package pl.poznan.put.darwin.model.problem
 
-import java.util.Random
-import pl.poznan.put.darwin.model.Config
-import pl.poznan.put.darwin.model.solution.Solution
-
 /**
  *  Class representing MMO problem to be solved by the darwin method.
  *

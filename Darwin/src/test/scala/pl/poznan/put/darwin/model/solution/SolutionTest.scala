@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model.solution
 
 import org.specs.runner.ScalaTest
 import pl.poznan.put.darwin.evolution.ProblemRepository
-import org.specs.{Specification, SpecificationWithJUnit}
+import org.specs.{Specification}
 
 class SolutionTest extends Specification with ScalaTest with ProblemRepository  {
 
