@@ -12,8 +12,9 @@ import pl.poznan.put.darwin.model.problem.{Problem, Goal}
 class MarkedSolution(problem: Problem, values: Map[String, Double],
                      performances: Map[Goal, List[Double]], val good: Boolean)
         extends EvaluatedSolution(problem, values, performances) {
-}
 
+    override val name = "(M) Solution"
+}
 
 /**
  * Companion object for creating MarkedSolution instances

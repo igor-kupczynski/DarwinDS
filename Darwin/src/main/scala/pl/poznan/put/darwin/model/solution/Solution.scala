@@ -1,7 +1,7 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.model.Config
 import java.util.Random
+import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Evaluator, Constraint, VariableDef, Problem}
 
 /**
@@ -47,6 +47,19 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
       tries += 1
     }
     Solution(problem, resultValues)
+  }
+
+  val name = "Solution"
+  
+  /**
+  * Returns string representation of solution
+  */ 
+  override def toString(): String = {
+    name + ": " + stringValues
+  }
+
+  protected def stringValues(): String = {
+    values.toString
   }
 
 }

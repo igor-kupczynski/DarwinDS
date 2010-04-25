@@ -14,6 +14,9 @@ class RankedSolution(problem: Problem, values: Map[String, Double],
                         performances: Map[Goal, List[Double]],
                         val primaryScore: Double, val secondaryScore: Double, val rank: Int)
         extends EvaluatedSolution(problem, values, performances) {
+
+    override val name = "(R) Solution"
+  
 }
 
 

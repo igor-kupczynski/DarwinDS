@@ -8,7 +8,9 @@ import solution.{MarkedSolution, EvaluatedSolution, Solution}
 
 object Runner {
   def main(args: Array[String]) {
-    
+
+    println("foo")
+  
     val lines = io.Source.fromPath(Config.FILENAME).mkString
     val p = Parser.fromText(lines)
 

@@ -25,6 +25,8 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
   }
 
 
+  override val name = "(E) Solution"
+  
   /**
    * Returns value of given percentile on specified goal
    */
