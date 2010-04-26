@@ -56,6 +56,8 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
       other.problem == problem && other.values == values
     case _ => false
   }
+
+  override def hashCode: Int = problem.hashCode + 41 * values.hashCode
   
   /**
   * Returns string representation of solution

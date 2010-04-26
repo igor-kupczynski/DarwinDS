@@ -25,6 +25,11 @@ class RankedSolution(problem: Problem, values: Map[String, Double],
       other.rank == rank
     case _ => false
   }
+
+   override def hashCode: Int = super.hashCode * 41 +
+                                (1341 * primaryScore).asInstanceOf[Int] +
+                                (2331 * secondaryScore).asInstanceOf[Int] +
+                                17 * rank
 }
 
 

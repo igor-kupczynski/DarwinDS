@@ -33,6 +33,8 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
       other.performances == performances
     case _ => false
   }
+
+   override def hashCode: Int = super.hashCode * 41 + performances.hashCode
   
   /**
    * Returns value of given percentile on specified goal

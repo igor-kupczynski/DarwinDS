@@ -21,6 +21,8 @@ class MarkedSolution(problem: Problem, values: Map[String, Double],
       other.performances == performances && other.good == good
     case _ => false
   }
+
+   override def hashCode: Int = super.hashCode * 41 + (if (good) 47 else -553)
 }
 
 /**
