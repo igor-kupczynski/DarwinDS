@@ -15,6 +15,9 @@ lib_managed/
 src_managed/
 Darwin/project/boot/
 
+#CTAGS
+TAGS
+
 # Files generated during run
 Darwin/rules/
 
