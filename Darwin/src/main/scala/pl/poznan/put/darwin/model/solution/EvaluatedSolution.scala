@@ -26,6 +26,13 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
 
 
   override val name = "(E) Solution"
+
+  override def equals(that: Any) = that match {
+    case other: EvaluatedSolution => other.getClass == getClass &&
+      other.problem == problem && other.values == values &&
+      other.performances == performances
+    case _ => false
+  }
   
   /**
    * Returns value of given percentile on specified goal
@@ -37,7 +44,7 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
     val nonZeroIdx = if (idx < 0) 0 else idx
     if (Config.USE_AVG) avgUpToIdx(g, nonZeroIdx) else performances(g)(nonZeroIdx)
   }
-
+  
   private def avgUpToIdx(g: Goal, idx: Int): Double = {
     val realIdx = if (idx > 0) idx else 0
     val toAvg = performances(g).take(realIdx + 1)

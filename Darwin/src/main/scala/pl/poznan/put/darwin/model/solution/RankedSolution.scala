@@ -14,8 +14,17 @@ class RankedSolution(problem: Problem, values: Map[String, Double],
                         val primaryScore: Double, val secondaryScore: Double, val rank: Int)
         extends EvaluatedSolution(problem, values, performances) {
 
-    override val name = "(R) Solution"
-  
+  override val name = "(R) Solution"
+
+  override def equals(that: Any) = that match {
+    case other: RankedSolution => other.getClass == getClass &&
+      other.problem == problem && other.values == values &&
+      other.performances == performances &&
+      other.primaryScore == primaryScore &&
+      other.secondaryScore == secondaryScore &&
+      other.rank == rank
+    case _ => false
+  }
 }
 
 

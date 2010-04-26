@@ -103,7 +103,8 @@ class EvaluatedSolutionTest extends JUnitSuite {
     val scenarios = perfs.map(n => Map("i" -> n))
     val evaluated2 = EvaluatedSolution(s, scenarios)
 
-    val goals2 = Map(goalMax2 -> perfs.sortWith((a, b) => a < b), goalMin2 -> perfs.sortWith((a, b) => a < b).reverse)
+    val goals2 = Map(goalMax2 -> perfs.sortWith((a, b) => a < b),
+      goalMin2 -> perfs.sortWith((a, b) => a < b).reverse)
 
     assertEquals(problem2, evaluated2.problem)
     assertEquals(Map("z" -> 1, "y" -> 1), evaluated2.values)
@@ -158,5 +159,10 @@ class EvaluatedSolutionTest extends JUnitSuite {
     assertEquals( 6.5, evaluated2.getPercentile(goalMin2,  80.0), 0.0)
     assertEquals( 6.0, evaluated2.getPercentile(goalMin2,  90.0), 0.0)
     assertEquals( 5.5, evaluated2.getPercentile(goalMin2, 100.0), 0.0)
+
+
+    // Check if Evaluating multiple solutions at one time gives the same result
+    val evaledList = EvaluatedSolution(List(s), scenarios)
+    assertEquals(evaluated2, evaledList(0))
   }
 }

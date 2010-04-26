@@ -50,6 +50,12 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
   }
 
   val name = "Solution"
+
+  override def equals(that: Any) = that match {
+    case other: Solution => other.getClass == getClass &&
+      other.problem == problem && other.values == values
+    case _ => false
+  }
   
   /**
   * Returns string representation of solution

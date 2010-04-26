@@ -13,7 +13,14 @@ class MarkedSolution(problem: Problem, values: Map[String, Double],
                      performances: Map[Goal, List[Double]], val good: Boolean)
         extends EvaluatedSolution(problem, values, performances) {
 
-    override val name = "(M) Solution"
+  override val name = "(M) Solution"
+
+  override def equals(that: Any) = that match {
+    case other: MarkedSolution => other.getClass == getClass &&
+      other.problem == problem && other.values == values &&
+      other.performances == performances && other.good == good
+    case _ => false
+  }
 }
 
 /**
