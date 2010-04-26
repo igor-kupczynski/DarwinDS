@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.simulation.Simulation
 import pl.poznan.put.darwin.model.problem.{Problem, Evaluator, Goal}
 import scala.collection.mutable.{HashMap => MutableHashMap}
 
@@ -11,9 +11,9 @@ import scala.collection.mutable.{HashMap => MutableHashMap}
  *
  * @author: Igor Kupczynski
  */
-class EvaluatedSolution(problem: Problem, values: Map[String, Double],
+class EvaluatedSolution(sim: Simulation, values: Map[String, Double],
                         protected[solution] val performances: Map[Goal, List[Double]])
-        extends Solution(problem, values) {
+        extends Solution(sim, values) {
 
   def utilityFunctionValue: Double = {
     var values: Map[String, Double] = Map()
@@ -21,7 +21,7 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
       //TODO: generalize to interval case
       values += (g.name -> getPercentile(g, 0))
     })
-    Evaluator.evaluate(problem.utilityFunction.expr, Map(), values)
+    Evaluator.evaluate(sim.problem.utilityFunction.expr, Map(), values)
   }
 
 
@@ -29,7 +29,7 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
 
   override def equals(that: Any) = that match {
     case other: EvaluatedSolution => other.getClass == getClass &&
-      other.problem == problem && other.values == values &&
+      other.sim == sim && other.values == values &&
       other.performances == performances
     case _ => false
   }
@@ -44,7 +44,7 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
     val floatIdx = performances(g).length * p / 100.0 - 1 // (-1 -> starting from 0
     val idx: Int = (math.round(floatIdx + 0.5) - 1).asInstanceOf[Int]
     val nonZeroIdx = if (idx < 0) 0 else idx
-    if (Config.USE_AVG) avgUpToIdx(g, nonZeroIdx) else performances(g)(nonZeroIdx)
+    if (sim.config.USE_AVG) avgUpToIdx(g, nonZeroIdx) else performances(g)(nonZeroIdx)
   }
   
   private def avgUpToIdx(g: Goal, idx: Int): Double = {
@@ -74,7 +74,7 @@ object EvaluatedSolution {
    * Creates one evaluated solution from given solution and scenarios
    */
   def apply(s: Solution, scenarios: List[Map[String, Double]]): EvaluatedSolution = {
-    val problem = s.problem
+    val problem = s.sim.problem
 
     val performances = new MutableHashMap[Goal, List[Double]]()
     for (g <- problem.goals) performances(g) = Nil
@@ -87,7 +87,7 @@ object EvaluatedSolution {
       })
     })
 
-    new EvaluatedSolution(s.problem, s.values, Map[Goal, List[Double]](performances.toList:_*))
+    new EvaluatedSolution(s.sim, s.values, Map[Goal, List[Double]](performances.toList:_*))
   }
 
 

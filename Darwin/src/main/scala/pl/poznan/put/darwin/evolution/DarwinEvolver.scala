@@ -9,7 +9,8 @@ class DarwinEvolver {
   def preformEvolution(solutions: List[MarkedSolution]): List[RankedSolution] = {
     println("Started evolution")
     var rulesContainer: DarwinRulesContainer = JrsIntegration(solutions)
-    val params: EvolutionParameters = new EvolutionParameters(solutions(0).problem, rulesContainer)
+    val params: EvolutionParameters =
+        new EvolutionParameters(solutions(0).sim.problem, rulesContainer)
     val engine = new EvolutionEngine(params)
     //engine.registerGenerationObserver(GenerationObserver())
     engine.registerGenerationObserver(new OneCriterionBestSolutionPrinter())

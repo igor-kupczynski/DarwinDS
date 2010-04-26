@@ -3,23 +3,25 @@ package pl.poznan.put.darwin.model.solution
 import java.util.Random
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Evaluator, Constraint, VariableDef, Problem}
+import pl.poznan.put.darwin.simulation.Simulation
+import pl.poznan.put.darwin.utils.RNG
 
 /**
  * Base class for solution hierarchy.
  *
  * Remembers values of variables
  */
-class Solution(val problem: Problem, val values: Map[String, Double]) {
+class Solution(val sim: Simulation, val values: Map[String, Double]) {
 
-  def goals = problem.goals
+  def goals = sim.problem.goals
 
 
     /**
    * Checks if given solution is feasible (on default scenario)
    */
   def isFeasible: Boolean = {
-    val default = problem.getDefaultScenario()
-    problem.constraints foreach ((c: Constraint) => {
+    val default = sim.problem.getDefaultScenario()
+    sim.problem.constraints foreach ((c: Constraint) => {
        val lVal = Evaluator.evaluate(c.lhs, default, values)
        val rVal = Evaluator.evaluate(c.rhs, default, values)
        if ( c.gte && lVal < rVal) return(false)
@@ -33,10 +35,10 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
    */
   def randomNeighbour(): Solution = {
     var resultValues: Map[String, Double] = null
-    val rng: Random = Config.getRNG()
+    val rng: Random = RNG.get()
     var tries = 0
-    while (tries < Config.MUTATION_TRIES &&
-            (resultValues == null || !(new Solution(problem, resultValues)).isFeasible)) {
+    while (tries < (new Config()).MUTATION_TRIES &&
+            (resultValues == null || !(new Solution(sim, resultValues)).isFeasible)) {
       val idx = rng.nextInt(values.size)
       val variable = (values.keys.toList)(idx)
       val value = values(variable) + rng.nextGaussian()
@@ -46,18 +48,18 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
       })
       tries += 1
     }
-    Solution(problem, resultValues)
+    Solution(sim, resultValues)
   }
 
   val name = "Solution"
 
   override def equals(that: Any) = that match {
     case other: Solution => other.getClass == getClass &&
-      other.problem == problem && other.values == values
+      other.sim == sim && other.values == values
     case _ => false
   }
 
-  override def hashCode: Int = problem.hashCode + 41 * values.hashCode
+  override def hashCode: Int = sim.problem.hashCode + 41 * values.hashCode
   
   /**
   * Returns string representation of solution
@@ -78,19 +80,19 @@ class Solution(val problem: Problem, val values: Map[String, Double]) {
  */
 object Solution {
 
-  def apply(p: Problem, values: Map[String, Double]): Solution = {
-    new Solution(p, values)
+  def apply(sim: Simulation, values: Map[String, Double]): Solution = {
+    new Solution(sim, values)
   }
 
-  def random(p: Problem): Solution = {
-    val rng: Random = Config.getRNG()
+  def random(sim: Simulation): Solution = {
+    val rng: Random = RNG.get()
     var result: Map[String, Double] = null
-    while (result == null || !(new Solution(p, result)).isFeasible) {
+    while (result == null || !(new Solution(sim, result)).isFeasible) {
       result = Map()
-      p.getVariables foreach ((v: VariableDef) => {
+      sim.problem.getVariables foreach ((v: VariableDef) => {
         result += (v.name -> (rng.nextDouble() * (v.max - v.min) + v.min))
       })
     }
-    new Solution(p, result)
+    new Solution(sim, result)
   }
 }

@@ -2,23 +2,24 @@ package pl.poznan.put.darwin.model.solution
 
 import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 import pl.poznan.put.darwin.model.Config
-import pl.poznan.put.darwin.model.problem.{Problem, Goal}
+import pl.poznan.put.darwin.model.problem.Goal
+import pl.poznan.put.darwin.simulation.Simulation
 
 /**
  * Solution evaluated on set of scenarios and with primary and secondary score calculated.
  *
  * @author: Igor Kupczynski
  */
-class RankedSolution(problem: Problem, values: Map[String, Double],
+class RankedSolution(sim: Simulation, values: Map[String, Double],
                         performances: Map[Goal, List[Double]],
                         val primaryScore: Double, val secondaryScore: Double, val rank: Int)
-        extends EvaluatedSolution(problem, values, performances) {
+        extends EvaluatedSolution(sim, values, performances) {
 
   override val name = "(R) Solution"
 
   override def equals(that: Any) = that match {
     case other: RankedSolution => other.getClass == getClass &&
-      other.problem == problem && other.values == values &&
+      other.sim == sim && other.values == values &&
       other.performances == performances &&
       other.primaryScore == primaryScore &&
       other.secondaryScore == secondaryScore &&
@@ -70,7 +71,7 @@ object RankedSolution {
     var count = 0
     (0 to (sortedSolutions.length - 1)).map(idx => {
       val s = sortedSolutions(idx)
-      new RankedSolution(s.problem, s.values, s.performances,
+      new RankedSolution(s.sim, s.values, s.performances,
                          primaryScores(s), crowdingDistances(s), idx+1)
     }).toList
   }
@@ -108,7 +109,7 @@ object RankedSolution {
     })
     val goals = solutions(0).goals
     goals foreach ((g: Goal) => {
-      Config.PERCENTILES foreach (p => {
+      (new Config()).PERCENTILES foreach (p => {
         val sorted = solutions.sortWith(crowdingDistanceLT(g, p))
         val s0 = sorted(0)
         crowdingDistance += (s0 -> Double.MaxValue)

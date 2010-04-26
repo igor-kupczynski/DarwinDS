@@ -23,7 +23,7 @@ class SelectionStrategyTest extends JUnitSuite with ProblemRepository {
     assertEquals(len, probabilities.length)
     var acc = 0.0
     for (idx <- 1 to len) {
-      val delta = math.pow((1.0 + len - idx) / len, Config.GAMMA) - math.pow((0.0 + len - idx) / len, Config.GAMMA)
+      val delta = math.pow((1.0 + len - idx) / len, (new Config()).GAMMA) - math.pow((0.0 + len - idx) / len, (new Config()).GAMMA)
       assertTrue(probabilities(idx-1) == acc + delta)
       acc += delta
     }

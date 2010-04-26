@@ -29,7 +29,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
     assertEquals(problem, evaluated.problem)
     assertEquals(Map(), evaluated.values)
     assertEquals(goals, evaluated.performances)
-    Config.USE_AVG = false
+    (new Config()).USE_AVG = false
     assertEquals( 1.0, evaluated.getPercentile(goalMax,   0.0), 0.0)
     assertEquals( 1.0, evaluated.getPercentile(goalMax,  10.0), 0.0)
     assertEquals( 2.0, evaluated.getPercentile(goalMax,  20.0), 0.0)
@@ -54,7 +54,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
     assertEquals( 2.0, evaluated.getPercentile(goalMin,  90.0), 0.0)
     assertEquals( 1.0, evaluated.getPercentile(goalMin, 100.0), 0.0)
 
-    Config.USE_AVG = true
+    (new Config()).USE_AVG = true
     assertEquals(1.0, evaluated.getPercentile(goalMax,   0.0), 0.0)
     assertEquals(1.0, evaluated.getPercentile(goalMax,  10.0), 0.0)
     assertEquals(1.5, evaluated.getPercentile(goalMax,  20.0), 0.0)
@@ -110,7 +110,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
     assertEquals(Map("z" -> 1, "y" -> 1), evaluated2.values)
     assertEquals(goals2, evaluated2.performances)
     assertEquals(41.0, evaluated2.utilityFunctionValue, 0.0)
-    Config.USE_AVG = false
+    (new Config()).USE_AVG = false
     assertEquals( 1.0, evaluated2.getPercentile(goalMax2,   0.0), 0.0)
     assertEquals( 1.0, evaluated2.getPercentile(goalMax2,  10.0), 0.0)
     assertEquals( 2.0, evaluated2.getPercentile(goalMax2,  20.0), 0.0)
@@ -135,7 +135,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
     assertEquals( 2.0, evaluated2.getPercentile(goalMin2,  90.0), 0.0)
     assertEquals( 1.0, evaluated2.getPercentile(goalMin2, 100.0), 0.0)
 
-    Config.USE_AVG = true
+    (new Config()).USE_AVG = true
     assertEquals(1.0, evaluated2.getPercentile(goalMax2,   0.0), 0.0)
     assertEquals(1.0, evaluated2.getPercentile(goalMax2,  10.0), 0.0)
     assertEquals(1.5, evaluated2.getPercentile(goalMax2,  20.0), 0.0)

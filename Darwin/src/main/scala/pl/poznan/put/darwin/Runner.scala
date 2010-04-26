@@ -4,7 +4,8 @@ import pl.poznan.put.darwin.simulation.Simulation
   
 object Runner {
   def main(args: Array[String]) {
-    (new Simulation).run()
+    val config = new Config()
+    (new Simulation(config)).run()
   }
 }
 

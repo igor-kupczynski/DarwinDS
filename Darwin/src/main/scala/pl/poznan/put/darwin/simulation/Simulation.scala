@@ -1,30 +1,30 @@
 package pl.poznan.put.darwin.simulation
 
 import pl.poznan.put.darwin.evolution.DarwinEvolver
-import pl.poznan.put.darwin.model.problem.Parser
+import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.model.solution._
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.Scenario
   
-class Simulation {
+class Simulation(val config: Config) {
 
+  private val lines = io.Source.fromPath((new Config()).FILENAME).mkString
+  val problem: Problem = Parser.fromText(lines)
+  
   val fired = false
 
   def run() {
     if (fired)
       throw new Exception("Already fired")
-
-    val lines = io.Source.fromPath(Config.FILENAME).mkString
-    val p = Parser.fromText(lines)
-
+    
     var solutions: List[Solution] = Nil
-    for (idx <- 1 to Config.SOLUTION_COUNT) {
-      solutions = Solution.random(p) :: solutions
+    for (idx <- 1 to config.SOLUTION_COUNT) {
+      solutions = Solution.random(this) :: solutions
     }
 
     var scenarios: List[Map[String, Double]] = Nil
-    for (idx <- 1 to Config.SCENARIO_COUNT) {
-      scenarios = Scenario.generate(p) :: scenarios
+    for (idx <- 1 to config.SCENARIO_COUNT) {
+      scenarios = Scenario.generate(problem) :: scenarios
     }
 
     var evaluatedSolutions = EvaluatedSolution(solutions, scenarios)

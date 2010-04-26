@@ -15,9 +15,9 @@ object JrsIntegration {
     val rulesInput = new RulesInput(result)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
-    val wrapper: RulesGeneratorWrapper = new VCdomLEMWrapperOpt(mc, Config.DOMLEM_CONFIDECE_LEVEL,
-      Config.CONDITION_SELECTION_METHOD,
-      Config.NEGATIVE_EXAMPLES_TREATMENT)
+    val wrapper: RulesGeneratorWrapper = new VCdomLEMWrapperOpt(mc, (new Config()).DOMLEM_CONFIDECE_LEVEL,
+      (new Config()).CONDITION_SELECTION_METHOD,
+      (new Config()).NEGATIVE_EXAMPLES_TREATMENT)
     wrapper.setInducePossibleRules(false);
     val container: RulesContainer = wrapper.generateRules(mc)
     val cwd = new File(".").getAbsolutePath

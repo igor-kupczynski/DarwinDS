@@ -31,7 +31,7 @@ object ExampleFactory {
   private def getFields(solution: EvaluatedSolution): List[Field] = {
     var fields: List[Field] = new StringField("Solution") :: Nil
     solution.goals foreach (
-            (g: Goal) => Config.PERCENTILES foreach (
+            (g: Goal) => (new Config()).PERCENTILES foreach (
                     p => fields = new FloatField(solution.getPercentile(g, p)) :: fields
             )
     )

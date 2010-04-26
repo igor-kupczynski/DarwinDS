@@ -3,12 +3,7 @@ package pl.poznan.put.darwin.model
 import java.util.Random
 import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
 
-object Config {
-
-  private val rng: Random = new Random()
-  def getRNG(): Random = {
-    rng
-  }
+class Config {
 
   val FILENAME: String = "problems/simple_1crit.mod"
 

@@ -64,11 +64,11 @@ class RankedSolutionTest extends Specification with Mockito {
       }
     }
     "have correctly calculated primary scores" in {
-      val pScores1 = List(2 * math.pow(1-Config.DELTA, 2), math.pow(1-Config.DELTA, 2), math.pow(1-Config.DELTA, 2), 0)
+      val pScores1 = List(2 * math.pow(1-(new Config()).DELTA, 2), math.pow(1-(new Config()).DELTA, 2), math.pow(1-(new Config()).DELTA, 2), 0)
       for (idx <- 0 to 3) {
         rankedSolutions(idx).primaryScore must be_==(pScores1(idx))
       }
-      val pScores2 = List(2 * math.pow(1-Config.DELTA, 2), 2 * math.pow(1-Config.DELTA, 2), 0)
+      val pScores2 = List(2 * math.pow(1-(new Config()).DELTA, 2), 2 * math.pow(1-(new Config()).DELTA, 2), 0)
       for (idx <- 0 to 2) {
         rankedSolutions2(idx).primaryScore must be_==(pScores2(idx))
       }

@@ -18,8 +18,8 @@ class DarwinRulesContainerTest extends Specification with Mockito {
       drc.rules.length must be_==(2)
     }
     "calculate weights correctly" in {
-      drc.rules(0)._2 must be_==(math.pow(1 - Config.DELTA, 2))
-      drc.rules(1)._2 must be_==(math.pow(1 - Config.DELTA, 1))
+      drc.rules(0)._2 must be_==(math.pow(1 - (new Config()).DELTA, 2))
+      drc.rules(1)._2 must be_==(math.pow(1 - (new Config()).DELTA, 1))
     }
     "calculate score for evaluated solutions correctly" in {
       val sols = solutionsToCheckScores
@@ -34,9 +34,9 @@ class DarwinRulesContainerTest extends Specification with Mockito {
                                     (4.0, 4.0),
                                     (4.0, 1.0)))
     val exp = List(0,
-                   math.pow(1 - Config.DELTA, 1),
-                   math.pow(1 - Config.DELTA, 2),
-                   math.pow(1 - Config.DELTA, 1) + math.pow(1 - Config.DELTA, 2))
+                   math.pow(1 - (new Config()).DELTA, 1),
+                   math.pow(1 - (new Config()).DELTA, 2),
+                   math.pow(1 - (new Config()).DELTA, 1) + math.pow(1 - (new Config()).DELTA, 2))
     sols.zip(exp)
                    
   }

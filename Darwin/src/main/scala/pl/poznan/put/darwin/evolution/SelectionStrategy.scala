@@ -3,6 +3,7 @@ package pl.poznan.put.darwin.evolution
 import scala.Iterator.range
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.RankedSolution
+import pl.poznan.put.darwin.utils.RNG
 
 
 /**
@@ -20,7 +21,7 @@ object SelectionStrategy {
 
     // 2*|Children| = |Parent|
     range(0, 2*childToGenerate).map(i => {
-      val idx = getIndexForProbability(Config.getRNG().nextDouble() * probabilities(probabilities.length - 1), probabilities)
+      val idx = getIndexForProbability(RNG.get().nextDouble() * probabilities(probabilities.length - 1), probabilities)
       individuals(idx)
     }).toList
   }
@@ -29,8 +30,8 @@ object SelectionStrategy {
   private[evolution] def computeProbabilities(individuals: List[RankedSolution]): Array[Double] = {
     val card = individuals.length
     val prob: List[Double] = individuals map ((s: RankedSolution) => {
-        math.pow((card - s.rank + 1).asInstanceOf[Double] / card, Config.GAMMA) -
-                math.pow((card - s.rank).asInstanceOf[Double] / card, Config.GAMMA)
+        math.pow((card - s.rank + 1).asInstanceOf[Double] / card, (new Config()).GAMMA) -
+                math.pow((card - s.rank).asInstanceOf[Double] / card, (new Config()).GAMMA)
       }
     )
     var acc: Double = 0

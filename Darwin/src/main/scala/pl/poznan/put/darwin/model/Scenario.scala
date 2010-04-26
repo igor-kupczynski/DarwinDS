@@ -2,9 +2,10 @@ package pl.poznan.put.darwin.model
 
 import java.util.Random
 import problem.{Interval, Problem}
+import pl.poznan.put.darwin.utils.RNG
 
 object Scenario extends  {
-  private val rng: Random = Config.getRNG()
+  private val rng: Random = RNG.get()
 
   def generate(p: Problem): Map[String, Double] = {
     var result: Map[String, Double] = Map()

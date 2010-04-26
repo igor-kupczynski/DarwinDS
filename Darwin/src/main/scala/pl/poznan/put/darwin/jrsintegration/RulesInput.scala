@@ -46,7 +46,7 @@ class RulesInput(result: List[MarkedSolution]) extends SerialInput {
     attributes = desc :: attributes
 
     result(0).goals foreach ((g: Goal) => {
-      Config.PERCENTILES foreach (p => {
+      (new Config()).PERCENTILES foreach (p => {
         val attribute = new Attribute(
           g.name + "_" + p, new FloatField())
         attribute.setPreferenceType(if (g.max) Attribute.GAIN else Attribute.COST)

@@ -1,6 +1,7 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.model.problem.{Problem, Goal}
+import pl.poznan.put.darwin.model.problem.Goal
+import pl.poznan.put.darwin.simulation.Simulation
 
 /**
  * Solution marked by DM as good/not good.
@@ -9,15 +10,15 @@ import pl.poznan.put.darwin.model.problem.{Problem, Goal}
  *
  * @author: Igor Kupczynski
  */
-class MarkedSolution(problem: Problem, values: Map[String, Double],
+class MarkedSolution(sim: Simulation, values: Map[String, Double],
                      performances: Map[Goal, List[Double]], val good: Boolean)
-        extends EvaluatedSolution(problem, values, performances) {
+        extends EvaluatedSolution(sim, values, performances) {
 
   override val name = "(M) Solution"
 
   override def equals(that: Any) = that match {
     case other: MarkedSolution => other.getClass == getClass &&
-      other.problem == problem && other.values == values &&
+      other.sim == sim && other.values == values &&
       other.performances == performances && other.good == good
     case _ => false
   }
@@ -32,6 +33,6 @@ class MarkedSolution(problem: Problem, values: Map[String, Double],
  */
 object MarkedSolution {
   def apply(s: EvaluatedSolution, good: Boolean): MarkedSolution = {
-    new MarkedSolution(s.problem, s.values, s.performances, good)
+    new MarkedSolution(s.sim, s.values, s.performances, good)
   }
 }

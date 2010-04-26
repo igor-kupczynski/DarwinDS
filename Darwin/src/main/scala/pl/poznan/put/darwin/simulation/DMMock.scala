@@ -10,7 +10,7 @@ object DMMock {
     var idx = -1
     sortedItems.map((s: EvaluatedSolution) => {
       idx += 1
-      if (idx < Config.GOOD_COUNT) MarkedSolution(s, true) else MarkedSolution(s, false)
+      if (idx < (new Config()).GOOD_COUNT) MarkedSolution(s, true) else MarkedSolution(s, false)
     })
   }
 }
