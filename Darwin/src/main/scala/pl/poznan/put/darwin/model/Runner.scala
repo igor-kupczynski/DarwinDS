@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model
 
 import problem.Parser
 import scala.Iterator.range
-import pl.poznan.put.darwin.experiment.{DMMock, Experiment}
+import pl.poznan.put.darwin.experiment.DMMock
 import pl.poznan.put.darwin.evolution.DarwinEvolver
 import solution.{MarkedSolution, EvaluatedSolution, Solution}
 
@@ -24,7 +24,7 @@ object Runner {
       scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
     }
 
-    var evaluatedSolutions: List[EvaluatedSolution] = Experiment(p, scenarios, solutions)
+    var evaluatedSolutions = EvaluatedSolution(solutions, scenarios)
 
     val evolver = new DarwinEvolver()
     var idx = 0

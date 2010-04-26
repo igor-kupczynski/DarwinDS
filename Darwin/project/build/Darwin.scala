@@ -9,6 +9,7 @@ class DarwinProject(info: ProjectInfo) extends DefaultProject(info)
                           "http://www.scala-tools.org/repo-snapshots/"
 
   val trove = "trove" % "trove" % "2.1.1" // Used by jRS
+  val ini4j = "org.ini4j" % "ini4j" % "0.5.1"
 
   val specs = "org.scala-tools.testing" % "specs_2.8.0.RC1" %
               "1.6.5-SNAPSHOT" % "test" withSources()

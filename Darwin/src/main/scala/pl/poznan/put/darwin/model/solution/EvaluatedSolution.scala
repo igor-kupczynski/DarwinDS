@@ -54,6 +54,16 @@ class EvaluatedSolution(problem: Problem, values: Map[String, Double],
  */
 object EvaluatedSolution {
 
+  /**
+   * Evaluates all the solutions given as arguments
+   */
+  def apply(solutions: List[Solution], scenarios: List[Map[String, Double]]):
+      List[EvaluatedSolution] =
+    solutions.map(s => apply(s, scenarios))
+  
+  /**
+   * Creates one evaluated solution from given solution and scenarios
+   */
   def apply(s: Solution, scenarios: List[Map[String, Double]]): EvaluatedSolution = {
     val problem = s.problem
 
