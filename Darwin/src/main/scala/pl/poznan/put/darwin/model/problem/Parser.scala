@@ -65,8 +65,15 @@ object Parser {
           case "-" ~ e => UnaryOp("-", e)
         } |
         ident ^^ {case name => Variable(name)} |
+        interval ^^ {case e => e} |
         "(" ~ math ~ ")"  ^^ {case _ ~ e ~ _ => e}
 
+    def interval: Parser[Expr] = {
+      "[" ~ ident ~ ":" ~ floatingPointNumber ~ "," ~ floatingPointNumber ~ "]" ^^ {
+        case _ ~ name ~ _ ~ lower ~ _ ~ upper ~ _ =>
+          Interval(name, lower.toDouble, upper.toDouble) }
+    }
+  
     def aggregate: Parser[AggregateOp] =
         (ident ~ "(" ~ repsep(math, ",") ~ ")") ^^ {
           case "min" ~ _ ~ ll ~ _ => AggregateOp("min", ll)
