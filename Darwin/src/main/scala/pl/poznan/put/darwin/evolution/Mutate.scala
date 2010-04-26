@@ -12,7 +12,8 @@ import pl.poznan.put.darwin.utils.RNG
 object Mutate {
 
   def apply(s: Solution, generation: Int): Solution =
-    if (RNG.get().nextDouble() > (new Config()).ETA * math.pow(1 - (new Config()).OMEGA, generation - 1))
+    if (RNG.get().nextDouble() > s.sim.config.ETA *
+        math.pow(1 - s.sim.config.OMEGA, generation - 1))
       s.randomNeighbour
     else s
 }

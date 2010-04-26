@@ -103,13 +103,14 @@ object RankedSolution {
 
   private def calculateCrowding(solutions: List[EvaluatedSolution]):
       Map[EvaluatedSolution, Double] = {
+    val sim = solutions(0).sim
     var crowdingDistance: Map[EvaluatedSolution, Double] = Map()
     solutions foreach ((s: EvaluatedSolution) => {
       crowdingDistance += (s -> 0.0)
     })
     val goals = solutions(0).goals
     goals foreach ((g: Goal) => {
-      (new Config()).PERCENTILES foreach (p => {
+      sim.config.PERCENTILES foreach (p => {
         val sorted = solutions.sortWith(crowdingDistanceLT(g, p))
         val s0 = sorted(0)
         crowdingDistance += (s0 -> Double.MaxValue)

@@ -1,6 +1,7 @@
 package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.problem.{Problem, Parser}
+import pl.poznan.put.darwin.simulation.Simulation
 
 /**
 * Base trait for unittesting some components of Darwin
@@ -20,6 +21,9 @@ trait ProblemRepository {
     "nonZero1: x1 >= 0;\n" +
     "nonZero2: x2 >= 0;\n"
   ).get
+
+  val trainsSoldiersNoIntervalsSim = new Simulation(new Config(),
+                                                    trainsSoldiersNoIntervals)
 
   val simpleWithIntervals: Problem = Parser.ProblemParser.parse("""
       var[0.0, 200.0] x;

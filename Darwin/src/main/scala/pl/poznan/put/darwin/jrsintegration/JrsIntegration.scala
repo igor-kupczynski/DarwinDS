@@ -12,12 +12,14 @@ object JrsIntegration {
   var counter = 0
 
   def apply(result: List[MarkedSolution]): DarwinRulesContainer = {
+    val sim = result(0).sim
     val rulesInput = new RulesInput(result)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
-    val wrapper: RulesGeneratorWrapper = new VCdomLEMWrapperOpt(mc, (new Config()).DOMLEM_CONFIDECE_LEVEL,
-      (new Config()).CONDITION_SELECTION_METHOD,
-      (new Config()).NEGATIVE_EXAMPLES_TREATMENT)
+    val wrapper: RulesGeneratorWrapper =
+      new VCdomLEMWrapperOpt(mc, sim.config.DOMLEM_CONFIDECE_LEVEL,
+      sim.config.CONDITION_SELECTION_METHOD,
+      sim.config.NEGATIVE_EXAMPLES_TREATMENT)
     wrapper.setInducePossibleRules(false);
     val container: RulesContainer = wrapper.generateRules(mc)
     val cwd = new File(".").getAbsolutePath

@@ -29,9 +29,10 @@ object ExampleFactory {
    * Perform extraction of non-decision attributes from solution
    */
   private def getFields(solution: EvaluatedSolution): List[Field] = {
+    val sim = solution.sim
     var fields: List[Field] = new StringField("Solution") :: Nil
     solution.goals foreach (
-            (g: Goal) => (new Config()).PERCENTILES foreach (
+            (g: Goal) => sim.config.PERCENTILES foreach (
                     p => fields = new FloatField(solution.getPercentile(g, p)) :: fields
             )
     )

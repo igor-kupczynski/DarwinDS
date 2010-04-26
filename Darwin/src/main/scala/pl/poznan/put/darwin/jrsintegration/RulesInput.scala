@@ -7,6 +7,8 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.MarkedSolution
 
 class RulesInput(result: List[MarkedSolution]) extends SerialInput {
+  private val sim = result(0).sim
+
   private val enumDomain: EnumDomain = new EnumDomain() {
     addElement("NOT_GOOD")
     addElement("GOOD")
@@ -46,7 +48,7 @@ class RulesInput(result: List[MarkedSolution]) extends SerialInput {
     attributes = desc :: attributes
 
     result(0).goals foreach ((g: Goal) => {
-      (new Config()).PERCENTILES foreach (p => {
+      sim.config.PERCENTILES foreach (p => {
         val attribute = new Attribute(
           g.name + "_" + p, new FloatField())
         attribute.setPreferenceType(if (g.max) Attribute.GAIN else Attribute.COST)

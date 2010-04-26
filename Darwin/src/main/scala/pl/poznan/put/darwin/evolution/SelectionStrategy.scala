@@ -28,10 +28,11 @@ object SelectionStrategy {
 
 
   private[evolution] def computeProbabilities(individuals: List[RankedSolution]): Array[Double] = {
+    val sim = individuals(0).sim
     val card = individuals.length
     val prob: List[Double] = individuals map ((s: RankedSolution) => {
-        math.pow((card - s.rank + 1).asInstanceOf[Double] / card, (new Config()).GAMMA) -
-                math.pow((card - s.rank).asInstanceOf[Double] / card, (new Config()).GAMMA)
+        math.pow((card - s.rank + 1).asInstanceOf[Double] / card, sim.config.GAMMA) -
+                math.pow((card - s.rank).asInstanceOf[Double] / card, sim.config.GAMMA)
       }
     )
     var acc: Double = 0

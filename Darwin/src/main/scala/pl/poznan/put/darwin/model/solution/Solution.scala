@@ -37,7 +37,7 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
     var resultValues: Map[String, Double] = null
     val rng: Random = RNG.get()
     var tries = 0
-    while (tries < (new Config()).MUTATION_TRIES &&
+    while (tries < sim.config.MUTATION_TRIES &&
             (resultValues == null || !(new Solution(sim, resultValues)).isFeasible)) {
       val idx = rng.nextInt(values.size)
       val variable = (values.keys.toList)(idx)

@@ -1,15 +1,12 @@
 package pl.poznan.put.darwin.simulation
 
 import pl.poznan.put.darwin.evolution.DarwinEvolver
-import pl.poznan.put.darwin.model.problem.{Parser, Problem}
+import pl.poznan.put.darwin.model.problem.Problem
 import pl.poznan.put.darwin.model.solution._
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.Scenario
   
-class Simulation(val config: Config) {
-
-  private val lines = io.Source.fromPath((new Config()).FILENAME).mkString
-  val problem: Problem = Parser.fromText(lines)
+class Simulation(val config: Config, val problem: Problem) {
   
   val fired = false
 
@@ -31,10 +28,13 @@ class Simulation(val config: Config) {
 
     val evolver = new DarwinEvolver()
     var idx = 0
+
+    val dMMock = new DMMock(this)
+    
     while (idx < 10) {
       println("loop " + idx)
       idx += 1
-      val markedResult: List[MarkedSolution] = DMMock(evaluatedSolutions)
+      val markedResult: List[MarkedSolution] = dMMock(evaluatedSolutions)
       evaluatedSolutions = evolver.preformEvolution(markedResult)
     }
   }
