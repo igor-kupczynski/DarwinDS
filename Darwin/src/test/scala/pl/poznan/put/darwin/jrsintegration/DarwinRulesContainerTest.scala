@@ -7,6 +7,7 @@ import java.util.ArrayList
 import pl.poznan.put.darwin.model.solution.EvaluatedSolution
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Goal, Variable, Problem, VariableDef}
+import pl.poznan.put.darwin.simulation.Simulation
 import org.specs.Specification
 
 class DarwinRulesContainerTest extends Specification with Mockito {
@@ -53,8 +54,9 @@ class DarwinRulesContainerTest extends Specification with Mockito {
                         List(maxX, minY),
                         null,
                         List())
+    val sim = new Simulation(new Config(), p)
     points.map({case (x, y) =>
-      new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
+      new EvaluatedSolution(sim, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
     })
   }
 

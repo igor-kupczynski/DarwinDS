@@ -10,11 +10,11 @@ class SelectionStrategyTest extends JUnitSuite with ProblemRepository {
 
   @Test def probabilitiesTest = {
     val solutions: List[RankedSolution] =
-      new RankedSolution(trainsSoldiersNoIntervals, Map(), Map(), 0.0, 0.0, 1) ::
-      new RankedSolution(trainsSoldiersNoIntervals, Map(), Map(), 0.0, 0.0, 2) ::
-      new RankedSolution(trainsSoldiersNoIntervals, Map(), Map(), 0.0, 0.0, 3) ::
-      new RankedSolution(trainsSoldiersNoIntervals, Map(), Map(), 0.0, 0.0, 4) ::
-      new RankedSolution(trainsSoldiersNoIntervals, Map(), Map(), 0.0, 0.0, 5) ::
+      new RankedSolution(trainsSoldiersNoIntervalsSim, Map(), Map(), 0.0, 0.0, 1) ::
+      new RankedSolution(trainsSoldiersNoIntervalsSim, Map(), Map(), 0.0, 0.0, 2) ::
+      new RankedSolution(trainsSoldiersNoIntervalsSim, Map(), Map(), 0.0, 0.0, 3) ::
+      new RankedSolution(trainsSoldiersNoIntervalsSim, Map(), Map(), 0.0, 0.0, 4) ::
+      new RankedSolution(trainsSoldiersNoIntervalsSim, Map(), Map(), 0.0, 0.0, 5) ::
       Nil
 
     val len = solutions.length

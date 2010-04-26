@@ -13,7 +13,7 @@ class MutateTest extends JUnitSuite with ProblemRepository {
     val a = Map("x1" -> 10.0, "x2" -> 10.0)
 
     for (idx <- 1 to 100) {
-      val c = Mutate(new Solution(trainsSoldiersNoIntervals, a), 1)
+      val c = Mutate(new Solution(trainsSoldiersNoIntervalsSim, a), 1)
       assertTrue(c.isFeasible)
       assertEquals(c.values.keySet.size, 2)
       assertTrue(c.values.contains("x1"))

@@ -7,6 +7,7 @@ import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import java.util.ArrayList
 import pl.poznan.put.cs.idss.jrs.types.{FloatField, Example}
 import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.simulation.Simulation
 import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 
 
@@ -20,13 +21,14 @@ class RankedSolutionTest extends Specification with Mockito {
                       List(maxX, minY),
                       null,
                       List())
+  val sim = new Simulation(new Config(), p)
 
   // Two tests to perform
   val sols = List((1.0, 4.0), (2.0, 3.0), (2.0, 4.0), (1.0, 3.0)).map({case (x, y) =>
-    new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
+    new EvaluatedSolution(sim, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
   })
   val sols2 = List((1.0, 4.0), (3.0, 2.0), (6.0, 1.0)).map({case (x, y) =>
-    new EvaluatedSolution(p, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
+    new EvaluatedSolution(sim, Map("x" -> x, "y" -> y), Map(maxX -> List(x), minY -> List(y)))
   })
 
   val ruleX = mock[Rule]

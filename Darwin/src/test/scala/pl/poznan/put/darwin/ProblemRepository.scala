@@ -2,6 +2,7 @@ package pl.poznan.put.darwin.evolution
 
 import pl.poznan.put.darwin.model.problem.{Problem, Parser}
 import pl.poznan.put.darwin.simulation.Simulation
+import pl.poznan.put.darwin.model.Config
 
 /**
 * Base trait for unittesting some components of Darwin
@@ -21,10 +22,10 @@ trait ProblemRepository {
     "nonZero1: x1 >= 0;\n" +
     "nonZero2: x2 >= 0;\n"
   ).get
-
   val trainsSoldiersNoIntervalsSim = new Simulation(new Config(),
                                                     trainsSoldiersNoIntervals)
 
+  
   val simpleWithIntervals: Problem = Parser.ProblemParser.parse("""
       var[0.0, 200.0] x;
       max profit: x;
@@ -32,6 +33,9 @@ trait ProblemRepository {
       nonZero: x >= 0.0;
       limit: ([i1: 0.9, 1.1] * x) <= 100.0;
       """).get
+  val simpleWithIntervalsSim = new Simulation(new Config(),
+                                              simpleWithIntervals)
+
   
   val simpleNoIntervals: Problem = Parser.ProblemParser.parse(
       "var[0.0, 200.0] x;\n\n" +
@@ -40,5 +44,6 @@ trait ProblemRepository {
       "nonZero: x >= 0.0;\n" +
       "limit: x <= 100.0;\n"
   ).get
-
+  val simpleNoIntervalsSim = new Simulation(new Config(),
+                                            simpleNoIntervals)
 }

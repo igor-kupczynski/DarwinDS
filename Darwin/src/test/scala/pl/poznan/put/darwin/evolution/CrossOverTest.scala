@@ -15,8 +15,8 @@ class CrossOverTest extends JUnitSuite with ProblemRepository {
     val b = Map("x1" -> 10.0, "x2" -> 0.0)
 
     for (idx <- 1 to 10) {
-      val c = CrossOver(new Solution(trainsSoldiersNoIntervals, a),
-          new Solution(trainsSoldiersNoIntervals, b))
+      val c = CrossOver(new Solution(trainsSoldiersNoIntervalsSim, a),
+          new Solution(trainsSoldiersNoIntervalsSim, b))
       assertTrue(c.values("x1") >= 0)
       assertTrue(c.values("x1") <= 10)
       assertTrue(c.values("x2") >= 0)
