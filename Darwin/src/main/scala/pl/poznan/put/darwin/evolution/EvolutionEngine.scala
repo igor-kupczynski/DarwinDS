@@ -1,7 +1,7 @@
 package pl.poznan.put.darwin.evolution
 
 import observer.EvolutionObserver
-import pl.poznan.put.darwin.model.MonteCarloScenarioFactory
+import pl.poznan.put.darwin.model.Scenario
 import pl.poznan.put.darwin.model.solution.{EvaluatedSolution, RankedSolution}
 
 /**
@@ -62,7 +62,7 @@ class EvolutionEngine(params: EvolutionParameters) {
     val toRegenerate: Double = if (scenarios == null) 1.0 else params.regeneratePercent
     var newScenarios: List[Map[String, Double]] =
       (0 to (toRegenerate * params.scenarioCount).asInstanceOf[Int] -1).map(
-          idx => MonteCarloScenarioFactory.generate(params.problem)
+          idx => Scenario.generate(params.problem)
        ).toList
     val left = params.scenarioCount - newScenarios.length
     if (left > 0) {

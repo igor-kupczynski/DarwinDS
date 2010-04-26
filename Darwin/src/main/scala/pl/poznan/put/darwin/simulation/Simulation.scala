@@ -4,7 +4,7 @@ import pl.poznan.put.darwin.evolution.DarwinEvolver
 import pl.poznan.put.darwin.model.problem.Parser
 import pl.poznan.put.darwin.model.solution._
 import pl.poznan.put.darwin.model.Config
-import pl.poznan.put.darwin.model.MonteCarloScenarioFactory
+import pl.poznan.put.darwin.model.Scenario
   
 class Simulation {
 
@@ -24,7 +24,7 @@ class Simulation {
 
     var scenarios: List[Map[String, Double]] = Nil
     for (idx <- 1 to Config.SCENARIO_COUNT) {
-      scenarios = MonteCarloScenarioFactory.generate(p) :: scenarios
+      scenarios = Scenario.generate(p) :: scenarios
     }
 
     var evaluatedSolutions = EvaluatedSolution(solutions, scenarios)
