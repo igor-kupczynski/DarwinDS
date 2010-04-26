@@ -21,6 +21,14 @@ trait ProblemRepository {
     "nonZero2: x2 >= 0;\n"
   ).get
 
+  val simpleWithIntervals: Problem = Parser.ProblemParser.parse("""
+      var[0.0, 200.0] x;
+      max profit: x;
+      !dec: profit;
+      nonZero: x >= 0.0;
+      limit: ([i1: 0.9, 1.1] * x) <= 100.0;
+      """).get
+  
   val simpleNoIntervals: Problem = Parser.ProblemParser.parse(
       "var[0.0, 200.0] x;\n\n" +
       "max profit: x;\n\n" +
