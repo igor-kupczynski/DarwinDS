@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model
 
 import problem.Parser
 import scala.Iterator.range
-import pl.poznan.put.darwin.experiment.DMMock
+import pl.poznan.put.darwin.simulation.DMMock
 import pl.poznan.put.darwin.evolution.DarwinEvolver
 import solution.{MarkedSolution, EvaluatedSolution, Solution}
 
