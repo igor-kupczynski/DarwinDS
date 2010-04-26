@@ -32,16 +32,23 @@ class RankedSolution(problem: Problem, values: Map[String, Double],
  * @author: Igor Kupczynski
  */
 object RankedSolution {
+
   /**
-   * Create gang of RankedSolutions from pack of EvaluatedSolutions. Solutions are sorted at the end
+   * Create gang of RankedSolutions from pack of EvaluatedSolutions.
+   * Solutions are sorted at the end
    */
-  def apply(solutions: List[EvaluatedSolution], rulesContainer: DarwinRulesContainer): List[RankedSolution] = {
-    val primaryScores: Map[EvaluatedSolution, Double] = calculatePrimary(rulesContainer.rules, solutions)
+  def apply(solutions: List[EvaluatedSolution],
+            rulesContainer: DarwinRulesContainer):
+      List[RankedSolution] = {
+    val primaryScores: Map[EvaluatedSolution, Double] =
+      calculatePrimary(rulesContainer, solutions)
     val crowdingDistances = calculateCrowding(solutions)
 
-    def fitnessLT(self: EvaluatedSolution, other: EvaluatedSolution): Boolean =
+    def fitnessLT(self: EvaluatedSolution,
+                  other: EvaluatedSolution): Boolean =
       if (primaryScores(self) > primaryScores (other) ||
-              (primaryScores(self) == primaryScores (other) && crowdingDistances(self) > crowdingDistances(other)))
+              (primaryScores(self) == primaryScores (other) &&
+               crowdingDistances(self) > crowdingDistances(other)))
         true
       else
         false
@@ -50,37 +57,27 @@ object RankedSolution {
     var count = 0
     (0 to (sortedSolutions.length - 1)).map(idx => {
       val s = sortedSolutions(idx)
-      new RankedSolution(s.problem, s.values, s.performances, primaryScores(s), crowdingDistances(s), idx+1)
+      new RankedSolution(s.problem, s.values, s.performances,
+                         primaryScores(s), crowdingDistances(s), idx+1)
     }).toList
   }
 
 
   // Part for calculating primary score
-  private def calculatePrimary(rules: List[(Rule, Double)],
+  private def calculatePrimary(container: DarwinRulesContainer,
                                solutions: List[EvaluatedSolution]):
         Map[EvaluatedSolution, Double] = {
-
     var scores: Map[EvaluatedSolution, Double] = Map()
-    solutions foreach ((s: EvaluatedSolution) => {
-      val sum = rules.foldLeft[Double](0.0)(
-        (sum: Double, pair: Tuple2[Rule, Double]) => {
-          val r = pair._1
-          val w = pair._2
-          if (r covers ExampleFactory(s))
-            sum + w
-          else
-            sum
-        }
-      )
-      scores += (s -> sum)
-    })
+    solutions foreach ((s: EvaluatedSolution) =>
+      scores += (s -> container.getScore(s)))
     scores
   }
 
 
   // Part for calculate crowding distance. So secondary score 
 
-  private def crowdingDistanceLT(goal: Goal, p: Double)(self: EvaluatedSolution, other: EvaluatedSolution): Boolean = {
+  private def crowdingDistanceLT(goal: Goal, p: Double)(
+      self: EvaluatedSolution, other: EvaluatedSolution): Boolean = {
     if (self.getPercentile(goal, p) < other.getPercentile(goal, p)) true else false
   }
 
@@ -90,7 +87,8 @@ object RankedSolution {
     else a + b
   }
 
-  private def calculateCrowding(solutions: List[EvaluatedSolution]): Map[EvaluatedSolution, Double] = {
+  private def calculateCrowding(solutions: List[EvaluatedSolution]):
+      Map[EvaluatedSolution, Double] = {
     var crowdingDistance: Map[EvaluatedSolution, Double] = Map()
     solutions foreach ((s: EvaluatedSolution) => {
       crowdingDistance += (s -> 0.0)
