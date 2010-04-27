@@ -31,6 +31,25 @@ trait ProblemRepository {
   val parser = new ConfigParser()
   parser.read(new ByteArrayInputStream(defConf.getBytes("UTF-8")))
   val defaultConfig = new Config(parser)
+
+  val confWithAvg = """
+  [main]
+  solutionCount = 30
+  scenarioCount = 30
+  delta = 0.1
+  gamma = 2.0
+  eta = 0.5
+  omega = 0.1
+  useAvg = true
+  mutationTries = 100
+  percentiles = 1.0, 25.0, 50.0
+
+  [mockedDM]
+  goodCount = 3
+  """
+  val parserWithAvg = new ConfigParser()
+  parserWithAvg.read(new ByteArrayInputStream(confWithAvg.getBytes("UTF-8")))
+  val configWithAvg = new Config(parserWithAvg)
   
   val trainsSoldiersNoIntervals: Problem = Parser.ProblemParser.parse(
     "var[0,200] x1;\n" +
