@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.evolution.ProblemRepository
+import pl.poznan.put.darwin.ProblemRepository
 import org.specs.{Specification}
 
 class SolutionTest extends Specification with ProblemRepository  {

@@ -1,13 +1,14 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.model.problem._
-import pl.poznan.put.darwin.model.Config
-import pl.poznan.put.darwin.simulation.Simulation
 import org.junit.Assert._
 import org.junit.Test
 import org.scalatest.junit.JUnitSuite
+import pl.poznan.put.darwin.ProblemRepository
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.problem._
+import pl.poznan.put.darwin.simulation.Simulation
 
-class EvaluatedSolutionTest extends JUnitSuite {
+class EvaluatedSolutionTest extends JUnitSuite with ProblemRepository {
 
   @Test def evaluationTest() {
     val goalMax = Goal("z", Variable("z"), true)
@@ -19,7 +20,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
       UtilityFunction(BinaryOp("+", Variable("z"), BinaryOp("+", Variable("y"), Constant(30.0)))),
       List()
     )
-    val sim = new Simulation(new Config(), problem)
+    val sim = new Simulation(defaultConfig, problem)
 
     val perfs = List(10.0, 2.0, 7.0, 4.0, 5.0, 6.0, 8.0, 3.0, 9.0, 1.0)
     val goals = Map(goalMax -> perfs.sortWith((a, b) => a < b), goalMin -> perfs.sortWith((a, b) => a < b).reverse)
@@ -98,7 +99,7 @@ class EvaluatedSolutionTest extends JUnitSuite {
       ),
       List()
     )
-    val sim2 = new Simulation(new Config(), problem2)
+    val sim2 = new Simulation(defaultConfig, problem2)
 
 
     val s = Solution(sim2, Map("z" -> 1, "y" -> 1))

@@ -1,9 +1,10 @@
 package pl.poznan.put.darwin.evolution
 
-import pl.poznan.put.darwin.model.solution.Solution
-import org.junit.Test
 import org.junit.Assert._
+import org.junit.Test
 import org.scalatest.junit.JUnitSuite
+import pl.poznan.put.darwin.ProblemRepository
+import pl.poznan.put.darwin.model.solution.Solution
 
 class MutateTest extends JUnitSuite with ProblemRepository {
 

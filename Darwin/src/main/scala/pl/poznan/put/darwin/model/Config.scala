@@ -2,18 +2,17 @@ package pl.poznan.put.darwin.model
 
 import java.util.Random
 import org.ini4j.ConfigParser
+import scala.util.matching.Regex
 import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
 
 class Config(parser: ConfigParser) {
 
-  println(parser.sections())
-  println(parser.options("main"))
   /*
    * Main parameters
    */
   val SOLUTION_COUNT: Int = parser.getInt("main", "solutioncount")
   val SCENARIO_COUNT: Int = parser.getInt("main", "scenariocount")
-  val PERCENTILES: List[Int] = 1 :: 25 :: 50 :: Nil;
+  val PERCENTILES: List[Double] = getListOfDoubles(parser.get("main", "percentiles"))
   val DELTA: Double = parser.getDouble("main", "delta")
   val GAMMA: Double = parser.getDouble("main", "gamma")
   val MUTATION_TRIES: Int = parser.getInt("main", "mutationtries")
@@ -32,6 +31,11 @@ class Config(parser: ConfigParser) {
   val DOMLEM_CONFIDECE_LEVEL = 1.0
   val CONDITION_SELECTION_METHOD = VCDomLem.MIX_CONDITIONS_FROM_DIFFERENT_OBJECTS
   val NEGATIVE_EXAMPLES_TREATMENT = VCDomLem.COVER_NONE_OF_NEGATIVE_EXAMPLES
+
+  private def getListOfDoubles(str: String): List[Double] = {
+    val r = new Regex(",")
+    r.split(str).toList.map(x => x.toDouble)
+  }
 }
 
 

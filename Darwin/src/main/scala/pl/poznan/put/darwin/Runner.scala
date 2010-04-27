@@ -12,8 +12,6 @@ object Runner {
 
     val parser = new ConfigParser()
     parser.read(configFilename)
-
-    println(parser)
   
     val config = new Config(parser)
 

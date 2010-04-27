@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.model.solution
 import org.junit.Assert._
 import pl.poznan.put.darwin.model.problem.Goal
 import org.junit.Test
-import pl.poznan.put.darwin.evolution.ProblemRepository
+import pl.poznan.put.darwin.ProblemRepository
 import org.scalatest.junit.JUnitSuite
 
 class MarkedSolutionTest extends JUnitSuite with ProblemRepository {

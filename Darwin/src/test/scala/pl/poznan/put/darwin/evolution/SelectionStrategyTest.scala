@@ -1,10 +1,11 @@
 package pl.poznan.put.darwin.evolution
 
-import pl.poznan.put.darwin.model.solution.RankedSolution
-import pl.poznan.put.darwin.model.Config
-import org.junit.Test
 import org.junit.Assert._
+import org.junit.Test
 import org.scalatest.junit.JUnitSuite
+import pl.poznan.put.darwin.ProblemRepository
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.solution.RankedSolution
 
 class SelectionStrategyTest extends JUnitSuite with ProblemRepository {
 
