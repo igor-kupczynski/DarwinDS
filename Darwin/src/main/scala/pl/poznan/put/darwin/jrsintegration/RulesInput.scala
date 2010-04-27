@@ -50,7 +50,7 @@ class RulesInput(result: List[MarkedSolution]) extends SerialInput {
     result(0).goals foreach ((g: Goal) => {
       sim.config.PERCENTILES foreach (p => {
         val attribute = new Attribute(
-          g.name + "_" + p, new FloatField())
+          "%s_%d" format (g.name, p.toInt), new FloatField())
         attribute.setPreferenceType(if (g.max) Attribute.GAIN else Attribute.COST)
         attribute.setKind(Attribute.NONE)
         attribute.setActive(true)
