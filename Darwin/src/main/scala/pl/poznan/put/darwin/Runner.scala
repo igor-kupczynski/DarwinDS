@@ -4,11 +4,9 @@ import pl.poznan.put.darwin.simulation.Simulation
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import org.ini4j.ConfigParser
   
-object Runner {
-  def main(args: Array[String]) {
-
-    val problemFilename = "etc/problems/simple_1crit.mod"
-    val configFilename = "etc/config.ini"
+class Runner(problemFilename: String, configFilename: String) {
+  
+  def run() {
 
     val parser = new ConfigParser()
     parser.read(configFilename)
@@ -19,6 +17,25 @@ object Runner {
     val problem: Problem = Parser.fromText(lines)
 
     (new Simulation(config, problem)).run()
+    println(problemFilename)
   }
 }
 
+object Runner {
+
+  def getArg(args: Array[String], name:String, default: String): String = {
+    for (idx <- 0 to args.length-1) {
+      if (args(idx) == name && idx+1 <= args.length-1)
+        return args(idx+1)
+    }
+    return default
+  }
+  
+  def main(args: Array[String]) {
+    (new Runner(
+      getArg(args, "--problem", "etc/problems/simple_1crit.mod"),
+      getArg(args, "--config", "etc/config.ini")
+      )
+    ).run()
+  }
+}
