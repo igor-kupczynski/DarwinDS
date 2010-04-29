@@ -49,8 +49,8 @@ class ProblemASTTest extends JUnitSuite {
 
 
   @Test def AdditionalConstraintTest = {
-    assertEquals("(B)", Binary.toString)
-    assertEquals("(I)", Integer.toString)
+    assertEquals("(B)", BinaryConstraint.toString)
+    assertEquals("(I)", IntegerConstraint.toString)
   }
   
   @Test def ProblemElementTest = {
@@ -78,11 +78,11 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals(null, v1.constraint)
     assertEquals("var[0.0, 10.0] a", v1.toString)
 
-    val v2 = VariableDef("b", -2.5, 11, Binary)
+    val v2 = VariableDef("b", -2.5, 11, BinaryConstraint)
     assertEquals("b", v2.name)
     assertEquals(-2.5, v2.min, 0.0)
     assertEquals(11.0, v2.max, 0.0)
-    assertEquals(Binary, v2.constraint)
+    assertEquals(BinaryConstraint, v2.constraint)
     assertEquals("var[(B) -2.5, 11.0] b", v2.toString)
     
 

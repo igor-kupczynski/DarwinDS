@@ -29,8 +29,8 @@ object Parser {
         }
 
     def additionalConstraint: Parser[AdditionalConstraint] = {
-      "(B)" ^^ { case _ => Binary }  |
-      "(I)" ^^ { case _ => Integer } |
+      "(B)" ^^ { case _ => BinaryConstraint }  |
+      "(I)" ^^ { case _ => IntegerConstraint } |
       "" ^^ { case _ => null }
     }
   

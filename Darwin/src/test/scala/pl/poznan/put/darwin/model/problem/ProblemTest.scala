@@ -25,9 +25,15 @@ class ProblemTest extends Specification {
     }
     "return variables that it contains" in {
       simpleNoIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
+      simpleNoIntervals.getVariable("x") must be_==(VariableDef("x", 0, 200, null))
       simpleWithIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
+      simpleWithIntervals.getVariable("x") must be_==(VariableDef("x", 0, 200, null))
       integerTrainsSoldiersNoIntervals.getVariables() must
-              be_==(List(VariableDef("x1", 0, 200, Integer), VariableDef("x2", 0, 200, Integer)))
+              be_==(List(VariableDef("x1", 0, 200, IntegerConstraint), VariableDef("x2", 0, 200, IntegerConstraint)))
+      integerTrainsSoldiersNoIntervals.getVariable("x1") must
+              be_==(VariableDef("x1", 0, 200, IntegerConstraint))
+      integerTrainsSoldiersNoIntervals.getVariable("x3") must
+              be(null)
     }
     "print nice decription using toString method" in {
     var expected = "" +

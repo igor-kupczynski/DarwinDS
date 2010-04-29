@@ -56,13 +56,13 @@ case class AggregateOp(operator: String, args: List[Expr]) extends Expr {
  */
 abstract class AdditionalConstraint
 
-case object Binary extends AdditionalConstraint {
+case object BinaryConstraint extends AdditionalConstraint {
    override def toString: String = {
       "(B)"
    }
 }
 
-case object Integer extends AdditionalConstraint { 
+case object IntegerConstraint extends AdditionalConstraint { 
    override def toString: String = {
       "(I)"
    }

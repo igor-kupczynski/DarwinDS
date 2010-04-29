@@ -84,7 +84,7 @@ class SolutionTest extends Specification with ProblemRepository  {
                     Map("x1" ->198.0, "x2" ->168.0))).isFeasible must be(false)
   
       (new Solution(binarySimpleNoIntervalsSim,
-                    Map("x" -> -1.0))).isFeasible must be(true)
+                    Map("x" -> -1.0))).isFeasible must be(false)
       (new Solution(binarySimpleNoIntervalsSim,
                     Map("x" -> 0.0))).isFeasible must be(true)
       (new Solution(binarySimpleNoIntervalsSim,

@@ -52,8 +52,8 @@ trait ProblemRepository {
   val configWithAvg = new Config(parserWithAvg)
   
   val trainsSoldiersNoIntervals: Problem = Parser.ProblemParser.parse(
-    "var[(I) 0,200] x1;\n" +
-    "var[(I) 0,200] x2;\n" +
+    "var[0,200] x1;\n" +
+    "var[0,200] x2;\n" +
     "max z: 3*x1 + 2*x2;\n" +
     "!dec: z;\n" +
     "Finishing: 2*x1 + x2 <= 100;\n" +

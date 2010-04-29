@@ -50,6 +50,18 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
     vars
   }
 
+  /**
+   * Returns single variable
+   */
+  def getVariable(name: String): VariableDef = {
+    vars foreach {
+      case VariableDef(name, min, max, constraint) =>
+        return VariableDef(name, min, max, constraint)
+      case _ => {}
+    }
+    null
+  }
+
 
   override def toString(): String = {
     val result = new StringBuilder()
