@@ -23,7 +23,7 @@ class ProblemTest extends Specification {
       simpleWithIntervals.getIntervals() must be_==(List(Interval("i1", 0.9, 1.1)))
       trainsSoldiersNoIntervals.getIntervals() must be_==(Nil)
     }
-    "return variables that it contains" in {
+    "return contained variables" in {
       simpleNoIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
       simpleNoIntervals.getVariable("x") must be_==(VariableDef("x", 0, 200, null))
       simpleWithIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
@@ -32,6 +32,8 @@ class ProblemTest extends Specification {
               be_==(List(VariableDef("x1", 0, 200, IntegerConstraint), VariableDef("x2", 0, 200, IntegerConstraint)))
       integerTrainsSoldiersNoIntervals.getVariable("x1") must
               be_==(VariableDef("x1", 0, 200, IntegerConstraint))
+      integerTrainsSoldiersNoIntervals.getVariable("x2") must
+              be_==(VariableDef("x2", 0, 200, IntegerConstraint))
       integerTrainsSoldiersNoIntervals.getVariable("x3") must
               be(null)
     }

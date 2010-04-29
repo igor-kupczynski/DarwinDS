@@ -17,7 +17,6 @@ class Runner(problemFilename: String, configFilename: String) {
     val problem: Problem = Parser.fromText(lines)
 
     (new Simulation(config, problem)).run()
-    println(problemFilename)
   }
 }
 

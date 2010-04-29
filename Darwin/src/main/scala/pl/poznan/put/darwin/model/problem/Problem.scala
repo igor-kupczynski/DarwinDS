@@ -54,9 +54,12 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
    * Returns single variable
    */
   def getVariable(name: String): VariableDef = {
+    if (name == "x3") {
+      println(vars)
+    }
     vars foreach {
-      case VariableDef(name, min, max, constraint) =>
-        return VariableDef(name, min, max, constraint)
+      case VariableDef(varName, min, max, constraint) if (varName == name) =>
+        return VariableDef(varName, min, max, constraint)
       case _ => {}
     }
     null

@@ -81,7 +81,6 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
    */
   private[solution] def boundaryAdd(v: Double, min: Double,
                                     max: Double, toAdd: Double): Double = {
-    print("[%s, %s] %s + %s => " format (min, max, v, toAdd))
     var current = v
     var delta = toAdd
     while (delta != 0.0) {
@@ -95,7 +94,6 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
         current = min
       }
     }
-    println(current)
     current
   }
 
