@@ -91,7 +91,7 @@ case class Constraint(name: String, lhs: Expr, rhs: Expr, gte: Boolean) extends 
 case class VariableDef(name: String, min: Double, max: Double,
                        constraint: AdditionalConstraint) extends ProblemElement {
   override def toString: String = {
-    val flag = if (constraint != null) constraint.toString else ""
+    val flag = if (constraint != null) "%s " format constraint.toString else ""
     "var[%s%s, %s] %s" format (flag, min, max, name)
   }
 }

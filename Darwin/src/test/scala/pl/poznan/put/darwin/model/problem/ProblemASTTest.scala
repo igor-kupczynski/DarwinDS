@@ -47,6 +47,12 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals("min(1.0, 2.0, 3.0)", a1.toString)
   }
 
+
+  @Test def AdditionalConstraintTest = {
+    assertEquals("(B)", Binary.toString)
+    assertEquals("(I)", Integer.toString)
+  }
+  
   @Test def ProblemElementTest = {
 
     // max: x1
@@ -69,7 +75,16 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals("a", v1.name)
     assertEquals(0.0, v1.min, 0.0)
     assertEquals(10.0, v1.max, 0.0)
+    assertEquals(null, v1.constraint)
     assertEquals("var[0.0, 10.0] a", v1.toString)
+
+    val v2 = VariableDef("b", -2.5, 11, Binary)
+    assertEquals("b", v2.name)
+    assertEquals(-2.5, v2.min, 0.0)
+    assertEquals(11.0, v2.max, 0.0)
+    assertEquals(Binary, v2.constraint)
+    assertEquals("var[(B) -2.5, 11.0] b", v2.toString)
+    
 
     // Supposed utility function *dec: z
     val u1 = UtilityFunction(Variable("z"))

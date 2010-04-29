@@ -6,7 +6,8 @@ class ProblemTest extends Specification {
   var simpleNoIntervals: Problem = _
   var simpleWithIntervals: Problem = _
   var trainsSoldiersNoIntervals: Problem = _         
-
+  var integerTrainsSoldiersNoIntervals: Problem = _         
+  
   "Problem" should {
     doPreparations()
     "return empty default scenario if no intervals" in {
@@ -25,8 +26,8 @@ class ProblemTest extends Specification {
     "return variables that it contains" in {
       simpleNoIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
       simpleWithIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
-      trainsSoldiersNoIntervals.getVariables() must
-              be_==(List(VariableDef("x1", 0, 200, null), VariableDef("x2", 0, 200, null)))
+      integerTrainsSoldiersNoIntervals.getVariables() must
+              be_==(List(VariableDef("x1", 0, 200, Integer), VariableDef("x2", 0, 200, Integer)))
     }
     "print nice decription using toString method" in {
     var expected = "" +
@@ -56,6 +57,18 @@ class ProblemTest extends Specification {
       "nonZero1: x1 >= 0.0;\n" +
       "nonZero2: x2 >= 0.0;\n"
      trainsSoldiersNoIntervals.toString must be_==(expected)
+  
+    expected = "" +
+      "var[(I) 0.0, 200.0] x1;\n" +
+      "var[(I) 0.0, 200.0] x2;\n\n" +
+      "max z: ((3.0 * x1) + (2.0 * x2));\n\n" +
+      "!dec: z;\n\n" +
+      "Finishing: ((2.0 * x1) + x2) <= 100.0;\n" +
+      "Carpentr: (x1 + x2) <= 80.0;\n" +
+      "Demand: x1 <= 40.0;\n" +
+      "nonZero1: x1 >= 0.0;\n" +
+      "nonZero2: x2 >= 0.0;\n"
+     integerTrainsSoldiersNoIntervals.toString must be_==(expected)
     }
 
   }
@@ -83,6 +96,18 @@ class ProblemTest extends Specification {
     trainsSoldiersNoIntervals = Parser.ProblemParser.parse(
       "var[0,200] x1;\n" +
       "var[0,200] x2;\n" +
+      "max z: 3*x1 + 2*x2;\n" +
+      "!dec: z;\n" +
+      "Finishing: 2*x1 + x2 <= 100;\n" +
+      "Carpentr: x1 + x2 <= 80;\n" +
+      "Demand: x1 <= 40;\n" +
+      "nonZero1: x1 >= 0;\n" +
+      "nonZero2: x2 >= 0;\n"
+    ).get
+
+  integerTrainsSoldiersNoIntervals = Parser.ProblemParser.parse(
+      "var[(I) 0,200] x1;\n" +
+      "var[(I) 0,200] x2;\n" +
       "max z: 3*x1 + 2*x2;\n" +
       "!dec: z;\n" +
       "Finishing: 2*x1 + x2 <= 100;\n" +
