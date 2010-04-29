@@ -100,4 +100,14 @@ trait ProblemRepository {
   ).get
   val simpleNoIntervalsSim = new Simulation(defaultConfig,
                                             simpleNoIntervals)
+
+  val binarySimpleNoIntervals: Problem = Parser.ProblemParser.parse(
+      "var[(B)0.0, 200.0] x;\n\n" +
+      "max profit: x;\n\n" +
+      "!dec: profit;\n\n" +
+      "nonZero: x >= 0.0;\n" +
+      "limit: x <= 100.0;\n"
+  ).get
+  val binarySimpleNoIntervalsSim = new Simulation(defaultConfig,
+                                                  binarySimpleNoIntervals)
 }
