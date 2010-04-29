@@ -1,11 +1,13 @@
 package pl.poznan.put.darwin.evolution
-import pl.poznan.put.darwin.model.problem.VariableDef
+import pl.poznan.put.darwin.model.problem.{BinaryConstraint,
+                                           IntegerConstraint,
+                                           VariableDef}
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.{Solution, RankedSolution}
 import pl.poznan.put.darwin.utils.RNG
 
 /**
-* DarwinCrossOver
+* CrossOver
 *
 * Crossover operaror for darwin evolution framework
 *
@@ -18,11 +20,15 @@ object CrossOver  {
     while (c == null || !(new Solution(a.sim, c)).isFeasible) {
       val gamma: Double = RNG.get().nextDouble()
       c = Map()
-      a.sim.problem.getVariables().map((v: VariableDef) => {
-        c += (v.name -> (gamma * a.values(v.name) + (1-gamma) * b.values(v.name)))
+      a.sim.problem.getVariables().foreach({
+        case VariableDef(name, min, max, BinaryConstraint) =>
+          c += (name -> (if (gamma < 0.5) a.values(name) else b.values(name)))
+        case VariableDef(name, min, max, IntegerConstraint) =>
+          c += (name -> math.round(gamma * a.values(name) + (1-gamma) * b.values(name)))
+        case VariableDef(name, min, max, null) =>
+          c += (name -> (gamma * a.values(name) + (1-gamma) * b.values(name)))
       })
     }
-
     Solution(a.sim, c)
   }
 }
