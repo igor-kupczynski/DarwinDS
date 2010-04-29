@@ -52,7 +52,7 @@ class DarwinRulesContainerTest extends Specification with Mockito with ProblemRe
     val maxX = Goal("x", Variable("x"), true)
     val minY = Goal("y", Variable("y"), false)
     val p = new Problem("foo",
-                        List(VariableDef("x", 0, 50), VariableDef("y", 0, 50)),
+                        List(VariableDef("x", 0, 50, null), VariableDef("y", 0, 50, null)),
                         List(maxX, minY),
                         null,
                         List())

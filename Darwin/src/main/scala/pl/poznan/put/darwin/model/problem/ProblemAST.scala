@@ -50,6 +50,24 @@ case class AggregateOp(operator: String, args: List[Expr]) extends Expr {
   }
 }
 
+
+/**
+ * Abstract class for defining additional variables constraints, eg. integers or binary
+ */
+abstract class AdditionalConstraint
+
+case object Binary extends AdditionalConstraint {
+   override def toString: String = {
+      "(B)"
+   }
+}
+
+case object Integer extends AdditionalConstraint { 
+   override def toString: String = {
+      "(I)"
+   }
+}
+  
 /**
  * Abstract base class for all problem elements
  */
@@ -70,9 +88,11 @@ case class Constraint(name: String, lhs: Expr, rhs: Expr, gte: Boolean) extends 
 }
 
 /* Variable definition: name, min and max value */
-case class VariableDef(name: String, min: Double, max: Double) extends ProblemElement {
+case class VariableDef(name: String, min: Double, max: Double,
+                       constraint: AdditionalConstraint) extends ProblemElement {
   override def toString: String = {
-    "var[%s, %s] %s" format (min, max, name)
+    val flag = if (constraint != null) constraint.toString else ""
+    "var[%s%s, %s] %s" format (flag, min, max, name)
   }
 }
 

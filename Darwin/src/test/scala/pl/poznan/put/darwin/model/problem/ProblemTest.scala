@@ -23,10 +23,10 @@ class ProblemTest extends Specification {
       trainsSoldiersNoIntervals.getIntervals() must be_==(Nil)
     }
     "return variables that it contains" in {
-      simpleNoIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200)))
-      simpleWithIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200)))
+      simpleNoIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
+      simpleWithIntervals.getVariables() must be_==(List(VariableDef("x", 0, 200, null)))
       trainsSoldiersNoIntervals.getVariables() must
-              be_==(List(VariableDef("x1", 0, 200), VariableDef("x2", 0, 200)))
+              be_==(List(VariableDef("x1", 0, 200, null), VariableDef("x2", 0, 200, null)))
     }
     "print nice decription using toString method" in {
     var expected = "" +
@@ -69,13 +69,13 @@ class ProblemTest extends Specification {
 
 
     simpleNoIntervals = new Problem("Simple, no intervals",
-          VariableDef("x", 0, 200) :: Nil,
+          VariableDef("x", 0, 200, null) :: Nil,
           Goal("profit", x, true) :: Nil,
           UtilityFunction(Variable("profit")),
           Constraint("non-zero", x, zero, true) :: Constraint("limit", x, max, false) :: Nil)
 
     simpleWithIntervals = new Problem("Simple, with intervals",
-          VariableDef("x", 0, 200) :: Nil,
+          VariableDef("x", 0, 200, null) :: Nil,
           Goal("profit", x, true) :: Nil,
           UtilityFunction(Variable("profit")),
           Constraint("non-zero", x, zero, true) :: Constraint("limit", BinaryOp("*", i, x), max, false) :: Nil)

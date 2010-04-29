@@ -65,7 +65,7 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals("limit: x2 <= 15.0", c1.toString)
 
     // Variable a[0, 10]
-    val v1 = VariableDef("a", 0, 10)
+    val v1 = VariableDef("a", 0, 10, null)
     assertEquals("a", v1.name)
     assertEquals(0.0, v1.min, 0.0)
     assertEquals(10.0, v1.max, 0.0)

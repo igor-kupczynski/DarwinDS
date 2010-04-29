@@ -15,7 +15,7 @@ class EvaluatedSolutionTest extends JUnitSuite with ProblemRepository {
     val goalMin = Goal("y", Variable("y"), false)
 
     val problem = new Problem("foomybar",
-      List(VariableDef("z", 0, 200), VariableDef("y", 0, 200)),
+      List(VariableDef("z", 0, 200, null), VariableDef("y", 0, 200, null)),
       List(goalMax, goalMin),
       UtilityFunction(BinaryOp("+", Variable("z"), BinaryOp("+", Variable("y"), Constant(30.0)))),
       List()
@@ -91,7 +91,7 @@ class EvaluatedSolutionTest extends JUnitSuite with ProblemRepository {
     val goalMin2 = Goal("y", BinaryOp("*", i, Variable("y")), false)
 
     val problem2 = new Problem("foomybar",
-      List(VariableDef("z", 0, 200), VariableDef("y", 0, 200)),
+      List(VariableDef("z", 0, 200, null), VariableDef("y", 0, 200, null)),
       List(goalMax2, goalMin2),
       UtilityFunction(
         BinaryOp("+",

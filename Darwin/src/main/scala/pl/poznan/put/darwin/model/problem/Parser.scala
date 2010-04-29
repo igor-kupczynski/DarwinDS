@@ -23,10 +23,17 @@ object Parser {
         constraint ^^ {case e => e}
     
     def variable: Parser[VariableDef] =
-        ("var" ~ "[" ~ floatingPointNumber ~ "," ~ floatingPointNumber ~ "]" ~ ident) ^^ {
-          case _ ~ _ ~ min ~ _ ~ max ~ _ ~ name => VariableDef(name, min.toDouble, max.toDouble)
+        ("var" ~ "[" ~ additionalConstraint ~ floatingPointNumber ~ "," ~ floatingPointNumber ~ "]" ~ ident) ^^ {
+          case _ ~ _ ~ addConstraint ~ min ~ _ ~ max ~ _ ~ name =>
+            VariableDef(name, min.toDouble, max.toDouble, addConstraint)
         }
 
+    def additionalConstraint: Parser[AdditionalConstraint] = {
+      "(B)" ^^ { case _ => Binary }  |
+      "(I)" ^^ { case _ => Integer } |
+      "" ^^ { case _ => null }
+    }
+  
     def goal: Parser[Goal] =
         (("min" | "max") ~ ident ~ ":" ~ math) ^^ {
           case max ~ name ~ _ ~ e => Goal(name, e, max == "max")
