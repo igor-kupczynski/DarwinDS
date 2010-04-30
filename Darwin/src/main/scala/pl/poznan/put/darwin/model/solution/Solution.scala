@@ -57,14 +57,21 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
       val variable = (values.keys.toList)(idx)
 
       val v = values(variable)
-      val factor = 1.0
+      var factor = 1.0
   
       val value = sim.problem.getVariable(variable) match {
           case VariableDef(_, _, _, BinaryConstraint) =>
             { if (v == 0.0) 1.0 else 0.0}
-          case VariableDef(_, min, max, IntegerConstraint) =>
+          case VariableDef(_, min, max, IntegerConstraint) => {
+            val d1 = v - min
+            val d2 = max - v
+            factor = (if (d1 < d2) d1 else d2) * 0.15
             math.round(boundaryAdd(v, min, max, rng.nextGaussian() * factor))
+          }
           case VariableDef(_, min, max, null) =>
+            val d1 = v - min
+            val d2 = max - v
+            factor = (if (d1 < d2) d1 else d2) * 0.15
             boundaryAdd(v, min, max, rng.nextGaussian() * factor)
       }
       resultValues = Map()

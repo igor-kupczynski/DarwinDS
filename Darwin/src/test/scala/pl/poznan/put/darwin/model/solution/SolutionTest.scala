@@ -1,9 +1,10 @@
 package pl.poznan.put.darwin.model.solution
 
+import org.scalacheck.Prop._
+import org.specs.{ScalaCheck, Specification}
 import pl.poznan.put.darwin.ProblemRepository
-import org.specs.{Specification}
 
-class SolutionTest extends Specification with ProblemRepository  {
+class SolutionTest extends Specification with ScalaCheck with ProblemRepository  {
 
   "Solution" should {
     "remember values stored in it" in {
@@ -94,13 +95,27 @@ class SolutionTest extends Specification with ProblemRepository  {
       (new Solution(binarySimpleNoIntervalsSim,
                     Map("x" -> 220.0))).isFeasible must be(false)
     }
-    "should generate feasible random neighbour" in {
+    "generate feasible random neighbour" in {
       val s = Solution(trainsSoldiersNoIntervalsSim, Map("x1" -> 10.0, "x2" -> 20.0))
       for (idx <- 1 to 50) {
         val rn = s.randomNeighbour
         rn.isFeasible must be(true)
         rn must be_!=(s)
       }
+    }
+    "do correct boundary add calculations" in {
+      val s = Solution(trainsSoldiersNoIntervalsSim,
+                       Map("x1" -> 10.0, "x2" -> 20.0))
+      val resBetweenBonds = forAll {
+        (v: Double, min: Double, max: Double, toAdd: Double) =>
+          max > min ==> {
+            val res = s.boundaryAdd(v, min, max, toAdd)
+            res >= min && res < max
+          }
+      }
+      resBetweenBonds must pass
+      s.boundaryAdd(10.0, 5.0, 15.0, 6.0) must be_==(14.0)
+      s.boundaryAdd(10.0, 5.0, 15.0, 16.0) must be_==(6.0)
     }
   }
 }

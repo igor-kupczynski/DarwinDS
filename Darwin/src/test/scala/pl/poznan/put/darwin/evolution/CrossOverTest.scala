@@ -57,7 +57,6 @@ class CrossOverTest extends JUnitSuite with ProblemRepository {
       assertEquals(math.round(c.values("x2")), c.values("x2"), 0.0)
       assertTrue(c.isFeasible)
     }
-    println("theSame = " + theSame)
     assertTrue(theSame < 20)
     
   }
