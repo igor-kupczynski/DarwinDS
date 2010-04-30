@@ -8,8 +8,10 @@ import pl.poznan.put.darwin.model.Scenario
   
 class Simulation(val config: Config, val problem: Problem) {
   
-  val fired = false
+  private val fired = false
 
+  private[simulation] var observers: List[SimulationObserver] = List()
+  
   def run() {
     if (fired)
       throw new Exception("Already fired")
@@ -37,4 +39,26 @@ class Simulation(val config: Config, val problem: Problem) {
       evaluatedSolutions = evolver.preformEvolution(markedResult)
     }
   }
+
+  /**
+   * Adds observer to list (if not there yet)
+   */
+  def registerObserver(obs: SimulationObserver) {
+    if (!observers.contains(obs)) {
+      observers = observers :+ obs
+    }
+  }
+
+  /** 
+   * Removes observer from list 
+   */
+  def removeObserver(obs: SimulationObserver) {
+    observers = observers filterNot obs.==
+  }
+  
+  private def notifyAll(event: SimulationEvent) {
+    observers foreach { o => o.notify(event) }
+  }
+
+  
 }

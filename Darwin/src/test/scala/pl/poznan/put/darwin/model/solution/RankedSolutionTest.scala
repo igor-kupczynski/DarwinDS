@@ -1,15 +1,15 @@
 package pl.poznan.put.darwin.model.solution
 
-import org.specs._
-import mock.Mockito
-import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
-import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import java.util.ArrayList
+import org.specs._
+import org.specs.mock.Mockito
+import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import pl.poznan.put.cs.idss.jrs.types.{FloatField, Example}
-import pl.poznan.put.darwin.model.Config
-import pl.poznan.put.darwin.simulation.Simulation
-import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 import pl.poznan.put.darwin.ProblemRepository
+import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
+import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
+import pl.poznan.put.darwin.simulation.Simulation
 
 
 class RankedSolutionTest extends Specification with Mockito with ProblemRepository{
