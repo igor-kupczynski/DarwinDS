@@ -46,7 +46,7 @@ def problem_decription(items, ut_weights):
     """
     out = []
     for idx in xrange(len(items)):
-        out.append("var[(b) 0.0, 2.0] x%d;" % idx)
+        out.append("var[(B) 0.0, 2.0] x%d;" % idx)
     out.append("")
     value = "max value: sum("
     weight = "min weight: sum("
