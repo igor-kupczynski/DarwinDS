@@ -16,11 +16,10 @@ src_managed/
 Darwin/project/boot/
 
 
-#CTAGS
+# eMACS
 TAGS
-
-# Backup
 *~
+.ropeproject
 
 # Files generated during run
 Darwin/rules/

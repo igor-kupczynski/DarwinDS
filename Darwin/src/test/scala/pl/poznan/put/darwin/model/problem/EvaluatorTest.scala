@@ -35,6 +35,9 @@ class EvaluatorTest extends JUnitSuite {
     val e6 = AggregateOp("min", limit :: x :: Constant(25) :: Nil)
     assertEquals(5.0, eval(e6), 0.0)
 
+    val e6b = AggregateOp("sum", limit :: x :: Constant(25) :: Nil)
+    assertEquals(40.0, eval(e6b), 0.0)
+    
     val one = Constant(1)
     val zero = Constant(0)
 

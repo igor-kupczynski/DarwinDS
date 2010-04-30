@@ -83,7 +83,7 @@ object Parser {
   
     def aggregate: Parser[AggregateOp] =
         (ident ~ "(" ~ repsep(math, ",") ~ ")") ^^ {
-          case "min" ~ _ ~ ll ~ _ => AggregateOp("min", ll)
+          case name ~ _ ~ ll ~ _ => AggregateOp(name, ll)
         }
 
     def parse(text: String) = {
