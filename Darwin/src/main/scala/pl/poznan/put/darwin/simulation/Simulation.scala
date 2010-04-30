@@ -55,6 +55,21 @@ class Simulation(val config: Config, val problem: Problem) {
   def removeObserver(obs: SimulationObserver) {
     observers = observers filterNot obs.==
   }
+
+
+  /**
+   * Informs simulation about new generation in evolution loop
+   */
+  def postGeneration(solutions: List[RankedSolution]) {
+    notifyAll(NewGenerationEvent(solutions))
+  }
+
+  /**
+   * Informs simulation about DM choices
+   */
+  def postDMChoices(solutions: List[MarkedSolution]) {
+    notifyAll(DMChoiceEvent(solutions))
+  }
   
   private def notifyAll(event: SimulationEvent) {
     observers foreach { o => o.notify(event) }
