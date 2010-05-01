@@ -6,10 +6,7 @@ import pl.poznan.put.darwin.simulation.{BriefReportGenerator, EvolutionReportGen
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import org.ini4j.ConfigParser
   
-class Runner(problemFilename: String,
-             configFilename: String,
-             evoReportFilename: String,
-             dmReportFilename: String) {
+class Runner(problemFilename: String, configFilename: String) {
   
   def run() {
 
@@ -23,17 +20,25 @@ class Runner(problemFilename: String,
    
     val sim = new Simulation(config, problem)
 
-    val evoOut = new FileOutputStream(evoReportFilename)
-    val dmOut = new FileOutputStream(dmReportFilename)
+    val evoOut = if (config.EVOLUTION_REPORT != "")
+      new FileOutputStream(config.EVOLUTION_REPORT) else null
+    val dmOut = if (config.DM_REPORT != "")
+      new FileOutputStream(config.DM_REPORT) else null
 
     
     try {
-      sim.registerObserver(new BriefReportGenerator(sim))
-      sim.registerObserver(new EvolutionReportGenerator(sim, evoOut))
-      sim.registerObserver(new DMReportGenerator(sim, dmOut))
+      if (config.BRIEF_REPORT)
+        sim.registerObserver(new BriefReportGenerator(sim))
+      if (evoOut != null)
+        sim.registerObserver(new EvolutionReportGenerator(sim, evoOut))
+      if (dmOut != null)
+        sim.registerObserver(new DMReportGenerator(sim, dmOut))
       sim.run()
     } finally {
-      evoOut.close()
+      if (evoOut != null)
+        evoOut.close()
+      if (dmOut != null)
+        dmOut.close()
     }
   }
 }
@@ -51,9 +56,7 @@ object Runner {
   def main(args: Array[String]) {
     (new Runner(
       getArg(args, "--problem", "etc/problems/simple_1crit.mod"),
-      getArg(args, "--config", "etc/config.ini"),
-      getArg(args, "--evolution-report", "out/evolution_report.csv"),
-      getArg(args, "--dm-report", "out/dm_report.csv")
+      getArg(args, "--config", "etc/config.ini")
       )
     ).run()
   }

@@ -34,6 +34,15 @@ class Config(parser: ConfigParser) {
   val CONDITION_SELECTION_METHOD = VCDomLem.MIX_CONDITIONS_FROM_DIFFERENT_OBJECTS
   val NEGATIVE_EXAMPLES_TREATMENT = VCDomLem.COVER_NONE_OF_NEGATIVE_EXAMPLES
 
+
+  /*
+   * Reprt options
+   */
+  val EVOLUTION_REPORT = parser.get("reports", "evolutionreport")
+  val DM_REPORT = parser.get("reports", "dmreport")
+  val BRIEF_REPORT = parser.getBoolean("reports", "briefreport")
+
+  
   private def getListOfDoubles(str: String): List[Double] = {
     val r = new Regex(",")
     r.split(str).toList.map(x => x.toDouble)

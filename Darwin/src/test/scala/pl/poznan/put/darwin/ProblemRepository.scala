@@ -28,6 +28,11 @@ trait ProblemRepository {
 
   [mockedDM]
   goodCount = 3
+
+  [reports]
+  evolutionReport = out/evolution_report.csv
+  DMReport = out/dm_report.csv
+  briefReport = true
   """
   val parser = new ConfigParser()
   parser.read(new ByteArrayInputStream(defConf.getBytes("UTF-8")))
@@ -48,6 +53,11 @@ trait ProblemRepository {
 
   [mockedDM]
   goodCount = 3
+
+  [reports]
+  evolutionReport = out/evolution_report.csv
+  DMReport = out/dm_report.csv
+  briefReport = true
   """
   val parserWithAvg = new ConfigParser()
   parserWithAvg.read(new ByteArrayInputStream(confWithAvg.getBytes("UTF-8")))
