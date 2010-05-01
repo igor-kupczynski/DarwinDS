@@ -49,7 +49,7 @@ class EvolutionReportGenerator(sim: Simulation, stream: OutputStream) extends Si
       sim.config.PERCENTILES foreach { p =>
         writer.print(",%s_%s" format (g.name, p)) }
     }
+    writer.println()
+    writer.flush()
   }
-  writer.println()
-  writer.flush()
 }
