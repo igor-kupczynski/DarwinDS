@@ -7,9 +7,10 @@ import pl.poznan.put.darwin.jrsintegration.{DarwinRulesContainer, JrsIntegration
 class DarwinEvolver {
 
   def preformEvolution(solutions: List[MarkedSolution]): List[RankedSolution] = {
+    val sim = solutions(0).sim
     var rulesContainer: DarwinRulesContainer = JrsIntegration(solutions)
     val params: EvolutionParameters =
-        new EvolutionParameters(solutions(0).sim.problem, rulesContainer)
+        new EvolutionParameters(sim.problem, rulesContainer, sim.config)
     val engine = new EvolutionEngine(params)
     //engine.registerGenerationObserver(GenerationObserver())
     engine.registerGenerationObserver(new OneCriterionBestSolutionPrinter())

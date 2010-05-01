@@ -1,10 +1,13 @@
 package pl.poznan.put.darwin.model
 
-import pl.poznan.put.darwin.simulation.Simulation
+import pl.poznan.put.darwin.simulation.{EvolutionReportGenerator, Simulation}
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import org.ini4j.ConfigParser
+import java.io.FileOutputStream
   
-class Runner(problemFilename: String, configFilename: String) {
+class Runner(problemFilename: String,
+             configFilename: String,
+             evoReportFilename: String) {
   
   def run() {
 
@@ -15,8 +18,18 @@ class Runner(problemFilename: String, configFilename: String) {
 
     val lines = io.Source.fromPath(problemFilename).mkString
     val problem: Problem = Parser.fromText(lines)
+   
+    val sim = new Simulation(config, problem)
 
-    (new Simulation(config, problem)).run()
+    val evoOut = new FileOutputStream(evoReportFilename)
+
+    
+    try {
+      sim.registerObserver(new EvolutionReportGenerator(sim, evoOut))
+      sim.run()
+    } finally {
+      evoOut.close()
+    }
   }
 }
 
@@ -33,7 +46,8 @@ object Runner {
   def main(args: Array[String]) {
     (new Runner(
       getArg(args, "--problem", "etc/problems/simple_1crit.mod"),
-      getArg(args, "--config", "etc/config.ini")
+      getArg(args, "--config", "etc/config.ini"),
+      getArg(args, "--evolution-report", "out/evolution_report.csv")
       )
     ).run()
   }

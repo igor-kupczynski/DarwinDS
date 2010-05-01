@@ -12,12 +12,14 @@ class Config(parser: ConfigParser) {
    */
   val SOLUTION_COUNT: Int = parser.getInt("main", "solutioncount")
   val SCENARIO_COUNT: Int = parser.getInt("main", "scenariocount")
+  val GENERATION_COUNT: Int = parser.getInt("main", "generationcount")
   val PERCENTILES: List[Double] = getListOfDoubles(parser.get("main", "percentiles"))
   val DELTA: Double = parser.getDouble("main", "delta")
   val GAMMA: Double = parser.getDouble("main", "gamma")
   val MUTATION_TRIES: Int = parser.getInt("main", "mutationtries")
   val ETA: Double = parser.getDouble("main", "eta")
   val OMEGA: Double = parser.getDouble("main", "omega")
+
   val USE_AVG: Boolean = parser.getBoolean("main", "useavg")
 
   /*

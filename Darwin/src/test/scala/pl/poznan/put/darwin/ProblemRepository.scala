@@ -17,6 +17,7 @@ trait ProblemRepository {
   [main]
   solutionCount = 30
   scenarioCount = 30
+  generationCount = 60
   delta = 0.1
   gamma = 2.0
   eta = 0.5
@@ -36,6 +37,7 @@ trait ProblemRepository {
   [main]
   solutionCount = 30
   scenarioCount = 30
+  generationCount = 60
   delta = 0.1
   gamma = 2.0
   eta = 0.5

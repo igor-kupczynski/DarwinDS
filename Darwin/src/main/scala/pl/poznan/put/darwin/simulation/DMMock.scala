@@ -10,9 +10,11 @@ class DMMock(sim: Simulation) {
       one.utilityFunctionValue > other.utilityFunctionValue)
 
     var idx = -1
-    sortedItems.map((s: EvaluatedSolution) => {
+    val marked = sortedItems.map((s: EvaluatedSolution) => {
       idx += 1
       if (idx < sim.config.GOOD_COUNT) MarkedSolution(s, true) else MarkedSolution(s, false)
     })
+    sim.postDMChoices(marked)
+    marked
   }
 }
