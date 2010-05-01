@@ -1,7 +1,7 @@
 package pl.poznan.put.darwin.model
 
 import java.io.FileOutputStream
-import pl.poznan.put.darwin.simulation.{EvolutionReportGenerator,
+import pl.poznan.put.darwin.simulation.{BriefReportGenerator, EvolutionReportGenerator,
                                         DMReportGenerator, Simulation}
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import org.ini4j.ConfigParser
@@ -28,6 +28,7 @@ class Runner(problemFilename: String,
 
     
     try {
+      sim.registerObserver(new BriefReportGenerator(sim))
       sim.registerObserver(new EvolutionReportGenerator(sim, evoOut))
       sim.registerObserver(new DMReportGenerator(sim, dmOut))
       sim.run()
