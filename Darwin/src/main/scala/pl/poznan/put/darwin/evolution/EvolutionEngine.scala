@@ -15,11 +15,13 @@ class EvolutionEngine(params: EvolutionParameters) {
   private var generationObservers: List[EvolutionObserver] = Nil
 
   def start(input: List[EvaluatedSolution]): List[RankedSolution] = {
+    val sim = input(0).sim
+  
     generation = 0
     scenarios = null
 
     var parents: List[RankedSolution] = RankedSolution(input, params.rulesContainer)
-    notifyGenerationObservers(generation, parents)
+    sim.postGeneration(parents)
     var children: List[RankedSolution] = null
     
     while (generation < params.generationCount) {
@@ -27,7 +29,7 @@ class EvolutionEngine(params: EvolutionParameters) {
       parents = RankedSolution(parents.take(parents.length / 2) ::: children.take(parents.length /2),
                                params.rulesContainer)
       generation += 1
-      notifyGenerationObservers(generation, parents)
+      sim.postGeneration(parents)
     }
     parents
   }

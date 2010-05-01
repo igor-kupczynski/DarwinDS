@@ -8,8 +8,6 @@ import pl.poznan.put.darwin.model.solution.EvaluatedSolution
  */
 class OneCriterionBestSolutionPrinter extends EvolutionObserver {
 
-  println("--- CREATED ---")
-
   override def notify(params: Map[String, Any]) {
     val generation: List[EvaluatedSolution] = params("generation").asInstanceOf[List[EvaluatedSolution]]
 

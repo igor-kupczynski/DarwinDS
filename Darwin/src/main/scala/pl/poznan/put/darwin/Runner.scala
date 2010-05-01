@@ -32,7 +32,7 @@ object Runner {
   
   def main(args: Array[String]) {
     (new Runner(
-      getArg(args, "--problem", "etc/problems/integer_1crit.mod"),
+      getArg(args, "--problem", "etc/problems/simple_1crit.mod"),
       getArg(args, "--config", "etc/config.ini")
       )
     ).run()
