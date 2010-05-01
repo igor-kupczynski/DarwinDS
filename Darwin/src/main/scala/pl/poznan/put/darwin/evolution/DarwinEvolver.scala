@@ -1,6 +1,5 @@
 package pl.poznan.put.darwin.evolution
 
-import observer.{OneCriterionBestSolutionPrinter, GenerationObserver}
 import pl.poznan.put.darwin.model.solution.{RankedSolution, MarkedSolution}
 import pl.poznan.put.darwin.jrsintegration.{DarwinRulesContainer, JrsIntegration}
 
@@ -12,8 +11,6 @@ class DarwinEvolver {
     val params: EvolutionParameters =
         new EvolutionParameters(sim.problem, rulesContainer, sim.config)
     val engine = new EvolutionEngine(params)
-    //engine.registerGenerationObserver(GenerationObserver())
-    engine.registerGenerationObserver(new OneCriterionBestSolutionPrinter())
     engine.start(solutions)
   }
 

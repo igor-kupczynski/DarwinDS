@@ -1,6 +1,5 @@
 package pl.poznan.put.darwin.evolution
 
-import observer.EvolutionObserver
 import pl.poznan.put.darwin.model.Scenario
 import pl.poznan.put.darwin.model.solution.{EvaluatedSolution, RankedSolution}
 
@@ -12,7 +11,6 @@ import pl.poznan.put.darwin.model.solution.{EvaluatedSolution, RankedSolution}
 class EvolutionEngine(params: EvolutionParameters) {
   private var generation: Int = _
   private var scenarios: List[Map[String, Double]] = _
-  private var generationObservers: List[EvolutionObserver] = Nil
 
   def start(input: List[EvaluatedSolution]): List[RankedSolution] = {
     val sim = input(0).sim
@@ -32,17 +30,6 @@ class EvolutionEngine(params: EvolutionParameters) {
       sim.postGeneration(parents)
     }
     parents
-  }
-
-  def registerGenerationObserver(obs: EvolutionObserver) {
-    generationObservers = obs :: generationObservers
-  }
-
-  private def notifyGenerationObservers(number: Int, generation: List[RankedSolution]) {
-    var params: Map[String, Any] = Map()
-    params += ("number" -> number.asInstanceOf[Any])
-    params += ("generation" -> generation)
-    generationObservers.foreach((o: EvolutionObserver) => o.notify(params))
   }
 
   private def nextGeneration(result: List[RankedSolution]):List[RankedSolution] = {
