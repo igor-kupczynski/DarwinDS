@@ -7,9 +7,8 @@ base config.
 
 Outputs merged config file.
 """
-
-import sys
 import ConfigParser
+import sys
 
 
 def merge(base, patches):
@@ -24,14 +23,14 @@ def merge(base, patches):
 
     
 def main():
-    usage = "%s <base-config> <patches>" % (sys.argv[0])
-    if (len(sys.argv) != 3):
+    usage = "%s <base-config>" % (sys.argv[0])
+    if (len(sys.argv) != 2):
         print >> sys.stderr, usage
         sys.exit(-1)
     base = ConfigParser.RawConfigParser()
     base.read(sys.argv[1])
     patches = ConfigParser.RawConfigParser()
-    patches.read(sys.argv[2])
+    patches.readfp(sys.stdin)
     result = merge(base, patches)
     result.write(sys.stdout)
         
