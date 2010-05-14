@@ -25,8 +25,9 @@ class EvolutionReportGenerator(sim: Simulation, stream: OutputStream) extends Si
 
   private def newGeneration(solutions: List[RankedSolution]) {
     solutions foreach { s => {
-      writer.print("%d,%d,%d,%f,%G" format (outerIdx, generation, s.rank,
-                                            s.primaryScore, s.secondaryScore))
+      writer.print("%d,%d,%d,%f,%G,%f" format (outerIdx, generation, s.rank,
+                                            s.primaryScore, s.secondaryScore,
+                                            s.utilityFunctionValue))
       sim.problem.goals foreach { g =>
         sim.config.PERCENTILES foreach { p =>
           writer.print(",%f" format (s.getPercentile(g, p))) }
@@ -49,6 +50,7 @@ class EvolutionReportGenerator(sim: Simulation, stream: OutputStream) extends Si
       sim.config.PERCENTILES foreach { p =>
         writer.print(",%s_%s" format (g.name, p)) }
     }
+    writer.print(",utility")
     writer.println()
     writer.flush()
   }

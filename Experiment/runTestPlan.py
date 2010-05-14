@@ -55,6 +55,7 @@ def parse_testplan(lines):
             item['config-patch'] = StringIO.StringIO()
         else:
             item['config-patch'].write(line)
+    result.append(item)
     return result
 
     
