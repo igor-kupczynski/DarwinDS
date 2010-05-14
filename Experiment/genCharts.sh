@@ -20,9 +20,9 @@ TESTPLAN_OUT_DIR=`rel2abs $2`
 
 for DIR in `find . -name 'reports' -type d`
 do
-    print "--- Charts for $DIR"
+    echo "--- Charts for $DIR"
     R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilgen.pdf" < $CHARTS_DIR/val_gen.R
 done
-print "--- Done"
+echo "--- Done"
 
 exit 0
