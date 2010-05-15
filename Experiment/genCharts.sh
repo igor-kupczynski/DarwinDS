@@ -22,6 +22,7 @@ for DIR in `find . -name 'reports' -type d`
 do
     echo "--- Charts for $DIR"
     R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilgen.pdf" < $CHARTS_DIR/val_gen.R
+    R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/valweight.pdf" < $CHARTS_DIR/value_weight.R
 done
 echo "--- Done"
 
