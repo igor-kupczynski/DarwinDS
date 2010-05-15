@@ -1,19 +1,39 @@
 library("reshape")
 library("ggplot2")
 
-prep.data <- function(outerIdx, x) {
+get.inner <- function(outerIdx, x) {
   inner <- subset(x, outer==outerIdx & generation %in% c(0,10,20,30,40,50,60),
-                  select=c("generation", "utility"))
+                  select=c("generation", "utility", "primary"))
+  inner
+}
+
+prep.data.util <- function(x) {
+  inner <- x[c("generation", "utility")]
   inner$generation <- factor(inner$generation)
   inner <- inner[with(inner, order(generation, utility)), ]
   inner$ind <- 1:summary(inner$generation)[1]
   inner
 }
 
-gen.plot <- function(outerIdx, data) {
+prep.data.ps <- function(x) {
+  inner <- x[c("generation", "primary")]
+  inner$generation <- factor(inner$generation)
+  inner <- inner[with(inner, order(generation, primary)), ]
+  inner$ind <- 1:summary(inner$generation)[1]
+  inner
+}
+
+gen.plot.util <- function(outerIdx, data) {
   c <- ggplot(data, aes(ind, utility, colour=generation))
   c <- c + geom_point() + geom_line()
   c <- c + opts(title=paste("Utility/Individual, outer=", outerIdx, sep=""))
+  c
+}
+
+gen.plot.ps <- function(outerIdx, data) {
+  c <- ggplot(data, aes(ind, primary, colour=generation))
+  c <- c + geom_point() + geom_line()
+  c <- c + opts(title=paste("Primary/Individual, outer=", outerIdx, sep=""))
   c
 }
 
@@ -33,8 +53,14 @@ args <- read.cmd.args()
 df <-read.csv(args[1], header=TRUE)
 pdf(args[2])
 for (outer.idx in levels(factor(df$outer))) {
-  data <- prep.data(outer.idx, df)
-  c <- gen.plot(outer.idx, data)
-  print(c)
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(2, 1)))
+  inner <- get.inner(outer.idx, df)
+  data <- prep.data.util(inner)
+  c <- gen.plot.util(outer.idx, data)
+  print(c, vp=viewport(layout.pos.row = 1, layout.pos.col = 1))
+  data <- prep.data.ps(inner)
+  c <- gen.plot.ps(outer.idx, data)
+  print(c, vp=viewport(layout.pos.row = 2, layout.pos.col = 1))
 }
 dev.off()

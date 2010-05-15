@@ -29,6 +29,8 @@ do
 	< $CHARTS_DIR/utility_ind.R
     R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilouter.pdf" \
 	< $CHARTS_DIR/util_outer.R
+    R --slave --no-save --args "$DIR/dm_report.csv,$DIR/dm_choices.pdf" \
+	< $CHARTS_DIR/dm_selection.R
 done
 echo "--- Done"
 

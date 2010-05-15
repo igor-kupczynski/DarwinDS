@@ -62,6 +62,31 @@ def problem_decription(items, ut_weights):
     out.append("!dec: %f * value + %f * weight;" % ut_weights)
     return "\n".join(out)
 
+
+def c_version(items, ut_weights):
+    """
+    Prepare version to be solved by bruteforce solver
+    """
+    out = []
+    out.append("%d" % len(items))
+    out.append("%f %f" % ut_weights)
+    for item in items:
+        out.append("%f %f" % item)
+    out.append("\n")
+    return "\n".join(out)
+    
+
+def solve(items, ut_weights):
+    """
+    Finds optimum utility for DM
+    """
+    best = 0.0
+    for item in items:
+        u = item[0] * ut_weights[0] + item[1] * ut_weights[1]
+        if (u > 0):
+            best += u
+    return best
+
 def main():
     usage = """
     python %s <item-no> <weight-correlation> <max-value> <ut-fun-weight-for-value> <ut-veight-for-weight>
@@ -79,6 +104,8 @@ def main():
 
     items = generate(n, correlation, max_val)
     print problem_decription(items, ut_weights)
+    with open('best.txt', 'w') as f:
+        f.write("best = %f" % solve(items, ut_weights))
 
 
 if __name__ == '__main__':
