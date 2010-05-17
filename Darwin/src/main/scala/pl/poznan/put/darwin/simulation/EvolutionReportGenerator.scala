@@ -25,13 +25,13 @@ class EvolutionReportGenerator(sim: Simulation, stream: OutputStream) extends Si
 
   private def newGeneration(solutions: List[RankedSolution]) {
     solutions foreach { s => {
-      writer.print("%d,%d,%d,%f,%G,%f" format (outerIdx, generation, s.rank,
-                                            s.primaryScore, s.secondaryScore,
-                                            s.utilityFunctionValue))
+      writer.print("%d,%d,%d,%f,%G" format (outerIdx, generation, s.rank,
+                                            s.primaryScore, s.secondaryScore))
       sim.problem.goals foreach { g =>
         sim.config.PERCENTILES foreach { p =>
           writer.print(",%f" format (s.getPercentile(g, p))) }
       }
+      writer.print(",%f" format (s.utilityFunctionValue))
       writer.println()
     }
     }
