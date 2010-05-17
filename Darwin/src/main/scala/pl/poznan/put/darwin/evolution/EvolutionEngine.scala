@@ -1,31 +1,31 @@
 package pl.poznan.put.darwin.evolution
 
+import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 import pl.poznan.put.darwin.model.Scenario
 import pl.poznan.put.darwin.model.solution.{EvaluatedSolution, RankedSolution}
+import pl.poznan.put.darwin.simulation.Simulation
 
 /**
  * Main class performing the evolution
  *
  * @author Igor Kupczynski
  */
-class EvolutionEngine(params: EvolutionParameters) {
+class EvolutionEngine(sim: Simulation, rulesContainer: DarwinRulesContainer) {
   private var generation: Int = _
   private var scenarios: List[Map[String, Double]] = _
 
   def start(input: List[EvaluatedSolution]): List[RankedSolution] = {
-    val sim = input(0).sim
-  
     generation = 0
     scenarios = null
 
-    var parents: List[RankedSolution] = RankedSolution(input, params.rulesContainer)
+    var parents: List[RankedSolution] = RankedSolution(input, rulesContainer)
     sim.postGeneration(parents)
     var children: List[RankedSolution] = null
     
     while (generation < sim.config.GENERATION_COUNT) {
       children = nextGeneration(parents)
       parents = RankedSolution(parents.take(parents.length / 2) ::: children.take(parents.length /2),
-                               params.rulesContainer)
+                               rulesContainer)
       generation += 1
       sim.postGeneration(parents)
     }
@@ -33,8 +33,8 @@ class EvolutionEngine(params: EvolutionParameters) {
   }
 
   private def nextGeneration(result: List[RankedSolution]):List[RankedSolution] = {
-    val regenerateMod = params.config.REGENERATE_SCENARIONS_EVERY_GENERATIONS
-    val indCount = params.config.SOLUTION_COUNT
+    val regenerateMod = sim.config.REGENERATE_SCENARIONS_EVERY_GENERATIONS
+    val indCount = sim.config.SOLUTION_COUNT
     if (generation % regenerateMod == 0) scenarios = regenerateScenarios()
     val chosenOnes = SelectionStrategy(result, indCount)
     RankedSolution(
@@ -45,16 +45,16 @@ class EvolutionEngine(params: EvolutionParameters) {
             generation),
           scenarios)
       }).toList,
-      params.rulesContainer)
+      rulesContainer)
   }
 
 
   private def regenerateScenarios(): List[Map[String, Double]] = {
-    val scenarioCount = params.config.SCENARIO_COUNT
-    val toRegenerate: Double = if (scenarios == null) 1.0 else params.config.REGENERATE_PERCENT_OF_SCENARIONS
+    val scenarioCount = sim.config.SCENARIO_COUNT
+    val toRegenerate: Double = if (scenarios == null) 1.0 else sim.config.REGENERATE_PERCENT_OF_SCENARIONS
     var newScenarios: List[Map[String, Double]] =
       (0 to (toRegenerate * scenarioCount).asInstanceOf[Int] -1).map(
-          idx => Scenario.generate(params.problem)
+          idx => Scenario.generate(sim.problem)
        ).toList
     val left = scenarioCount - newScenarios.length
     if (left > 0) {

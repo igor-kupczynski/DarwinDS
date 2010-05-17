@@ -8,9 +8,7 @@ class DarwinEvolver {
   def preformEvolution(solutions: List[MarkedSolution]): List[RankedSolution] = {
     val sim = solutions(0).sim
     var rulesContainer: DarwinRulesContainer = JrsIntegration(solutions)
-    val params: EvolutionParameters =
-        new EvolutionParameters(sim.problem, rulesContainer, sim.config)
-    val engine = new EvolutionEngine(params)
+    val engine = new EvolutionEngine(sim, rulesContainer)
     engine.start(solutions)
   }
 
