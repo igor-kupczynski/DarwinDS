@@ -36,12 +36,18 @@ class Config(parser: ConfigParser) {
 
 
   /*
-   * Reprt options
+   * Report options
    */
   val EVOLUTION_REPORT = parser.get("reports", "evolutionreport")
   val DM_REPORT = parser.get("reports", "dmreport")
   val BRIEF_REPORT = parser.getBoolean("reports", "briefreport")
 
+
+  /*
+   * Evolution options
+   */
+  val REGENERATE_SCENARIONS_EVERY_GENERATIONS: Int = 100000000
+  val REGENERATE_PERCENT_OF_SCENARIONS: Double = 0.0
   
   private def getListOfDoubles(str: String): List[Double] = {
     val r = new Regex(",")
