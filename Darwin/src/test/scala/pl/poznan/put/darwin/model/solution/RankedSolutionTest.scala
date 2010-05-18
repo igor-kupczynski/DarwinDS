@@ -6,7 +6,7 @@ import org.specs.mock.Mockito
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import pl.poznan.put.cs.idss.jrs.types.{FloatField, Example}
 import pl.poznan.put.darwin.ProblemRepository
-import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
+import pl.poznan.put.darwin.jrsintegration.SingleRulesContainer
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
 import pl.poznan.put.darwin.simulation.Simulation
