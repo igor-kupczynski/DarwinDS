@@ -55,9 +55,9 @@ class RankedSolutionTest extends Specification with Mockito with ProblemReposito
   rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST) returns rulesArray
 
   val rankedSolutions: List[RankedSolution] =
-    RankedSolution(sols, DarwinRulesContainer(rulesContainer, sols))
+    RankedSolution(sols, SingleRulesContainer(rulesContainer, sols))
   val rankedSolutions2: List[RankedSolution] =
-    RankedSolution(sols2, DarwinRulesContainer(rulesContainer, sols2))
+    RankedSolution(sols2, SingleRulesContainer(rulesContainer, sols2))
 
   "Pack of Rankend solutions" should {
     "be in a rank order" in {
