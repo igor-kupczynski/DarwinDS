@@ -25,6 +25,6 @@ object JrsIntegration {
     val cwd = new File(".").getAbsolutePath
     container.writeRules("rules/rule_%03d.txt".format(counter), true, true)
     counter = counter + 1
-    DarwinRulesContainer(container, result)
+    SingleRulesContainer(container, result)
   }
 }

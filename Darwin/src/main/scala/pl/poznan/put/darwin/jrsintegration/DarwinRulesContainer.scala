@@ -10,7 +10,17 @@ import pl.poznan.put.darwin.model.Config
  *
  * @author: Igor Kupczynski
  */
-class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]]) {
+trait DarwinRulesContainer {
+  def getScore(solution: EvaluatedSolution): Double
+}
+
+/**
+ * Basic DarwinRulesContainer implementation
+ *
+ * @author: Igor Kupczynski
+ */
+class SingleRulesContainer(val rules: List[Tuple2[Rule, Double]]) extends
+        DarwinRulesContainer {
 
   /** 
   * Returns score of given solution on set of rules in the container
@@ -33,18 +43,18 @@ class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]]) {
  * Companion object for creating DarwinRuleContainer and calculating
  * appropriate weights for each rule
  */
-object DarwinRulesContainer {
+object SingleRulesContainer {
 
   /**
    * Create new instance of DarwinRuleContainer. Rules will be based on
    * a container and their weights on given example list.
    */
   def apply(rulesContainer: RulesContainer, examples: List[EvaluatedSolution]):
-        DarwinRulesContainer = {
+        SingleRulesContainer = {
     val rules: List[Rule] = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST).
           toArray(new Array[Rule](0)).toList
     val weights: Map[Rule, Double] = calculateWeights(rules, examples)
-    new DarwinRulesContainer(weights.toList)
+    new SingleRulesContainer(weights.toList)
   }
 
   private def calculateWeights(rules: List[Rule],
