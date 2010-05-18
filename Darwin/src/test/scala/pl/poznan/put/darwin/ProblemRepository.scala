@@ -18,6 +18,7 @@ trait ProblemRepository {
   solutionCount = 30
   scenarioCount = 30
   generationCount = 60
+  outerCount = 10
   delta = 0.1
   gamma = 2.0
   eta = 0.5
@@ -33,6 +34,10 @@ trait ProblemRepository {
   evolutionReport = out/evolution_report.csv
   DMReport = out/dm_report.csv
   briefReport = true
+
+  [evolution]
+  regenerateEvery = 1000
+  regeneratePercent = 0.0
   """
   val parser = new ConfigParser()
   parser.read(new ByteArrayInputStream(defConf.getBytes("UTF-8")))
@@ -43,6 +48,7 @@ trait ProblemRepository {
   solutionCount = 30
   scenarioCount = 30
   generationCount = 60
+  outerCount = 10
   delta = 0.1
   gamma = 2.0
   eta = 0.5
@@ -58,6 +64,10 @@ trait ProblemRepository {
   evolutionReport = out/evolution_report.csv
   DMReport = out/dm_report.csv
   briefReport = true
+
+  [evolution]
+  regenerateEvery = 1000
+  regeneratePercent = 0.0
   """
   val parserWithAvg = new ConfigParser()
   parserWithAvg.read(new ByteArrayInputStream(confWithAvg.getBytes("UTF-8")))
