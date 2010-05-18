@@ -33,7 +33,7 @@ class Simulation(val config: Config, val problem: Problem) {
 
     val dMMock = new DMMock(this)
     
-    while (idx < 10) {
+    while (idx < config.OUTER_COUNT) {
       idx += 1
       val markedResult: List[MarkedSolution] = dMMock(evaluatedSolutions)
       evaluatedSolutions = evolver.preformEvolution(markedResult)
