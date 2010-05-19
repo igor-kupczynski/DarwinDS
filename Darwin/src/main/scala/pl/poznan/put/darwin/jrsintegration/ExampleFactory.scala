@@ -15,27 +15,44 @@ object ExampleFactory {
   /**
    * Converts solution to example using skipping decision attribute
    */
-  def apply(solution: EvaluatedSolution): Example = new Example(getFields(solution).toArray[Field])
+  def apply(solution: EvaluatedSolution): Example = {
+    new Example(getFields(solution).toArray[Field])
+  }
 
   /**
    * Converts solution to example including decision variable
    */
-  def apply(solution: MarkedSolution, enumDomain: EnumDomain): Example = {
-    val fields: List[Field] = getFields(solution) ::: List(new EnumField(if (solution.good) 1 else 0, enumDomain))
+  def apply(solution: MarkedSolution, enumDomain: EnumDomain,
+            order: List[Tuple2[Goal, Double]]): Example = {
+    val fields: List[Field] = getFields(solution, order) ::: List(
+      new EnumField(if (solution.good) 1 else 0, enumDomain))
     new Example(fields.toArray[Field])
   }
 
   /**
    * Perform extraction of non-decision attributes from solution
    */
+  private def getFields(solution: EvaluatedSolution,
+                        order: List[Tuple2[Goal, Double]]): List[Field] = {
+    var fields: List[Field] = new StringField("Solution") :: Nil
+    order foreach { case (g, p) =>
+      fields = new FloatField(solution.getPercentile(g, p)) :: fields
+    }
+    fields.reverse
+  }
+
+  /**
+   * Perform extraction of non-decision attributes from solution.
+   * Use default ordering.
+   */
   private def getFields(solution: EvaluatedSolution): List[Field] = {
     val sim = solution.sim
     var fields: List[Field] = new StringField("Solution") :: Nil
-    solution.goals foreach (
-            (g: Goal) => sim.config.PERCENTILES foreach (
-                    p => fields = new FloatField(solution.getPercentile(g, p)) :: fields
-            )
-    )
+    sim.problem.goals foreach (g => {
+      sim.config.PERCENTILES foreach (p => {
+        fields = new FloatField(solution.getPercentile(g, p)) :: fields
+      })
+    })
     fields.reverse
   }
 

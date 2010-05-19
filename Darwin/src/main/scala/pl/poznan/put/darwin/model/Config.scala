@@ -23,6 +23,9 @@ class Config(parser: ConfigParser) {
 
   val USE_AVG: Boolean = parser.getBoolean("main", "useavg")
 
+  val MULTI_RULES: Boolean = parser.getBoolean("main", "multirules")
+  val MULTI_RULES_COUNT: Int = parser.getInt("main", "multirulescount")
+
   /*
    * Mocked DM options
    */

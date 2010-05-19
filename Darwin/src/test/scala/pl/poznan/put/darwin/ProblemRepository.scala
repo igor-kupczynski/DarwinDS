@@ -26,6 +26,7 @@ trait ProblemRepository {
   useAvg = false
   mutationTries = 100
   percentiles = 1.0, 25.0, 50.0
+  multiRules = false
 
   [mockedDM]
   goodCount = 3
@@ -56,6 +57,7 @@ trait ProblemRepository {
   useAvg = true
   mutationTries = 100
   percentiles = 1.0, 25.0, 50.0
+  multiRules = false
 
   [mockedDM]
   goodCount = 3

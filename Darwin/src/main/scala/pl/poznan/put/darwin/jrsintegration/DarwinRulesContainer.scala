@@ -10,17 +10,7 @@ import pl.poznan.put.darwin.model.Config
  *
  * @author: Igor Kupczynski
  */
-trait DarwinRulesContainer {
-  def getScore(solution: EvaluatedSolution): Double
-}
-
-/**
- * Basic DarwinRulesContainer implementation
- *
- * @author: Igor Kupczynski
- */
-class SingleRulesContainer(val rules: List[Tuple2[Rule, Double]]) extends
-        DarwinRulesContainer {
+class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]]) {
 
   /** 
   * Returns score of given solution on set of rules in the container
@@ -40,21 +30,33 @@ class SingleRulesContainer(val rules: List[Tuple2[Rule, Double]]) extends
 }
 
 /**
- * Companion object for creating DarwinRuleContainer and calculating
- * appropriate weights for each rule
+ * Factory object for creating DarwinRuleContainer and calculating
+ * appropriate weights for each rule. Uses only one rules container
  */
-object SingleRulesContainer {
+object DarwinRulesContainer {
 
   /**
    * Create new instance of DarwinRuleContainer. Rules will be based on
    * a container and their weights on given example list.
    */
   def apply(rulesContainer: RulesContainer, examples: List[EvaluatedSolution]):
-        SingleRulesContainer = {
-    val rules: List[Rule] = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST).
-          toArray(new Array[Rule](0)).toList
+        DarwinRulesContainer = {
+    apply(List(rulesContainer), examples)
+  }
+
+  /**
+   * Create new instance of DarwinRuleContainer. Rules will be based on
+   * the given containers and their weights on given example list.
+   */
+  def apply(rulesContainers: List[RulesContainer], examples: List[EvaluatedSolution]):
+        DarwinRulesContainer = {
+    var rules: List[Rule] = Nil
+    for (rulesContainer <- rulesContainers) {
+      rules = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST).
+        toArray(new Array[Rule](0)).toList ::: rules
+    }
     val weights: Map[Rule, Double] = calculateWeights(rules, examples)
-    new SingleRulesContainer(weights.toList)
+    new DarwinRulesContainer(weights.toList)
   }
 
   private def calculateWeights(rules: List[Rule],

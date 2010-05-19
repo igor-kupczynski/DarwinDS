@@ -13,18 +13,32 @@ object JrsIntegration {
 
   def apply(result: List[MarkedSolution]): DarwinRulesContainer = {
     val sim = result(0).sim
-    val rulesInput = new RulesInput(result)
+    val container: RulesContainer = getSingleContainer(result, 0, false)
+    counter = counter + 1
+    if (sim.config.MULTI_RULES) {
+      var containers = List(container)
+      for (idx <- 1 to sim.config.MULTI_RULES_COUNT) {
+        containers = containers :+ getSingleContainer(result, idx, true)
+      }
+      DarwinRulesContainer(containers, result)
+    } else {
+      DarwinRulesContainer(container, result)
+    }
+  }
+
+  private def getSingleContainer(result: List[MarkedSolution], id: Int, randomize: Boolean):
+  RulesContainer = {
+    val sim = result(0).sim
+    val rulesInput = new RulesInput(result, randomize)
     val mc: MemoryContainer = new MemoryContainer()
     Transfer.transfer(rulesInput, new MemoryOutput(mc))
     val wrapper: RulesGeneratorWrapper =
       new VCdomLEMWrapperOpt(mc, sim.config.DOMLEM_CONFIDECE_LEVEL,
-      sim.config.CONDITION_SELECTION_METHOD,
-      sim.config.NEGATIVE_EXAMPLES_TREATMENT)
+                             sim.config.CONDITION_SELECTION_METHOD,
+                             sim.config.NEGATIVE_EXAMPLES_TREATMENT)
     wrapper.setInducePossibleRules(false);
     val container: RulesContainer = wrapper.generateRules(mc)
-    val cwd = new File(".").getAbsolutePath
-    container.writeRules("rules/rule_%03d.txt".format(counter), true, true)
-    counter = counter + 1
-    SingleRulesContainer(container, result)
+    container.writeRules("rules/rule_%03d_%03d.txt".format(id, counter), true, true)
+    container
   }
 }

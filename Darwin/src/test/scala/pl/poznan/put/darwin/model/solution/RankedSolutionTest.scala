@@ -6,7 +6,7 @@ import org.specs.mock.Mockito
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import pl.poznan.put.cs.idss.jrs.types.{FloatField, Example}
 import pl.poznan.put.darwin.ProblemRepository
-import pl.poznan.put.darwin.jrsintegration.SingleRulesContainer
+import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{VariableDef, Problem, Variable, Goal}
 import pl.poznan.put.darwin.simulation.Simulation
@@ -55,9 +55,9 @@ class RankedSolutionTest extends Specification with Mockito with ProblemReposito
   rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST) returns rulesArray
 
   val rankedSolutions: List[RankedSolution] =
-    RankedSolution(sols, SingleRulesContainer(rulesContainer, sols))
+    RankedSolution(sols, DarwinRulesContainer(rulesContainer, sols))
   val rankedSolutions2: List[RankedSolution] =
-    RankedSolution(sols2, SingleRulesContainer(rulesContainer, sols2))
+    RankedSolution(sols2, DarwinRulesContainer(rulesContainer, sols2))
 
   "Pack of Rankend solutions" should {
     "be in a rank order" in {
