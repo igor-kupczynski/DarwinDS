@@ -91,12 +91,12 @@ object Parser {
       parseAll(problem, preprocess(text))
     }
 
-    private val lineComment = "#.*?\n".r
+    private val comment = """(?s)(#.*?\n)|(\/\*.*?\*\/)""".r
     /**
      * Does preprocessing - removing comments, etc.
      */
     private def preprocess(text: String): String = {
-      lineComment.replaceAllIn(text, "\n")
+      comment.replaceAllIn(text, "\n")
     }
 
   }
