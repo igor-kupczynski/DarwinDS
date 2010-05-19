@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Simple script for generating bicriteria knapsack problem instances.
+Simple script for generating bicriteria picking problem instances.
 
 The criteria are sum of values (max) and sum of weights (min). It
 outputs the problem in mod format used by darwin method.
@@ -60,19 +60,6 @@ def problem_decription(items, ut_weights):
     out.append("")
     assert(len(ut_weights) == 2)
     out.append("!dec: %f * value + %f * weight;" % ut_weights)
-    return "\n".join(out)
-
-
-def c_version(items, ut_weights):
-    """
-    Prepare version to be solved by bruteforce solver
-    """
-    out = []
-    out.append("%d" % len(items))
-    out.append("%f %f" % ut_weights)
-    for item in items:
-        out.append("%f %f" % item)
-    out.append("\n")
     return "\n".join(out)
     
 
