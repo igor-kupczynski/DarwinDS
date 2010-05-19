@@ -5,6 +5,9 @@ object Parser {
 
   def fromText(text: String): Problem = {
     val result: ProblemParser.ParseResult[Problem] = ProblemParser.parse(text)
+    if (result.successful == false) {
+      throw new Exception("%s" format result)
+    }
     result.get
   }
 
