@@ -19,6 +19,7 @@ class ParserTest extends JUnitSuite {
      "!dec: z;Finishing: 2*x1 + x2 <= 100;\nCarpentr: x1 + x2 <= 80;\n" +
      "Demand: x1 <= 40;\nnonZero1: x1 >= 0;\nnonZero2: x2 >= 0;") ::
     ("var[0, 10.0] x;\n" +
+     "# Just a silly comment\n" +
      "max profit: [i1: 20, 40] * x;") ::
     ("var[(B)0,10] x1; var[ (I) 0,5] x2;\nmin time: x1 + 2*x2;\n" +
      "max profit: x1 + 3*x2;\nmarket_limit_1: x1 <= 10;\n" +

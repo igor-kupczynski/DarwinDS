@@ -1,3 +1,4 @@
+# Test problem
 var[(B) 0.0, 2.0] x0;
 var[(B) 0.0, 2.0] x1;
 var[(B) 0.0, 2.0] x2;

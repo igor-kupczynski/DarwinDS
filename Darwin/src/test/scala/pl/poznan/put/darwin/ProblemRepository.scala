@@ -27,7 +27,8 @@ trait ProblemRepository {
   mutationTries = 100
   percentiles = 1.0, 25.0, 50.0
   multiRules = false
-
+  multiRulesCount = 3
+  
   [mockedDM]
   goodCount = 3
 
@@ -58,7 +59,8 @@ trait ProblemRepository {
   mutationTries = 100
   percentiles = 1.0, 25.0, 50.0
   multiRules = false
-
+  multiRulesCount = 3
+  
   [mockedDM]
   goodCount = 3
 

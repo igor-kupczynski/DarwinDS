@@ -87,7 +87,16 @@ object Parser {
         }
 
     def parse(text: String) = {
-      parseAll(problem, text)
+      
+      parseAll(problem, preprocess(text))
+    }
+
+    private val lineComment = "#.*?\n".r
+    /**
+     * Does preprocessing - removing comments, etc.
+     */
+    private def preprocess(text: String): String = {
+      lineComment.replaceAllIn(text, "\n")
     }
 
   }
