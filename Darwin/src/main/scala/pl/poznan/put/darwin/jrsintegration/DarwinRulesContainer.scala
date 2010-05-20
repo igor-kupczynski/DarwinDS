@@ -54,11 +54,13 @@ object DarwinRulesContainer {
     var rulesAtLeast: List[Rule] = Nil
     var rulesAtMost: List[Rule] = Nil
     for (rulesContainer <- rulesContainers) {
-      rulesAtLeast = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST).
-        toArray(new Array[Rule](0)).toList ::: rulesAtLeast
+      val ral = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST)
+      if (ral != null) 
+        rulesAtLeast = ral.toArray(new Array[Rule](0)).toList ::: rulesAtLeast
       if (sim.config.USE_AT_MOST) {
-        rulesAtMost = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_MOST).
-          toArray(new Array[Rule](0)).toList ::: rulesAtMost
+        val ram = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_MOST)
+        if (ram != null)
+          rulesAtMost = ram.toArray(new Array[Rule](0)).toList ::: rulesAtMost
       }
     }
     val weights: Map[Rule, Double] = calculateWeights(rulesAtLeast, rulesAtMost, examples)

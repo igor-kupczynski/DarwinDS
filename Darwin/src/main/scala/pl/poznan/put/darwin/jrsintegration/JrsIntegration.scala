@@ -13,7 +13,7 @@ object JrsIntegration {
 
   def apply(result: List[MarkedSolution]): DarwinRulesContainer = {
     val sim = result(0).sim
-    val container: RulesContainer = getSingleContainer(result, 0, false)
+    var container: RulesContainer = getSingleContainer(result, 0, false)
     counter = counter + 1
     if (sim.config.MULTI_RULES) {
       var containers = List(container)
@@ -36,6 +36,7 @@ object JrsIntegration {
       new VCdomLEMWrapperOpt(mc, sim.config.DOMLEM_CONFIDECE_LEVEL,
                              sim.config.CONDITION_SELECTION_METHOD,
                              sim.config.NEGATIVE_EXAMPLES_TREATMENT)
+    wrapper.setInducePossibleRules(false)
     val container: RulesContainer = wrapper.generateRules(mc)
     container.writeRules("rules/rule_%03d_%03d.txt".format(id, counter), true, true)
     container
