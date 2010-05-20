@@ -24,6 +24,7 @@ ITEMS=(
     "project/boot/scala-2.8.0.RC1/lib/scala-library.jar"
     "lib_managed/scala_2.8.0.RC1/compile/args4j-2.0.9.jar"
     "lib/jrs_2010-04-30.jar"
+    "lib/ForemkaCore_3.1.0.jar"
     "lib_managed/scala_2.8.0.RC1/compile/trove-2.1.1.jar"
     "lib_managed/scala_2.8.0.RC1/compile/ini4j-0.5.1.jar")
 

@@ -33,6 +33,9 @@ trait ProblemRepository {
   [mockedDM]
   goodCount = 3
 
+  [DomLem]
+  confidenceLevel = 1.0
+  
   [reports]
   evolutionReport = out/evolution_report.csv
   DMReport = out/dm_report.csv
@@ -65,6 +68,9 @@ trait ProblemRepository {
   
   [mockedDM]
   goodCount = 3
+
+  [DomLem]
+  confidenceLevel = 1.0
 
   [reports]
   evolutionReport = out/evolution_report.csv
