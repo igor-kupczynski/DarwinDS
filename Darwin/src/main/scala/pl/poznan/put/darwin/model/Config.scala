@@ -22,6 +22,7 @@ class Config(parser: ConfigParser) {
   val OMEGA: Double = parser.getDouble("main", "omega")
 
   val USE_AVG: Boolean = parser.getBoolean("main", "useavg")
+  val USE_AT_MOST: Boolean = parser.getBoolean("main", "useatmost")
 
   val MULTI_RULES: Boolean = parser.getBoolean("main", "multirules")
   val MULTI_RULES_COUNT: Int = parser.getInt("main", "multirulescount")
@@ -34,9 +35,9 @@ class Config(parser: ConfigParser) {
   /*
    * DOMLEM CONFIG
    */
-  val DOMLEM_CONFIDECE_LEVEL = 1.0
+  val DOMLEM_CONFIDECE_LEVEL = parser.getInt("domlem", "confidencelevel")
   val CONDITION_SELECTION_METHOD = VCDomLem.MIX_CONDITIONS_FROM_DIFFERENT_OBJECTS
-  val NEGATIVE_EXAMPLES_TREATMENT = VCDomLem.COVER_NONE_OF_NEGATIVE_EXAMPLES
+  val NEGATIVE_EXAMPLES_TREATMENT = VCDomLem.COVER_ONLY_INCONSISTENT_AND_BOUNDARY_NEGATIVE_EXAMPLES
 
 
   /*

@@ -5,20 +5,21 @@ function rel2abs {
     echo "`cd \`dirname $1\`; pwd`/`basename $1`"
 }
 
-EXPECTED_ARGS=4
+EXPECTED_ARGS=5
 E_BADARGS=65
 E_XCD=86
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-  echo "Usage: `basename $0` darwin-dir config-file problme-file out-prefix" >&2
+  echo "Usage: `basename $0` darwin-dir config-file problme-file out-prefix out-sub-prefix" >&2
   exit $E_BADARGS
 fi
 
 DARWIN_DIR=`rel2abs $1`
 CONFIG_FILE=`rel2abs $2`
 PROBLEM_FILE=`rel2abs $3`
-OUT_DIR=`rel2abs $4`
+OUT=`rel2abs $4`
+OUT_DIR="$OUT/$5"
 ITEMS=(
     "project/boot/scala-2.8.0.RC1/lib/scala-library.jar"
     "lib_managed/scala_2.8.0.RC1/compile/args4j-2.0.9.jar"
@@ -42,7 +43,7 @@ if [ -d "$OUT_DIR" ]; then
     exit -1
 fi
 
-mkdir $OUT_DIR
+mkdir -p $OUT_DIR
 mkdir "$OUT_DIR/reports"
 mkdir "$OUT_DIR/rules"
 mkdir "$OUT_DIR/input"

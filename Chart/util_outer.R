@@ -5,6 +5,7 @@ last <- function(x) {
   x[length(x)]
 }
 
+
 prep.data <- function(x) {
   inner <- df[c("outer", "generation", "rank", "utility")]
   innerM <- melt(inner, id=c("outer", "generation", "rank"))

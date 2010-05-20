@@ -71,8 +71,8 @@ def main():
         tmp.close()
         for idx in xrange(item['reps']):
             p = subprocess.Popen(['bash', 'runOnce.sh', darwin_dir, 'tmp.ini',
-                                 problem_file, "%s/%s_%d" % (now, item['name'], idx)]
-                                 )
+                                  problem_file, "%s/%s" % (now, item['name']),
+                                  str(idx)])
             p.communicate()
         os.remove("tmp.ini")
     

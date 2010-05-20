@@ -24,6 +24,7 @@ trait ProblemRepository {
   eta = 0.5
   omega = 0.1
   useAvg = false
+  useAtMost = false
   mutationTries = 100
   percentiles = 1.0, 25.0, 50.0
   multiRules = false
@@ -56,6 +57,7 @@ trait ProblemRepository {
   eta = 0.5
   omega = 0.1
   useAvg = true
+  useAtMost = false
   mutationTries = 100
   percentiles = 1.0, 25.0, 50.0
   multiRules = false

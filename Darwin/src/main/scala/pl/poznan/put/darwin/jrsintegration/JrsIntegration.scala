@@ -36,7 +36,6 @@ object JrsIntegration {
       new VCdomLEMWrapperOpt(mc, sim.config.DOMLEM_CONFIDECE_LEVEL,
                              sim.config.CONDITION_SELECTION_METHOD,
                              sim.config.NEGATIVE_EXAMPLES_TREATMENT)
-    wrapper.setInducePossibleRules(false);
     val container: RulesContainer = wrapper.generateRules(mc)
     container.writeRules("rules/rule_%03d_%03d.txt".format(id, counter), true, true)
     container
