@@ -17,6 +17,7 @@ prep.data <- function(x) {
 
 gen.plot <- function(data) {
   dataM <- melt(data, id=c("outer"))
+  write.table(data, file="outer.csv", sep=",", row.names=F)
   c <- ggplot(dataM)
   c <- c + geom_ribbon(aes(outer, ymin=utility_min, ymax=utility_max),
                        data=data, alpha=0.2)
