@@ -30,7 +30,7 @@ TESTPLAN_OUT_DIR=`rel2abs $3`
 for DIR in `find $TESTPLAN_OUT_DIR -name 'reports' -type d`
 do
     echo "--- Charts for $DIR"
-    R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilouter.pdf" \
+    R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilouter.pdf,$DIR/outer.csv" \
 	< $CHARTS_DIR/util_outer.R
     if (( $FULL == 1 ))
     then

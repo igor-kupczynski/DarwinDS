@@ -15,9 +15,9 @@ prep.data <- function(x) {
   innerC
 }
 
-gen.plot <- function(data) {
+gen.plot <- function(data, filename) {
   dataM <- melt(data, id=c("outer"))
-  write.table(data, file="outer.csv", sep=",", row.names=F)
+  write.table(data, file=filename, sep=",", row.names=F)
   c <- ggplot(dataM)
   c <- c + geom_ribbon(aes(outer, ymin=utility_min, ymax=utility_max),
                        data=data, alpha=0.2)
@@ -32,10 +32,10 @@ read.cmd.args <- function() {
   n <- n1[length(n1)]
   tmp<-strsplit(n,",")
   args <- tmp[[1]]
-  if (length(args) == 2) {
+  if (length(args) == 3) {
     return(args)
   }
-  c("evolution_report.csv", "utilouter.pdf")
+  c("evolution_report.csv", "utilouter.pdf", "outer.csv")
 }
 
 ### MAIN ######################################################################
@@ -43,6 +43,6 @@ args <- read.cmd.args()
 df <-read.csv(args[1], header=TRUE)
 pdf(args[2])
 data <- prep.data(df)
-c <- gen.plot(data)
+c <- gen.plot(data, args[3])
 print(c)
 dev.off()
