@@ -15,6 +15,14 @@ prep.data <- function(x) {
   innerC
 }
 
+add.optimal <- function(plot, optimal) {
+  opt <- c(optimal)
+  outer <- 1:100
+  df <- data.frame(outer=outer, value=opt)
+  plot <- plot +  geom_line(aes(outer, value), data=df)
+  plot
+}
+
 gen.plot <- function(data, filename) {
   dataM <- melt(data, id=c("outer"))
   write.table(data, file=filename, sep=",", row.names=F)
@@ -44,5 +52,6 @@ df <-read.csv(args[1], header=TRUE)
 pdf(args[2])
 data <- prep.data(df)
 c <- gen.plot(data, args[3])
+c <- add.optimal(c, 4154.441453)
 print(c)
 dev.off()
