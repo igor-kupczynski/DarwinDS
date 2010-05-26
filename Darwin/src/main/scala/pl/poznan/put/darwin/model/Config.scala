@@ -30,8 +30,9 @@ class Config(parser: ConfigParser) {
   /*
    * Mocked DM options
    */
-  val GOOD_COUNT: Int = parser.getInt("mockeddm", "goodcount")
-  
+  val BASE_GOOD_COUNT: Int = parser.getInt("mockeddm", "basegoodcount")
+  val GOOD_COUNT_DELTA: Int = parser.getInt("mockeddm", "goodcountdelta")
+  val NOISE_LEVEL: Int = parser.getInt("mockeddm", "noiselevel")
   /*
    * DOMLEM CONFIG
    */

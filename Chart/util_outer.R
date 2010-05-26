@@ -15,9 +15,9 @@ prep.data <- function(x) {
   innerC
 }
 
-add.optimal <- function(plot, optimal) {
+add.optimal <- function(plot, optimal, range) {
   opt <- c(optimal)
-  outer <- 1:100
+  outer <- 1:range
   df <- data.frame(outer=outer, value=opt)
   plot <- plot +  geom_line(aes(outer, value), data=df)
   plot
@@ -52,6 +52,6 @@ df <-read.csv(args[1], header=TRUE)
 pdf(args[2])
 data <- prep.data(df)
 c <- gen.plot(data, args[3])
-c <- add.optimal(c, 4154.441453)
+c <- add.optimal(c, 4154.441453, length(data$outer))
 print(c)
 dev.off()

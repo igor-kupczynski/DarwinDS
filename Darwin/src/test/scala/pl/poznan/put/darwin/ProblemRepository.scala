@@ -31,7 +31,9 @@ trait ProblemRepository {
   multiRulesCount = 3
   
   [mockedDM]
-  goodCount = 3
+  baseGoodCount = 3
+  goodCountDelta = 0
+  noiseLevel = 0
 
   [DomLem]
   confidenceLevel = 1.0
@@ -67,7 +69,9 @@ trait ProblemRepository {
   multiRulesCount = 3
   
   [mockedDM]
-  goodCount = 3
+  baseGoodCount = 3
+  goodCountDelta = 0
+  noiseLevel = 0
 
   [DomLem]
   confidenceLevel = 1.0
