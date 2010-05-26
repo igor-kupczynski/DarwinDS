@@ -9,7 +9,8 @@ prep.data.line <- function(x, fname) {
 }
 
 prep.data.box <- function(x) {
-  data <- subset(x, outer==10, select=c('test', 'try', 'value'))
+  last.gen <- x$outer[length(x$outer)]
+  data <- subset(x, outer==last.gen, select=c('test', 'try', 'value'))
   data
 }
 
@@ -24,6 +25,7 @@ gen.plot.line <- function(data) {
 gen.plot.box <- function(data) {
   c <- ggplot(data)
   c <- c + geom_boxplot(aes(test, value))
+  c <- c + opts(axis.text.x=theme_text(angle=-45, hjust=0))
   c
 }
 

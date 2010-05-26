@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.simulation
 
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.{MarkedSolution, EvaluatedSolution}
-import pl.poznan.put.darwin.utils.RNG
+import pl.poznan.put.darwin.utils.{RNG, ListUtils}
 
 class DMMock(sim: Simulation) {
 
@@ -10,10 +10,13 @@ class DMMock(sim: Simulation) {
     val sortedItems = items.sortWith((one, other) =>
       one.utilityFunctionValue > other.utilityFunctionValue)
 
-    val toSelect = getGoodCount
+    val noisedItems = addNoise(sortedItems, sim.config.NOISE_LEVEL)
+  
+    val toSelect = getGoodCount(sim.config.BASE_GOOD_COUNT,
+                                sim.config.GOOD_COUNT_DELTA)
   
     var idx = -1
-    val marked = sortedItems.map((s: EvaluatedSolution) => {
+    val marked = noisedItems.map((s: EvaluatedSolution) => {
       idx += 1
       if (idx < toSelect) MarkedSolution(s, true) else MarkedSolution(s, false)
     })
@@ -21,12 +24,18 @@ class DMMock(sim: Simulation) {
     marked
   }
 
-  private def getGoodCount(): Int = {
-    val base: Int = sim.config.BASE_GOOD_COUNT
-    val delta: Int = if (0 < sim.config.GOOD_COUNT_DELTA) {
-      RNG.get().nextInt(sim.config.GOOD_COUNT_DELTA + 1) *
-          (if (RNG.get().nextBoolean()) -1 else 1)
+  private[simulation] def getGoodCount(baseGood: Int, goodDelta: Int): Int = {
+    val delta: Int = if (goodDelta > 0) {
+      RNG.get().nextInt(goodDelta + 1) *
+        (if (RNG.get().nextBoolean()) -1 else 1)
     } else 0
-    base + delta
+    baseGood + delta
+  }
+
+  private[simulation] def addNoise(items: List[EvaluatedSolution], noiseLevel: Int): List[EvaluatedSolution] = {
+    if (noiseLevel > 0) {
+      val (a, b) = items.splitAt(noiseLevel)
+      ListUtils.shuffle(a) ::: b
+    } else items
   }
 }
