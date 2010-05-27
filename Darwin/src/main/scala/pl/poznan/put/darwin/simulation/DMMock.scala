@@ -9,11 +9,11 @@ class DMMock(sim: Simulation) {
   def apply(items: List[EvaluatedSolution]): List[MarkedSolution] = {
     val sortedItems = items.sortWith((one, other) =>
       one.utilityFunctionValue > other.utilityFunctionValue)
-
-    val noisedItems = addNoise(sortedItems, sim.config.NOISE_LEVEL)
   
     val toSelect = getGoodCount(sim.config.BASE_GOOD_COUNT,
                                 sim.config.GOOD_COUNT_DELTA)
+
+    val noisedItems = addNoise(sortedItems, sim.config.NOISE_LEVEL, toSelect)
   
     var idx = -1
     val marked = noisedItems.map((s: EvaluatedSolution) => {
@@ -32,9 +32,10 @@ class DMMock(sim: Simulation) {
     baseGood + delta
   }
 
-  private[simulation] def addNoise(items: List[EvaluatedSolution], noiseLevel: Int): List[EvaluatedSolution] = {
+  private[simulation] def addNoise(items: List[EvaluatedSolution], goodCount:Int, noiseLevel: Int):
+      List[EvaluatedSolution] = {
     if (noiseLevel > 0) {
-      val (a, b) = items.splitAt(noiseLevel)
+      val (a, b) = items.splitAt(noiseLevel + goodCount)
       ListUtils.shuffle(a) ::: b
     } else items
   }
