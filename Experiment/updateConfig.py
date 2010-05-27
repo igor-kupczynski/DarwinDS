@@ -18,7 +18,12 @@ def merge(base, patches):
         for item, value in base.items(sec):
             if patches.has_option(sec, item):
                 value = patches.get(sec, item)
+                if not patches.remove_option(sec, item):
+                    raise Exception("Not an option: %s -> %s" % (sec, item))
             result.set(sec, item, value)
+    for sec in patches.sections():
+        for item, value in patches.items(sec):
+            raise Exception("Unused options %s -> %s" % (sec, item))
     return result
 
     
