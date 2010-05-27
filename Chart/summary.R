@@ -29,6 +29,14 @@ gen.plot.box <- function(data) {
   c
 }
 
+optimal <- function(optimal, range) {
+  opt <- c(optimal)
+  outer <- 1:range
+  df <- data.frame(outer=outer, value=opt)
+  geom_line(aes(outer, value), data=df)
+}
+
+
 read.cmd.args <- function() {
   n1 <- commandArgs()
   n <- n1[length(n1)]
@@ -47,6 +55,7 @@ pdf(args[3])
 data <- prep.data.line(df, args[2])
 data.box <- prep.data.box(df)
 c <- gen.plot.line(data)
+c <- c + optimal(4154.441453, data$outer[length(data$outer)])
 print(c)
 dev.off()
 pdf(args[4])

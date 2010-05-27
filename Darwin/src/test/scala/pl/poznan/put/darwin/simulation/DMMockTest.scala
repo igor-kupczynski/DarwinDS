@@ -54,6 +54,20 @@ class DMMockTest extends Specification with Mockito with ScalaCheck {
   
         ll.length == 0 && rr.length == 0
       }} must pass
+
+      // Check if something really change
+      var changes: Int = 0
+      for (idx <- 1 to 20) {
+        val ll = dm.addNoise(l, 3, 3)
+        for (i <- 0 to 2) {
+          if (l(i) != ll(i)) changes += 1
+        }
+        for (i <- 6 to 9) {
+          l(i) must be_==(ll(i))
+        }
+      }
+      changes must be_>(40)
+      println(changes)
     }
   }
   
