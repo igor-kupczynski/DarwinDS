@@ -5,13 +5,13 @@ function rel2abs {
     echo "`cd \`dirname $1\`; pwd`/`basename $1`"
 }
 
-EXPECTED_ARGS=3
+EXPECTED_ARGS=5
 E_BADARGS=65
 E_XCD=86
 
 if [ $# -ne $EXPECTED_ARGS ]
 then
-  echo "Usage: `basename $0` --brief/--full charts-dir testplan-out-dir" >&2
+  echo "Usage: `basename $0` --brief/--full criteria-no best-val charts-dir testplan-out-dir" >&2
   exit $E_BADARGS
 fi
 
@@ -24,23 +24,25 @@ then
     exit $E_BADARGS
 fi  
 
-CHARTS_DIR=`rel2abs $2`
-TESTPLAN_OUT_DIR=`rel2abs $3`
+CRI_NO=$2
+BEST=$3
+CHARTS_DIR=`rel2abs $4`
+TESTPLAN_OUT_DIR=`rel2abs $5`
 
 for DIR in `find $TESTPLAN_OUT_DIR -name 'reports' -type d`
 do
     echo "--- Charts for $DIR"
-    R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilouter.pdf,$DIR/outer.csv" \
+    R --slave --no-save --args "$CRI_NO,$BEST,$DIR/evolution_report.csv,$DIR/utilouter.pdf,$DIR/outer.csv" \
 	< $CHARTS_DIR/util_outer.R
     if (( $FULL == 1 ))
     then
-	R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilgen.pdf" \
+	R --slave --no-save --args "$CRI_NO,$DIR/evolution_report.csv,$DIR/utilgen.pdf" \
 	    < $CHARTS_DIR/val_gen.R
-	R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/valweight.pdf" \
+	R --slave --no-save --args "$CRI_NO,$DIR/evolution_report.csv,$DIR/valweight.pdf" \
 	    < $CHARTS_DIR/value_weight.R
-	R --slave --no-save --args "$DIR/evolution_report.csv,$DIR/utilind.pdf" \
+	R --slave --no-save --args "$CRI_NO,$DIR/evolution_report.csv,$DIR/utilind.pdf" \
 	    < $CHARTS_DIR/utility_ind.R
-	R --slave --no-save --args "$DIR/dm_report.csv,$DIR/dm_choices.pdf" \
+	R --slave --no-save --args "$CRI_NO,$DIR/dm_report.csv,$DIR/dm_choices.pdf" \
 	    < $CHARTS_DIR/dm_selection.R
     fi
 done

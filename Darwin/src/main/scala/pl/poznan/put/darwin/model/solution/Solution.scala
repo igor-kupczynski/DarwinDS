@@ -25,8 +25,12 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
     sim.problem.constraints foreach ((c: Constraint) => {
        val lVal = Evaluator.evaluate(c.lhs, default, values)
        val rVal = Evaluator.evaluate(c.rhs, default, values)
-       if ( c.gte && lVal < rVal) return false
-       if (!c.gte && lVal > rVal) return false
+       if ( c.gte && lVal < rVal) {
+         return false
+       }
+       if (!c.gte && lVal > rVal) {
+         return false
+       }
     })
     // Check additional variable constrints
     sim.problem.getVariables() foreach {

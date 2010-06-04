@@ -19,19 +19,23 @@ read.cmd.args <- function() {
   n <- n1[length(n1)]
   tmp<-strsplit(n,",")
   args <- tmp[[1]]
-  if (length(args) == 2) {
+  if (length(args) == 3) {
     return(args)
   }
-  c("dm_report.csv", "dmchoice.pdf")
+  c(2, "dm_report.csv", "dmchoice.pdf")
 }
 
 ### MAIN ######################################################################
 args <- read.cmd.args()
-df <-read.csv(args[1], header=TRUE)
-pdf(args[2])
-for (outer.idx in levels(factor(df$outer))) {
-  data <- prep.data(outer.idx, df)
-  c <- gen.plot(outer.idx, data)
-  print(c)
-}
+if (args[1] == 2) {
+  df <-read.csv(args[2], header=TRUE)
+  pdf(args[3])
+  for (outer.idx in levels(factor(df$outer))) {
+    data <- prep.data(outer.idx, df)
+    c <- gen.plot(outer.idx, data)
+    print(c)
+  }
 dev.off()
+} else {
+  cat(sprintf("Only works for two criteria, selected %d\n", args[0]))
+}

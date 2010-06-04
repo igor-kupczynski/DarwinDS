@@ -9,7 +9,7 @@ prep.data.line <- function(x, fname) {
 }
 
 prep.data.box <- function(x) {
-  last.gen <- x$outer[length(x$outer)]
+  last.gen <- 10
   data <- subset(x, outer==last.gen, select=c('test', 'try', 'value'))
   data
 }
@@ -42,23 +42,23 @@ read.cmd.args <- function() {
   n <- n1[length(n1)]
   tmp<-strsplit(n,",")
   args <- tmp[[1]]
-  if (length(args) == 4) {
+  if (length(args) == 6) {
     return(args)
   }
-  c("summary.csv", "summary_short.csv", "summary1.pdf", "summary2.pdf")
+  c(2, 4154.441453, "summary.csv", "summary_short.csv", "summary1.pdf", "summary2.pdf")
 }
 
 ### MAIN ######################################################################
 args <- read.cmd.args()
-df <-read.csv(args[1], header=TRUE)
-pdf(args[3])
-data <- prep.data.line(df, args[2])
+df <-read.csv(args[3], header=TRUE)
+pdf(args[5])
+data <- prep.data.line(df, args[4])
 data.box <- prep.data.box(df)
 c <- gen.plot.line(data)
-c <- c + optimal(4154.441453, data$outer[length(data$outer)])
+c <- c + optimal(as.numeric(args[2]), data$outer[length(data$outer)])
 print(c)
 dev.off()
-pdf(args[4])
+pdf(args[6])
 c <- gen.plot.box(data.box)
 print(c)
 dev.off()

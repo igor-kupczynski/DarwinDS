@@ -40,18 +40,19 @@ read.cmd.args <- function() {
   n <- n1[length(n1)]
   tmp<-strsplit(n,",")
   args <- tmp[[1]]
-  if (length(args) == 3) {
+  if (length(args) == 5) {
     return(args)
   }
-  c("evolution_report.csv", "utilouter.pdf", "outer.csv")
+  c(2, 4154.441453, "evolution_report.csv", "utilouter.pdf", "outer.csv")
 }
 
 ### MAIN ######################################################################
 args <- read.cmd.args()
-df <-read.csv(args[1], header=TRUE)
-pdf(args[2])
+
+df <-read.csv(args[3], header=TRUE)
+pdf(args[4])
 data <- prep.data(df)
-c <- gen.plot(data, args[3])
-c <- add.optimal(c, 4154.441453, length(data$outer))
+c <- gen.plot(data, args[5])
+c <- add.optimal(c, as.numeric(args[2]), length(data$outer))
 print(c)
 dev.off()

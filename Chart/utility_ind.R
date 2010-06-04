@@ -42,16 +42,16 @@ read.cmd.args <- function() {
   n <- n1[length(n1)]
   tmp<-strsplit(n,",")
   args <- tmp[[1]]
-  if (length(args) == 2) {
+  if (length(args) == 3) {
     return(args)
   }
-  c("evolution_report.csv", "utilind.pdf")
+  c(2, "evolution_report.csv", "utilind.pdf")
 }
 
 ### MAIN ######################################################################
 args <- read.cmd.args()
-df <-read.csv(args[1], header=TRUE)
-pdf(args[2])
+df <-read.csv(args[2], header=TRUE)
+pdf(args[3])
 for (outer.idx in levels(factor(df$outer))) {
   grid.newpage()
   pushViewport(viewport(layout = grid.layout(2, 1)))
