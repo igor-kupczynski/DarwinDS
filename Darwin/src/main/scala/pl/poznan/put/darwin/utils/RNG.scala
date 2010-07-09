@@ -42,11 +42,4 @@ class RNG {
     rng.nextInt(x)
   }
   
-  def nextDoubleInclusive(): Double = {
-    var result: Double = 0.0
-    do {
-      result = rng.nextDouble() * 1.1
-    } while (result > 1.0)
-    result
-  }
 }
