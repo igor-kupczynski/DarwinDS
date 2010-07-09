@@ -26,8 +26,8 @@ class DMMock(sim: Simulation) {
 
   private[simulation] def getGoodCount(baseGood: Int, goodDelta: Int): Int = {
     val delta: Int = if (goodDelta > 0) {
-      RNG.get().nextInt(goodDelta + 1) *
-        (if (RNG.get().nextBoolean()) -1 else 1)
+      RNG().nextInt(goodDelta + 1) *
+        (if (RNG().nextBoolean()) -1 else 1)
     } else 0
     baseGood + delta
   }

@@ -21,7 +21,7 @@ object SelectionStrategy {
 
     // 2*|Children| = |Parent|
     range(0, 2*childToGenerate).map(i => {
-      val idx = getIndexForProbability(RNG.get().nextDouble() * probabilities(probabilities.length - 1), probabilities)
+      val idx = getIndexForProbability(RNG().nextDouble() * probabilities(probabilities.length - 1), probabilities)
       individuals(idx)
     }).toList
   }

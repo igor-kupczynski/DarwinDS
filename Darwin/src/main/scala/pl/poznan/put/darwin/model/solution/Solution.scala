@@ -53,7 +53,7 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
    */
   def randomNeighbour(): Solution = {
     var resultValues: Map[String, Double] = null
-    val rng: Random = RNG.get()
+    val rng: RNG = RNG()
     var tries = 0
     while (tries < sim.config.MUTATION_TRIES &&
             (resultValues == null || !(new Solution(sim, resultValues)).isFeasible)) {
@@ -142,7 +142,7 @@ object Solution {
   }
 
   def random(sim: Simulation): Solution = {
-    val rng: Random = RNG.get()
+    val rng: RNG = RNG()
     var result: Map[String, Double] = null
     while (result == null || !(new Solution(sim, result)).isFeasible) {
       result = Map()

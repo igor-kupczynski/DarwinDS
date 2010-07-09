@@ -18,7 +18,7 @@ object CrossOver  {
   def apply(a: Solution, b: Solution): Solution = {
     var c: Map[String, Double] = null
     while (c == null || !(new Solution(a.sim, c)).isFeasible) {
-      val gamma: Double = RNG.get().nextDouble()
+      val gamma: Double = RNG().nextDouble()
       c = Map()
       a.sim.problem.getVariables().foreach({
         case VariableDef(name, min, max, BinaryConstraint) =>
