@@ -29,10 +29,6 @@ object Parser {
         ("var" ~ "[" ~ additionalConstraint ~ floatingPointNumber ~ "," ~ floatingPointNumber ~ "]" ~ ident) ^^ {
           case _ ~ _ ~ addConstraint ~ min ~ _ ~ max ~ _ ~ name =>
             VariableDef(name, min.toDouble, max.toDouble, addConstraint)
-        } |
-        ("var" ~ "<" ~ additionalConstraint ~ floatingPointNumber ~ "," ~ floatingPointNumber ~ ">" ~ ident) ^^ {
-          case _ ~ _ ~ addConstraint ~ min ~ _ ~ max ~ _ ~ name =>
-            VariableDef(name, min.toDouble, max.toDouble, addConstraint)
         }
 
     def additionalConstraint: Parser[AdditionalConstraint] = {
@@ -73,11 +69,12 @@ object Parser {
 
     def factor: Parser[Expr] =
         floatingPointNumber ^^ {case x => Constant(x.toDouble)} |
-        aggregate ^^ {case e => e} |
-        ((("+" | "-")) ~ factor) ^^ {
+        ((("+" | "-" | "ln")) ~ factor) ^^ {
           case "+" ~ e => e
           case "-" ~ e => UnaryOp("-", e)
+          case "ln" ~ e => UnaryOp("ln", e)
         } |
+        aggregate ^^ {case e => e} |
         ident ^^ {case name => Variable(name)} |
         interval ^^ {case e => e} |
         "(" ~ math ~ ")"  ^^ {case _ ~ e ~ _ => e}

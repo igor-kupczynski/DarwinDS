@@ -29,6 +29,7 @@ object Evaluator {
       exp match {
         case UnaryOp("-", UnaryOp("-", x)) => x
         case UnaryOp("+", x) => x
+        case UnaryOp("ln", Constant(x)) => Constant(math.log(x))
 
         case BinaryOp("*", x, Constant(1)) => x
         case BinaryOp("*", Constant(1), x) => x

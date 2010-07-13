@@ -74,7 +74,7 @@ class ProblemTest extends Specification {
       "Finishing: ((2.0 * x1) + x2) <= 100.0;\n" +
       "Carpentr: (x1 + x2) <= 80.0;\n" +
       "Demand: x1 <= 40.0;\n" +
-      "nonZero1: x1 >= 0.0;\n" +
+      "nonZero1: x1 >= ln(1.0);\n" +
       "nonZero2: x2 >= 0.0;\n"
      integerTrainsSoldiersNoIntervals.toString must be_==(expected)
     }
@@ -121,7 +121,7 @@ class ProblemTest extends Specification {
       "Finishing: 2*x1 + x2 <= 100;\n" +
       "Carpentr: x1 + x2 <= 80;\n" +
       "Demand: x1 <= 40;\n" +
-      "nonZero1: x1 >= 0;\n" +
+      "nonZero1: x1 >= ln(1);\n" +
       "nonZero2: x2 >= 0;\n"
     ).get
   }
