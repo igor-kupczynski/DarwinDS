@@ -20,6 +20,9 @@ class EvaluatorTest extends JUnitSuite {
     val e1 = UnaryOp("-", x)
     assertEquals(-5.0, eval(e1), 0.0)
 
+    val e1b = UnaryOp("ln", x)
+    assertEquals(1.60943791, eval(e1b), 0.000001)
+
     val e2 = BinaryOp("+", x, limit)
     assertEquals(15.0, eval(e2), 0.0)
 

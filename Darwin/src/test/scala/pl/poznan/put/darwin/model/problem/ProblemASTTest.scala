@@ -35,6 +35,11 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals(Constant(10.0), u1.arg)
     assertEquals("-(10.0)", u1.toString)
 
+    val u2 = UnaryOp("ln", Constant(10.0))
+    assertEquals("ln", u2.operator)
+    assertEquals(Constant(10.0), u2.arg)
+    assertEquals("ln(10.0)", u2.toString)
+
     val b1 = BinaryOp("+", Constant(5.0), Constant(15.0))
     assertEquals("+", b1.operator)
     assertEquals(Constant(5.0), b1.lhs)
@@ -45,6 +50,11 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals("min", a1.operator)
     assertEquals(Constant(1.0) :: Constant(2.0) :: Constant(3.0) :: Nil, a1.args)
     assertEquals("min(1.0, 2.0, 3.0)", a1.toString)
+
+    val a2 = AggregateOp("min", Constant(1.0) :: Nil)
+    assertEquals("min", a2.operator)
+    assertEquals(Constant(1.0) :: Nil, a2.args)
+    assertEquals("min(1.0)", a2.toString)
   }
 
 

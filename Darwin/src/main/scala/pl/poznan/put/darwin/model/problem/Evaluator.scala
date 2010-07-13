@@ -60,6 +60,7 @@ object Evaluator {
 
       case Constant(x) => x
       case UnaryOp("-", x) => -(evaluateSim(x))
+      case UnaryOp("ln", x) => math.log(evaluateSim(x))
       case BinaryOp("+", x, y) => evaluateSim(x) + evaluateSim(y)
       case BinaryOp("-", x, y) => evaluateSim(x) - evaluateSim(y)
       case BinaryOp("*", x, y) => evaluateSim(x) * evaluateSim(y)
