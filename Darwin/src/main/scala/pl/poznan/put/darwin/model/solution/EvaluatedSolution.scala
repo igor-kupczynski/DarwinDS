@@ -19,7 +19,7 @@ class EvaluatedSolution(sim: Simulation, values: Map[String, Double],
     var values: Map[String, Double] = Map()
     goals foreach ((g: Goal) => {
       //TODO: generalize to interval case
-      values += (g.name -> getPercentile(g, 0))
+      values += (g.name -> getPercentile(g, 1))
     })
     Evaluator.evaluate(sim.problem.utilityFunction.expr, Map(), values)
   }
