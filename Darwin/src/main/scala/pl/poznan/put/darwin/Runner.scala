@@ -15,7 +15,7 @@ class Runner(problemFilename: String, configFilename: String) {
   
     val config = new Config(parser)
 
-    val lines = io.Source.fromPath(problemFilename).mkString
+    val lines = io.Source.fromFile(problemFilename).mkString
     val problem: Problem = Parser.fromText(lines)
    
     val sim = new Simulation(config, problem)

@@ -12,11 +12,11 @@ class DarwinProject(info: ProjectInfo) extends DefaultProject(info)
   val ini4j = "org.ini4j" % "ini4j" % "0.5.1"
   val args4j = "args4j" % "args4j" % "2.0.9"
 
-  val specs = "org.scala-tools.testing" % "specs_2.8.0.RC1" %
-              "1.6.5-SNAPSHOT" % "test" withSources()
+  val specs = "org.scala-tools.testing" % "specs_2.8.0" %
+              "1.6.5" % "test" withSources()
   val scalatest = "org.scalatest" % "scalatest" %
-                  "1.0.1-for-scala-2.8.0.RC1-SNAPSHOT" % "test" withSources()
-  val scalacheck = "org.scala-tools.testing" % "scalacheck_2.8.0.RC1" %
+                  "1.2" % "test" withSources()
+  val scalacheck = "org.scala-tools.testing" % "scalacheck_2.8.0" %
                    "1.7" % "test"  withSources()
   val mockito = "org.mockito" % "mockito-all" % "1.8.4" % "test" withSources()
   val junit = "junit" % "junit" % "4.8.1" % "test"
