@@ -24,3 +24,12 @@ TAGS
 # Files generated during run
 Darwin/rules/
 Darwin/reports/
+
+# Thesis
+*.aux
+*.bbl
+*.log
+main.pdf
+*.blg
+*.out
+*.toc
