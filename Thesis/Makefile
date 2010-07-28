@@ -87,9 +87,8 @@ SKIP="****************************************************************"
 
 export M4PATH=/usr/share/m4
 
-ifdef BIBLIO
 BIBLIOGRAPHY=${MF}.bbl
-endif
+
 ifdef INDEX
 INDEXDEP=${MF}.ind
 endif
@@ -216,6 +215,9 @@ endif
 #
 
 all: dvi
+
+bibtex:
+	@bibtex ${MF}
 
 build:
 	@rm -f ${MF}.dvi
@@ -352,6 +354,7 @@ final:
 finalps: final ps
 
 finalpdf:
+	@make bibtex
 	@rm -f ${MF}.pdf
 	@${MAKE} pdf
 	@if [ -f "${MF}.idx" ]; then \
