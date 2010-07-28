@@ -1,0 +1,106 @@
+%
+%  $Id: dcsalg.sty 964 2009-12-30 20:40:58Z sobaniec $
+%
+%  Algorithm environment of DCS group
+%  by Cezary Sobaniec <cezary.sobaniec@cs.put.poznan.pl>
+%
+
+\RequirePackage{algpseudocode}
+\RequirePackage{keyval}
+\RequirePackage{ifthen}
+\RequirePackage{caption}[2009/10/09]
+\RequirePackage{translator}
+\RequirePackage{xcolor}
+
+\usedictionary{translator-float-dictionary}
+
+\definecolor{commentcolor}{rgb}{0.3,0.3,0.3}
+
+\renewcommand{\algorithmiccomment}[1]{\hspace{1em}\textcolor{commentcolor}{::~\textit{#1}}}
+\renewcommand{\algorithmicforall}{\textbf{foreach}}
+
+% procedures
+\algrenewcommand{\textproc}{\texttt}
+
+% additional commands
+\newcommand{\AND}{\ \textbf{and}\ }
+\newcommand{\OR}{\ \textbf{or}\ }
+\newcommand{\NOT}{\textbf{not}\ }
+\newcommand{\TRUE}{\textrm{true}\ }
+\newcommand{\FALSE}{\textrm{false}\ }
+\newcommand{\algorithmicprocname}{\textbf{Procedure:}}
+\newcommand{\ProcName}{\item[\algorithmicprocname]}
+\newcommand{\algorithmicparameters}{\textbf{Parameters:}}
+\newcommand{\Parameters}{\item[\algorithmicparameters]}
+\newcommand{\Statey}[1]{\item[#1]}
+\newcommand{\Stateybf}[1]{\item[\textbf{#1}]}
+\newcommand{\Stateysf}[1]{\item[\textsf{#1}]}
+\newcommand{\Stateytt}[1]{\item[\texttt{#1}]}
+
+\newcommand{\MSG}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\MSGN}[2]{\ensuremath{\mathsf{#1}\left\langle#2\right\rangle}}
+
+%
+% dcsalg environment
+%
+
+% width parameter 
+\newlength{\@dcsalgwidth}
+\setlength{\@dcsalgwidth}{\textwidth}
+\addtolength{\@dcsalgwidth}{-1em}
+\define@key{dcsalg}{width}{\setlength{\@dcsalgwidth}{#1}}
+
+% font parameter
+\newcommand{\@dcsalgfont}{}
+\define@key{dcsalg}{font}{\renewcommand{\@dcsalgfont}{#1}}
+
+% number parameter
+\newboolean{@dcsalgnumber}
+\setboolean{@dcsalgnumber}{false}
+\define@key{dcsalg}{number}[]{\setboolean{@dcsalgnumber}{true}}
+
+% plain|boxed|ruled parameters
+\newboolean{@dcsalgruled}
+\setboolean{@dcsalgruled}{false}
+\newboolean{@dcsalgboxed}
+\setboolean{@dcsalgboxed}{false}
+\define@key{dcsalg}{plain}[]{\setboolean{@dcsalgruled}{false}
+                             \setboolean{@dcsalgboxed}{false}}
+\define@key{dcsalg}{ruled}[]{\setboolean{@dcsalgruled}{true}
+                             \setboolean{@dcsalgboxed}{true}}
+\define@key{dcsalg}{boxed}[]{\setboolean{@dcsalgruled}{false}
+                             \setboolean{@dcsalgboxed}{true}}
+
+\newenvironment{dcsalg}[1][]%
+  {\setkeys{dcsalg}{#1}%
+   \if@dcsalgboxed
+     \if@dcsalgruled
+       \begin{tabular}{c}%
+     \else
+       \begin{tabular}{|c|}%
+     \fi
+     \hline%
+   \fi
+   \begin{minipage}{\@dcsalgwidth}\smallskip%
+   \if@dcsalgnumber
+     \begin{algorithmic}[1]%
+   \else
+     \begin{algorithmic}%
+   \fi
+   \@dcsalgfont}%
+  {\end{algorithmic}%
+   \smallskip%
+   \end{minipage}%
+   \if@dcsalgboxed
+     \tabularnewline%
+     \hline%
+     \end{tabular}
+   \fi}
+
+\newcommand{\dcsalgset}[1]{\setkeys{dcsalg}{#1}}
+
+% algorithm float
+\ifthenelse{\isundefined{\chaptermark}}
+  {\DeclareCaptionType[fileext=loa,placement=tbhp,within=none]{algorithm}[\translate{Alg.}][List of Algorithms]}
+  {\DeclareCaptionType[fileext=loa,placement=tbhp,within=chapter]{algorithm}[\translate{Alg.}][List of Algorithms]}
+\captionsetup[algorithm]{position=bottom,skip=\bigskipamount}
