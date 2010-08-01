@@ -13,7 +13,7 @@ lib/
 target/
 lib_managed/
 src_managed/
-Darwin/project/boot/
+*/project/boot/
 
 
 # eMACS
@@ -24,6 +24,9 @@ TAGS
 # Files generated during run
 Darwin/rules/
 Darwin/reports/
+
+# Lift
+*.h2.db
 
 # Thesis
 *.aux
