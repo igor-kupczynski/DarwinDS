@@ -1,0 +1,43 @@
+\tikzset{redrect/.style={
+      % The shape:
+      rectangle,
+      % The size:
+      minimum size=6mm,
+      % The border:
+      very thick,
+      draw=red!50!black!50,         % 50% red and 50% black,
+      % and that mixed with 50% white
+      % The filling:
+      top color=white,              % a shading that is white at the top...
+      bottom color=red!50!black!20, % and something else at the bottom
+      % Font
+      font=\itshape
+    }
+}
+
+\tikzset{roundrect/.style={
+    % The shape:
+    rectangle,minimum size=6mm,rounded corners=3mm,
+    % The rest
+    very thick,draw=black!50,
+    top color=white,bottom color=black!20,
+    font=\ttfamily
+  }
+}
+
+\tikzset{greenrect/.style={
+      % The shape:
+      rectangle,
+      % The size:
+      minimum size=6mm,
+      % The border:
+      very thick,
+      draw=green!50!black!50,         % 50% red and 50% black,
+      % and that mixed with 50% white
+      % The filling:
+      top color=green!50!black!20,
+      bottom color=white,
+      % Font
+      font=\ttfamily
+    }
+}

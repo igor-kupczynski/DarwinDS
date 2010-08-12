@@ -354,7 +354,6 @@ final:
 finalps: final ps
 
 finalpdf:
-	@make bibtex
 	@rm -f ${MF}.pdf
 	@${MAKE} pdf
 	@if [ -f "${MF}.idx" ]; then \

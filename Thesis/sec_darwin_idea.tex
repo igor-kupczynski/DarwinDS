@@ -1,1 +1,74 @@
-fff \cite{GMS09}
+The basic idea of Darwin method was introduced in~ \cite{GMS09}. This idea will
+be described in the following paragraph.
+
+The uniqueness of the method comes from combining two distinct approaches ---
+Interactive Multiobjective Optimisation (IMO, see~TODO) and Evolutionary
+Multiobjective Optimization (EMO, see~TODO).
+
+In the IMO paradigm we want to elicit Decision Maker (DM) preferences by
+involving her in the process. This is done by systematic dialog with the
+DM. Questions are being asked and the DM provides answers. Based on these
+answers preference information is extracted. Algorithm can then use this
+knowledge to produce solution better fitted to the Decision Maker
+preferences. The IMO framework is presented on
+fig.~\ref{fig:interactive-process}.
+
+\begin{figure} 
+  \begin{center}
+    \begin{tikzpicture}[start chain, node distance=10mm,
+        every join/.style={->}]
+
+      
+      \node (gen)     [on chain, join, roundrect]{
+        \begin{tabular}{c}
+          1. Generate set\\
+          of possible solutions
+      \end{tabular}};
+
+      \node (ask) [on chain, join, roundrect] {
+        \begin{tabular}{c}
+          2. Ask the DM \\
+          to indicate `good' ones
+      \end{tabular}};
+
+      \begin{scope}[start branch=store]
+        \node (store) [roundrect,on chain=going below left,join] {
+          \begin{tabular}{c}
+            3. Extract \\
+            preference information
+        \end{tabular}};
+      \end{scope}
+
+      
+      \path (store) edge[->] (gen);
+    \end{tikzpicture}
+    \caption{Typical Interactive Multiobjective
+      Optimisation process framework\label{fig:interactive-process}}
+  \end{center} 
+\end{figure} 
+
+
+
+Most of past research on Evolutionary Multiobjective Optimization (EMO) at-
+tempts to approximate the complete Pareto-optimal front by a set of well-
+distributed representatives of Pareto-optimal solutions. The underlying reason-
+ing is that in the absence of any preference information, all Pareto-optimal so-
+lutions have to be considered equivalent.
+
+
+    On the other hand, in most practical applications, the Decision Maker (DM)
+is eventually interested in only a small subset of good solutions, or even a single
+most preferred solution. In order to come up with such a result, it is necessary
+to involve the DM. This is the underlying idea of another multiobjective opti-
+mization paradigm: Interactive Multiobjective Optimization (IMO). IMO deals
+with the identification of the most preferred solution by means of a systematic
+dialogue with the DM. Only recently, the scientific community has discovered
+the great potential of combining the two paradigms (see (2)). From the point of
+view of EMO, involving the DM in an interactive procedure allows to focus the
+search on the area of the Pareto front which is most relevant to the DM. This,
+in turn, may allow to find preferred solutions faster. In particular, in the case
+of many objectives, EMO has difficulties, because the number of Pareto-optimal
+solutions becomes huge, and Pareto-optimality is not sufficiently discriminative
+to guide the search into better regions. Integrating user’s preferences promises
+to alleviate these problems, allowing to converge faster to the preferred region
+of the Pareto-optimal front.
