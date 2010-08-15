@@ -32,20 +32,50 @@ fig.~\ref{fig:interactive-process}.
       \end{tabular}};
 
       \begin{scope}[start branch=store]
-        \node (store) [roundrect,on chain=going below left,join] {
+        \node (store) [roundrect,on chain=going below,join] {
           \begin{tabular}{c}
             3. Extract \\
             preference information
         \end{tabular}};
+
+        \node (use) [roundrect,on chain=going left,join] {
+          \begin{tabular}{c}
+            4. Improve solution set
+        \end{tabular}};
       \end{scope}
 
       
-      \path (store) edge[->] (gen);
+      \path (use) edge[->] (gen);
     \end{tikzpicture}
     \caption{Typical Interactive Multiobjective
       Optimisation process framework\label{fig:interactive-process}}
   \end{center} 
 \end{figure} 
+
+Rationale behind the interactive process is that the Decision Maker is
+interested only in a small subset of preferred solutions or even in a single
+most preferred one.
+
+This process makes possible to gather preference information and then use this
+information to construct better solutions. However this is just a framework,
+details are left up to analyst. Especially one has to think how to extract and
+store knowledge gathered on DM's answers and how to use this knowledge to
+generate and provide solutions better fitted to Decision Maker's
+preferences.
+
+Human factor is another thing to consider. DM is a human being and thus her
+behavior is constantly changing. The challenge here is to find what questions
+should be asked, how often and how many intermediate solutions should be
+presented to evaluate. 
+
+Evolutionary Multiobjective Optimisation (EMO) provides a computational engine
+for generating new, better solutions from existing ones. Better in sense of
+objective function defined in the solution space. Most of the EMO methods are
+approximating Pareto-optimal front by a set of solutions. So one solution is
+better than the other if it Pareto-dominates it. In case of two equivalent
+ones another factors have to be taken into account (for example crowding score
+in NSGA2 [ref]). This is the case because if no preference information is
+given all Pareto-optimal solutions has to be considered equivalent.
 
 
 
@@ -56,19 +86,12 @@ ing is that in the absence of any preference information, all Pareto-optimal so-
 lutions have to be considered equivalent.
 
 
-    On the other hand, in most practical applications, the Decision Maker (DM)
-is eventually interested in only a small subset of good solutions, or even a single
-most preferred solution. In order to come up with such a result, it is necessary
-to involve the DM. This is the underlying idea of another multiobjective opti-
-mization paradigm: Interactive Multiobjective Optimization (IMO). IMO deals
-with the identification of the most preferred solution by means of a systematic
-dialogue with the DM. Only recently, the scientific community has discovered
-the great potential of combining the two paradigms (see (2)). From the point of
-view of EMO, involving the DM in an interactive procedure allows to focus the
-search on the area of the Pareto front which is most relevant to the DM. This,
-in turn, may allow to find preferred solutions faster. In particular, in the case
-of many objectives, EMO has difficulties, because the number of Pareto-optimal
-solutions becomes huge, and Pareto-optimality is not sufficiently discriminative
-to guide the search into better regions. Integrating user’s preferences promises
-to alleviate these problems, allowing to converge faster to the preferred region
-of the Pareto-optimal front.
+From the point of view of EMO, involving the DM in an interactive procedure
+allows to focus the search on the area of the Pareto front which is most
+relevant to the DM. This, in turn, may allow to find preferred solutions
+faster. In particular, in the case of many objectives, EMO has difficulties,
+because the number of Pareto-optimal solutions becomes huge, and
+Pareto-optimality is not sufficiently discriminative to guide the search into
+better regions. Integrating user’s preferences promises to alleviate these
+problems, allowing to converge faster to the preferred region of the
+Pareto-optimal front.
