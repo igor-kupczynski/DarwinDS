@@ -20,31 +20,34 @@ fig.~\ref{fig:interactive-process}.
     \begin{tikzpicture}
       \matrix[row sep=10mm, column sep=10mm]{
 
-      
-      \node (gen)     [roundrect] {
-        \begin{tabular}{c}
-          1. Generate set\\
-          of possible solutions
-      \end{tabular}}; &
+        
+        \node (gen)     [roundrect] {
+          \begin{tabular}{c}
+            1. Generate set\\
+            of possible solutions
+        \end{tabular}}; &
 
-      \node (ask) [roundrect] {
-        \begin{tabular}{c}
-          2. Ask the DM \\
-          to indicate `good' ones
-      \end{tabular}}; \\
+        \node (ask) [roundrect] {
+          \begin{tabular}{c}
+            2. Ask the DM \\
+            to indicate `good' ones
+        \end{tabular}}; \\
+
+        \node (use) [roundrect] {
+          \begin{tabular}{c}
+            4. Improve solution set
+        \end{tabular}}; &
 
         \node (store) [roundrect] {
           \begin{tabular}{c}
             3. Extract \\
             preference information
-        \end{tabular}}; &
-
-        \node (use) [roundrect] {
-          \begin{tabular}{c}
-            4. Improve solution set
         \end{tabular}}; \\
       };
-      \path (use) [->] (gen);
+      \path (gen) edge[->] (ask);
+      \path (ask) edge[->] (store);
+      \path (store) edge[->] (use);
+      \path (use) edge[->] (gen);
     \end{tikzpicture}
     \caption{Typical Interactive Multiobjective
       Optimisation process framework\label{fig:interactive-process}}
@@ -147,45 +150,73 @@ about real value of an coefficient). A vector of fixed values for each
 interval is called \textit{scenario} of imprecision (see fig.~\ref{scenario}).
 
 DARWIN is composed of two nested loops --- exterior and interior. The former
-is a realisation of interactive process and the latter is an EMO engine dedicated
-to improve solutions based on the Decision Maker preferences. This is
-illustrated on 
+is a realisation of an interactive process and the latter is an EMO engine
+dedicated to improve solutions based on the Decision Maker preferences. This
+is illustrated on figure~\ref{fig:darwin-ext}.
 
 \begin{figure} 
   \begin{center}
-    \begin{tikzpicture}[start chain, node distance=10mm,
-        every join/.style={->}]
+    \begin{tikzpicture}
+      \matrix[row sep=10mm, column sep=10mm]{
 
-      
-      \node (gen)     [on chain, join, roundrect]{
-        \begin{tabular}{c}
-          1. Generate set\\
-          of possible solutions
-      \end{tabular}};
-
-      \node (ask) [on chain, join, roundrect] {
-        \begin{tabular}{c}
-          2. Ask the DM \\
-          to indicate `good' ones
-      \end{tabular}};
-
-      \begin{scope}[start branch=store]
-        \node (store) [roundrect,on chain=going below,join] {
+        
+        \node (gen)     [roundrect] {
           \begin{tabular}{c}
-            3. Extract \\
-            preference information
-        \end{tabular}};
+            (0) Generate:\\
+            * solutions\\
+            * scenarios
+        \end{tabular}}; &
 
-        \node (use) [roundrect,on chain=going left,join] {
+        \node (presentation) [greenrect] {
           \begin{tabular}{c}
-            4. Improve solution set
-        \end{tabular}};
-      \end{scope}
+            (1) Presentation \\
+            of results
+        \end{tabular}}; &
 
-      
-      \path (use) edge[->] (gen);
+        \node (eval) [greenrect] {
+          \begin{tabular}{c}
+            (2) DM\\
+            evaluation
+        \end{tabular}}; \\
+
+        \node (stop) [redrect] {
+          \begin{tabular}{c}
+            STOP
+        \end{tabular}}; &
+
+        \node (inner) [greenrect] {
+          \begin{tabular}{c}
+            (4) Evolutionary \\
+            loop
+        \end{tabular}}; &
+
+        \node (rules) [greenrect] {
+          \begin{tabular}{c}
+            (3) Rules \\
+            generation
+        \end{tabular}}; \\
+      };
+      \path (gen) edge[->] (presentation);
+      \path (presentation) edge[->] (eval);
+      \path (eval) edge[->] (rules);
+      \path (rules) edge[->] (inner);
+      \path (inner) edge[->] (presentation);
+      \path (presentation) edge[->] (stop);
     \end{tikzpicture}
-    \caption{Typical Interactive Multiobjective
-      Optimisation process framework\label{fig:interactive-process2}}
+    \caption{DARWIN states and transitions. Steps (1) - (4) are forming
+      exterior loop and step (4) is the interior loop.\label{fig:darwin-ext}}
   \end{center} 
-\end{figure} 
+\end{figure}
+
+
+The exterior loop is composed of the following steps.
+
+\begin{algorithm}[1]
+\caption{Exterior loop}\label{extloop}
+  
+\end{algorithm}
+
+\begin{description}
+  \item[Step 1.] Generate set of feasible solutions $X$ to the problem
+  
+\end{description}
