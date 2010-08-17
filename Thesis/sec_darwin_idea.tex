@@ -341,4 +341,7 @@ Finally $\textit{PrimaryScore}(x)$ is a primary score of given solution ($x \in 
 
 In case of a draw also a secondary score is considered for each solution. This
 score is calculated in the same way as \textit{crowding distance} in
-\textit{NSGA-II} method ([ref]).
+\textit{NSGA-II} method ([ref]). The difference lies in a fact, that this
+score is calculated in a~quantile space instead of original objective space,
+e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots$
+$\times f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k(x)$
