@@ -315,12 +315,30 @@ starts with evaluation of each solution over every scenario
 (\ref{algin:evstart-int} -- \ref{algin:evstop-int}). After the evaluation
 meaningful quantiles are known for each solution. Then the procedure can
 calculate a primary score for each of the individuals. The primary score is
-computed as follows.
+computed as follows. Let:
 
 \begin{description}
-Let $\textit{rules}(x) = \{\textit{rule}_h \in \textit{rules} :$
-$\textit{rule}_h$ is matched by solution $x\}$ 
-
+\item $\textit{rules}(x) = \{\textit{rule}_h \in \textit{rules} :$
+$\textit{rule}_h$ is matched by solution $x\}$ \\
 $\textit{rules}(x)$ is a set of rules ($\textit{rule}_h \in \textit{rules}$)
 matched by solution $x \in X$. 
+
+\item $X(\textit{rule}_h) = \{x \in X: x \text{is matching} \textit{rule}_h\}$
+\\ For each $\textit{rule}_h \in rules: X(\textit{rule}_h)$ is a set of
+solutions matching this rule.
+
+\item $w(\textit{rule}_h) = (1 - \delta)^{\textit{card}(X(\textit{rule}_h))}$
+  \\ Each rule ($\textit{rule}_h$) gets a~weight related to number of times it
+  is matched by a~solution. $\delta$ is a~decay of rule weight. For example
+  $\delta = 0.1$. This formula associates higher weight for rules matching
+  lesser number of solutions --- this is an important property because it
+  allows to maintain diversity with respect to rules.
+
+\item $\textit{PrimaryScore}(x) = \sum_{\textit{rule}_h \in rules(x)}$
+  $w(\textit{rule}_h)$ \\
+Finally $\textit{PrimaryScore}(x)$ is a primary score of given solution ($x \in X$).
 \end{description}
+
+In case of a draw also a secondary score is considered for each solution. This
+score is calculated in the same way as \textit{crowding distance} in
+\textit{NSGA-II} method ([ref]).
