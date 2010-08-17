@@ -208,18 +208,66 @@ is illustrated on figure~\ref{fig:darwin-ext}.
   \end{center} 
 \end{figure}
 
-
-The exterior loop is composed of the following steps.
-
 \begin{algorithm}
-\caption{DARWIN's exterior loop}\label{extloop}
+\caption{DARWIN's exterior loop}\label{alg:extloop}
   \begin{algorithmic}[1]
-    \While{}
-    \EndWhile{}
+    \State $X \gets$ \Call{GenerateSolutions}{} \label{algin:solgen}
+    \Loop
+    \State $S \gets$ \Call{GenerateScenarios}{} \label{algin:scengen}
+    \ForAll{$x \in X, s \in S$} \label{algin:evstart}
+    \State \Call{Evaluate}{x, s} 
+    \EndFor{} \label{algin:evstop}
+    \State $\text{satisfied} \gets$ \Call{PresentResults}{} \label{algin:dmshow}
+    \If{$\text{satisfied}$}
+    \State \Call{STOP}{}
+    \Else
+    \State $X \gets$ \Call{AskToMarkGood}{X} \label{algin:dmmark}
+    \EndIf
+    \State rules $\gets$ \Call{InduceDecisionRules}{X} \label{algin:rules}
+    \State $X \gets$ \Call{EmoProcedure}{rules} \Comment{the interior loop} \label{algin:intloop}
+    \EndLoop{}
   \end{algorithmic}
 \end{algorithm}
 
-\begin{description}
-  \item[Step 1.] Generate set of feasible solutions $X$ to the problem
-  
-\end{description}
+
+The exterior loop algorithm, corresponding to the IMO interactive process is
+shown on alg.~\ref{alg:extloop}. More detailed description of each step
+follows.
+
+One has to generate a set of feasible solution to the MOO problem first. This
+can be done using the Monte Carlo method. The method itself is not
+knew. A~concept of statistical sampling became popular after inventing digital
+computing machines (see~[ref]). This method can be described as random
+sampling a domain of a problem. In most basic variant one can just pick a
+solution at random and check if it is feasible. Unfortunately it could be
+impossible unless the non-feasible space is only a small part of the
+domain. Additional hints for the generator for example in form of analyst's
+suggestions can be taken into account.
+
+At this stage goals and constraints are allowed to contain intervals
+corresponding to the uncertainty of a model of a set of scenarios needs to be
+generated. Each one of these scenarios is a realisation of the problem with
+fixed values of the intervals (see~[inref]). It is worth noting that if the
+problem constraints are given in uncertain form --- that is containing
+coefficients in form of intervals --- it could be impossible to determinate if
+give solution is possible. If that is the case then lines \ref{algin:solgen}
+and \ref{algin:scengen} should be inverted and feasibility of a solution set
+should be checked on generated scenarios.
+
+In lines \ref{algin:evstart} to \ref{algin:evstop} each solution if evaluated
+on each scenario. Results of this evaluation phase are then gathered and
+showed the Decision Maker in \ref{algin:dmshow}. The DM is a human being
+though, so in order to get a valuable feedback one need to show the data in
+aggregated form. The authors proposed a meaningful quantiles to be presented
+(see~[inref]). For example $f^{1\%}_1(x), f^{25\%}_1(x), f^{50\%}_1(x),$
+$\dots, f^{1\%}_k(x), f^{25\%}_k(x), f^{50\%}_k(x)$ for all $x \in X$.
+
+If the DM finds satisfactory solution in the set of presented ones the problem
+is solved and algorithm ends here. If not however he or she is asked to
+indicated the ``good'' solutions in the set (line~\ref{algin:dmmark}).  Based
+on this distinction method generates a set of decision rules
+(line~\ref{algin:rules}). These rules are then passed to interior loop
+(line~\ref{algin:intloop}) where --- by using the EMO paradigm (see~[inref])
+--- DARWIN performs search of the solution space. The search in driven towards
+specific region based on the rules. Finally new solutions, better fitted to
+DM's expectations are generated and the process starts over again.
