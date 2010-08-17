@@ -212,18 +212,18 @@ is illustrated on figure~\ref{fig:darwin-ext}.
 \caption{DARWIN's exterior loop}\label{alg:extloop}
   \begin{algorithmic}[1]
     \State $X \gets$ \Call{GenerateSolutions}{} \label{algin:solgen}
-    \Loop
     \State $S \gets$ \Call{GenerateScenarios}{} \label{algin:scengen}
+    \Loop
     \ForAll{$x \in X, s \in S$} \label{algin:evstart}
-    \State \Call{Evaluate}{x, s} 
+    \State \Call{Evaluate}{$x, s$} 
     \EndFor{} \label{algin:evstop}
     \State $\text{satisfied} \gets$ \Call{PresentResults}{} \label{algin:dmshow}
     \If{$\text{satisfied}$}
-    \State \Call{STOP}{}
+    \State \textbf{stop}$\qed$ 
     \Else
-    \State $X \gets$ \Call{AskToMarkGood}{X} \label{algin:dmmark}
+    \State $X \gets$ \Call{AskToMarkGood}{$X$} \label{algin:dmmark}
     \EndIf
-    \State rules $\gets$ \Call{InduceDecisionRules}{X} \label{algin:rules}
+    \State rules $\gets$ \Call{InduceDecisionRules}{$X$} \label{algin:rules}
     \State $X \gets$ \Call{EmoProcedure}{rules} \Comment{the interior loop} \label{algin:intloop}
     \EndLoop{}
   \end{algorithmic}
@@ -271,3 +271,56 @@ on this distinction method generates a set of decision rules
 --- DARWIN performs search of the solution space. The search in driven towards
 specific region based on the rules. Finally new solutions, better fitted to
 DM's expectations are generated and the process starts over again.
+
+Algorithm~\ref{alg:intloop} shows the interior loop of DARWIN method. This
+loop is an EMO procedure [inref] guided by decision rules induced in exterior
+loop on DM's selections.
+
+\begin{algorithm}
+\caption{DARWIN's interior loop}\label{alg:intloop}
+  \begin{algorithmic}[1]
+    \Procedure{EmoProcedure}{rules}
+    \State $X \gets$ \Call{GenerateSolutions}{} \label{algin:solgen-int}
+    \State $S \gets$ \Call{GenerateScenarios}{} \label{algin:scengen-int}
+    \Loop \label{algin:evloop}
+    \ForAll{$x \in X, s \in S$} \label{algin:evstart-int} \Comment{this loop
+      calculates meaningful quantiles for each solution}
+    \State \Call{Evaluate}{$x, s$}
+    \EndFor{} \label{algin:evstop-int}
+    \If{termination conditions fulfilled}
+    \State \textbf{return} $X$
+    \EndIf
+    \State pScore $\gets$ \Call{CalculatePrimaryScore}{$X$} \label{algin:ps}
+    \State sScore $\gets$ \Call{CalculateSecondaryScore}{$X$} \label{algin:ss}
+    \State $X'$ $\gets$ \Call{RankSolutions}{$X$, pScore, sScore} \label{algin:rank}
+    \State $P \gets$ \Call{SelectParents}{$X'$} \label{algin:select}
+    \State $O \gets$ \Call{RecombineOffspring}{P} \label{algin:off}
+    \State $O' \gets$ \Call{Mutate}{O} \label{algin:mut}
+    \State $X \gets$ \Call{MergePopulations}{$X', O'$} \label{algin:merge}
+    \EndLoop
+    \EndProcedure{}
+  \end{algorithmic}
+\end{algorithm}
+
+Procedure start by generating new set of feasible solutions and possible
+scenarios in lines~\ref{algin:solgen-int}, \ref{algin:scengen-int}. Then in
+line~\ref{algin:evloop} actual evolutionary optimisation starts.
+
+Each solution is an individual. Solution set constitutes a
+population. Iterations of a~loop defined in line~\ref{algin:evloop} marks 
+generations of the population.
+
+In every generation first the population is evaluated and ranked. The process
+starts with evaluation of each solution over every scenario
+(\ref{algin:evstart-int} -- \ref{algin:evstop-int}). After the evaluation
+meaningful quantiles are known for each solution. Then the procedure can
+calculate a primary score for each of the individuals. The primary score is
+computed as follows.
+
+\begin{description}
+Let $\textit{rules}(x) = \{\textit{rule}_h \in \textit{rules} :$
+$\textit{rule}_h$ is matched by solution $x\}$ 
+
+$\textit{rules}(x)$ is a set of rules ($\textit{rule}_h \in \textit{rules}$)
+matched by solution $x \in X$. 
+\end{description}
