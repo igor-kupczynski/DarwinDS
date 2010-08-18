@@ -308,7 +308,8 @@ line~\ref{algin:evloop} actual evolutionary optimisation starts.
 
 Each solution is an individual. Solution set constitutes a
 population. Iterations of a~loop defined in line~\ref{algin:evloop} marks 
-generations of the population.
+generations of the population. Termination condition could be for example
+a fixed number of iterations or a fixed amount of time.
 
 In every generation first the population is evaluated and ranked. The process
 starts with evaluation of each solution over every scenario
@@ -343,5 +344,53 @@ In case of a draw also a secondary score is considered for each solution. This
 score is calculated in the same way as \textit{crowding distance} in
 \textit{NSGA-II} method ([ref]). The difference lies in a fact, that this
 score is calculated in a~quantile space instead of original objective space,
-e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots$
-$\times f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k(x)$
+e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots \times $
+$f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k$. The procedure is shown in
+alg.~\ref{alg:crowddist}.
+
+\begin{algorithm}
+  \caption{Procedure calculating crowding distance}\label{alg:crowddist}
+  \begin{algorithmic}[1]
+    \Procedure{CalculateCrowdingDistance}{$X$}
+    \State $n \gets |X|$ \Comment{Number of solutions}
+    \ForAll{$x \in X$} \Comment{Initialize}
+    \State $\textit{distance}(x) = 0$
+    \EndFor
+    \ForAll{$o \in \textit{objectives}$}
+    \State $X' \gets$ \Call{Sort}{$X, o$} \Comment{Sort solutions using value
+      of $o$ objective}
+    \State $\textit{distance}(X`(1)) \gets \infty$ \Comment{Boundary solutions
+      get highest score possible}
+    \State $\textit{distance}(X`(n)) \gets \infty$ \Comment{$X`(n)$ is the
+      n-th element of the X` ordered set}
+    \EndFor
+    \For{$i \gets 2, n-2$} \Comment{$o(x), x \in X$ is a value of the objective $o$
+    in the solution $s$}
+    \State $\textit{distance}(X`(i)) \gets \textit{distance}(X`(i))$
+    $+ [o(X`(i-1)) + o(X`(i-1))]$
+    \EndFor
+    \EndProcedure{}
+  \end{algorithmic}
+\end{algorithm}
+
+In line~\ref{algin:select} parent selection is done. The process is a Monte
+Carlo procedure and possibility of selecting a~solution $x \in X$ as parent
+is:\\
+$$Pr(x) = \left( \frac{|X|-\textit{rank}(x) + 1}{|X|} \right)^\gamma - \left( \frac{|X|-\textit{rank}(x)}{|X|} \right)^\gamma$$
+where $\textit{rank}(x)$ is a rank of solution $x \in X$ in the ranking made
+in line~\ref{algin:rank}. $\gamma \geq 1$ is a elitism coefficient. The higher
+the $\gamma$ the bigger the probability of selecting high-ranked solution as
+a~parent.
+
+In line~\ref{algin:off} a new individual (a child) is created using two of the
+parents chosen in previous step --- $a \in P, b \in P$. The child is obtained
+by combining the parents together: $$z = \lambda a + (1 - \lambda) b$$
+$\lambda$ is a random real-valued number; $0 \leq \lambda \leq 1$.
+
+
+Mutation operator is applied to the offspring population. Probability of
+mutation for a single individual is decreasing in successive generations and
+can be calculated using the formula: $$Pr(t) = \epsilon (1 - \omega)^{t-1}$$
+Where $t$ is a number of current iteration, $\omega$ - mutation decay rate,
+$\epsilon$ - initial mutation probability. Suggested values are
+$\omega = 0.1, \epsilon = 0.5$.
