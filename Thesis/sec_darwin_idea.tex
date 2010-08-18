@@ -4,11 +4,11 @@ be described in the following paragraph.
 \subsection{Background}
 
 The method combines two different approaches --- Interactive Multiobjective
-Optimisation (IMO, see~TODO) and Evolutionary Multiobjective Optimization
-(EMO, see~TODO).
+Optimisation (IMO, see~[inref]) and Evolutionary Multiobjective Optimization
+(EMO, see~[inref]).
 
-In the IMO paradigm we want to elicit Decision Maker (DM) preferences by
-involving her in the process. This is done by systematic dialog with the
+In the IMO paradigm one wants to elicit Decision Maker (DM) preferences by
+involving her in the process. This is done by a systematic dialog with the
 DM. Questions are being asked and the DM provides answers. Based on these
 answers preference information is extracted. Algorithm can then use this
 knowledge to produce solution better fitted to the Decision Maker
@@ -65,10 +65,15 @@ store knowledge gathered on DM's answers and how to use this knowledge to
 generate and provide solutions better fitted to Decision Maker's
 preferences.
 
-Human factor is another thing to consider. DM is a human being and thus her
+Human factor is another thing to consider. The DM is a human being and thus her
 behavior is constantly changing. The challenge here is to find what questions
 should be asked, how often and how many intermediate solutions should be
-presented to evaluate. 
+presented to evaluate.
+
+DARWIN is a realisation of the IMO process. It keeps generating solutions and
+improving them based on the DM's feedback. It only asks the DM to mark
+potentially good solutions, so only problem-domain knowledge is requires; its
+user do not need to have an expert knowledge in the decision support field.
 
 Evolutionary Multiobjective Optimisation (EMO) provides a computational engine
 for generating new, better solutions from existing ones. Better in sense of
@@ -102,11 +107,66 @@ discriminative. However guiding the search to preferred regions of the
 solution space allows the method to coverage faster to good solutions. It is
 shown on fig.~\ref{pareto}.
 
+DARWIN uses EMO procedure to improve generated solutions based on the DM's
+preferences.
+
 
 \subsection{Uncertainty}
 
-TODO
+It is often the case that not all numbers and coefficients are precisely
+known. It may be easier for the Decision Maker to formulate the
+multi-objective optimisation problem giving the problem coefficients in form
+of intervals of possible values. For example instead of saying that product
+price will equal 20 units one can say it will be in the $[19, 21]$
+interval. In this situation the decision maker is often interested in finding
+best robust solution --- that is good and possible in a large part of
+uncertainty scenarios. DARWIN allows to give the coefficients in form of
+intervals.
 
+\begin{figure}
+  \centering \includegraphics[width=0.5\textwidth]{img/scenario}
+  \caption{Scenario --- set of intervals fixed on specific values}
+  \label{scenario}
+\end{figure}
+
+Set of all the problem's coefficients given as intervals and fixed on one of
+possible values will be called scenario of uncertainty (see
+fig.~\ref{scenario}). If intervals are allowed it is impossible to calculate
+exact value of problem's objectives for given solutions. To handle this case
+all the considered solutions are evaluated over a~set of uncertainty
+scenarios.
+
+ Results of this evaluation are then aggregated to quantile space. The
+ quantiles are points taken at regular intervals from the cumulative
+ distribution of a random variable. Instead of presenting all the results the
+ method calculates meaningful quantiles of results distribution for each
+ objective. For example percentiles (like $1\%, 25\%$ and $50\%$) can be
+ chosen. Percentiles divide ordered data in 100 of equally-sized subsets ---
+ $1\%$ percentile is the best of $1\%$ worst solutions or alternatively the
+ worst of $99\%$ of best solutions.
+
+Choice of these quantiles is connected with DM's attitude towards risk. If he
+or she wants to avoid risk then his/her decision will be focused on quantiles
+from the beginning of the distribution (e.g. $10\%$). On the other hand when
+he or she is interested in best possible solution even if it is assisted with
+risk then the quantiles from the of the distribution will be inspected
+(e.g. $75\%$). 
+
+In DARWIN DM's preferences are gathered and stored using DRSA methodology
+(see~[inref]). Dominance-Based Rough Set Approach is a~framework for reasoning
+about partially inconsistent preference data. DRSA already has a successful
+applications in IMO area ([ref]).
+
+DRSA will be applied in IMO process. After selection of ``good'' solutions
+from the provided set decision rules are induced to store the
+preferences. These rules are given in form of \textit{``If ... then
+  ...''}. Conditional part is a disjunction of conditions on attributes from
+quantile space. These attributes are compared to a specific values, e.g.
+$\text{profit}_{25\%} >= 100 \land \text{time}_{1\%} <= 10$. The consequent
+part assigns a solution to a class (\textit{at least} or \textit{at most}),
+e.g. Class \textit{at least} Good. So the whole rule would be If
+$\text{profit}_{25\%} >= 100 \land \text{time}_{1\%} <= 10$ then Class
+\textit{at least} Good.
 
 \subsection{The algorithm}
 
@@ -137,12 +197,6 @@ Where:
 \item $b_1, b_2, \dots, b_m$ are real-valued right hand sides of the
   constraints.
 \end{description}
-
-\begin{figure}
-  \centering \includegraphics[width=0.5\textwidth]{img/scenario}
-  \caption{Scenario --- set of intervals fixed on specific values}
-  \label{scenario}
-\end{figure}
 
 It is possible to give some of the coefficients in objective functions or
 constraints in form of intervals (thus modeling ignorance --- uncertainty
