@@ -3,15 +3,15 @@ be described in the following paragraph.
 
 \subsection{Background}
 
-The method combines two different approaches --- Interactive Multiobjective
-Optimisation (IMO, see~[inref]) and Evolutionary Multiobjective Optimization
+The method combines two different approaches --- Interactive Multi-Objective
+Optimisation (IMO, see~[inref]) and Evolutionary Multi-Objective Optimization
 (EMO, see~[inref]).
 
-In the IMO paradigm one wants to elicit Decision Maker (DM) preferences by
-involving her in the process. This is done by a systematic dialog with the
-DM. Questions are being asked and the DM provides answers. Based on these
-answers preference information is extracted. Algorithm can then use this
-knowledge to produce solution better fitted to the Decision Maker
+In the IMO paradigm one wants to elicit decision maker's preferences by
+involving his or her in the process. This is done by a systematic dialog with
+the decision maker (the DM). Questions are being asked and the DM provides
+answers. Based on these answers preference information is extracted. Algorithm
+can then use the knowledge to produce solutions better fitted to his or her
 preferences. The IMO framework is presented on
 fig.~\ref{fig:interactive-process}.
 
@@ -54,28 +54,27 @@ fig.~\ref{fig:interactive-process}.
   \end{center} 
 \end{figure} 
 
-Rationale behind the interactive process is that the Decision Maker is
+Rationale behind the interactive process is that the decision maker is
 interested only in a small subset of preferred solutions or even in a single
 most preferred one.
 
 This process makes possible to gather preference information and then use this
-information to construct better solutions. However this is just a framework,
-details are left up to analyst. Especially one has to think how to extract and
-store knowledge gathered on DM's answers and how to use this knowledge to
-generate and provide solutions better fitted to Decision Maker's
-preferences.
+information to construct a better solutions. However this is just a framework,
+details are left up to the analyst. Especially one has to think how to extract
+and store knowledge gathered on DM's answers and how to use this knowledge to
+generate and provide solutions better fitted to decision maker's preferences.
 
-Human factor is another thing to consider. The DM is a human being and thus her
-behavior is constantly changing. The challenge here is to find what questions
-should be asked, how often and how many intermediate solutions should be
-presented to evaluate.
+Human factor is yet another thing to consider. The DM is a human being and
+thus his or her behavior is constantly changing. The challenge here is to find
+what questions should be asked, how often and how many intermediate solutions
+should be presented to evaluate.
 
 DARWIN is a realisation of the IMO process. It keeps generating solutions and
 improving them based on the DM's feedback. It only asks the DM to mark
 potentially good solutions, so only problem-domain knowledge is requires; its
-user do not need to have an expert knowledge in the decision support field.
+user does not need to have an expert knowledge in the decision support field.
 
-Evolutionary Multiobjective Optimisation (EMO) provides a computational engine
+Evolutionary Multi-Objective Optimisation (EMO) provides a computational engine
 for generating new, better solutions from existing ones. Better in sense of
 objective function defined in the solution space. Most of the EMO methods are
 approximating Pareto-optimal front by a set of solutions. So one solution is
@@ -85,22 +84,23 @@ crowding score in NSGA2 [ref]). This is the case because if no preference
 information is given all Pareto-optimal solutions have to be considered
 equivalent.
 
-It seems natural to combine these two approaches described --- Interactive
-Multiobjective Optimisation and Evolutionary Multiobjective
+It seems natural to combine these two described approaches --- Interactive
+Multi-Objective Optimisation and Evolutionary Multi-Objective
 Optimisation. (TODO: maybe a note and a ref about combining these two
 approaches). IMO is just a process framework but still needs an engine to
 generate and improve solutions. EMO is such an engine. On the other hand for
-EMO involving the Decision Maker in the procedure results in gathering
+EMO involving the decision maker in the procedure results in gathering
 preference information. This information allows the procedure to focus on
-specific region of Pareto-front --- the one most relevant to decision maker.
+specific region of Pareto-front --- the one most relevant to decision
+maker. So IMO and EMO are complementing each other.
 
 \begin{figure}
   \centering \includegraphics[width=1.2\textwidth]{img/pareto}
-  \caption{Pareto-front and area preferred by the Decision Maker}
+  \caption{Pareto-front and area preferred by the decision maker}
   \label{pareto}
 \end{figure}
 
-This is important because of the ``human factor''. If a number of solution
+This is important because of the ``human factor''. If a number of solutions
 becomes huge DM can not effectively analyze it and find the one that fits best
 her preferences, thus Pareto-optimality is not sufficiently
 discriminative. However guiding the search to preferred regions of the
@@ -114,13 +114,13 @@ preferences.
 \subsection{Uncertainty}
 
 It is often the case that not all numbers and coefficients are precisely
-known. It may be easier for the Decision Maker to formulate the
-multi-objective optimisation problem giving the problem coefficients in form
+known. It may be easier for the decision maker to formulate the
+Multi-Objective Optimisation problem giving the problem coefficients in form
 of intervals of possible values. For example instead of saying that product
 price will equal 20 units one can say it will be in the $[19, 21]$
 interval. In this situation the decision maker is often interested in finding
 best robust solution --- that is good and possible in a large part of
-uncertainty scenarios. DARWIN allows to give the coefficients in form of
+uncertainty scenarios. DARWIN allows to give the coefficients in a form of
 intervals.
 
 \begin{figure}
@@ -129,8 +129,8 @@ intervals.
   \label{scenario}
 \end{figure}
 
-Set of all the problem's coefficients given as intervals and fixed on one of
-possible values will be called scenario of uncertainty (see
+Set of all of the problem's coefficients given as intervals and fixed on one
+of possible values will be called scenario of uncertainty (see
 fig.~\ref{scenario}). If intervals are allowed it is impossible to calculate
 exact value of problem's objectives for given solutions. To handle this case
 all the considered solutions are evaluated over a~set of uncertainty
@@ -138,8 +138,8 @@ scenarios.
 
  Results of this evaluation are then aggregated to quantile space. The
  quantiles are points taken at regular intervals from the cumulative
- distribution of a random variable. Instead of presenting all the results the
- method calculates meaningful quantiles of results distribution for each
+ distribution of a random variable. Instead of presenting all of the results
+ the method calculates meaningful quantiles of results distribution for each
  objective. For example percentiles (like $1\%, 25\%$ and $50\%$) can be
  chosen. Percentiles divide ordered data in 100 of equally-sized subsets ---
  $1\%$ percentile is the best of $1\%$ worst solutions or alternatively the
@@ -157,8 +157,8 @@ In DARWIN DM's preferences are gathered and stored using DRSA methodology
 about partially inconsistent preference data. DRSA already has a successful
 applications in IMO area ([ref]).
 
-DRSA will be applied in IMO process. After selection of ``good'' solutions
-from the provided set decision rules are induced to store the
+DRSA will be applied in IMO process. After selecting ``good'' solutions
+from the provided set the decision rules are induced to store the
 preferences. These rules are given in form of \textit{``If ... then
   ...''}. Conditional part is a disjunction of conditions on attributes from
 quantile space. These attributes are compared to a specific values, e.g.
@@ -205,8 +205,8 @@ interval is called \textit{scenario} of imprecision (see fig.~\ref{scenario}).
 
 DARWIN is composed of two nested loops --- exterior and interior. The former
 is a realisation of an interactive process and the latter is an EMO engine
-dedicated to improve solutions based on the Decision Maker preferences. This
-is illustrated on figure~\ref{fig:darwin-ext}.
+dedicated to improve solutions based on the decision maker's preferences. This
+is illustrated on a figure~\ref{fig:darwin-ext}.
 
 \begin{figure} 
   \begin{center}
@@ -310,7 +310,7 @@ should be checked on generated scenarios.
 
 In lines \ref{algin:evstart} to \ref{algin:evstop} each solution if evaluated
 on each scenario. Results of this evaluation phase are then gathered and
-showed the Decision Maker in \ref{algin:dmshow}. The DM is a human being
+showed the decision maker in \ref{algin:dmshow}. The DM is a human being
 though, so in order to get a valuable feedback one need to show the data in
 aggregated form. The authors proposed a meaningful quantiles to be presented
 (see~[inref]). For example $f^{1\%}_1(x), f^{25\%}_1(x), f^{50\%}_1(x),$
