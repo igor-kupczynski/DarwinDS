@@ -130,7 +130,7 @@ intervals.
 \end{figure}
 
 Set of all of the problem's coefficients given as intervals and fixed on one
-of possible values will be called scenario of uncertainty (see
+of possible values will be called scenario of imprecision (see
 fig.~\ref{scenario}). If intervals are allowed it is impossible to calculate
 exact value of problem's objectives for given solutions. To handle this case
 all the considered solutions are evaluated over a~set of uncertainty
@@ -268,11 +268,12 @@ is illustrated on a figure~\ref{fig:darwin-ext}.
     \State $X \gets$ \Call{GenerateSolutions}{} \label{algin:solgen}
     \State $S \gets$ \Call{GenerateScenarios}{} \label{algin:scengen}
     \Loop
-    \ForAll{$x \in X, s \in S$} \label{algin:evstart}
+    \ForAll{$x \in X, s \in S$} \label{algin:evstart} \Comment{Evaluate each
+      solution over all of the scenarios}
     \State \Call{Evaluate}{$x, s$} 
     \EndFor{} \label{algin:evstop}
-    \State $\text{satisfied} \gets$ \Call{PresentResults}{} \label{algin:dmshow}
-    \If{$\text{satisfied}$}
+    \State $\text{isSatisfied} \gets$ \Call{PresentResults}{} \label{algin:dmshow}
+    \If{$\text{isSatisfied}$}
     \State \textbf{stop}$\qed$ 
     \Else
     \State $X \gets$ \Call{AskToMarkGood}{$X$} \label{algin:dmmark}
@@ -289,8 +290,8 @@ shown on alg.~\ref{alg:extloop}. More detailed description of each step
 follows.
 
 One has to generate a set of feasible solution to the MOO problem first. This
-can be done using the Monte Carlo method. The method itself is not
-knew. A~concept of statistical sampling became popular after inventing digital
+can be done using the Monte Carlo method. A Monte Carlo concept itself is not
+new. A~concept of statistical sampling became popular after inventing digital
 computing machines (see~[ref]). This method can be described as random
 sampling a domain of a problem. In most basic variant one can just pick a
 solution at random and check if it is feasible. Unfortunately it could be
@@ -299,36 +300,36 @@ domain. Additional hints for the generator for example in form of analyst's
 suggestions can be taken into account.
 
 At this stage goals and constraints are allowed to contain intervals
-corresponding to the uncertainty of a model of a set of scenarios needs to be
-generated. Each one of these scenarios is a realisation of the problem with
+corresponding to the uncertainty of a model. Thus a set of scenarios needs to
+be generated. Each one of these scenarios is a realisation of the problem with
 fixed values of the intervals (see~[inref]). It is worth noting that if the
-problem constraints are given in uncertain form --- that is containing
+problem constraints are given in an uncertain form --- that is containing
 coefficients in form of intervals --- it could be impossible to determinate if
-give solution is possible. If that is the case then lines \ref{algin:solgen}
-and \ref{algin:scengen} should be inverted and feasibility of a solution set
+given solution is possible. If that is the case then lines \ref{algin:solgen}
+and \ref{algin:scengen} should be swapped and feasibility of a solution set
 should be checked on generated scenarios.
 
 In lines \ref{algin:evstart} to \ref{algin:evstop} each solution if evaluated
-on each scenario. Results of this evaluation phase are then gathered and
+over each scenario. Results of this evaluation phase are then gathered and
 showed the decision maker in \ref{algin:dmshow}. The DM is a human being
 though, so in order to get a valuable feedback one need to show the data in
 aggregated form. The authors proposed a meaningful quantiles to be presented
 (see~[inref]). For example $f^{1\%}_1(x), f^{25\%}_1(x), f^{50\%}_1(x),$
 $\dots, f^{1\%}_k(x), f^{25\%}_k(x), f^{50\%}_k(x)$ for all $x \in X$.
 
-If the DM finds solution in the set of presented ones satisfactory the problem
-is solved and algorithm ends here. If not however he or she is asked to
-indicated the ``good'' solutions in the set (line~\ref{algin:dmmark}).  Based
-on this distinction method generates a set of decision rules
+If the DM finds solution in the set of presented ones satisfactory then the
+problem is solved and algorithm ends here. If not however he or she is asked
+to indicated the ``good'' solutions in the set (line~\ref{algin:dmmark}).
+Based on this distinction method generates a set of decision rules
 (line~\ref{algin:rules}). These rules are then passed to the interior loop
 (line~\ref{algin:intloop}) where --- by using the EMO paradigm (see~[inref])
---- DARWIN performs search of the solution space. The search in driven towards
+--- DARWIN performs search of the solution space. The search is driven towards
 specific region based on the rules. Finally new solutions, better fitted to
 DM's expectations are generated and the process starts over again.
 
 Algorithm~\ref{alg:intloop} shows the interior loop of DARWIN method. This
-loop is an EMO procedure [inref] guided by decision rules induced in exterior
-loop on DM's selections.
+loop is an EMO procedure [inref] guided by the decision rules induced in
+exterior loop on DM's selections.
 
 \begin{algorithm}
 \caption{DARWIN's interior loop}\label{alg:intloop}
@@ -378,16 +379,16 @@ $\textit{rule}_h$ is matched by solution $x\}$ \\
 $\textit{rules}(x)$ is a set of rules ($\textit{rule}_h \in \textit{rules}$)
 matched by solution $x \in X$. 
 
-\item $X(\textit{rule}_h) = \{x \in X: x \text{is matching} \textit{rule}_h\}$
+\item $X(\textit{rule}_h) = \{x \in X: x$ is matching $\textit{rule}_h\}$
 \\ For each $\textit{rule}_h \in rules: X(\textit{rule}_h)$ is a set of
 solutions matching this rule.
 
 \item $w(\textit{rule}_h) = (1 - \delta)^{\textit{card}(X(\textit{rule}_h))}$
-  \\ Each rule ($\textit{rule}_h$) gets a~weight related to number of times it
-  is matched by a~solution. $\delta$ is a~decay of rule weight. For example
-  $\delta = 0.1$. This formula associates higher weight for rules matching
-  lesser number of solutions --- this is an important property because it
-  allows to maintain diversity with respect to rules.
+  \\ Each rule ($\textit{rule}_h$) gets a~weight related to the number of
+  times it is matched by a~solution. $\delta$ is a~decay of rule weight. For
+  example $\delta = 0.1$. This formula associates higher weight for rules
+  matching lesser number of solutions --- this is an important property
+  because it allows to maintain diversity with respect to rules.
 
 \item $\textit{PrimaryScore}(x) = \sum_{\textit{rule}_h \in rules(x)}$
   $w(\textit{rule}_h)$ \\
@@ -395,7 +396,7 @@ Finally $\textit{PrimaryScore}(x)$ is a primary score of given solution ($x \in 
 \end{description}
 
 In case of a draw also a secondary score is considered for each solution. This
-score is calculated in the same way as \textit{crowding distance} in
+score is calculated similarly to a \textit{crowding distance} score in
 \textit{NSGA-II} method ([ref]). The difference lies in a fact, that this
 score is calculated in a~quantile space instead of original objective space,
 e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots \times $
@@ -412,7 +413,7 @@ alg.~\ref{alg:crowddist}.
     \EndFor
     \ForAll{$o \in \textit{objectives}$}
     \State $X' \gets$ \Call{Sort}{$X, o$} \Comment{Sort solutions using value
-      of $o$ objective}
+      of an $o$ objective}
     \State $\textit{distance}(X`(1)) \gets \infty$ \Comment{Boundary solutions
       get highest score possible}
     \State $\textit{distance}(X`(n)) \gets \infty$ \Comment{$X`(n)$ is the
@@ -427,12 +428,12 @@ alg.~\ref{alg:crowddist}.
   \end{algorithmic}
 \end{algorithm}
 
-In line~\ref{algin:select} parent selection is done. The process is a Monte
-Carlo procedure and possibility of selecting a~solution $x \in X$ as parent
+In line~\ref{algin:select} parents selection is done. The process is a Monte
+Carlo procedure; possibility of selecting a~solution $x \in X$ as a parent
 is:\\
 $$Pr(x) = \left( \frac{|X|-\textit{rank}(x) + 1}{|X|} \right)^\gamma - \left( \frac{|X|-\textit{rank}(x)}{|X|} \right)^\gamma$$
-where $\textit{rank}(x)$ is a rank of solution $x \in X$ in the ranking made
-in line~\ref{algin:rank}. $\gamma \geq 1$ is a elitism coefficient. The higher
+where $\textit{rank}(x)$ is a rank of a solution $x \in X$ in the ranking made
+in line~\ref{algin:rank}. $\gamma \geq 1$ is an elitism coefficient. The higher
 the $\gamma$ the bigger the probability of selecting high-ranked solution as
 a~parent.
 
@@ -448,3 +449,6 @@ can be calculated using the formula: $$Pr(t) = \epsilon (1 - \omega)^{t-1}$$
 Where $t$ is a number of current iteration, $\omega$ - mutation decay rate,
 $\epsilon$ - initial mutation probability. Suggested values are
 $\omega = 0.1, \epsilon = 0.5$.
+
+In this section DARWIN idea was explained. The implementation is given in the
+next section,
