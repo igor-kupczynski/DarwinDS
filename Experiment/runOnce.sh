@@ -55,7 +55,7 @@ cd $OUT_DIR || {
 }
 cp $CONFIG_FILE input/config.ini
 cp $PROBLEM_FILE input/problem.mod
-java -Xms768mb -Xmx768mb -classpath "$CP" $MAIN_CLASS --config $CONFIG_FILE --problem $PROBLEM_FILE
+java -Xms768m -Xmx768m -classpath "$CP" $MAIN_CLASS --config $CONFIG_FILE --problem $PROBLEM_FILE
 cd - > /dev/null
 
 exit 0

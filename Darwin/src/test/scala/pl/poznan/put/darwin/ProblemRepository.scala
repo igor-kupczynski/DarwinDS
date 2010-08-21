@@ -148,4 +148,6 @@ trait ProblemRepository {
   ).get
   val binarySimpleNoIntervalsSim = new Simulation(defaultConfig,
                                                   binarySimpleNoIntervals)
+
+  
 }
