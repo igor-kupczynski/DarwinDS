@@ -74,11 +74,18 @@ object Parser {
           case "-" ~ e => UnaryOp("-", e)
           case "ln" ~ e => UnaryOp("ln", e)
         } |
+        quantile ^^ {case e => e} |
         aggregate ^^ {case e => e} |
         ident ^^ {case name => Variable(name)} |
         interval ^^ {case e => e} |
         "(" ~ math ~ ")"  ^^ {case _ ~ e ~ _ => e}
 
+    def quantile: Parser[Expr] =
+      "<" ~ ident ~ "," ~ floatingPointNumber ~ ">" ^^ {
+        case _ ~ name ~ _ ~ value ~ _ if ((value.toDouble >= 0) && (value.toDouble <= 1)) =>
+          Quantile(name, value.toDouble)
+      }
+  
     def interval: Parser[Expr] = {
       "[" ~ ident ~ ":" ~ floatingPointNumber ~ "," ~ floatingPointNumber ~ "]" ^^ {
         case _ ~ name ~ _ ~ lower ~ _ ~ upper ~ _ =>

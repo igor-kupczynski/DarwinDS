@@ -28,6 +28,13 @@ case class Interval(name: String, lower: Double, upper: Double) extends Expr {
   }
 }
 
+/* Quantile of goal */
+case class Quantile(name: String, quantile: Double) extends Expr {
+  override def toString: String = {
+    "<%s, %s>" format (name, quantile)
+  }
+}
+  
 /* Operators */
 case class UnaryOp(operator: String, arg: Expr) extends Expr {
   override def toString: String = {

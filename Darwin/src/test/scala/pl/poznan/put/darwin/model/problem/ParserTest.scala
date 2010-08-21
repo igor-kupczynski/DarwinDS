@@ -45,7 +45,7 @@ class ParserTest extends JUnitSuite {
     ("""
      var[0, 1] x;
      max profit: x;
-     !dec: profit(0.1) + profit(0.25);
+     !dec: <profit,0.1> + <profit,0.25>;
     """) :: Nil
 
     val toStringRes = "var[0.0, 10.0] x1;\nvar [0.0,15.0] x2;\n" ::
@@ -106,7 +106,7 @@ weight: sum((ln(8.103435) * x0), (4.069466 * x1), (8.993478 * x2), (1.203721 * x
 
 max profit: x;
 
-!dec: (profit(0.1) + profit(0.25));
+!dec: (<profit, 0.1> + <profit, 0.25>);
 
 """) ::
     Nil
