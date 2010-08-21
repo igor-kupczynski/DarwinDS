@@ -17,4 +17,5 @@ c4: xa >= 0;
 c5: xb >= 0;
 c6: xc >= 0;
 
-!dec: profit - time;
+!dec:      <profit, 0.01> + 3 * <profit, 0.25> + 2 * <profit, 0.50>
+      -1 * <time, 0.01>   - 3 * <time, 0.25>   - 2 * <time, 0.50>;

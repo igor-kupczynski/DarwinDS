@@ -21,6 +21,7 @@ object Evaluator {
       case UnaryOp(op, x) => UnaryOp(op, simplify(x, scenario, solution))
       case Interval(x, _, _) => Constant(scenario(x))
       case Variable(x) => Constant(solution(x))
+      case Quantile(name, x) => Constant(solution("%s_%s" format (name, x)))
       case _ => exp
     }
 
@@ -86,6 +87,24 @@ object Evaluator {
     evaluateSim(simplify(expr, scenario, solution))
   }
 
+
+  /**
+   * Extracts all quantiles from the expression
+   */
+  def extractQuantiles(exp: Expr): List[Quantile] = {
+
+    def extractAll(exp: Expr): List[Quantile] = {
+      exp match {
+        case q: Quantile => q :: Nil
+        case UnaryOp(name, e) => extractAll(e)
+        case BinaryOp(name, l, r) => extractAll(l) ::: extractAll(r)
+        case AggregateOp(name, eList) =>  (eList.foldLeft[List[Quantile]](Nil))((ll, e) => extractAll(e) ::: ll)
+        case _ => Nil
+      }
+    }
+
+    ((extractAll(exp)).foldLeft[List[Quantile]](Nil))((ll: List[Quantile], i) => if (ll.contains(i)) ll else i :: ll)
+  }
 
   /**
    * Extracts all intervals from the expression

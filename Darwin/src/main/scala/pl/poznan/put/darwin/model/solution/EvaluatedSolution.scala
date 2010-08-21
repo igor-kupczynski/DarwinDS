@@ -18,8 +18,10 @@ class EvaluatedSolution(sim: Simulation, values: Map[String, Double],
   def utilityFunctionValue: Double = {
     var values: Map[String, Double] = Map()
     goals foreach ((g: Goal) => {
-      //TODO: generalize to interval case
       values += (g.name -> getPercentile(g, 1))
+      sim.problem.getQuantilesFor(g.name) foreach (q => {
+        values += (("%s_%s" format (q.name, q.quantile)) -> getPercentile(g, 100 * q.quantile))
+      })
     })
     Evaluator.evaluate(sim.problem.utilityFunction.expr, Map(), values)
   }

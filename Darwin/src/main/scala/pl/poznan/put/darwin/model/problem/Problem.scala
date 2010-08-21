@@ -10,6 +10,7 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
               val constraints: List[Constraint]) {
 
   private var intervals: List[Interval] = null
+  private var quantiles: List[Quantile] = null
 
   /**
    * Returns scenario with medium values on each interval.
@@ -41,6 +42,17 @@ class Problem(name: String, vars: List[VariableDef], val goals: List[Goal], val 
       })
     }
     intervals
+  }
+
+  /**
+   * Return list of quantiles for given goal name
+   */
+  def getQuantilesFor(goalName: String): List[Quantile] = {
+    if (utilityFunction == null)
+      return(List())
+    if (quantiles == null)
+      quantiles = Evaluator.extractQuantiles(utilityFunction.expr)
+    quantiles filter {_.name == goalName}
   }
 
   /**
