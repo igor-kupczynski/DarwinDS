@@ -14,7 +14,7 @@ class SolutionTest extends Specification with ScalaCheck with ProblemRepository 
     }
     "should generate feasible random solutions" in {
       for (idx <- 1 to 50) {
-        val r = Solution.random(trainsSoldiersNoIntervalsSim)
+        val r = Solution.random(trainsSoldiersNoIntervalsSim, List())
         r.sim must be_==(trainsSoldiersNoIntervalsSim)
         val x1 = r.values("x1")
         x1 must be_>=(0.0)
@@ -26,7 +26,7 @@ class SolutionTest extends Specification with ScalaCheck with ProblemRepository 
     }
     "respect integer constraints" in {
       for (idx <- 1 to 50) {
-        val r = Solution.random(integerTrainsSoldiersNoIntervalsSim)
+        val r = Solution.random(integerTrainsSoldiersNoIntervalsSim, List())
         r.sim must be_==(integerTrainsSoldiersNoIntervalsSim)
         val x1 = r.values("x1")
         x1 must be_>=(0.0)
@@ -40,7 +40,7 @@ class SolutionTest extends Specification with ScalaCheck with ProblemRepository 
     }
   "respect binary constraints" in {
       for (idx <- 1 to 50) {
-        val r = Solution.random(binarySimpleNoIntervalsSim)
+        val r = Solution.random(binarySimpleNoIntervalsSim, List())
         r.sim must be_==(binarySimpleNoIntervalsSim)
         val x = r.values("x")
         x must beOneOf(0.0, 1.0)
@@ -98,7 +98,7 @@ class SolutionTest extends Specification with ScalaCheck with ProblemRepository 
     "generate feasible random neighbour" in {
       val s = Solution(trainsSoldiersNoIntervalsSim, Map("x1" -> 10.0, "x2" -> 20.0))
       for (idx <- 1 to 50) {
-        val rn = s.randomNeighbour
+        val rn = s.randomNeighbour(List())
         rn.isFeasible must be(true)
         rn must be_!=(s)
       }

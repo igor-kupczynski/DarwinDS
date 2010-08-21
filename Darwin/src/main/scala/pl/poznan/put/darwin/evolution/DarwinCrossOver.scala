@@ -15,9 +15,11 @@ import pl.poznan.put.darwin.utils.RNG
 */
 object CrossOver  {
 
-  def apply(a: Solution, b: Solution): Solution = {
+  def apply(a: Solution, b: Solution, scenarios: List[Map[String, Double]]):
+      Solution = {
     var c: Map[String, Double] = null
-    while (c == null || !(new Solution(a.sim, c)).isFeasible) {
+    while (c == null ||
+           !(new Solution(a.sim, c)).isFeasibleOnScenarios(scenarios)) {
       val gamma: Double = RNG().nextDouble()
       c = Map()
       a.sim.problem.getVariables().foreach({

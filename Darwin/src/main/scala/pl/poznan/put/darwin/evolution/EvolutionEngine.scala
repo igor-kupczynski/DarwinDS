@@ -41,7 +41,8 @@ class EvolutionEngine(sim: Simulation, rulesContainer: DarwinRulesContainer) {
       (0 to (chosenOnes.length / 2 - 1)).map(idx => {
         EvaluatedSolution(
           Mutate(
-            CrossOver(chosenOnes(2*idx), chosenOnes(2*idx+1)),
+            CrossOver(chosenOnes(2*idx), chosenOnes(2*idx+1), scenarios),
+            scenarios,
             generation),
           scenarios)
       }).toList,

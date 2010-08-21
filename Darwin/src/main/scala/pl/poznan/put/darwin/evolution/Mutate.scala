@@ -11,9 +11,10 @@ import pl.poznan.put.darwin.utils.RNG
  */
 object Mutate {
 
-  def apply(s: Solution, generation: Int): Solution =
+  def apply(s: Solution, scenarios: List[Map[String, Double]],
+            generation: Int): Solution =
     if (RNG().nextDouble() > s.sim.config.ETA *
         math.pow(1 - s.sim.config.OMEGA, generation - 1))
-      s.randomNeighbour
+      s.randomNeighbour(scenarios)
     else s
 }

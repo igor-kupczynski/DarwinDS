@@ -16,15 +16,35 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
   def goals = sim.problem.goals
 
 
-    /**
+  /**
    * Checks if given solution is feasible (on default scenario)
    */
-  def isFeasible: Boolean = {
+  private[solution] def isFeasible: Boolean = {
     val default = sim.problem.getDefaultScenario()
+    isFeasibleOn(default)
+  }
+
+  /**
+   * Checks if given solution is feasible (first on default and then on
+   * given scenarios)
+   */
+  def isFeasibleOnScenarios(scenarios: List[Map[String, Double]]): Boolean = {
+    if (!isFeasible) return false
+    for (s <- scenarios) {
+      if (!isFeasibleOn(s)) return false
+    }
+    true
+  }
+
+
+  /**
+   * Check if solution is feasible on given scenario
+   */
+  private def isFeasibleOn(scenario: Map[String, Double]): Boolean = {
     // Check problem constraints
     sim.problem.constraints foreach ((c: Constraint) => {
-       val lVal = Evaluator.evaluate(c.lhs, default, values)
-       val rVal = Evaluator.evaluate(c.rhs, default, values)
+       val lVal = Evaluator.evaluate(c.lhs, scenario, values)
+       val rVal = Evaluator.evaluate(c.rhs, scenario, values)
        if ( c.gte && lVal < rVal) {
          return false
        }
@@ -47,16 +67,17 @@ class Solution(val sim: Simulation, val values: Map[String, Double]) {
     }
     true
   }
-
+  
   /**
    *  Generate neighbour
    */
-  def randomNeighbour(): Solution = {
+  def randomNeighbour(scenarios: List[Map[String, Double]]): Solution = {
     var resultValues: Map[String, Double] = null
     val rng: RNG = RNG()
     var tries = 0
     while (tries < sim.config.MUTATION_TRIES &&
-            (resultValues == null || !(new Solution(sim, resultValues)).isFeasible)) {
+            (resultValues == null ||
+             !(new Solution(sim, resultValues)).isFeasibleOnScenarios(scenarios))) {
       val idx = rng.nextInt(values.size)
       val variable = (values.keys.toList)(idx)
 
@@ -141,10 +162,11 @@ object Solution {
     new Solution(sim, values)
   }
 
-  def random(sim: Simulation): Solution = {
+  def random(sim: Simulation, scenarios: List[Map[String, Double]]): Solution = {
     val rng: RNG = RNG()
     var result: Map[String, Double] = null
-    while (result == null || !(new Solution(sim, result)).isFeasible) {
+    while (result == null ||
+           !(new Solution(sim, result)).isFeasibleOnScenarios(scenarios)) {
       result = Map()
       sim.problem.getVariables foreach ((v: VariableDef) => {
         v.constraint match {

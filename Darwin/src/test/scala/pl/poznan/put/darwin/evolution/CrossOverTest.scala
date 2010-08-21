@@ -17,7 +17,7 @@ class CrossOverTest extends JUnitSuite with ProblemRepository {
 
     for (idx <- 1 to 10) {
       val c = CrossOver(new Solution(trainsSoldiersNoIntervalsSim, a),
-          new Solution(trainsSoldiersNoIntervalsSim, b))
+          new Solution(trainsSoldiersNoIntervalsSim, b), List())
       assertTrue(c.values("x1") >= 5.0)
       assertTrue(c.values("x1") <= 25.0)
       assertTrue(c.values("x2") >= 1.0)
@@ -26,7 +26,7 @@ class CrossOverTest extends JUnitSuite with ProblemRepository {
       assertTrue(c.values("x2") != a("x2"))
       assertTrue(c.values("x1") != b("x1"))
       assertTrue(c.values("x2") != b("x2"))
-      assertTrue(c.isFeasible)
+      assertTrue(c.isFeasibleOnScenarios(List()))
     }
     
   }
@@ -39,7 +39,7 @@ class CrossOverTest extends JUnitSuite with ProblemRepository {
     var theSame = 0
     for (idx <- 1 to 10) {
       val c = CrossOver(new Solution(integerTrainsSoldiersNoIntervalsSim, a),
-          new Solution(integerTrainsSoldiersNoIntervalsSim, b))
+          new Solution(integerTrainsSoldiersNoIntervalsSim, b), List())
       assertTrue(c.values("x1") >= 2)
       assertTrue(c.values("x1") <= 20)
       assertTrue(c.values("x2") >= 2)
@@ -55,7 +55,7 @@ class CrossOverTest extends JUnitSuite with ProblemRepository {
       }
       assertEquals(math.round(c.values("x1")), c.values("x1"), 0.0)
       assertEquals(math.round(c.values("x2")), c.values("x2"), 0.0)
-      assertTrue(c.isFeasible)
+      assertTrue(c.isFeasibleOnScenarios(List()))
     }
     assertTrue(theSame < 20)
     

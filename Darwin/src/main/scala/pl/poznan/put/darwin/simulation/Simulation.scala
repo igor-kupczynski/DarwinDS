@@ -15,15 +15,15 @@ class Simulation(val config: Config, val problem: Problem) {
   def run() {
     if (fired)
       throw new Exception("Already fired")
-    
-    var solutions: List[Solution] = Nil
-    for (idx <- 1 to config.SOLUTION_COUNT) {
-      solutions = Solution.random(this) :: solutions
-    }
 
     var scenarios: List[Map[String, Double]] = Nil
     for (idx <- 1 to config.SCENARIO_COUNT) {
       scenarios = Scenario.generate(problem) :: scenarios
+    }
+  
+    var solutions: List[Solution] = Nil
+    for (idx <- 1 to config.SOLUTION_COUNT) {
+      solutions = Solution.random(this, scenarios) :: solutions
     }
 
     var evaluatedSolutions = EvaluatedSolution(solutions, scenarios)
