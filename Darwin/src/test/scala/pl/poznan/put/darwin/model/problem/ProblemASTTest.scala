@@ -27,6 +27,12 @@ class ProblemASTTest extends JUnitSuite {
     assertEquals(3.14, i2.upper, 0.0)
     assertEquals(3.14, i2.getMediumValue(), 0.0)
     assertEquals("[limit2: 3.14, 3.14]", i2.toString)
+
+
+    val q1 = Quantile("profit", 0.2)
+    assertEquals("profit", q1.name)
+    assertEquals(0.2, q1.quantile, 0.0)
+    assertEquals("<profit, 0.2>", q1.toString)
   }
 
   @Test def OperatorTest = {
