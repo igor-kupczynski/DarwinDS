@@ -132,7 +132,7 @@ trait ProblemRepository {
   val simpleNoIntervals: Problem = Parser.ProblemParser.parse(
       "var[0.0, 200.0] x;\n\n" +
       "max profit: x;\n\n" +
-      "!dec: profit;\n\n" +
+      "!dec: profit(0.10) + profit(0.25);\n\n" +
       "nonZero: x >= 0.0;\n" +
       "limit: x <= 100.0;\n"
   ).get
