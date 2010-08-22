@@ -21,14 +21,14 @@ PROBLEM_FILE=`rel2abs $3`
 OUT=`rel2abs $4`
 OUT_DIR="$OUT/$5"
 ITEMS=(
-    "project/boot/scala-2.8.0.RC1/lib/scala-library.jar"
-    "lib_managed/scala_2.8.0.RC1/compile/args4j-2.0.9.jar"
+    "project/boot/scala-2.8.0/lib/scala-library.jar"
+    "lib_managed/scala_2.8.0/compile/args4j-2.0.9.jar"
     "lib/jrs_2010-04-30.jar"
     "lib/ForemkaCore_3.1.0.jar"
-    "lib_managed/scala_2.8.0.RC1/compile/trove-2.1.1.jar"
-    "lib_managed/scala_2.8.0.RC1/compile/ini4j-0.5.1.jar")
+    "lib_managed/scala_2.8.0/compile/trove-2.1.1.jar"
+    "lib_managed/scala_2.8.0/compile/ini4j-0.5.1.jar")
 
-JAR="$DARWIN_DIR/target/scala_2.8.0.RC1/darwin_2.8.0.RC1-0.1.jar"
+JAR="$DARWIN_DIR/target/scala_2.8.0/darwin_2.8.0-0.1.jar"
 CP="$JAR"
 
 for idx in $(seq 0 $((${#ITEMS[@]} - 1)))
