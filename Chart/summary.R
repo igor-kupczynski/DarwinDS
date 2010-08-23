@@ -55,7 +55,10 @@ pdf(args[5])
 data <- prep.data.line(df, args[4])
 data.box <- prep.data.box(df)
 c <- gen.plot.line(data)
-c <- c + optimal(as.numeric(args[2]), data$outer[length(data$outer)])
+opt <- as.numeric(args[2])
+if (opt != 0) {
+  c <- c + optimal(opt, data$outer[length(data$outer)])
+}
 print(c)
 dev.off()
 pdf(args[6])

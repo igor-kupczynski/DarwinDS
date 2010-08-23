@@ -53,6 +53,9 @@ df <-read.csv(args[3], header=TRUE)
 pdf(args[4])
 data <- prep.data(df)
 c <- gen.plot(data, args[5])
-c <- add.optimal(c, as.numeric(args[2]), length(data$outer))
+opt <- as.numeric(args[2])
+if (opt != 0) {
+  c <- add.optimal(c, opt, length(data$outer))
+}
 print(c)
 dev.off()
