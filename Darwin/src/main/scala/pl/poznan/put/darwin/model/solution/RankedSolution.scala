@@ -12,8 +12,10 @@ import pl.poznan.put.darwin.simulation.Simulation
  */
 class RankedSolution(sim: Simulation, values: Map[String, Double],
                         performances: Map[Goal, List[Double]],
-                        val primaryScore: Double, val secondaryScore: Double, val rank: Int)
-        extends EvaluatedSolution(sim, values, performances) {
+                        val primaryScore: Double,
+                        val secondaryScore: Double,
+                        val rank: Int)
+    extends EvaluatedSolution(sim, values, performances) {
 
   override val name = "(R) Solution"
 
@@ -43,6 +45,9 @@ class RankedSolution(sim: Simulation, values: Map[String, Double],
  * One cannot create single instance fo RankedSolution. You need a band of
  * EvaluatedSolutions to create a band of RankedSolutions. N-in, N-out.
  *
+ * It is possible to use supposed utiliy function /usefull only for tests
+ * and comparisons
+ *
  * @author: Igor Kupczynski
  */
 object RankedSolution {
@@ -58,7 +63,7 @@ object RankedSolution {
       calculatePrimary(rulesContainer, solutions)
     val crowdingDistances = calculateCrowding(solutions)
 
-    def fitnessLT(self: EvaluatedSolution,
+    def rulesLT(self: EvaluatedSolution,
                   other: EvaluatedSolution): Boolean =
       if (primaryScores(self) > primaryScores (other) ||
               (primaryScores(self) == primaryScores (other) &&
@@ -67,7 +72,22 @@ object RankedSolution {
       else
         false
 
-    val sortedSolutions = solutions.sortWith(fitnessLT)
+    /**
+     * Supposed utility function comparator. Usefull for testing purposes.
+     */
+    def supposedUtilityLT(self: EvaluatedSolution,
+                   other: EvaluatedSolution): Boolean =
+      if (self.utilityFunctionValue > other.utilityFunctionValue)
+        true
+      else
+        false
+
+    val config = solutions(0).sim.config
+    val sortedSolutions = if (config.COMPARE_USING_SUPPOSED_UTILITY)
+        solutions.sortWith(supposedUtilityLT)
+      else
+        solutions.sortWith(rulesLT)
+                     
     var count = 0
     (0 to (sortedSolutions.length - 1)).map(idx => {
       val s = sortedSolutions(idx)

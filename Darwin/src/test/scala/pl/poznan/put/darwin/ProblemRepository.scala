@@ -46,6 +46,7 @@ trait ProblemRepository {
   [evolution]
   regenerateEvery = 1000
   regeneratePercent = 0.0
+  compareusingsupposedutility = False
   """
   val parser = new ConfigParser()
   parser.read(new ByteArrayInputStream(defConf.getBytes("UTF-8")))
@@ -84,6 +85,7 @@ trait ProblemRepository {
   [evolution]
   regenerateEvery = 1000
   regeneratePercent = 0.0
+  compareusingsupposedutility = False
   """
   val parserWithAvg = new ConfigParser()
   parserWithAvg.read(new ByteArrayInputStream(confWithAvg.getBytes("UTF-8")))

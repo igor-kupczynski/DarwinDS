@@ -52,8 +52,12 @@ class Config(parser: ConfigParser) {
   /*
    * Evolution options
    */
-  val REGENERATE_SCENARIONS_EVERY_GENERATIONS: Int = parser.getInt("evolution", "regenerateevery")
-  val REGENERATE_PERCENT_OF_SCENARIONS: Double = parser.getDouble("evolution", "regeneratepercent")
+  val REGENERATE_SCENARIONS_EVERY_GENERATIONS: Int =
+    parser.getInt("evolution", "regenerateevery")
+  val REGENERATE_PERCENT_OF_SCENARIONS: Double =
+    parser.getDouble("evolution", "regeneratepercent")
+  val COMPARE_USING_SUPPOSED_UTILITY: Boolean =
+    parser.getBoolean("evolution", "compareusingsupposedutility")
   
   private def getListOfDoubles(str: String): List[Double] = {
     val r = new Regex(",")
