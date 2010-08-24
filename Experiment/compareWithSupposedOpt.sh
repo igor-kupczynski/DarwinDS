@@ -28,7 +28,7 @@ do
     ./mergeEvReports.py `find $DIR_SUPP -iname 'evolution_report.csv'` $DIR_SUPP/merged_evolution_report.csv
     ./compare.py $CHART_DIR \
 	$DIR_RULES/merged_evolution_report.csv ${TEST_NAME}_rules \
-	$DIR_RULES/merged_evolution_report.csv ${TEST_NAME}_supp \
+	$DIR_SUPP/merged_evolution_report.csv ${TEST_NAME}_supp \
 	$DIR_SUPP/../${TEST_NAME}_comparison.pdf
     
 done
