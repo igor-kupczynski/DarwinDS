@@ -26,7 +26,7 @@ do
     TEST_NAME=`basename $DIR_SUPP | sed s/_supp//`
     ./mergeEvReports.py `find $DIR_RULES -iname 'evolution_report.csv'` $DIR_RULES/merged_evolution_report.csv
     ./mergeEvReports.py `find $DIR_SUPP -iname 'evolution_report.csv'` $DIR_SUPP/merged_evolution_report.csv
-    ./compare.py $CHART_DIR \
+    ./compare.sh $CHART_DIR \
 	$DIR_RULES/merged_evolution_report.csv ${TEST_NAME}_rules \
 	$DIR_SUPP/merged_evolution_report.csv ${TEST_NAME}_supp \
 	$DIR_SUPP/../${TEST_NAME}_comparison.pdf
