@@ -134,15 +134,77 @@ The experiments were performed using following problems:
 
   \item{\textbf{Three-criteria DTLZ problem generated using constraint surface
     approach}}
+    \begin{align*}
+      & \textit{min}\text{ f$_1$:} \hspace{0.2cm} x_1 \\
+      & \textit{min}\text{ f$_2$:} \hspace{0.2cm} x_2 \\
+      & \textit{min}\text{ f$_3$:} \hspace{0.2cm} x_3 \\
+      & \textit{subject to:} \\
+      & \hspace{0.5cm} 0 \le x_i \le 1, \hspace{0.2cm} i = 1, 2, 3 \\
+      & \hspace{0.5cm} -x_1 + x_2 + 0.6 \ge 0 \\
+      & \hspace{0.5cm} x_1 + x_3 - 0.5 \ge 0 \\
+      & \hspace{0.5cm} x_1 + x_2 + x_3 - 1.1 \ge 0 \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} -1 * \text{f}_1 - 2 * \text{f}_2 - 1 * \text{f}_3
+    \end{align*}
 
-  \item{\textbf{Two-criteria production problem with uncertainty} (described in
-    presentation given on ... [ref])}
+    This problem consists of three simple linear criteria. The solution space
+    is three dimensional cube bounded by the $0 \le x_i \le 1$ constraint. To
+    make the problem more interesting parts of the solution space are being
+    cut off by additional constraints.
 
-  \item{\textbf{Tree-criteria DTLZ7 problem with uncertainty}}
+    This problem was build according to constraint surface approach presented
+    in~[ref].
 
-  \item{\textbf{Four-criteria DTLZ1 problem with uncertainty}}
+  \item{\textbf{Two-criteria robust mix problem}}
+    \begin{align*}
+      & \textit{max}\text{ profit:} \hspace{0.2cm} p_A \text{min}(x_A, d_A)
+      + p_B \text{min}(x_B, d_B) +  p_C \text{min}(x_C, d_C) \\
+      & \hspace{1cm} - (r^1_Ax_A + r^1_Bx_B + r^1_Cx_C) p^1_R
+      - (r^2_Ax_A + r^2_Bx_B + r^2_Cx_C) p^2_R\\
+      & \textit{min}\text{ time:} \hspace{0.2cm} t_Ax_A + t_Bx_B + t_Cx_C \\
+      & \textit{where:} \\
+      & \hspace{0.5cm} p_A \in [20, 24], p_B \in [30, 36], p_C \in [25, 30] \\
+      & \hspace{0.5cm} d_A \in [10, 12], d_B \in [20, 24], d_C \in [10, 12] \\
+      & \hspace{0.5cm} r^1_A \in [1, 1.2], r^1_B \in [2, 2.4], r^1_C \in [0.75, 0.9] \\ 
+      & \hspace{0.5cm} r^2_A \in [0,5, 0.6], r^2_B \in [1, 1.2], r^2_C \in [0.5, 0.6] \\ 
+      & \hspace{0.5cm} p^1_R \in [6, 7.2], p^2_R \in [9, 9.6] \\
+      & \hspace{0.5cm} t_A \in [5, 6], t_B \in [8, 9.6], t_C \in [10, 12] \\ 
+      & \textit{subject to:} \\
+      & \hspace{0.5cm} 0 \le x_A \le 12 \\
+      & \hspace{0.5cm} 0 \le x_B \le 24 \\
+      & \hspace{0.5cm} 0 \le x_C \le 12 \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} \text{profit}^{1\%} + 3 * \text{profit}^{25\%}
+      + 2 * \text{profit}^{50\%} - \text{time}^{1\%}
+      - 3 * \text{time}^{25\%} - 2 * \text{time}^{50\%} 
+    \end{align*}
+    
+    
+    The problem was described in a presentation given on ... ([ref])
+    describing the DARWIN method. It contains a lot of coefficients given in
+    form of intervals. For readability's sake they were named and defined
+    below the criteria.
 
-  \item{\textbf{Ten-criteria DTLZ1 problem with uncertainty}}
+    The goal is to decide quantity of each product ($A, B, C$) to be
+    produced. One wants to maximise the profit and minimised the total time it
+    takes to produce the products. $p_i$ is the price of a product $i \in \{A,
+    B, C\}$ on the market. There is also maximal demand the market can consume
+    ($d_i$). Each product consists of two raw materials --- $r_1$ and
+    $r_2$. Quantity needed to produce $i$-th product is defined ($r^1_i,
+    r^2_i$) as well as the product price ($p^1_R, p^2_R$). Finally it takes
+    time to produce a given product --- $t_A, t_B, t_C$.
+
+    Coefficients are given in form of intervals, so each solution has to be
+    evaluated on many scenarios of uncertainty. This is why no exact values
+    are given in the supposed utility function. Percentiles are given instead
+    (see~[inref]). $\text{goal}^{25\%}$ means the best solution of the worst
+    $25\%$ of them.
+
+  \item{\textbf{Tree-criteria robust DTLZ7 problem}}
+
+  \item{\textbf{Four-criteria robust DTLZ1 problem}}
+
+  \item{\textbf{Ten-criteria robust DTLZ1 problem}}
 
 \end{description}
 
