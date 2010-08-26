@@ -27,17 +27,49 @@ Area of interest for Multi-Objective Optimisation is huge and consists of many
 potential problems to be solved. There are multi-criteria versions of
 classical problems, like minimal spanning tree~[ref], traveling salesman
 problem (TSP)~[ref] or knapsack problem~[ref] as well as artificially
-generated ones --- like the ZDT problems [ref]. Some of them are interesting
+generated ones --- like the DTLZ problems [ref]. Some of them are interesting
 because of their real-life applications while the other are good for
 experimenting and testing purposes.
 
+Introducing uncertainty model as intervals is a new concept. For this reason
+the uncertainty was added to the problems described above.
+
 The experiments were performed using following problems:
-\begin{enumerate}
-  \item Two-criteria binary knapsack problem
+\begin{description}
+  \item{\textbf{Two-criteria binary knapsack problem}} \\
+    \begin{align*}
+      & \bar{x} = [x_1, x_2, \dots, x_{300}]  \\
+      & x_i \in \{0, 1\};  \hspace{0.5cm} i = 1, 2, \dots, 300 \\
+      & \textit{max}\text{ value$_1$:} \hspace{0.2cm} \bar{a_1} \cdot \bar{x} \\
+      & \textit{max}\text{ value$_2$:} \hspace{0.2cm} \bar{a_2} \cdot \bar{x} \\
+      & \textit{subject to:} \\
+      & \hspace{0.5cm} \text{weight} \bar{w} \cdot \bar{x} \leq b \\
+    \end{align*}
+    
+    Where $\bar{x}$ is a vector of items to be chosen. The problem is binary,
+    so each $x_i \in \bar{x}$ can be either selected ($x_i = 1$) or not($x_i
+    = 0$). There are two criteria: value$_1$ and value$_2$. Each one is a sum
+    of items multiplied with associated weights (vector $\bar{a_1}$ and
+    $\bar{a_2}$).
+
+    Knapsack constraint is given. One can choose items up to a certain weight
+    ($b$). There is a vector of weights associated with each item
+    ($\bar{w}$). The limit is defined that it is possible to choose about
+    $2/3$ of the items.
+
+    Weights ($\bar{a_1}, \bar{a_2}, \bar{w}$) are uniformly distributed
+    vectors of values in $[0,10)$ interval.
+
   \item Two-criteria continuous knapsack problem
   \item Three-criteria binary knapsack problem
-  \item Three-criteria ZDT-problem
-\end{enumerate}
+  \item Three-criteria DTLZ problem generated using constraint surface
+    approach
+  \item Two-criteria production problem with uncertainty (described in
+    presentation given on ... [ref])
+  \item Tree-criteria DTLZ7 problem with uncertainty
+  \item Four-criteria DTLZ1 problem with uncertainty
+  \item Ten-criteria DTLZ1 problem with uncertainty
+\end{description}
 
 \section{No uncertainty}
 
