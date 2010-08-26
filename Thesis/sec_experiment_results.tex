@@ -23,9 +23,25 @@ code and with the modules written in R.
 
 \section{The Decision Maker}
 
-Experiments were repeated many times so to make it possible it was essential
-to mock the DM. This was done to assure /TODO/
+Experiments were repeated many times. In order to make it possible it was
+essential to mock the DM. This was also done to assure repeatable process
+across the test runs.
 
+In the DARWIN method interaction with decision maker occurs by showing him or
+her a list of generated solutions (usually 30) and asking him or her to
+indicate few ``good'' ones.
+
+To mock the DM one need to simulate his or her selections. It is assumed that
+the decision maker acts according to a utility functions he or her has in
+mind. This function will be called the supposed utility function.
+
+In the mocking process algorithm sorts the received solutions list according
+to this supposed utility function. Then it selects three (usually three,
+however this can be configured) solutions with the highest supposed utility.
+
+Unfortunately real decision maker, being a human isn't a predictive and
+repeatable as the described process. In the section [inref] results of
+introducing noise to DM's decisions are presented.
 
 \section{Problem selection}
 
