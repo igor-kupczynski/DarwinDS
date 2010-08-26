@@ -56,21 +56,18 @@ read.cmd.args <- function() {
 
 ### MAIN ######################################################################
 args <- read.cmd.args()
-if (args[1] == 2) {
-  df <-read.csv(args[2], header=TRUE)
-  pdf(args[3])
-  for (outer.idx in levels(factor(df$outer))) {
-    grid.newpage()
-    pushViewport(viewport(layout = grid.layout(2, 1)))
-    inner <- get.inner(outer.idx, df)
-    data <- prep.data.util(inner)
-    c <- gen.plot.util(outer.idx, data)
-    print(c, vp=viewport(layout.pos.row = 1, layout.pos.col = 1))
-    data <- prep.data.ps(inner)
-    c <- gen.plot.ps(outer.idx, data)
-    print(c, vp=viewport(layout.pos.row = 2, layout.pos.col = 1))
-  }
-  dev.off()
-} else {
-  cat(sprintf("Only works for two criteria, selected %d\n", args[0]))
+df <-read.csv(args[2], header=TRUE)
+pdf(args[3])
+for (outer.idx in levels(factor(df$outer))) {
+  grid.newpage()
+  pushViewport(viewport(layout = grid.layout(2, 1)))
+  inner <- get.inner(outer.idx, df)
+  data <- prep.data.util(inner)
+  c <- gen.plot.util(outer.idx, data)
+  print(c, vp=viewport(layout.pos.row = 1, layout.pos.col = 1))
+  data <- prep.data.ps(inner)
+  c <- gen.plot.ps(outer.idx, data)
+  print(c, vp=viewport(layout.pos.row = 2, layout.pos.col = 1))
 }
+dev.off()
+

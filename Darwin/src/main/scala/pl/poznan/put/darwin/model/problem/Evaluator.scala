@@ -75,6 +75,8 @@ object Evaluator {
         (exps.foldLeft[Double](0))(
           (x, exp) => x + evaluateSim(exp)
         )
+      case AggregateOp("cos", exps) =>
+        math.cos(evaluateSim(exps(0)))
     }
 
   }
