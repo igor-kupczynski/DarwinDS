@@ -60,7 +60,18 @@ The experiments were performed using following problems:
     Weights ($\bar{a_1}, \bar{a_2}, \bar{w}$) are uniformly distributed
     vectors of values in $[0,10)$ interval.
 
-  \item Two-criteria continuous knapsack problem
+
+  \item \textbf{Two-criteria continuous knapsack problem}
+
+    \begin{align*}
+      & \bar{x} = [x_1, x_2, \dots, x_{300}]  \\
+      & x_i \in [0, 1);  \hspace{0.5cm} i = 1, 2, \dots, 300 \\
+      & \textit{max}\text{ value$_1$:} \hspace{0.2cm} \bar{a_1} \cdot \bar{x} \\
+      & \textit{max}\text{ value$_2$:} \hspace{0.2cm} \bar{a_2} \cdot \bar{x} \\
+      & \textit{subject to:} \\
+      & \hspace{0.5cm} \text{weight} \bar{w} \cdot \bar{x} \leq b \\
+    \end{align*}
+
   \item Three-criteria binary knapsack problem
   \item Three-criteria DTLZ problem generated using constraint surface
     approach
