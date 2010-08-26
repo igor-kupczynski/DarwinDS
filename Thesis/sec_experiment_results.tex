@@ -43,6 +43,8 @@ Unfortunately real decision maker, being a human isn't a predictive and
 repeatable as the described process. In the section [inref] results of
 introducing noise to DM's decisions are presented.
 
+In the following problems the supposed utility function is also defined.
+
 \section{Problem selection}
 
 Area of interest for Multi-Objective Optimisation is huge and consists of many
@@ -72,7 +74,10 @@ The experiments were performed using following problems:
       & \textit{max}\text{ value$_1$:} \hspace{0.2cm} \bar{a_1} \cdot \bar{x} \\
       & \textit{max}\text{ value$_2$:} \hspace{0.2cm} \bar{a_2} \cdot \bar{x} \\
       & \textit{subject to:} \\
-      & \hspace{0.5cm} \text{weight:} \hspace{0.2cm} \bar{w} \cdot \bar{x} \leq b
+      & \hspace{0.5cm} \text{weight:} \hspace{0.2cm} \bar{w} \cdot \bar{x}
+      \leq b \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} 1*\text{value}_1 + 2*\text{value}_2
     \end{align*}
     
     Where $\bar{x}$ is a vector of items to be chosen. The problem is binary,
@@ -97,7 +102,10 @@ The experiments were performed using following problems:
       & \textit{max}\text{ value$_1$:} \hspace{0.2cm} \bar{a_1} \cdot \bar{x} \\
       & \textit{max}\text{ value$_2$:} \hspace{0.2cm} \bar{a_2} \cdot \bar{x} \\
       & \textit{subject to:} \\
-      & \hspace{0.5cm} \text{weight:}  \hspace{0.2cm} \bar{w} \cdot \bar{x} \leq b
+      & \hspace{0.5cm} \text{weight:}  \hspace{0.2cm} \bar{w} \cdot \bar{x}
+        \leq b \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} 3 * \text{value}_1 - 1 * \text{value}_2
     \end{align*}
 
     Continuous version of the knapsack problem. Description given for the
@@ -112,7 +120,10 @@ The experiments were performed using following problems:
       & \textit{max}\text{ value$_2$:} \hspace{0.2cm} \bar{a_2} \cdot \bar{x} \\
       & \textit{max}\text{ value$_3$:} \hspace{0.2cm} \bar{a_3} \cdot \bar{x} \\
       & \textit{subject to:} \\
-      & \hspace{0.5cm} \text{weight:} \hspace{0.2cm} \bar{w} \cdot \bar{x} \leq b
+      & \hspace{0.5cm} \text{weight:} \hspace{0.2cm} \bar{w} \cdot \bar{x}
+      \leq b \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} 1 * \text{value}_1 - 1 * \text{value}_2 + 2 * \text{value}_22
     \end{align*}
 
     Two-criteria problems can be easily visualised and analysed, however in
