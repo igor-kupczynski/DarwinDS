@@ -252,7 +252,105 @@ The experiments were performed using following problems:
 \end{description}
 
 \section{No uncertainty}
+In order to observe the algorithm's behaviour a detailed analysis of single
+run is presented in this section. The problem being analysed is the two
+criteria binary knapsack problem (see [inref]). Problem is simple and number
+of criteria small in order to focus on the algorithm. Also no uncertainty in
+form of interval coefficients is considered.
 
+Although this section is illustrated by an example run on the single problem
+the conclusions drawn here applies globally. Compare with further sections of
+the chapter.
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilouter}
+  \caption{Supposed utility function in exterior loop iterations}
+  \label{c2_utilouter}
+\end{figure}
+
+
+The exterior loop of the DARWIN was repeated ten times. The algorithm runs
+with default parameters (see [inref]). Exterior loop was repeated ten
+times. This means that ten times results (in form of solutions) were presented
+to the (mocked) decision maker. The solutions were recorded.
+
+The same problem was also solved by a mathematical programming solver
+(glpk~[ref]). One used supposed utility function as a optimisation goal for
+the solver. This way the best solutions was obtained (for the considered
+instance best supposed utility function value is $4154.441453$).
+
+Results of the run from the exterior loop perspective are given on
+figure~\ref{c2_utilouter}. All of the solutions generated during interior loop
+run were recorded. On the chart one see best and worst solutions in given run
+(the rest lies between them). Also best of the solutions shown to the DM is
+presented (labeled as ``last''). This is because for evolutionary algorithm it
+is possible to find and then forget ``good'' solutions (note that optimisation
+--- the internal loop is not aware of supposed utility function, it only tries
+to approximate it using induced decision rules). However most of the times
+``last'' solution equals ``best'' solution.
+
+One can see that in every iteration there is an improvement, however the
+improvements are getting smaller and smaller. This is because the better the
+solution population the harder it is to optimise it further.
+
+Now analysis of the interior loop is given. The first, third and seventh
+interior loop will be presented. Other runs are similar, so they were omitted
+in the paper. The results are presented on figures \ref{c2_utilgen_01},
+\ref{c2_utilgen_03} and \ref{c2_utilgen_07}. The iterations of the interior
+loop are also called \textit{generations} because of their evolutionary
+nature.
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilgen_01}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilgen_03}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilgen_07}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_07}
+\end{figure}
+
+On the charts one can see supposed utility function dependent on
+generation. Also value of the primary score is included for reference. To
+recapitulate --- the better the solution fits to induced decision rules the
+higher the primary score; in case of a draw (i.e. the primary score for two
+individuals is the same) secondary score is considered.
+
+The improvement happens on generation basis --- in every iteration supposed
+utility function is getting better. However as one can see improvement of the
+primary score happens mainly at the beginning. The runs like one in
+\ref{c2_utilgen_07}, where the is a breakthrough at the end of the run are in
+fact rare. Nevertheless the algorithm shouldn't be shut down after reaching
+maximum primary score. Although preference information extracted before the
+run are now exploited still an improvement can occur. More importantly the
+diversification effort is ongoing now --- when the primary score (rule based)
+of all the population is identical the secondary score (distance based --- the
+less the solution is crowded the higher the score) start to play major role in
+the process, pushing individuals in the population to new areas in solution
+space. This can result in major breakthrough --- the population may acquire
+traits wanted by the DM.
+
+Rules driving the interior loops described above are presented.
+
+\begin{description}
+  \item{Iteration 1}
+  \item{Iteration 3}
+  \item{Iteration 7}
+\end{description}
+
+
+
+
+
+\clearpage{}
 \section{The importance of parameters}
 
 \section{Noise in the DM's decisions}
