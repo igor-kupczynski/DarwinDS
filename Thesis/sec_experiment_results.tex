@@ -262,13 +262,6 @@ Although this section is illustrated by an example run on the single problem
 the conclusions drawn here applies globally. Compare with further sections of
 the chapter.
 
-\begin{figure}
-  \centering \includegraphics{exp/nouncert/c2_utilouter}
-  \caption{Supposed utility function in exterior loop iterations}
-  \label{c2_utilouter}
-\end{figure}
-
-
 The exterior loop of the DARWIN was repeated ten times. The algorithm runs
 with default parameters (see [inref]). Exterior loop was repeated ten
 times. This means that ten times results (in form of solutions) were presented
@@ -299,24 +292,6 @@ in the paper. The results are presented on figures \ref{c2_utilgen_01},
 \ref{c2_utilgen_03} and \ref{c2_utilgen_07}. The iterations of the interior
 loop are also called \textit{generations} because of their evolutionary
 nature.
-
-\begin{figure}
-  \centering \includegraphics{exp/nouncert/c2_utilgen_01}
-  \caption{Supposed utility function in interior loop iterations}
-  \label{c2_utilgen_01}
-\end{figure}
-
-\begin{figure}
-  \centering \includegraphics{exp/nouncert/c2_utilgen_03}
-  \caption{Supposed utility function in interior loop iterations}
-  \label{c2_utilgen_03}
-\end{figure}
-
-\begin{figure}
-  \centering \includegraphics{exp/nouncert/c2_utilgen_07}
-  \caption{Supposed utility function in interior loop iterations}
-  \label{c2_utilgen_07}
-\end{figure}
 
 On the charts one can see supposed utility function dependent on
 generation. Also value of the primary score is included for reference. To
@@ -356,8 +331,123 @@ Note that there are only two classes --- \texttt{GOOD} and \texttt{NOT GOOD}
 so essentially $\text{class} \ge \texttt{GOOD}$ means $\text{class} =
 \texttt{GOOD}$.
 
+In order to verify how the rules influences the algorithm behaviour charts
+were prepared (fig.~\ref{c2_valweight_01}, \ref{c2_valweight_03} and
+\ref{c2_valweight_07}). For two-criteria problem it is possible to present the
+search space on two-dimensional chart.
+
+The iterations $1$ and $3$ show typical run. Before the 10th generation whole
+population moves to an area covered by the rules. In the further generations
+diversification occurs. 7th iteration is a bit different though. Evolution
+``discovered'' a way to match the second rule not before the 20th
+generation. Soon after individuals covering both solutions were included the
+whole population drifted to the region marked by both rules.
+
+It can be also insightful to see the mocked DM choices and compare them with the
+inferred  rules. They are presented on charts (fig.~\ref{c2_dmchoices_01},
+\ref{c2_dmchoices_03}, \ref{c2_dmchoices_07}). It is the case that the choices
+directly affected the rules. One can also see another interesting trait of the
+problem. The further (in goal functions' space) the selected individuals are
+the harder it is to achieve maximal possible primary score.
+
+Finally charts presenting how supposed utility and primary score changed in
+the population together with succeeding generations (fig.~\ref{c2_utilind_01},
+\ref{c2_utilind_03} and \ref{c2_utilind_07}) are given. They are supporting
+the conclusions stated above.
+
+Analysis of single run it a good tool for understanding the internals of the
+method and inspecting the method behaviour. One can draw conclusions and spot
+potential problems and possible improvements. However more experiments have to
+be conducted and their results should be aggregated using statistical methods
+in order to check how useful the method is and what is the influence of the
+algorithm parameters. This is done in the further sections.
+
+%% Charts
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilouter}
+  \caption{Supposed utility function in exterior loop iterations}
+  \label{c2_utilouter}
+\end{figure}
 
 
+%% Utilgen
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilgen_01}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilgen_03}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilgen_07}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_07}
+\end{figure}
+
+
+%% Valweight
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_valweight_01}
+  \caption{Individuals in the solution space}
+  \label{c2_valweight_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_valweight_03}
+  \caption{Individuals in the solution space}
+  \label{c2_valweight_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_valweight_07}
+  \caption{Individuals in the solution space}
+  \label{c2_valweight_07}
+\end{figure}
+
+
+%% DM's choices
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_dmchoices_01}
+  \caption{Choices made by the DM in exterior loop}
+  \label{c2_dmchoices_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_dmchoices_03}
+  \caption{Choices made by the DM in exterior loop}
+  \label{c2_dmchoices_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_dmchoices_07}
+  \caption{Choices made by the DM in exterior loop}
+  \label{c2_dmchoices_07}
+\end{figure}
+
+
+%% Utilind
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilind_01}
+  \caption{Population advancing through the generations of interior loop}
+  \label{c2_utilind_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilind_03}
+  \caption{Population advancing through the generations of interior loop}
+  \label{c2_utilind_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics{exp/nouncert/c2_utilind_07}
+  \caption{Population advancing through the generations of interior loop}
+  \label{c2_utilind_07}
+\end{figure}
 
 
 \clearpage{}
