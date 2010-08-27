@@ -200,7 +200,29 @@ The experiments were performed using following problems:
     (see~[inref]). $\text{goal}^{25\%}$ means the best solution of the worst
     $25\%$ of them.
 
-  \item{\textbf{Tree-criteria robust DTLZ7 problem}}
+  \item{\textbf{Four-criteria robust DTLZ7 problem}}
+    \begin{align*}
+      & \textit{min}\text{ $f_j(x)$:} \hspace{0.2cm}
+      0.1 * \sum_{10(j-1) + 1}^{10j}x_i + [0, 2*(4-j)], \hspace{0.2cm}
+      j = 1, 2, 3, 4\\
+      & \textit{subject to:} \\
+      & \hspace{0.5cm} g_1(x)\text{: } f_4(x) + 4f_1(x) - 1 \ge 0\\
+      & \hspace{0.5cm} g_2(x)\text{: } f_4(x) + 4f_2(x) - 1 \ge 0\\
+      & \hspace{0.5cm} g_3(x)\text{: } f_4(x) + 4f_3(x) - 1 \ge 0\\
+      & \hspace{0.5cm} g_3(x)\text{: } 2*f_4(x) + \text{min}
+      [f_1(x) + f_2(x), f_1(x) + f_3(x), f_2(x) + f_3(x)] -1 \ge 0\\
+      & \hspace{0.5cm} 0 \le x_i \le 1, \hspace{0.2cm} i = 1, 2, 3, 4 \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} -4 * \text{f}_1^{60\%} -3 * \text{f}_2^{60\%}
+      -2 * \text{f}_3^{60\%} -1 * \text{f}_1^{60\%}
+      -8 * \text{f}_1^{30\%} -6 * \text{f}_2^{30\%}
+      -4 * \text{f}_3^{30\%} -2 * \text{f}_1^{30\%}
+    \end{align*}
+
+    This problem is a variation of DTLZ7 problem from [ref] article. The
+    problem was constructed using constraint surface approach describe in the
+    article. Interval coefficients were added to the goals however.
+
 
   \item{\textbf{Four-criteria robust DTLZ1 problem}}
 
