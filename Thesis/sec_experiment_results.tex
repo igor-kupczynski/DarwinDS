@@ -224,9 +224,31 @@ The experiments were performed using following problems:
     article. Interval coefficients were added to the goals however.
 
 
-  \item{\textbf{Four-criteria robust DTLZ1 problem}}
+  \item{\textbf{Robust DTLZ1 problem}}
+    \begin{align*}
+      & \textit{min}\text{ $f_1(x)$:} \hspace{0.2cm}
+      0.5 x_1 x_2 \dots x_{M-1}(1 + g(x_M)) \\
+      & \textit{min}\text{ $f_2(x)$:} \hspace{0.2cm}
+      0.5 x_1 x_2 \dots (1 - x_{M-1})(1 + g(x_M)) \\
+      & \hspace{0.5cm} \dots \\
+      & \textit{min}\text{ $f_{M-1}(x)$:} \hspace{0.2cm}
+      0.5 x_1 (1 - x_2) (1 + g(x_M)) \\
+      & \textit{min}\text{ $f_M(x)$:} \hspace{0.2cm}
+      0.5 (1 - x_1) (1 + g(x_M)) \\
+      & \textit{subject to:} \\  
+      & \hspace{0.5cm} g_1(x)\text{: } f_4(x) + 4f_1(x) - 1 \ge 0\\
+      & \hspace{0.5cm} g_2(x)\text{: } f_4(x) + 4f_2(x) - 1 \ge 0\\
+      & \hspace{0.5cm} g_3(x)\text{: } f_4(x) + 4f_3(x) - 1 \ge 0\\
+      & \hspace{0.5cm} g_3(x)\text{: } 2*f_4(x) + \text{min}
+      [f_1(x) + f_2(x), f_1(x) + f_3(x), f_2(x) + f_3(x)] -1 \ge 0\\
+      & \hspace{0.5cm} 0 \le x_i \le 1, \hspace{0.2cm} i = 1, 2, 3, 4 \\
+      & \textit{(max) supposed utility:} \\
+      & \hspace{0.5cm} -4 * \text{f}_1^{60\%} -3 * \text{f}_2^{60\%}
+      -2 * \text{f}_3^{60\%} -1 * \text{f}_1^{60\%}
+      -8 * \text{f}_1^{30\%} -6 * \text{f}_2^{30\%}
+      -4 * \text{f}_3^{30\%} -2 * \text{f}_1^{30\%}
+    \end{align*}
 
-  \item{\textbf{Ten-criteria robust DTLZ1 problem}}
 
 \end{description}
 
