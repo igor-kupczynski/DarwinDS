@@ -253,6 +253,7 @@ The experiments were performed using following problems:
 
 \section{No uncertainty}
 
+\subsection{Single run analysis}
 In order to observe the algorithm's behaviour a detailed analysis of single
 run is presented in this section. The problem being analysed is the two
 criteria binary knapsack problem (see [inref]). Problem is simple and number
@@ -390,44 +391,43 @@ algorithm parameters. This is done in the further sections.
   \label{c2_utilgen_07}
 \end{figure}
 
-
 %% Valweight
 \begin{figure}
-  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_valweight_01}
+  \subfigure{
+    \hspace*{-3.3cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_01}
+    \label{c2_valweight_01}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_03}
+    \label{c2_valweight_03}
+  }
+  \subfigure{
+    \hspace*{2cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_07}
+    \label{c2_valweight_07}
+  }
   \caption{Individuals in the solution space}
-  \label{c2_valweight_01}
-\end{figure}
-
-\begin{figure}
-  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_valweight_03}
-  \caption{Individuals in the solution space}
-  \label{c2_valweight_03}
-\end{figure}
-
-\begin{figure}
-  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_valweight_07}
-  \caption{Individuals in the solution space}
-  \label{c2_valweight_07}
 \end{figure}
 
 
 %% DM's choices
 \begin{figure}
-  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_dmchoices_01}
+  \subfigure{
+    \hspace*{-2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_01}
+    \label{c2_dmchoices_01}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_03}
+    \label{c2_dmchoices_03}
+  }
+  \subfigure{
+    \hspace*{2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_07}
+    \label{c2_dmchoices_07}
+  }
   \caption{Choices made by the DM in exterior loop}
-  \label{c2_dmchoices_01}
-\end{figure}
-
-\begin{figure}
-  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_dmchoices_03}
-  \caption{Choices made by the DM in exterior loop}
-  \label{c2_dmchoices_03}
-\end{figure}
-
-\begin{figure}
-  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_dmchoices_07}
-  \caption{Choices made by the DM in exterior loop}
-  \label{c2_dmchoices_07}
 \end{figure}
 
 
@@ -452,6 +452,28 @@ algorithm parameters. This is done in the further sections.
 
 
 \clearpage{}
+\subsection{The performance on exemplary problems}
+It is important to know what performance can be expected from an
+algorithm. When no uncertainty is considered in a problem and one assumes
+supposed utility function is easy to get optimal solution using linear
+programming solver. Of course in real-world applications supposed utility
+function is not known a priori. One can test this algorithm in such an
+artificially created environment and then assume that the behaviour will be
+similar on similar real-world problems.
+
+Results of the evaluation on the following problems are given (see~[inref]):
+\begin{itemize}
+\item Two-criteria binary knapsack problem,
+\item Two-criteria continuous knapsack problem,
+\item Three-criteria binary knapsack problem,
+\item Three-criteria DTLZ problem generated using constraint surface approach.
+\end{itemize}
+
+The test were repeated fifteen times and average results here.
+
+
+
+
 \section{The importance of parameters}
 
 The algorithm itself contains many parameters that can potentially affect its
