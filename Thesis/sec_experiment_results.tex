@@ -562,10 +562,33 @@ problem is a well-known subject in the multi-objective optimisation
 ([ref]). However it is out-of-scope of this paper.
 
 For completeness charts presenting the algorithm behaviour when more exterior
-loop integrations are allowed are presented.
+loop iterations are allowed are given (fig.~\ref{outer}). After the twentieth
+loop improvements are small (if any). In author's opinion this is a good thing
+because there is no reason not to stop algorithm. If it works for the problem
+it will be evident from the first few iterations.
 
-
-
+\begin{figure}
+  \subfigure{
+    \hspace*{-2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin_outer}
+    \label{outer1}
+  }
+  \subfigure[TODO!]{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
+    \label{outer2}
+  }
+  \subfigure{
+    \hspace*{-2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin_outer}
+    \label{outer3}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c3_surface_outer}
+    \label{outer4}
+  }
+  \caption{Supposed utility function when long runs are allowed}
+  \label{outer}
+\end{figure}
 
 
 
