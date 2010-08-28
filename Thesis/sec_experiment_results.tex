@@ -253,10 +253,6 @@ The experiments were performed using following problems:
 
 \section{No uncertainty}
 
-At first results for the experiments when no uncertainty is involved are
-given.
-
-\subsection{Example run analysis}
 In order to observe the algorithm's behaviour a detailed analysis of single
 run is presented in this section. The problem being analysed is the two
 criteria binary knapsack problem (see [inref]). Problem is simple and number
@@ -456,8 +452,33 @@ algorithm parameters. This is done in the further sections.
 
 
 \clearpage{}
-\subsection{The importance of parameters}
+\section{The importance of parameters}
 
+The algorithm itself contains many parameters that can potentially affect its
+behaviour. Of course it is always left to analyst to fine-tune the parameters
+for a specific problem to solve. Nevertheless in this section some guidelines
+will be given. Conclusions were drawn based on experiments performed on
+exemplary problems described above.
+
+The parameters were grouped into two categories --- basic ones affecting the
+whole method and additional ones of less importance. The latter however can be
+used for fine-tuning to specific problem given.
+
+Author consider basic parameters to be:
+\begin{itemize}
+\item Number of generation in the evolutionary loop --- intuitively the more
+  the better.
+\item Number of individuals in the population --- again intuitively the more
+  the better.
+\item A confidence of the rules generated in the DomLem algorithm. (compare
+  with~[inref]). 100\% confidence may seem a good idea however lowering it
+  would allow more gradual improvements of the goal function in the
+  evolutionary algorithm which could lead to better results.
+\end{itemize}
+
+
+
+\clearpage{}
 \subsection{Noise in the DM's decisions}
 
 \section{Uncertainty}
