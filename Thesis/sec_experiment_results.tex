@@ -463,17 +463,113 @@ similar on similar real-world problems.
 
 Results of the evaluation on the following problems are given (see~[inref]):
 \begin{itemize}
-\item Two-criteria binary knapsack problem,
-\item Two-criteria continuous knapsack problem,
-\item Three-criteria binary knapsack problem,
-\item Three-criteria DTLZ problem generated using constraint surface approach.
+\item Two-criteria binary knapsack problem, optimal value $= 4154.441453$.
+\item Two-criteria continuous knapsack problem, optimal value $= 32700.41689$.
+\item Three-criteria binary knapsack problem, optimal value $= 31502.10927$.
+\item Three-criteria DTLZ problem generated using constraint surface approach, optimal value $= -1.1$.
 \end{itemize}
 
-The test were repeated fifteen times and average results here.
+The test were repeated at least fifteen times and the results averaged. They
+are presented on figure~\ref{simple_performance}. Depending on a problem $10$
+or $20$ iterations of exterior loop were simulated. Normally it would be up to
+the DM to stop when he or she is satisfied with the solution. However one can
+safely assume that if no satisfactory solution is found in $10$ the decision
+maker will not want to investigate the problem with this method further.
+
+\begin{figure}
+  \subfigure{
+    \hspace*{-3.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin}
+    \label{simple_performance1}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
+    \label{simple_performance2}
+  }
+  \subfigure{
+    \hspace*{-3.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin}
+    \label{simple_performance3}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c3_surface}
+    \label{simple_performance4}
+  }
+  \caption{Performance comparison}
+  \label{simple_performance}
+\end{figure}
+
+On both binary knapsack problems the performance is very good --- they are not
+further than $10\%$ away from optimal solution after $10^{th}$ iteration. The
+same is true for the surface problem. However looking at the
+fig.~\ref{simple_performance4} one can see a bizarre phenomenon --- the
+supposed utility is falling down in a few runs.
+
+On the other hand evolutionary algorithm knows nothing about the utility
+function so it may happen. The chart (fig.~\ref{simple_performance4}) was
+generated using aggregated (averaged) results, however this happened in most
+of the runs. To give further insight charts showing evolution in a third
+exterior loop are presented (not that the charts are for single run only, not
+aggregated). The charts are on figures~\ref{c3_surface_utilgen_03}
+and~\ref{c3_surface_utilind_03}. As one can see the evolutionary algorithm
+improves the population from its perspective (the primary score factor)
+however supposed utility function is being lowered in the process.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{exp/nouncert/c3_surface_utilgen_03}
+  \caption{The population in the third iteration of the exterior loop. DTLZ
+    surface problem.}
+  \label{c3_surface_utilgen_03}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{exp/nouncert/c3_surface_utilind_03}
+  \caption{The population in the third iteration of the exterior loop. DTLZ
+    surface problem}
+  \label{c3_surface_utilind_03}
+\end{figure}
+
+This is the case because generated decision rules:
+\begin{enumerate}
+\item $f_1 \le 0.14033 \Rightarrow \text{class} \ge \texttt{GOOD}$
+\item $f_3 \le 0.56462 \Rightarrow \text{class} \ge \texttt{GOOD}$
+\end{enumerate}
+are not selective enough. It is possible than switching DomLem to another
+algorithm, generating all possible rules instead of minimal set would help
+here. Still the results achieved by the DARWIN method are good on this
+problem.
+
+In contrary continuous knapsack problem performs extremely poor --- only
+$55\%$ of the optimum after $10^{th}$ run and $58\%$, so almost no
+improvement, after $20^{th}$. Investigating single runs in details provided no
+more details. The problem lies in the evolutionary algorithm, more precisely
+in its crossover operator. Authors suggested a from of distance preserving
+crossover --- child is somewhere in between its parents. However in continuous
+it is usually the case to take items one-by-one starting with the one with
+greatest value per unit until the weight constraint is reached.
+
+Considering the constraints ($ \forall_{x_i \in items}: \hspace{0.1cm} 0 \leq
+x_i \leq 1 $) --- most of the individuals will have its decision variables in
+form of $x_i \approx 0.5$ after a few generations. But for the optimal
+solutions most of the variables takes either $1$ or $0$. That is why
+improvement is happening so slowly here.
+
+According to authors intuition changing the crossover operator would solve the
+problem with continuous knapsack. Choosing the right operator for a given
+problem is a well-known subject in the multi-objective optimisation
+([ref]). However it is out-of-scope of this paper.
+
+For completeness charts presenting the algorithm behaviour when more exterior
+loop integrations are allowed are presented.
 
 
 
 
+
+
+\clearpage{}
 \section{The importance of parameters}
 
 The algorithm itself contains many parameters that can potentially affect its
@@ -501,7 +597,7 @@ Author consider basic parameters to be:
 
 
 \clearpage{}
-\subsection{Noise in the DM's decisions}
+\section{Noise in the DM's decisions}
 
 \section{Uncertainty}
 

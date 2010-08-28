@@ -21,21 +21,21 @@ TESTPLAN_OUT_DIR=`rel2abs $3`
 P_NAME=$4
 
 # We can set two criteria becasue brief option do not care
-./genCharts.sh --brief 2 $BEST $CHARTS_DIR $TESTPLAN_OUT_DIR
+#./genCharts.sh --brief 2 $BEST $CHARTS_DIR $TESTPLAN_OUT_DIR
 
 echo "+--------------------------------------------------------------------+"
 echo "|   GOT BRIEF CHARTS                                                 |"
 echo "+--------------------------------------------------------------------+"
 
-./genSummary.py $TESTPLAN_OUT_DIR
+#./genSummary.py $TESTPLAN_OUT_DIR
 
 echo "+--------------------------------------------------------------------+"
 echo "|   GOT SUMMARY                                                      |"
 echo "+--------------------------------------------------------------------+"
 
 DIR=$TESTPLAN_OUT_DIR
-R --slave --no-save --args "2,$BEST,$DIR/summary.csv,$DIR/summary_short.csv,$DIR/summary1.pdf,$DIR/summary2.pdf" \
-    < $CHARTS_DIR/summary.R
+#R --slave --no-save --args "2,$BEST,$DIR/summary.csv,$DIR/summary_short.csv,$DIR/summary1.pdf,$DIR/summary2.pdf" \
+#    < $CHARTS_DIR/summary.R
 
 echo "+--------------------------------------------------------------------+"
 echo "|   GOT SUMMARY CHART                                                |"

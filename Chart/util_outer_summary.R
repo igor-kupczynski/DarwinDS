@@ -11,7 +11,7 @@ gen.plot.line <- function(data,chart.title) {
   c <- ggplot(data)
   c <- c + geom_point(aes(outer, value_mean), colour="red")
   c <- c + geom_line(aes(outer, value_mean), colour="red")
-  c <- c + opts(title=chart.title) 
+  c <- c + opts(title=chart.title)
   c
 }
 
