@@ -497,6 +497,94 @@ parameters have only a minor influence over the algorithm. This is a good
 think, because the solution given to the DM is robust. However analyst should
 try to tune the parameters on problem basis. 
 
-
 \clearpage{}
 \section{Noise in the DM's decisions}
+
+In the experiments performed the decision maker was mocked by a computer
+algorithm. Its choices were based on assumed supposed utility function. Always
+repeatable and always complying with the assumed function. This is not the
+case in real-world situation where the DM is a human being and the supposed
+utility function is not known. His or her decisions will be noisy, not the
+best, sometimes even contradictory.
+
+For this reason it is important to measure the impact of a ``noise'' in the
+DM's choices on the algorithm. Normally, without introducing an artificial
+noise the decisions are carried as follows:
+
+\begin{algorithm}
+\caption{Mocked DM indicating ``good'' solutions}\label{alg:dmselection}
+  \begin{algorithmic}[1]
+    \Procedure{SelectGoodSolutions}{solutions, toSelect} \\
+    \Comment{solutions  --- a list of solutions generated in the interior
+      loop} \\
+    \Comment{toSelect --- how many solutions should be marked as ``good''}
+    \ForAll{$s \in \text{solutions}$}
+    \State $s.$value $\gets$ \Call{SupposedUtilityFunction}{$s$}
+    \EndFor
+    \State solutions $\gets$ \Call{Sort}{key=value, descending=True} \\
+    \Comment{Sort solutions on descending supposed utility}
+    \State \textbf{return} \Call{GetFirst}{solutions, toSelect}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+and the \textit{toSelect} parameter is set to $3$ so always three solutions
+are marked as good. One can influence the behaviour of
+\textsc{SelectGoodSolutions} by changing the toSelect parameter. But this is
+not enough to simulate human-made noise.
+
+First note that one do not have to always select the same number of
+solutions. In fact this is unrealistic because the decision maker will select
+as many solutions as he or she will think are appropriate. To mock this
+behaviour additional parameter was added --- toSelectDelta. Now number of
+solutions to be selected be taken from $[\text{toSelect} -
+  \text{toSelectDelta}, \text{toSelect} + \text{toSelectDelta}]$ with uniform
+distribution.
+
+Second thing is that the human decision maker is fallible. He or her can make
+wrong decision and not select best solutions according to supposed utility
+function. Another parameter was introduced to simulate this phenomenon ---
+noiseLimit. After sorting the solutions based on the supposed utility value
+the individuals $1, 2, \dots, \text{noiseLimit}$ are shuffled. So lets say one
+want to select three solutions. If the noiseLimit parameter is set to $0$ (the
+default) three best solutions will be selected. However if an experimenter
+sets the noiseLimit to $6$ three out of $6$ best solutions will be picked by
+random.
+
+The noisy version of the algorithm~\ref{alg:dmselection} is shown below.
+\begin{algorithm}
+\caption{Mocked DM indicating ``good'' solutions}\label{alg:noisydmselection}
+  \begin{algorithmic}[1]
+    \Procedure{NoisySelectGoodSolutions}{solutions, toSelect, toSelectDelta, 
+      noiseLimit}
+    \ForAll{$s \in \text{solutions}$}
+    \State $s.$value $\gets$ \Call{SupposedUtilityFunction}{$s$}
+    \EndFor
+    \State solutions $\gets$ \Call{Sort}{key=value, descending=True}
+    \State shuffled $\gets$ \Call{ShuffleFirst}{solutions, noiseLimit}
+    \State toSelect$' \gets$ \Call{RandomFromInterval}{toSelect $-$
+      toSelectDelta, toSelect $+$ toSelectDelta}
+    \State \textbf{return} \Call{GetFirst}{shuffled, toSelect$'$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+Following tests were performed:
+
+\begin{tabular}{r c c c c c c c}
+  \hline
+  Parameter & no noise & noise$_1$ & noise$_2$ & noise$_3$ & noise$_4$ &
+  noise$_5$ & noise$_6$ \\
+  \hline
+  \hline
+  toSelect      & 3 & 3 & 3 & 3 & 5 &  3 &  3 \\
+  toSelectDelta & 0 & 2 & 2 & 2 & 4 &  4 &  2 \\
+  noiseLimit    & 0 & 0 & 2 & 4 & 6 & 10 & 16 \\
+  \hline \\
+\end{tabular}
+
+Note that noise$_1$ to noise$_4$ are rather minor ones, noise$_5$ is medium
+noise and finally noise$_6$ is a big one, unlikely to happen in practise ---
+half of the solutions are considered as good. If the decision maker is careful
+is his or her evaluations the algorithm will probably have to face a noise
+between $1$ and $4$.
