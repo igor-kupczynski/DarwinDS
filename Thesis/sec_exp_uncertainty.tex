@@ -146,5 +146,84 @@ besides profit$^{50\%}$ and time$^{50\%}$ explains the phenomenon.
   \caption{Two-dimensional section of the objective space}
   \label{pres_dm_choices}
 \end{figure}
+\clearpage{}
 
+\subsection{The performance on exemplary problems}
+To see how well the DARWIN can infer the decision maker's preferences
+comparison with supposed utility function is given. It section the experiments
+where performed on all exemplary problems with interval coefficients --- mix
+problem (also labeled as presentation problem), dtlz1 (version with four and
+ten criteria) and dtlz7.
+
+The problems were solved with default (base) values of configuration options
+as well as with increased number of generation (from $30$ to $60$). Tests that
+names ends with \texttt{\_rules} are using primary and secondary score; tests
+with names ending with \texttt{\_supp} are using supposed utility function
+value as an objective in evolutionary optimisation.
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/pres_perf1}
+      \label{pres_perf1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/pres_perf1b}
+      \label{pres_perf1b}
+    }
+  }
+  \caption{Performance comparison on the mix problem}
+  \label{pres_perf}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz1_c4_perf1}
+      \label{dtlz1_c4_perf1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz1_c4_perf1b}
+      \label{dtlz1_c4_perf1b}
+    }
+  }
+  \caption{Performance comparison on the four-criteria DTLZ1 problem}
+  \label{dtlz1_c4_perf}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz1_c10_perf1}
+      \label{dtlz1_c10_perf1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz1_c10_perf1b}
+      \label{dtlz1_c10_perf1b}
+    }
+  }
+  \caption{Performance comparison on the ten-criteria DTLZ1 problem}
+  \label{dtlz1_c10_perf}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz7_c4_perf1}
+      \label{dtlz7_c4_perf1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz7_c4_perf1b}
+      \label{dtlz7_c4_perf1b}
+    }
+  }
+  \caption{Performance comparison on the four-criteria DTLZ7 problem}
+  \label{dtlz7_c4_perf}
+\end{figure}
+
+TODO: Data table and conclusions
 \clearpage{}
