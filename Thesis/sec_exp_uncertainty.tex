@@ -227,3 +227,47 @@ value as an objective in evolutionary optimisation.
 
 TODO: Data table and conclusions
 \clearpage{}
+
+\subsection{The importance of parameters}
+\clearpage{}
+
+\subsection{Noise in the DM's decisions}
+
+In order to check impact of a noise in DM's decisions experiments were
+performed. The results are presented in figure~\ref{noise}.
+
+The effect of the noise starts to be an important factor only in case of
+medium (noise$_5$) and major (noise$_6$). So the situation is similar to the
+impact on problems defined without uncertainty. Even if one adds the interval
+coefficients to the problem the solution is still robust with respect to the
+noise.
+
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat[Mix problem]{
+      \includegraphics[scale=0.53]{exp/uncert/pres_noise}
+      \label{pres_noise}
+    }
+    \subfloat[DTLZ1 four-criteria]{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz1_c4_noise}
+      \label{dtlz1_c4_noise}
+    }
+  }
+  \makebox[\textwidth]{
+    \subfloat[DTLZ1 ten-criteria]{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz1_c10_noise}
+      \label{dtlz1_c10_noise}
+    }
+    \subfloat[DTLZ7 four-criteria]{
+      \includegraphics[scale=0.53]{exp/uncert/dtlz7_c4_noise}
+      \label{dtlz7_c4_noise}
+    }
+  }
+  \caption{Effect of noise in DM's decisions}
+  \label{noise}
+\end{figure}
+
+
+\clearpage{}
