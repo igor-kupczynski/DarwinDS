@@ -618,6 +618,103 @@ Author consider basic parameters to be:
 \end{itemize}
 
 
+\begin{figure}
+  \hspace{-2.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1}
+    \label{c2_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1b}
+    \label{c2_params1b}
+  }
+  \caption{Basic parameters for the two-criteria binary knapsack problem}
+  \label{c2_params}
+\end{figure}
+
+\begin{figure}
+  \hspace{-3.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1}
+    \label{c2_cont_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1b}
+    \label{c2_cont_params1b}
+  }
+  \caption{Basic parameters for the two-criteria continuous knapsack problem}
+  \label{c2_cont_params}
+\end{figure}
+
+\begin{figure}
+  \hspace{-3.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1}
+    \label{c3_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1b}
+    \label{c3_params1b}
+  }
+  \caption{Basic parameters for the three-criteria binary knapsack problem}
+  \label{c3_params}
+\end{figure}
+
+\begin{figure}
+  \hspace{-2.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1}
+    \label{c3_surface_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1b}
+    \label{c3_surface_params1b}
+  }
+  \caption{Basic parameters for the three-criteria DTLZ surface problem}
+  \label{c3_surface_params}
+\end{figure}
+
+The result shown on the charts (fig.~\ref{c2_params}, \ref{c2_cont_params},
+\ref{c3_params} and~\ref{c3_surface_params}) agrees with the intuition. More
+solutions (individuals in the population) and longer interior loop (more
+generations) will result in better value of supposed utility for all the
+problems. Confidence however yields an interesting result --- one should lower
+the confidence. Default is $100\%$ ($1.0$)  and should be lowered.
+
+The other parameters are:
+\begin{itemize}
+\item Delta ($\delta$) --- decay of a rule weight.
+\item Eta ($\eta$) --- initial mutation probability.
+\item Gamma ($\gamma$) --- coefficient of elitism.
+\item Omega ($\omega$) --- decay rate of the mutation.
+\end{itemize}
+
+They are used in the interior loop (see~[inref]).
+
+\begin{figure}
+  \subfigure[Two-criteria binary knapsack]{
+    \hspace*{-3.5cm}
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_params2}
+  }
+  \subfigure[Two-criteria continuous knapsack]{
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_cont_params2}
+  }
+  \subfigure[Three-criteria binary knapsack]{
+    \hspace*{-3.5cm}
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_params2}
+  }
+  \subfigure[DTLZ surface problem]{
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_surface_params2}
+  }
+  \caption{Other parameters for the three-criteria DTLZ surface problem}
+  \label{params2}
+\end{figure}
+
+There is no clear patter through the problems. In general changing the other
+parameters have only a minor influence over the algorithm. This is a good
+think, because the solution given to the DM is robust. However analyst should
+try to tune the parameters on problem basis. 
+
 
 \clearpage{}
 \section{Noise in the DM's decisions}
