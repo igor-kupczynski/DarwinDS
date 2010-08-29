@@ -152,19 +152,22 @@ algorithm parameters. This is done in the further sections.
 
 %% Valweight
 \begin{figure}
-  \subfloat{
-    \hspace*{-3.3cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_01}
-    \label{c2_valweight_01}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_valweight_01}
+      \label{c2_valweight_01}
+    }
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_valweight_03}
+      \label{c2_valweight_03}
+    }
   }
-  \subfloat{
-    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_03}
-    \label{c2_valweight_03}
-  }
-  \subfloat{
-    \hspace*{2cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_07}
-    \label{c2_valweight_07}
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_valweight_07}
+      \label{c2_valweight_07}
+    }
   }
   \caption{Individuals in the solution space}
 \end{figure}
@@ -172,19 +175,22 @@ algorithm parameters. This is done in the further sections.
 
 %% DM's choices
 \begin{figure}
-  \subfloat{
-    \hspace*{-2.5cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_01}
-    \label{c2_dmchoices_01}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_dmchoices_01}
+      \label{c2_dmchoices_01}
+    }
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_dmchoices_03}
+      \label{c2_dmchoices_03}
+    }
   }
-  \subfloat{
-    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_03}
-    \label{c2_dmchoices_03}
-  }
-  \subfloat{
-    \hspace*{2.5cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_07}
-    \label{c2_dmchoices_07}
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_dmchoices_07}
+      \label{c2_dmchoices_07}
+    }
   }
   \caption{Choices made by the DM in exterior loop}
 \end{figure}
@@ -236,23 +242,26 @@ safely assume that if no satisfactory solution is found in $10$ the decision
 maker will not want to investigate the problem with this method further.
 
 \begin{figure}
-  \subfloat{
-    \hspace*{-3.5cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin}
-    \label{simple_performance1}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_knapsack_bin}
+      \label{simple_performance1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_knapsack_cont}
+      \label{simple_performance2}
+    }
   }
-  \subfloat{
-    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
-    \label{simple_performance2}
-  }
-  \subfloat{
-    \hspace*{-3.5cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin}
-    \label{simple_performance3}
-  }
-  \subfloat{
-    \includegraphics[scale=0.57]{exp/nouncert/c3_surface}
-    \label{simple_performance4}
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c3_knapsack_bin}
+      \label{simple_performance3}
+    }
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c3_surface}
+      \label{simple_performance4}
+    }
   }
   \caption{Performance comparison}
   \label{simple_performance}
@@ -327,23 +336,26 @@ because there is no reason not to stop algorithm. If it works for the problem
 it will be evident from the first few iterations.
 
 \begin{figure}
-  \subfloat{
-    \hspace*{-2.5cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin_outer}
-    \label{outer1}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_knapsack_bin_outer}
+      \label{outer1}
+    }
+    \subfloat[TODO!]{
+      \includegraphics[scale=0.50]{exp/nouncert/c2_knapsack_cont}
+      \label{outer2}
+    }
   }
-  \subfloat[TODO!]{
-    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
-    \label{outer2}
-  }
-  \subfloat{
-    \hspace*{-2.5cm}
-    \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin_outer}
-    \label{outer3}
-  }
-  \subfloat{
-    \includegraphics[scale=0.57]{exp/nouncert/c3_surface_outer}
-    \label{outer4}
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c3_knapsack_bin_outer}
+      \label{outer3}
+    }
+    \subfloat{
+      \includegraphics[scale=0.50]{exp/nouncert/c3_surface_outer}
+      \label{outer4}
+    }
   }
   \caption{Supposed utility function when long runs are allowed}
   \label{outer}
@@ -378,56 +390,64 @@ Author consider basic parameters to be:
 
 
 \begin{figure}
-  \hspace{-2.5cm}
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1}
-    \label{c2_params1}
-  }
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1b}
-    \label{c2_params1b}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1}
+      \label{c2_params1}
+    }
+    \subfloat{
+      \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1b}
+      \label{c2_params1b}
+    }
   }
   \caption{Basic parameters for the two-criteria binary knapsack problem}
   \label{c2_params}
 \end{figure}
 
 \begin{figure}
-  \hspace{-3.5cm}
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1}
-    \label{c2_cont_params1}
-  }
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1b}
-    \label{c2_cont_params1b}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1}
+      \label{c2_cont_params1}
+    }
+    \subfloat{
+      \includegraphics[width=0.6\textwidth]{exp/nouncert/c2_cont_params1b}
+      \label{c2_cont_params1b}
+    }
   }
   \caption{Basic parameters for the two-criteria continuous knapsack problem}
   \label{c2_cont_params}
 \end{figure}
 
 \begin{figure}
-  \hspace{-3.5cm}
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1}
-    \label{c3_params1}
-  }
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1b}
-    \label{c3_params1b}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1}
+      \label{c3_params1}
+    }
+    \subfloat{
+      \includegraphics[width=0.6\textwidth]{exp/nouncert/c3_params1b}
+      \label{c3_params1b}
+    }
   }
   \caption{Basic parameters for the three-criteria binary knapsack problem}
   \label{c3_params}
 \end{figure}
 
 \begin{figure}
-  \hspace{-2.5cm}
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1}
-    \label{c3_surface_params1}
-  }
-  \subfloat{
-    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1b}
-    \label{c3_surface_params1b}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1}
+      \label{c3_surface_params1}
+    }
+    \subfloat{
+      \includegraphics[width=0.6\textwidth]{exp/nouncert/c3_surface_params1b}
+      \label{c3_surface_params1b}
+    }
   }
   \caption{Basic parameters for the three-criteria DTLZ surface problem}
   \label{c3_surface_params}
@@ -451,19 +471,22 @@ The other parameters are:
 They are used in the interior loop (see~[inref]).
 
 \begin{figure}
-  \subfloat[Two-criteria binary knapsack]{
-    \hspace*{-3.5cm}
-    \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_params2}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat[Two-criteria binary knapsack]{
+      \includegraphics[width=0.60\textwidth]{exp/nouncert/c2_params2}
+    }
+    \subfloat[Two-criteria continuous knapsack]{
+      \includegraphics[width=0.60\textwidth]{exp/nouncert/c2_cont_params2}
+    }
   }
-  \subfloat[Two-criteria continuous knapsack]{
-    \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_cont_params2}
-  }
-  \subfloat[Three-criteria binary knapsack]{
-    \hspace*{-3.5cm}
-    \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_params2}
-  }
-  \subfloat[DTLZ surface problem]{
-    \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_surface_params2}
+  \makebox[\textwidth]{
+    \subfloat[Three-criteria binary knapsack]{
+      \includegraphics[width=0.60\textwidth]{exp/nouncert/c3_params2}
+    }
+    \subfloat[DTLZ surface problem]{
+      \includegraphics[width=0.60\textwidth]{exp/nouncert/c3_surface_params2}
+    }
   }
   \caption{Other parameters for the three-criteria DTLZ surface problem}
   \label{params2}
