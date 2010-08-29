@@ -117,10 +117,14 @@ algorithm parameters. This is done in the further sections.
   \label{c2_utilouter}
 \end{figure}
 
-%% Charts
 %% \begin{figure}
-%%   \subfigure{
-%%     \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilouter}
+%%   \makebox[1\textwidth]{
+%%     \subfloat[Subfloat]{
+%%       \includegraphics[width=0.6\textwidth]{exp/nouncert/c2_utilouter}
+%%     }
+%%     \subfloat[Subfloat]{
+%%       \includegraphics[width=0.6\textwidth]{exp/nouncert/c2_utilouter}
+%%     }
 %%   }
 %%   \caption{Supposed utility function in exterior loop iterations}
 %%   \label{c2_utilouter}
@@ -148,16 +152,16 @@ algorithm parameters. This is done in the further sections.
 
 %% Valweight
 \begin{figure}
-  \subfigure{
+  \subfloat{
     \hspace*{-3.3cm}
     \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_01}
     \label{c2_valweight_01}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_03}
     \label{c2_valweight_03}
   }
-  \subfigure{
+  \subfloat{
     \hspace*{2cm}
     \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_07}
     \label{c2_valweight_07}
@@ -168,16 +172,16 @@ algorithm parameters. This is done in the further sections.
 
 %% DM's choices
 \begin{figure}
-  \subfigure{
+  \subfloat{
     \hspace*{-2.5cm}
     \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_01}
     \label{c2_dmchoices_01}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_03}
     \label{c2_dmchoices_03}
   }
-  \subfigure{
+  \subfloat{
     \hspace*{2.5cm}
     \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_07}
     \label{c2_dmchoices_07}
@@ -232,21 +236,21 @@ safely assume that if no satisfactory solution is found in $10$ the decision
 maker will not want to investigate the problem with this method further.
 
 \begin{figure}
-  \subfigure{
+  \subfloat{
     \hspace*{-3.5cm}
     \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin}
     \label{simple_performance1}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
     \label{simple_performance2}
   }
-  \subfigure{
+  \subfloat{
     \hspace*{-3.5cm}
     \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin}
     \label{simple_performance3}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[scale=0.57]{exp/nouncert/c3_surface}
     \label{simple_performance4}
   }
@@ -323,21 +327,21 @@ because there is no reason not to stop algorithm. If it works for the problem
 it will be evident from the first few iterations.
 
 \begin{figure}
-  \subfigure{
+  \subfloat{
     \hspace*{-2.5cm}
     \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin_outer}
     \label{outer1}
   }
-  \subfigure[TODO!]{
+  \subfloat[TODO!]{
     \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
     \label{outer2}
   }
-  \subfigure{
+  \subfloat{
     \hspace*{-2.5cm}
     \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin_outer}
     \label{outer3}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[scale=0.57]{exp/nouncert/c3_surface_outer}
     \label{outer4}
   }
@@ -375,11 +379,11 @@ Author consider basic parameters to be:
 
 \begin{figure}
   \hspace{-2.5cm}
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1}
     \label{c2_params1}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1b}
     \label{c2_params1b}
   }
@@ -389,11 +393,11 @@ Author consider basic parameters to be:
 
 \begin{figure}
   \hspace{-3.5cm}
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1}
     \label{c2_cont_params1}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1b}
     \label{c2_cont_params1b}
   }
@@ -403,11 +407,11 @@ Author consider basic parameters to be:
 
 \begin{figure}
   \hspace{-3.5cm}
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1}
     \label{c3_params1}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1b}
     \label{c3_params1b}
   }
@@ -417,11 +421,11 @@ Author consider basic parameters to be:
 
 \begin{figure}
   \hspace{-2.5cm}
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1}
     \label{c3_surface_params1}
   }
-  \subfigure{
+  \subfloat{
     \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1b}
     \label{c3_surface_params1b}
   }
@@ -447,18 +451,18 @@ The other parameters are:
 They are used in the interior loop (see~[inref]).
 
 \begin{figure}
-  \subfigure[Two-criteria binary knapsack]{
+  \subfloat[Two-criteria binary knapsack]{
     \hspace*{-3.5cm}
     \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_params2}
   }
-  \subfigure[Two-criteria continuous knapsack]{
+  \subfloat[Two-criteria continuous knapsack]{
     \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_cont_params2}
   }
-  \subfigure[Three-criteria binary knapsack]{
+  \subfloat[Three-criteria binary knapsack]{
     \hspace*{-3.5cm}
     \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_params2}
   }
-  \subfigure[DTLZ surface problem]{
+  \subfloat[DTLZ surface problem]{
     \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_surface_params2}
   }
   \caption{Other parameters for the three-criteria DTLZ surface problem}
