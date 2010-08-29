@@ -1,0 +1,475 @@
+\section{No uncertainty}
+\subsection{Single run analysis}
+In order to observe the algorithm's behaviour a detailed analysis of single
+run is presented in this section. The problem being analysed is the two
+criteria binary knapsack problem (see [inref]). Problem is simple and number
+of criteria small in order to focus on the algorithm. Also no uncertainty in
+form of interval coefficients is considered.
+
+Although this section is illustrated by an example run on the single problem
+the conclusions drawn here applies globally. Compare with further sections of
+the chapter.
+
+The exterior loop of the DARWIN was repeated ten times. The algorithm runs
+with default parameters (see [inref]). Exterior loop was repeated ten
+times. This means that ten times results (in form of solutions) were presented
+to the (mocked) decision maker. The solutions were recorded.
+
+The same problem was also solved by a mathematical programming solver
+(glpk~[ref]). One used supposed utility function as a optimisation goal for
+the solver. This way the best solutions was obtained (for the considered
+instance best supposed utility function value is $4154.441453$).
+
+Results of the run from the exterior loop perspective are given on
+figure~\ref{c2_utilouter}. All of the solutions generated during interior loop
+run were recorded. On the chart one see best and worst solutions in given run
+(the rest lies between them). Also best of the solutions shown to the DM is
+presented (labeled as ``last''). This is because for evolutionary algorithm it
+is possible to find and then forget ``good'' solutions (note that optimisation
+--- the internal loop is not aware of supposed utility function, it only tries
+to approximate it using induced decision rules). However most of the times
+``last'' solution equals ``best'' solution.
+
+One can see that in every iteration there is an improvement, however the
+improvements are getting smaller and smaller. This is because the better the
+solution population the harder it is to optimise it further.
+
+Now analysis of the interior loop is given. The first, third and seventh
+interior loop will be presented. Other runs are similar, so they were omitted
+in the paper. The results are presented on figures \ref{c2_utilgen_01},
+\ref{c2_utilgen_03} and \ref{c2_utilgen_07}. The iterations of the interior
+loop are also called \textit{generations} because of their evolutionary
+nature.
+
+On the charts one can see supposed utility function dependent on
+generation. Also value of the primary score is included for reference. To
+recapitulate --- the better the solution fits to induced decision rules the
+higher the primary score; in case of a draw (i.e. the primary score for two
+individuals is the same) secondary score is considered.
+
+The improvement happens on generation basis --- in every iteration supposed
+utility function is getting better. However as one can see improvement of the
+primary score happens mainly at the beginning. The runs like one in
+\ref{c2_utilgen_07}, where the is a breakthrough at the end of the run are in
+fact rare. Nevertheless the algorithm shouldn't be shut down after reaching
+maximum primary score. Although preference information extracted before the
+run are now exploited still an improvement can occur. More importantly the
+diversification effort is ongoing now --- when the primary score (rule based)
+of all the population is identical the secondary score (distance based --- the
+less the solution is crowded the higher the score) start to play major role in
+the process, pushing individuals in the population to new areas in solution
+space. This can result in major breakthrough --- the population may acquire
+traits wanted by the DM.
+
+Rules driving the interior loops are presented below
+
+\begin{description}
+  \item{\textbf{Iteration 1}} \\
+    value$_1 \ge 859.86 \Rightarrow \text{class} \ge \texttt{GOOD}$ \\
+    value$_2 \ge 814.71 \Rightarrow \text{class} \ge \texttt{GOOD}$
+  \item{\textbf{Iteration 3}} \\
+    value$_1 \ge 1023.62 \Rightarrow \text{class} \ge \texttt{GOOD}$ \\
+    value$_2 \ge 1011.61 \Rightarrow \text{class} \ge \texttt{GOOD}$
+  \item{\textbf{Iteration 7}} \\
+    value$_1 \ge 1211.14 \Rightarrow \text{class} \ge \texttt{GOOD}$ \\
+    value$_2 \ge 1210.63 \Rightarrow \text{class} \ge \texttt{GOOD}$
+\end{description}
+
+Note that there are only two classes --- \texttt{GOOD} and \texttt{NOT GOOD}
+so essentially $\text{class} \ge \texttt{GOOD}$ means $\text{class} =
+\texttt{GOOD}$.
+
+In order to verify how the rules influences the algorithm behaviour charts
+were prepared (fig.~\ref{c2_valweight_01}, \ref{c2_valweight_03} and
+\ref{c2_valweight_07}). For two-criteria problem it is possible to present the
+search space on two-dimensional chart.
+
+The iterations $1$ and $3$ show typical run. Before the 10th generation whole
+population moves to an area covered by the rules. In the further generations
+diversification occurs. 7th iteration is a bit different though. Evolution
+``discovered'' a way to match the second rule not before the 20th
+generation. Soon after individuals covering both solutions were included the
+whole population drifted to the region marked by both rules.
+
+It can be also insightful to see the mocked DM choices and compare them with the
+inferred  rules. They are presented on charts (fig.~\ref{c2_dmchoices_01},
+\ref{c2_dmchoices_03}, \ref{c2_dmchoices_07}). It is the case that the choices
+directly affected the rules. One can also see another interesting trait of the
+problem. The further (in goal functions' space) the selected individuals are
+the harder it is to achieve maximal possible primary score.
+
+Finally charts presenting how supposed utility and primary score changed in
+the population together with succeeding generations (fig.~\ref{c2_utilind_01},
+\ref{c2_utilind_03} and \ref{c2_utilind_07}) are given. They are supporting
+the conclusions stated above.
+
+Analysis of single run it a good tool for understanding the internals of the
+method and inspecting the method behaviour. One can draw conclusions and spot
+potential problems and possible improvements. However more experiments have to
+be conducted and their results should be aggregated using statistical methods
+in order to check how useful the method is and what is the influence of the
+algorithm parameters. This is done in the further sections.
+
+%% Charts
+\begin{figure}[tb]
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilouter}
+  \caption{Supposed utility function in exterior loop iterations}
+  \label{c2_utilouter}
+\end{figure}
+
+%% Charts
+%% \begin{figure}
+%%   \subfigure{
+%%     \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilouter}
+%%   }
+%%   \caption{Supposed utility function in exterior loop iterations}
+%%   \label{c2_utilouter}
+%% \end{figure}
+
+
+%% Utilgen
+\begin{figure}
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilgen_01}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilgen_03}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilgen_07}
+  \caption{Supposed utility function in interior loop iterations}
+  \label{c2_utilgen_07}
+\end{figure}
+
+%% Valweight
+\begin{figure}
+  \subfigure{
+    \hspace*{-3.3cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_01}
+    \label{c2_valweight_01}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_03}
+    \label{c2_valweight_03}
+  }
+  \subfigure{
+    \hspace*{2cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_valweight_07}
+    \label{c2_valweight_07}
+  }
+  \caption{Individuals in the solution space}
+\end{figure}
+
+
+%% DM's choices
+\begin{figure}
+  \subfigure{
+    \hspace*{-2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_01}
+    \label{c2_dmchoices_01}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_03}
+    \label{c2_dmchoices_03}
+  }
+  \subfigure{
+    \hspace*{2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_dmchoices_07}
+    \label{c2_dmchoices_07}
+  }
+  \caption{Choices made by the DM in exterior loop}
+\end{figure}
+
+
+%% Utilind
+\begin{figure}
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilind_01}
+  \caption{Population advancing through the generations of interior loop}
+  \label{c2_utilind_01}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilind_03}
+  \caption{Population advancing through the generations of interior loop}
+  \label{c2_utilind_03}
+\end{figure}
+
+\begin{figure}
+  \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilind_07}
+  \caption{Population advancing through the generations of interior loop}
+  \label{c2_utilind_07}
+\end{figure}
+
+
+\clearpage{}
+\subsection{The performance on exemplary problems}
+It is important to know what performance can be expected from an
+algorithm. When no uncertainty is considered in a problem and one assumes
+supposed utility function is easy to get optimal solution using linear
+programming solver. Of course in real-world applications supposed utility
+function is not known a priori. One can test this algorithm in such an
+artificially created environment and then assume that the behaviour will be
+similar on similar real-world problems.
+
+Results of the evaluation on the following problems are given (see~[inref]):
+\begin{itemize}
+\item Two-criteria binary knapsack problem, optimal value $= 4154.441453$.
+\item Two-criteria continuous knapsack problem, optimal value $= 32700.41689$.
+\item Three-criteria binary knapsack problem, optimal value $= 31502.10927$.
+\item Three-criteria DTLZ problem generated using constraint surface approach, optimal value $= -1.1$.
+\end{itemize}
+
+The test were repeated at least fifteen times and the results averaged. They
+are presented on figure~\ref{simple_performance}. Depending on a problem $10$
+or $20$ iterations of exterior loop were simulated. Normally it would be up to
+the DM to stop when he or she is satisfied with the solution. However one can
+safely assume that if no satisfactory solution is found in $10$ the decision
+maker will not want to investigate the problem with this method further.
+
+\begin{figure}
+  \subfigure{
+    \hspace*{-3.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin}
+    \label{simple_performance1}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
+    \label{simple_performance2}
+  }
+  \subfigure{
+    \hspace*{-3.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin}
+    \label{simple_performance3}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c3_surface}
+    \label{simple_performance4}
+  }
+  \caption{Performance comparison}
+  \label{simple_performance}
+\end{figure}
+
+On both binary knapsack problems the performance is very good --- they are not
+further than $10\%$ away from optimal solution after $10^{th}$ iteration. The
+same is true for the surface problem. However looking at the
+fig.~\ref{simple_performance4} one can see a bizarre phenomenon --- the
+supposed utility is falling down in a few runs.
+
+On the other hand evolutionary algorithm knows nothing about the utility
+function so it may happen. The chart (fig.~\ref{simple_performance4}) was
+generated using aggregated (averaged) results, however this happened in most
+of the runs. To give further insight charts showing evolution in a third
+exterior loop are presented (not that the charts are for single run only, not
+aggregated). The charts are on figures~\ref{c3_surface_utilgen_03}
+and~\ref{c3_surface_utilind_03}. As one can see the evolutionary algorithm
+improves the population from its perspective (the primary score factor)
+however supposed utility function is being lowered in the process.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{exp/nouncert/c3_surface_utilgen_03}
+  \caption{The population in the third iteration of the exterior loop. DTLZ
+    surface problem.}
+  \label{c3_surface_utilgen_03}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=1.0\textwidth]{exp/nouncert/c3_surface_utilind_03}
+  \caption{The population in the third iteration of the exterior loop. DTLZ
+    surface problem}
+  \label{c3_surface_utilind_03}
+\end{figure}
+
+This is the case because generated decision rules:
+\begin{enumerate}
+\item $f_1 \le 0.14033 \Rightarrow \text{class} \ge \texttt{GOOD}$
+\item $f_3 \le 0.56462 \Rightarrow \text{class} \ge \texttt{GOOD}$
+\end{enumerate}
+are not selective enough. It is possible than switching DomLem to another
+algorithm, generating all possible rules instead of minimal set would help
+here. Still the results achieved by the DARWIN method are good on this
+problem.
+
+In contrary continuous knapsack problem performs extremely poor --- only
+$55\%$ of the optimum after $10^{th}$ run and $58\%$, so almost no
+improvement, after $20^{th}$. Investigating single runs in details provided no
+more details. The problem lies in the evolutionary algorithm, more precisely
+in its crossover operator. Authors suggested a from of distance preserving
+crossover --- child is somewhere in between its parents. However in continuous
+it is usually the case to take items one-by-one starting with the one with
+greatest value per unit until the weight constraint is reached.
+
+Considering the constraints ($ \forall_{x_i \in items}: \hspace{0.1cm} 0 \leq
+x_i \leq 1 $) --- most of the individuals will have its decision variables in
+form of $x_i \approx 0.5$ after a few generations. But for the optimal
+solutions most of the variables takes either $1$ or $0$. That is why
+improvement is happening so slowly here.
+
+According to authors intuition changing the crossover operator would solve the
+problem with continuous knapsack. Choosing the right operator for a given
+problem is a well-known subject in the multi-objective optimisation
+([ref]). However it is out-of-scope of this paper.
+
+For completeness charts presenting the algorithm behaviour when more exterior
+loop iterations are allowed are given (fig.~\ref{outer}). After the twentieth
+loop improvements are small (if any). In author's opinion this is a good thing
+because there is no reason not to stop algorithm. If it works for the problem
+it will be evident from the first few iterations.
+
+\begin{figure}
+  \subfigure{
+    \hspace*{-2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_bin_outer}
+    \label{outer1}
+  }
+  \subfigure[TODO!]{
+    \includegraphics[scale=0.57]{exp/nouncert/c2_knapsack_cont}
+    \label{outer2}
+  }
+  \subfigure{
+    \hspace*{-2.5cm}
+    \includegraphics[scale=0.57]{exp/nouncert/c3_knapsack_bin_outer}
+    \label{outer3}
+  }
+  \subfigure{
+    \includegraphics[scale=0.57]{exp/nouncert/c3_surface_outer}
+    \label{outer4}
+  }
+  \caption{Supposed utility function when long runs are allowed}
+  \label{outer}
+\end{figure}
+
+
+
+\clearpage{}
+\section{The importance of parameters}
+
+The algorithm itself contains many parameters that can potentially affect its
+behaviour. Of course it is always left to analyst to fine-tune the parameters
+for a specific problem to solve. Nevertheless in this section some guidelines
+will be given. Conclusions were drawn based on experiments performed on
+exemplary problems described above.
+
+The parameters were grouped into two categories --- basic ones affecting the
+whole method and additional ones of less importance. The latter however can be
+used for fine-tuning to specific problem given.
+
+Author consider basic parameters to be:
+\begin{itemize}
+\item Number of generation in the evolutionary loop --- intuitively the more
+  the better.
+\item Number of individuals in the population --- again intuitively the more
+  the better.
+\item A confidence of the rules generated in the DomLem algorithm. (compare
+  with~[inref]). 100\% confidence may seem a good idea however lowering it
+  would allow more gradual improvements of the goal function in the
+  evolutionary algorithm which could lead to better results.
+\end{itemize}
+
+
+\begin{figure}
+  \hspace{-2.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1}
+    \label{c2_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_params1b}
+    \label{c2_params1b}
+  }
+  \caption{Basic parameters for the two-criteria binary knapsack problem}
+  \label{c2_params}
+\end{figure}
+
+\begin{figure}
+  \hspace{-3.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1}
+    \label{c2_cont_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c2_cont_params1b}
+    \label{c2_cont_params1b}
+  }
+  \caption{Basic parameters for the two-criteria continuous knapsack problem}
+  \label{c2_cont_params}
+\end{figure}
+
+\begin{figure}
+  \hspace{-3.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1}
+    \label{c3_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_params1b}
+    \label{c3_params1b}
+  }
+  \caption{Basic parameters for the three-criteria binary knapsack problem}
+  \label{c3_params}
+\end{figure}
+
+\begin{figure}
+  \hspace{-2.5cm}
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1}
+    \label{c3_surface_params1}
+  }
+  \subfigure{
+    \includegraphics[width=0.65\textwidth]{exp/nouncert/c3_surface_params1b}
+    \label{c3_surface_params1b}
+  }
+  \caption{Basic parameters for the three-criteria DTLZ surface problem}
+  \label{c3_surface_params}
+\end{figure}
+
+The result shown on the charts (fig.~\ref{c2_params}, \ref{c2_cont_params},
+\ref{c3_params} and~\ref{c3_surface_params}) agrees with the intuition. More
+solutions (individuals in the population) and longer interior loop (more
+generations) will result in better value of supposed utility for all the
+problems. Confidence however yields an interesting result --- one should lower
+the confidence. Default is $100\%$ ($1.0$)  and should be lowered.
+
+The other parameters are:
+\begin{itemize}
+\item Delta ($\delta$) --- decay of a rule weight.
+\item Eta ($\eta$) --- initial mutation probability.
+\item Gamma ($\gamma$) --- coefficient of elitism.
+\item Omega ($\omega$) --- decay rate of the mutation.
+\end{itemize}
+
+They are used in the interior loop (see~[inref]).
+
+\begin{figure}
+  \subfigure[Two-criteria binary knapsack]{
+    \hspace*{-3.5cm}
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_params2}
+  }
+  \subfigure[Two-criteria continuous knapsack]{
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c2_cont_params2}
+  }
+  \subfigure[Three-criteria binary knapsack]{
+    \hspace*{-3.5cm}
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_params2}
+  }
+  \subfigure[DTLZ surface problem]{
+    \includegraphics[width=0.67\textwidth]{exp/nouncert/c3_surface_params2}
+  }
+  \caption{Other parameters for the three-criteria DTLZ surface problem}
+  \label{params2}
+\end{figure}
+
+There is no clear patter through the problems. In general changing the other
+parameters have only a minor influence over the algorithm. This is a good
+think, because the solution given to the DM is robust. However analyst should
+try to tune the parameters on problem basis. 
+
+
+\clearpage{}
+\section{Noise in the DM's decisions}
