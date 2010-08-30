@@ -225,11 +225,103 @@ value as an objective in evolutionary optimisation.
   \label{dtlz7_c4_perf}
 \end{figure}
 
-TODO: Data table and conclusions
+\begin{table}
+  \centering
+  \caption{Performance comparison on robust multi-objective problems}
+  \label{t:perf-comp}
+  \begin{tabular}{r c c c}
+    \hline
+    test \ optimisation & supposed & rules & distance \\
+    \hline
+    \hline
+    mix\_base & 6683.1389116 & 6678.95315893333 & 0.06\% \\
+    mix\_gen60 & 6680.04755986667 & 6661.40905693333 & 0.28\% \\
+    dtlz1\_c4\_base & 7.0080924 & 12.8092118666667 & 45.29\% \\
+    dtlz1\_c4\_gen60 & 6.4837556 & 15.17629275 & 57.28\% \\
+    dtlz1\_c10\_base & 7.597114 & 13.7340478666667 & 44.68\% \\
+    dtlz1\_c10\_gen60 & 5.60679086666667 & 17.9988671333333 & 68.85\% \\
+    dtlz7\_c4\_base & 104.724579166667 & 108.741367166667 & 3.69\% \\
+    dtlz7\_c4\_gen60 & 104.954425714286 & 110.277812181818 & 4.83\% \\
+    \hline
+  \end{tabular}
+\end{table}
+
+Thee results are shown on table~\ref{t:perf-comp} and presented on
+figure~\ref{pres_perf}, \ref{dtlz1_c4_perf}, \ref{dtlz1_c10_perf}
+and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
+(less than $1\%$) and minor difference for the dtlz7 problem --- less than
+$5\%$. Unfortunately differences for dtlz1 problems (both four- and
+ten-criteria) were important and noticeable --- about $50\%$ percent after ten
+iterations. It looks like that the problem is here to blame. This particular
+one is difficult for the method. The conclusion is that analyst should always
+check if the method fits for given problem. In fact according to the
+no-free-lunch([ref]) theorem one should always do that, because there is no
+optimisation algorithm which is universally better than the others.
+
 \clearpage{}
 
 \subsection{The importance of parameters}
 
+The importance of basic parameters was evaluated again in the robust
+environment. The numerical results are presented in the
+table~\ref{t:base2_imp_1} and~\ref{t:base2_imp_2}. Also charts are included to
+visualise the relations (fig.~\ref{params}).
+
+Unfortunately no clear pattern emerges. For mix problem the solution is robust
+--- changing the basic parameters changes the value of the result no more than
+a $1\%$ after ten iterations.For the DTLZ7 problem situation is similar ---
+differences are bigger now, however still less than $5\%$.
+
+Differences are bigger and important for the DTLZ1 problems (four- and
+ten-criteria). However the standard deviations are the same order of magnitude
+as mean values of the results. So one should say the results are inconclusive
+here and it is impossible to make a suggestion based solely on this results.
+
+\begin{table}
+  \centering
+  \caption{Importance of base parameters in robust environment}
+  \label{t:base2_imp_1}
+  \begin{tabular}{r c c c c c c}
+    & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
+    \hline
+    test & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+    base & 6665.60 & 57.27 & 0.00\% & -9.99 & 6.83 & 0.00\% \\
+    conf06 & 6677.63 & 44.01 & 0.18\% & -13.26 & 13.74 & 32.79\% \\
+    conf08 & 6671.75 & 47.59 & 0.09\% & -12.67 & 8.17 & 26.85\% \\
+    generation45 & 6661.72 & 47.52 & -0.06\% & -16.04 & 12.47 & 60.63\% \\
+    generation60 & 6661.14 & 45.08 & -0.07\% & -9.63 & 7.78 & -3.61\% \\
+    scenario45 & 6617.60 & 47.33 & -0.72\% & -13.12 & 11.37 & 31.34\% \\
+    scenario60 & 6639.54 & 33.98 & -0.39\% & -13.95 & 8.50 & 39.68\% \\
+    solution45 & 6705.68 & 52.96 & 0.60\% & -10.43 & 8.33 & 4.44\% \\
+    solution60 & 6685.43 & 56.78 & 0.30\% & -11.68 & 8.23 & 16.97\% \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}
+  \centering
+  \caption{Importance of base parameters in robust environment}
+  \label{t:base2_imp_2}
+  \begin{tabular}{r c c c c c c}
+    & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
+    \hline
+    test & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+    base & -15.30 & 11.20 & 0.00\% & -109.23 & 5.87 & 0.00\% \\
+    conf06 & -16.98 & 13.01 & 10.95\% & -107.51 & 4.43 & -1.57\% \\
+    conf08 & -15.31 & 9.06 & 0.07\% & -112.58 & 6.45 & 3.07\% \\
+    generation45 & -15.92 & 13.27 & 4.03\% & -109.23 & 6.96 & 0.00\% \\
+    generation60 & -21.63 & 12.55 & 41.37\% & -108.33 & 10.87 & -0.82\% \\
+    scenario45 & -17.32 & 11.15 & 13.17\% & -111.98 & 5.34 & 2.52\% \\
+    scenario60 & -16.67 & 13.30 & 8.91\% & -112.54 & 3.45 & 3.03\% \\
+    solution45 & -13.89 & 9.63 & -9.22\% & -107.88 & 6.39 & -1.23\% \\
+    solution60 & -9.55 & 6.81 & -37.62\% & -109.98 & 6.37 & 0.69\% \\
+    \hline
+  \end{tabular}
+\end{table}
 
 \begin{figure}
   \centering
@@ -256,6 +348,7 @@ TODO: Data table and conclusions
   \caption{Effect of params in DM's decisions}
   \label{params}
 \end{figure}
+
 \clearpage{}
 
 \subsection{Noise in the DM's decisions}
@@ -295,6 +388,8 @@ noise.
   \caption{Effect of noise in DM's decisions}
   \label{noise}
 \end{figure}
+
+
 
 
 \clearpage{}
