@@ -257,9 +257,9 @@ The experiments were performed using following problems:
 
 \section{Conclusions}
 
-The experiments performed confirmed that method proposed in~[ref] can be used
-to solve multi-objective optimisation problems even when they do contain
-uncertainty (in form of intervals of possible values).
+The experiments performed confirmed that the method proposed in~[ref] can be
+used to solve multi-objective optimisation problems even when the problem
+formulation does contain uncertainty in form of intervals of possible values.
 
 At the moment of writing according to author's knowledge there was no working
 implementation of the DARWIN method. So the first task was to analyse behavior
@@ -286,4 +286,8 @@ with interval coefficients.
 
 To conclude the results --- the DARWIN method can handle very well MMO
 problems. A resulting solution is robust with respect to algorithm parameters,
-decision-maker's noise and finally to the uncertainty in problem definition.
+decision-maker's noise and finally to the uncertainty in problem
+definition. Nevertheless analyst should be care and research the problem
+instead of blindly using the method. There are some problems which are hard
+for the DARWIN to solve (e.g. DTLZ1). Even if the problem is appropriate and
+the method promises good results one have to fine-tune the parameters.

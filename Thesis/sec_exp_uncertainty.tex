@@ -354,13 +354,21 @@ here and it is impossible to make a suggestion based solely on this results.
 \subsection{Noise in the DM's decisions}
 
 In order to check impact of a noise in DM's decisions experiments were
-performed. The results are presented in figure~\ref{noise}.
+performed. The results are presented in figure~\ref{noise} and on the
+tables~\ref{t:un_noise_1} and~\ref{t:un_noise_2}.
 
-The effect of the noise starts to be an important factor only in case of
-medium (noise$_5$) and major (noise$_6$). So the situation is similar to the
-impact on problems defined without uncertainty. Even if one adds the interval
-coefficients to the problem the solution is still robust with respect to the
-noise.
+Again one have to analyse the results excluding DTLZ1 problem. This is because
+of the standard deviation of the series of results --- again it is the same
+order of magnitude as the value itself.
+
+In the Mix and DTLZ7 problems the effect of the noise starts to be an
+important factor only in case of medium- (noise$_5$) --- the results differs
+about $8\%$ and in case of major-noise (noise$_6$) --- difference about 12\%
+for the mix problem and about 8\% for the DTLZ7 problem.
+
+So the situation is similar to the impact on problems defined without
+uncertainty. Even if one adds the interval coefficients to the problem the
+solution is still robust with respect to the noise.
 
 
 \begin{figure}
@@ -390,6 +398,45 @@ noise.
 \end{figure}
 
 
+\begin{table}
+  \centering
+  \caption{The impact of noise in robust environment}
+  \label{t:un_noise_1}
+  \begin{tabular}{r c c c c c c}
+    & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
+    \hline
+    noise level & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+    base & 6678.95 & 53.86 & 0.00\% & -12.81 & 8.38 & 0.00\% \\
+    noise1 & 6662.93 & 36.54 & -0.24\% & -7.70 & 8.48 & 39.89\% \\
+    noise2 & 6638.77 & 70.33 & -0.60\% & -12.61 & 11.36 & 1.55\% \\
+    noise3 & 6636.90 & 53.88 & -0.63\% & -12.73 & 10.82 & 0.61\% \\
+    noise4 & 6537.39 & 137.71 & -2.12\% & -13.65 & 7.84 & -6.55\% \\
+    noise5 & 6093.31 & 811.58 & -8.77\% & -17.27 & 11.32 & -34.82\% \\
+    noise6 & 5858.94 & 924.72 & -12.28\% & -13.72 & 12.45 & -7.09\% \\
+    \hline
+  \end{tabular}
+\end{table}
 
+ \begin{table}
+  \centering
+  \caption{The impact of noise in robust environment}
+  \label{t:un_noise_2}
+  \begin{tabular}{r c c c c c c}
+    & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
+    \hline
+    noise level & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+    base & -13.73 & 8.08 & 0.00\% & -108.86 & 4.00 & 0.00\% \\
+    noise1 & -17.34 & 9.07 & -26.23\% & -109.48 & 7.03 & -0.57\% \\
+    noise2 & -20.58 & 13.18 & -49.83\% & -115.45 & 7.33 & -6.06\% \\
+    noise3 & -21.52 & 11.72 & -56.70\% & -112.61 & 5.84 & -3.45\% \\
+    noise4 & -21.47 & 9.29 & -56.36\% & -112.38 & 6.51 & -3.24\% \\
+    noise5 & -24.86 & 13.03 & -81.01\% & -117.84 & 6.78 & -8.26\% \\
+    noise6 & -24.89 & 11.79 & -81.21\% & -117.45 & 7.21 & -7.89\% \\
+    \hline
+  \end{tabular}
+\end{table}
 
-\clearpage{}
