@@ -270,11 +270,15 @@ to investigate the problem with this method further.
 \end{figure}
 
 \begin{table}
+  \centering
   \caption{Distance from the optimum solution}
   \label{t:opt_dist}
   \begin{tabular}{r c c c c}
+    \hline
     Exterior loop & Knapsack bin 2c & Knapsack cont 2c & Knapsack bin 3c &
     DTLZ surface 3c \\
+    \hline
+    \hline
     1. & 30.52\% & 46.79\% & 36.85\% & 7.82\% \\
     2. & 23.84\% & 46.66\% & 30.77\% & 4.40\% \\
     3. & 18.61\% & 46.49\% & 25.80\% & 6.79\% \\
@@ -295,6 +299,7 @@ to investigate the problem with this method further.
     18. & - & 43.25\% & 3.12\% & - \\
     19. & - & 43.02\% & 2.94\% & - \\
     20. & - & 42.81\% & 2.77\% & - \\
+    \hline
   \end{tabular}
 \end{table}
 
@@ -394,11 +399,15 @@ first few iterations.
 \end{figure}
 
 \begin{table}
+  \centering
   \caption{Distance from the optimum solution when long runs are allowed}
   \label{t:opt_dist_long}
   \begin{tabular}{r c c c c}
+    \hline
     Exterior loop & Knapsack bin 2c & Knapsack cont 2c & Knapsack bin 3c &
     DTLZ surface 3c \\
+    \hline
+    \hline
     1 & 31.08\% & TODO & 37.48\% & 14.05\% \\
     5 & 13.59\% & TODO & 17.42\% & 1.22\% \\
     10 & 7.33\% & TODO & 6.48\% & 7.19\% \\
@@ -420,6 +429,7 @@ first few iterations.
     90 & 3.22\% & TODO & 1.62\% & 7.24\% \\
     95 & 3.45\% & TODO & 1.59\% & 4.85\% \\
     100 & 3.66\% & TODO & 1.71\% & 3.34\% \\
+    \hline
   \end{tabular}
 \end{table}
 
@@ -513,12 +523,58 @@ Author consider basic parameters to be:
   \label{c3_surface_params}
 \end{figure}
 
-The result shown on the charts (fig.~\ref{c2_params}, \ref{c2_cont_params},
-\ref{c3_params} and~\ref{c3_surface_params}) agrees with the intuition. More
-solutions (individuals in the population) and longer interior loop (more
-generations) will result in better value of supposed utility for all the
-problems. Confidence however yields an interesting result --- one should lower
-the confidence. Default is $100\%$ ($1.0$)  and should be lowered.
+
+\begin{table}
+  \centering
+  \caption{Importance of base parameters}
+  \label{t:base_imp_1}
+  \begin{tabular}{r c c c c c c}
+    & \multicolumn{3}{c}{Knapsack bin 2c} & \multicolumn{3}{c}{Knapsack cont 2c} \\
+    \hline
+    test & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+    base & 3870.72 & 45.73 & 0.00\% & 18711.65 & 439.25 & 0.00\% \\ 
+    conf06 & 3865.89 & 26.77 & -0.12\% & 18450.09 & 559.24 & -1.40\% \\
+    conf08 & 3855.53 & 40.73 & -0.39\% & 18550.45 & 389.49 & -0.86\% \\
+    generation45 & 3958.75 & 34.14 & \textbf{2.27\%} & 18998.47 & 645.67 & \textbf{1.53\%} \\
+    generation60 & 3995.55 & 32.71 & \textbf{3.22\%} & 19450.22 & 432.85 & \textbf{3.95\%} \\
+    solution45 & 3937.89 & 26.11 & \textbf{1.74\%} & 18613.14 & 686.11 & -0.53\% \\
+    solution60 & 3924.30 & 44.31 & \textbf{1.38\%} & 19169.14 & 317.48 & \textbf{2.44\%} \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}
+  \centering
+  \caption{Importance of base parameters}
+  \label{t:base_imp_2}
+  \begin{tabular}{r c c c c c c}
+    & \multicolumn{3}{c}{Knapsack bin 3c} & \multicolumn{3}{c}{DTLZ surface 3c} \\
+    \hline
+    test & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+    base & 30648.33 & 168.22 & 0.00\% & 1.19 & 0.14 & 0.00\% \\
+    conf06 & 30522.49 & 214.76 & -0.41\% & 1.21 & 0.15 & -1.24\% \\
+    conf08 & 30259.30 & 201.96 & -1.27\% & 1.19 & 0.14 & -0.11\% \\
+    generation45 & 30810.65 & 157.15 & \textbf{0.53\%} & 1.17 & 0.08 & \textbf{1.73\%} \\
+    generation60 & 30839.93 & 110.70 & \textbf{0.63\%} & 1.14 & 0.05 & \textbf{4.61\%} \\
+    solution45 & 30767.10 & 150.78 & \textbf{0.39\%} & 1.18 & 0.10 & \textbf{1.26\%} \\
+    solution60 & 30852.30 & 212.38 & \textbf{0.67\%} & 1.14 & 0.11 & \textbf{4.11\%} \\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+Numerical data are presented in table~\ref{t:base_imp_1}
+and~\ref{t:base_imp_2}. The result are also shown on charts
+(fig.~\ref{c2_params}, \ref{c2_cont_params}, \ref{c3_params}
+and~\ref{c3_surface_params}). This agrees with the intuition. More solutions
+(individuals in the population) and longer interior loop (more generations)
+will result in better value of supposed utility for all the
+problems. Confidence however yields an interesting result --- one shouldn't lower
+the confidence (the default is $100\%$).
 
 The other parameters are:
 \begin{itemize}
@@ -557,7 +613,6 @@ parameters have only a minor influence over the algorithm. This is a good
 think, because the solution given to the DM is robust. However analyst should
 try to tune the parameters on problem basis. 
 
-\clearpage{}
 \subsection{Noise in the DM's decisions}
 
 In the experiments performed the decision maker was mocked by a computer
@@ -702,18 +757,78 @@ without additional noise.
   \label{c3_surface_noise}
 \end{figure}
 
-Results of the DTLZ surface problem (fig.\ref{c3_surface_noise}) are
-inconclusive. This is because of the behavior described in
-section~\ref{nouncert-performance} --- the decision rules are not
+Results of the DTLZ surface problem (table~\ref{t:noise} and
+fig.\ref{c3_surface_noise}) are inconclusive. This is because of the behavior
+described in section~\ref{nouncert-performance} --- the decision rules are not
 discriminating enough so that often the utility value drops between the
 interior loops. This can be seen as a form of noise with even bigger impact
 than the one tested here, so it obscures results for this particular problem.
 
 For the other problems however --- binary knapsacks (fig.~\ref{c2_noise} and
 \ref{c3_noise}) the results are clear. Minor noises make almost no harm to the
-results, while medium and major have only a small impact. (TODO: data!). This
-means that the solution generated by the DARWIN is robust with respect to the
-noise in the decision maker chooses. Even with the major noise the algorithm
-is able to return the same results however a few iterations later.
+results, while medium and major have only a small impact --- the value has
+decreased less than $1\%$. This means that the solution generated by the
+DARWIN is robust with respect to the noise in the decision maker chooses. Even
+with the major noise the algorithm is able to return the same results however
+a few iterations later.
+
+\begin{table}[h]
+  \centering
+  \caption{The impact of noise on knapsack bin 2c}
+  \label{t:noise1}
+  \begin{tabular}{r c c c}
+    \hline
+    test & mean & sd & improvement \\
+    \hline
+    \hline
+    base & 4057.34 & 21.31 & 0.00\% \\
+    noise1 & 4061.20 & 20.45 & 0.10\% \\
+    noise2 & 4055.07 & 22.89 & -0.06\% \\
+    noise3 & 4049.89 & 23.98 & -0.18\% \\
+    noise4 & 4044.00 & 33.41 & -0.33\% \\
+    noise5 & 4032.45 & 34.63 & -0.61\% \\
+    noise6 & 4029.31 & 32.76 & -0.69\% \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{The impact of noise on knapsack bin 3c}
+  \label{t:noise2}
+  \begin{tabular}{r c c c}
+    \hline
+    test & mean & sd & improvement  \\
+    \hline
+    \hline
+    base   & 30648.33 & 168.22 & 0.00\% \\
+    noise1 & 30522.49 & 214.76 & -0.41\% \\
+    noise2 & 30259.30 & 201.96 & -1.27\% \\
+    noise3 & 30810.65 & 157.15 & 0.53\% \\
+    noise4 & 30839.93 & 110.70 & 0.63\% \\
+    noise5 & 30854.91 & 86.76 & 0.67\% \\
+    noise6 & 30852.30 & 212.38 & 0.67\% \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\begin{table}[h]
+  \centering
+  \caption{The impact of noise on DTLZ surface 3c}
+  \label{t:noise3}
+  \begin{tabular}{r c c c}
+    \hline
+    test & mean & sd & improvement  \\
+    \hline
+    \hline
+    base   & -1.19 & 0.14 & 0.00\% \\
+    noise2 & -1.16 & 0.05 & -2.65\% \\
+    noise3 & -1.21 & 0.15 & 1.46\% \\
+    noise4 & -1.14 & 0.04 & -3.88\% \\
+    noise5 & -1.28 & 0.17 & 7.66\% \\
+    noise6 & -1.21 & 0.11 & 1.75\% \\
+    \hline
+  \end{tabular}
+\end{table}
 
 \clearpage{}
