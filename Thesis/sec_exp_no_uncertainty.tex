@@ -361,10 +361,11 @@ problem is a well-known subject in the multi-objective optimisation
 ([ref]). However it is out-of-scope of this paper.
 
 For completeness charts presenting the algorithm behaviour when more exterior
-loop iterations are allowed are given (fig.~\ref{outer}). After the twentieth
-loop improvements are small (if any). In author's opinion this is a good thing
-because there is no reason not to stop algorithm. If it works for the problem
-it will be evident from the first few iterations.
+loop iterations are allowed are given (fig.~\ref{outer},
+table~\ref{t:opt_dist_long}). After the twentieth loop improvements are small
+(if any). In author's opinion this is a good thing because there is no reason
+not to stop algorithm. If it works for the problem it will be evident from the
+first few iterations.
 
 \begin{figure}
   \centering
@@ -392,7 +393,35 @@ it will be evident from the first few iterations.
   \label{outer}
 \end{figure}
 
-
+\begin{table}
+  \caption{Distance from the optimum solution when long runs are allowed}
+  \label{t:opt_dist_long}
+  \begin{tabular}{r c c c c}
+    Exterior loop & Knapsack bin 2c & Knapsack cont 2c & Knapsack bin 3c &
+    DTLZ surface 3c \\
+    1 & 31.08\% & TODO & 37.48\% & 14.05\% \\
+    5 & 13.59\% & TODO & 17.42\% & 1.22\% \\
+    10 & 7.33\% & TODO & 6.48\% & 7.19\% \\
+    15 & 4.72\% & TODO & 3.39\% & 7.43\% \\
+    20 & 3.70\% & TODO & 2.33\% & 6.00\% \\
+    25 & 3.11\% & TODO & 2.02\% & 12.06\% \\
+    30 & 3.05\% & TODO & 1.75\% & 1.05\% \\
+    35 & 2.99\% & TODO & 1.56\% & 9.93\% \\
+    40 & 3.05\% & TODO & 1.73\% & 16.83\% \\
+    45 & 2.91\% & TODO & 1.58\% & 11.93\% \\
+    50 & 2.94\% & TODO & 1.49\% & 18.44\% \\
+    55 & 2.94\% & TODO & 1.65\% & 14.70\% \\
+    60 & 3.15\% & TODO & 1.70\% & 14.55\% \\
+    65 & 3.13\% & TODO & 1.69\% & 1.61\% \\
+    70 & 3.14\% & TODO & 1.60\% & 1.16\% \\
+    75 & 3.34\% & TODO & 1.60\% & 8.86\% \\
+    80 & 3.31\% & TODO & 1.71\% & 2.07\% \\
+    85 & 3.41\% & TODO & 1.66\% & 1.15\% \\
+    90 & 3.22\% & TODO & 1.62\% & 7.24\% \\
+    95 & 3.45\% & TODO & 1.59\% & 4.85\% \\
+    100 & 3.66\% & TODO & 1.71\% & 3.34\% \\
+  \end{tabular}
+\end{table}
 
 \clearpage{}
 \subsection{The importance of parameters}
