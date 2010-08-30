@@ -236,11 +236,12 @@ Results of the evaluation on the following problems are given (see~[inref]):
 \end{itemize}
 
 The test were repeated at least fifteen times and the results averaged. They
-are presented on figure~\ref{simple_performance}. Depending on a problem $10$
-or $20$ iterations of exterior loop were simulated. Normally it would be up to
-the DM to stop when he or she is satisfied with the solution. However one can
-safely assume that if no satisfactory solution is found in $10$ the decision
-maker will not want to investigate the problem with this method further.
+are presented on figure~\ref{simple_performance} and
+table~\ref{t:opt_dist}. Depending on a problem $10$ or $20$ iterations of
+exterior loop were simulated. Normally it would be up to the DM to stop when
+he or she is satisfied with the solution. However one can safely assume that
+if no satisfactory solution is found in $10$ the decision maker will not want
+to investigate the problem with this method further.
 
 \begin{figure}
   \centering
@@ -267,6 +268,35 @@ maker will not want to investigate the problem with this method further.
   \caption{Performance comparison}
   \label{simple_performance}
 \end{figure}
+
+\begin{table}
+  \caption{Distance from the optimum solution}
+  \label{t:opt_dist}
+  \begin{tabular}{r c c c c}
+    Exterior loop & Knapsack bin 2c & Knapsack cont 2c & Knapsack bin 3c &
+    DTLZ surface 3c \\
+    1. & 30.52\% & 46.79\% & 36.85\% & 7.82\% \\
+    2. & 23.84\% & 46.66\% & 30.77\% & 4.40\% \\
+    3. & 18.61\% & 46.49\% & 25.80\% & 6.79\% \\
+    4. & 15.96\% & 46.32\% & 20.99\% & 5.38\% \\
+    5. & 13.73\% & 46.16\% & 17.12\% & 5.08\% \\
+    6. & 12.02\% & 45.97\% & 13.57\% & 10.15\% \\
+    7. & 10.59\% & 45.74\% & 11.28\% & 8.33\% \\
+    8. & 9.20\% & 45.51\% & 9.78\% & 7.64\% \\
+    9. & 8.05\% & 45.29\% & 8.50\% & 5.49\% \\
+    10. & 7.03\% & 45.06\% & 7.22\% & 8.24\% \\
+    11. & - & 44.85\% & 6.47\% & - \\
+    12. & - & 44.62\% & 5.70\% & - \\
+    13. & - & 44.38\% & 5.15\% & - \\
+    14. & - & 44.17\% & 4.67\% & - \\
+    15. & - & 43.94\% & 4.17\% & - \\
+    16. & - & 43.70\% & 3.77\% & - \\
+    17. & - & 43.46\% & 3.43\% & - \\
+    18. & - & 43.25\% & 3.12\% & - \\
+    19. & - & 43.02\% & 2.94\% & - \\
+    20. & - & 42.81\% & 2.77\% & - \\
+  \end{tabular}
+\end{table}
 
 On both binary knapsack problems the performance is very good --- they are not
 further than $10\%$ away from optimal solution after $10^{th}$ iteration. The

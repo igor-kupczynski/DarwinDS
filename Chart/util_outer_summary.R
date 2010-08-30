@@ -39,6 +39,7 @@ args <- read.cmd.args()
 df <-read.csv(args[4], header=TRUE)
 pdf(args[5])
 data <- prep.data.line(df, args[3])
+write.csv(data, "summary_mean.csv")
 c <- gen.plot.line(data, args[3])
 opt <- as.numeric(args[2])
 if (opt != 0) {
