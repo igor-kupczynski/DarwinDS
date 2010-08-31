@@ -259,36 +259,37 @@ The experiments were performed using following problems:
 \section{Conclusions}
 
 The experiments performed confirmed that the method proposed in~[ref] can be
-used to solve multi-objective optimisation problems even when the problem
-formulation does contain uncertainty in form of intervals of possible values.
+used to solve multi-objective optimization problems even when the problem
+formulation does contain uncertainty in the form of intervals of possible
+values.
 
-At the moment of writing according to author's knowledge there was no working
-implementation of the DARWIN method. So the first task was to analyse behavior
-of the algorithm on simple two criteria problem without uncertainty. First
-evaluations allowed the author to learn the properties and to get to know the
-behaviour of the algorithm.
+At the moment of writing according to the author's knowledge there was no
+working implementation of the DARWIN method. The first task was to analyze
+behavior of the algorithm on simple two criteria problem without
+uncertainty. First evaluations allowed the author to learn the properties and
+to get to know the behaviour of the algorithm.
 
 Having confidence that the DARWIN works it was possible to advance to the next
-task --- to evaluate the performance of richer set of the problem. It was
-decided to start without allowing uncertainty. Rationale for this behaviour
-was to prove that algorithm can solve a category of problems with good overall
-performance. Ignoring the uncertainty it was possible to compare the DARWIN
-results with optimal ones, calculated by the linear programming solver.
+task --- to evaluate the performance of a richer set of the problem. It was
+decided to start without allowing uncertainty. Rationale behind this behavior
+was to prove the algorithm can solve a category of problems with the good
+overall performance. Ignoring the uncertainty it was possible to compare the
+DARWIN results with optimal ones, calculated by the linear programming solver.
 
-There are lot of parameters in the algorithm itself, so logical next step was
-to check the importance of the parameters. Experiments performed so far
-assumed that the decision maker is infallible, consistent and acts according
-to a well defined utility function. It is not the case in real-life situations
-so the impact of noise in DM's decisions was measured.
+There are a lot of parameters in the algorithm itself, so the next logical
+step was to check the importance of the parameters. Experiments performed so
+far assumed that the decision maker is infallible, consistent and acts
+according to a well-defined utility function. It is not the case in real-life
+situations so the impact of noise in DM's decisions was measured.
 
 Knowing the characteristics, performance and impact of the parameters and the
-noise one can check if the algorithm will similar characteristics on problems
+noise one can check if the algorithm with similar characteristics on problems
 with interval coefficients.
 
-To conclude the results --- the DARWIN method can handle very well MMO
-problems. A resulting solution is robust with respect to algorithm parameters,
-decision-maker's noise and finally to the uncertainty in problem
-definition. Nevertheless analyst should be care and research the problem
-instead of blindly using the method. There are some problems which are hard
-for the DARWIN to solve (e.g. DTLZ1). Even if the problem is appropriate and
-the method promises good results one have to fine-tune the parameters.
+To conclude, the DARWIN method can handle MMO very well problems. A resulting
+solution is robust with respect to algorithm parameters, decision-maker's
+noise and finally to the uncertainty in the problem definition. Nevertheless
+the analyst should be careful and investigate the problem instead of using the
+method blindly. There are some problems which are hard for the DARWIN to solve
+(e.g. DTLZ1). Even if the problem is appropriate and the method promises good
+results one has to fine-tune the parameters.

@@ -1,39 +1,38 @@
 \section{Uncertainty}
-In the previous sections the algorithm's results were analysed. It was assumed
+In the previous sections the algorithm's results were analyzed. It was assumed
 that the problems were well-specified with no room for uncertainty. It was a
-way to test the algorithm's behaviour and to get the idea about its
-properties.
+way to test the algorithm's behavior and to get the idea about its properties.
 
-It is often impossible to specify exact values of each coefficient in the
-problem. One may want to specify some of the coefficients in form of intervals
-of the possible values. Then he or she is interested in robust solution taking
-into account many possible scenarios of imprecision (see~[inref]). This is
-possible with the DARWIN method.
+It is often impossible to specify the exact values of each coefficient in the
+problem. One may want to specify some of the coefficients in the form of
+intervals of the possible values. Then he or she is interested in a robust
+solution taking into account many possible scenarios of imprecision
+(see~[inref]). This is possible with the DARWIN method.
 
 Now the tests performed earlier will be extended to ``robust'' problems ---
-i.e. ones with interval coefficients. Note that now it is impossible to
+i.e.the ones with interval coefficients. Note that now it is impossible to
 compare a result with the optimal solution, even assuming the supposed utility
-function. However a point of reference is need in order to know what
+function. However, a point of reference is needed in order to know what
 performance can be expected from the method. The author decided to compare the
-results with supposed utility function optimisation.
+results with the supposed utility function optimization.
 
 As a reference point for comparison result generated as follows was taken. The
 whole exterior loop (see~[inref]) is left intact but in the interior loop the
-goal function for evolutionary optimisation changes. Instead of optimisation
+goal function for evolutionary optimization changes. Instead of optimization
 based on primary and secondary score the supposed utility function is the one
 to be taken into account. This way it is possible to measure how well the DM's
 preferences are inferred by the DARWIN method. And the preference gathering is
-definitely most important and unique part of this method.
+definitely the most important and unique part of this method.
 
 Like in previous sections all tests were repeated at least fifteen times and
 results were averaged unless stated otherwise.
 
 \subsection{Single run analysis}
 Before evaluating performances on exemplary problems it is a good idea to
-analyse single run on a single problem. It can indicate interesting properties
-or potential problems of the algorithm.
+analyze a single run on a single problem. It can indicate interesting
+properties or potential problems of the algorithm.
 
-The problem being evaluated is a two-criteria mix problem (this a problem
+The problem being evaluated is a two criteria mix problem (this a problem
 presented at the original DARWIN lecture given at~[ref]). Note that although
 the problem has only two-criteria in its definition it has to be considered in
 a space with more dimensions. This is because the supposed utility function is
@@ -58,28 +57,28 @@ profit.
   \label{pres_utilouter}
 \end{figure}
 
-Basic performance of single run is presented on
+Basic performance of a single run is presented in
 figure~\ref{pres_utilouter}. As one can see the algorithm needs only four
-iteration to reach maximum value --- a point were no further improvement
-occurs\footnote{This is not optimal solution to the problem. By their nature
-  --- intervals and scenarios of uncertainty --- a problem from this section
-  do not have a optimal value.}.
+iterations to reach the maximum value --- a point where no further improvement
+occurs\footnote{This is not an optimal solution to the problem. By their
+  nature --- intervals and scenarios of uncertainty --- a problem from this
+  section does not have an optimal value.}.
 
-Improvements of the supposed utility function and primary score are shown on
+Improvements of the supposed utility function and primary score are shown in
 figures~\ref{pres_utilgen_01},~\ref{pres_utilgen_03} whereas the shape of the
-population on fig.~\ref{pres_utilind_01},~\ref{pres_utilind_03}. One can see
+population in fig.~\ref{pres_utilind_01},~\ref{pres_utilind_03}. One can see
 that it is easy to generate a good solution to the problem --- a solution with
-the best result in given run appears in a first few generations.
+the best result in a given run appears in the first few generations.
 
-Having sixth-dimensional objective space it is impossible to provide section
-of this space on two-dimensional chart. However these dimensions are not
+Having six-dimensional objective space it is impossible to provide a section
+of this space on a two-dimensional chart. However, these dimensions are not
 completely independent. There is a correlation between the quantiles of the
-same objective. This can be observed on fig.~\ref{pres_valweight} --- showing
+same objective. This can be observed in fig.~\ref{pres_valweight} --- showing
 the movement of population during the generation on a section of objective
-space or even better on fig.~\ref{pres_dm_choices} --- solutions marked by the
+space, or even better in fig.~\ref{pres_dm_choices} --- solutions marked by the
 decision maker as ``good''.
 
-As expected the solutions chosen by the DM are near the pareto-front. However
+As expected the solutions chosen by the DM are near the pareto-front. However,
 not all of them are part of the front. Knowing that there are four other goals
 besides profit$^{50\%}$ and time$^{50\%}$ explains the phenomenon.
 
@@ -150,16 +149,16 @@ besides profit$^{50\%}$ and time$^{50\%}$ explains the phenomenon.
 
 \subsection{The performance on exemplary problems}
 To see how well the DARWIN can infer the decision maker's preferences a
-comparison with supposed utility function is given. It section the experiments
-where performed on all exemplary problems with interval coefficients --- mix
-problem (also labeled as presentation problem), dtlz1 (version with four and
-ten criteria) and dtlz7.
+comparison with the supposed utility function is given. For this section the
+experiments were performed on all exemplary problems with interval
+coefficients --- mix problem (also labeled as presentation problem), dtlz1
+(version with four and ten criteria) and dtlz7.
 
 The problems were solved with default (base) values of configuration options
-as well as with increased number of generation (from $30$ to $60$). Tests that
-names ends with \texttt{\_rules} are using primary and secondary score; tests
-with names ending with \texttt{\_supp} are using supposed utility function
-value as an objective in evolutionary optimisation.
+as well as with an increased number of generations (from $30$ to $60$). Tests
+whose names end with \texttt{\_rules} are using primary and secondary score;
+tests with names ending with \texttt{\_supp} are using the supposed utility
+function value as an objective in evolutionary optimization.
 
 \begin{figure}
   \centering
@@ -246,17 +245,17 @@ value as an objective in evolutionary optimisation.
   \end{tabular}
 \end{table}
 
-Thee results are shown on table~\ref{t:perf-comp} and presented on
+The results are shown in table~\ref{t:perf-comp} and presented in
 figure~\ref{pres_perf}, \ref{dtlz1_c4_perf}, \ref{dtlz1_c10_perf}
 and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
-(less than $1\%$) and minor difference for the dtlz7 problem --- less than
-$5\%$. Unfortunately differences for dtlz1 problems (both four- and
+(less than $1\%$) and a minor difference for the dtlz7 problem --- less than
+$5\%$. Unfortunately, differences for dtlz1 problems (both four- and
 ten-criteria) were important and noticeable --- about $50\%$ percent after ten
 iterations. It looks like the problem is here to blame. This particular one is
-difficult for the method. The conclusion is that analyst should always check
-if the method fits for a given problem. In fact according to the
+difficult for the method. The conclusion is that the analyst should always
+check if the method fits the given problem. In fact, according to the
 no-free-lunch([ref]) theorem one should always do that, because there is no
-optimisation algorithm which is universally better than the others.
+optimization algorithm which is universally better than the others.
 
 \clearpage{}
 
@@ -265,17 +264,18 @@ optimisation algorithm which is universally better than the others.
 The importance of basic parameters was evaluated again in the robust
 environment. The numerical results are presented in the
 table~\ref{t:base2_imp_1} and~\ref{t:base2_imp_2}. Also charts are included to
-visualise the relations (fig.~\ref{params}).
+visualize the relations (fig.~\ref{params}).
 
-Unfortunately no clear pattern emerges. For mix problem the solution is robust
---- changing the basic parameters changes the value of the result no more than
-a $1\%$ after ten iterations.For the DTLZ7 problem situation is similar ---
-differences are bigger now, however still less than $5\%$.
+Unfortunately, no clear pattern emerges. For a mix problem the solution is
+robust --- changing the basic parameters changes the value of the result no
+more than a $1\%$ after ten iterations.For the DTLZ7 problem the situation is
+similar --- differences are bigger now, however still less than $5\%$.
 
 Differences are bigger and important for the DTLZ1 problems (four- and
-ten-criteria). However the standard deviations are the same order of magnitude
-as mean values of the results. So one should say the results are inconclusive
-here and it is impossible to make a suggestion based solely on this results.
+ten-criteria). However, the standard deviations are of the same order of
+magnitude as mean values of the results. So one should say the results are
+inconclusive here and it is impossible to make a suggestion based solely on
+these results.
 
 \begin{table}
   \centering
@@ -353,21 +353,21 @@ here and it is impossible to make a suggestion based solely on this results.
 
 \subsection{Noise in the DM's decisions}
 
-In order to check impact of a noise in DM's decisions experiments were
-performed. The results are presented in figure~\ref{noise} and on the
+In order to check the impact of a noise in DM's decisions, experiments were
+performed. The results are presented in figure~\ref{noise} and in the
 tables~\ref{t:un_noise_1} and~\ref{t:un_noise_2}.
 
-Again one have to analyse the results excluding DTLZ1 problem. This is because
-of the standard deviation of the series of results --- again it is the same
-order of magnitude as the value itself.
+Again one has to analyze the results excluding the DTLZ1 problem. This is
+because of the standard deviation of the series of results --- again it is the
+same order of magnitude as the value itself.
 
 In the Mix and DTLZ7 problems the effect of the noise starts to be an
-important factor only in case of medium- (noise$_5$) --- the results differs
-about $8\%$ and in case of major-noise (noise$_6$) --- difference about 12\%
+important factor only in case of medium- (noise$_5$) --- the results differ
+about $8\%$ and in case of a major-noise (noise$_6$) --- difference about 12\%
 for the mix problem and about 8\% for the DTLZ7 problem.
 
-So the situation is similar to the impact on problems defined without
-uncertainty. Even if one adds the interval coefficients to the problem the
+The situation is similar to the impact on problems defined without
+uncertainty. Even if one adds the interval coefficients to the problem, the
 solution is still robust with respect to the noise.
 
 
