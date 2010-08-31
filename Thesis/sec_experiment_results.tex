@@ -1,11 +1,10 @@
-DARWIN is a new method and according to knowledge of the author and the
-supervisor haven't been implemented before. Experiments are
-designed to check if the method is working at all, what parameters are important
-for the method and what should be their reasonable default values. To make
-results repeatable the DM is mocked. Noise in his or her decisions is
-simulated. Unless uncertainty is involved comparisons to exact optimal
-solution are provided. In tests involving uncertainty results are compared to
-supposed utility function optimisation. 
+DARWIN is a new method and according to knowledge of the author it hasn't been
+implemented before. Experiments are designed to check if the method is working
+at all, what parameters are important for the method and what should be their
+reasonable default values. To make results repeatable the DM is mocked. Noise
+in his or her decisions is simulated. Unless uncertainty is involved
+comparisons to exact optimal solution are provided. In tests involving
+uncertainty results are compared to supposed utility function optimisation.
 
 \section{The environment}
 
@@ -24,8 +23,8 @@ code and with the modules written in R.
 \section{The Decision Maker}
 
 Experiments were repeated many times. In order to make it possible it was
-essential to mock the DM. This was also done to assure repeatable process
-across the test runs.
+essential to mock the DM. Mocking the decision make guarantees repeatable
+process across the test runs.
 
 In the DARWIN method interaction with decision maker occurs by showing him or
 her a list of generated solutions (usually 30) and asking him or her to
@@ -39,7 +38,7 @@ In the mocking process algorithm sorts the received solutions list according
 to this supposed utility function. Then it selects three (usually three,
 however this can be configured) solutions with the highest supposed utility.
 
-Unfortunately real decision maker, being a human isn't a predictive and
+Unfortunately real decision maker, being a human isn't as predictive and
 repeatable as the described process. In the section [inref] results of
 introducing noise to DM's decisions are presented.
 
@@ -50,20 +49,17 @@ In the following problems the supposed utility function is also defined.
 Area of interest for Multi-Objective Optimisation is huge and consists of many
 potential problems to be solved. There are multi-criteria versions of
 classical problems, like minimal spanning tree~[ref], traveling salesman
-problem (TSP)~[ref] or knapsack problem~[ref] as well as artificially
+problem (TSP)~[ref] or knapsack problem~[ref] as well as an artificially
 generated ones --- like the DTLZ problems [ref]. Some of them are interesting
 because of their real-life applications while the other are good for
 experimenting and testing purposes.
 
 It is worth noting that the ordinary single-criterion versions of the problems
-can be easy to solve. However in multi-criteria setting one has to infer the
+can be easy to solve. However in multi-criteria settings one has to infer the
 decision maker preferences and approximate supposed utility function
 correctly. The challenge here is not to build the best optimisation algorithm
-for all the problems (what is impossible according to no-free-lunch theorem
+for all the problems (this is impossible according to no-free-lunch theorem
 [ref]) but rather a framework for preference information extraction.
-
-Introducing uncertainty model as intervals is a new concept. For this reason
-the uncertainty was added to the problems described above.
 
 The experiments were performed using following problems:
 \begin{description}
@@ -109,8 +105,9 @@ The experiments were performed using following problems:
     \end{align*}
 
     Continuous version of the knapsack problem. Description given for the
-    binary version also applies here. The only difference is that now item can
-    be partially selected ($\forall_{x_i \in \bar{x}} x_i \in [0, 1)$). 
+    binary version also applies here. The only difference is that now the
+    items can be partially selected ($\forall_{x_i \in \bar{x}} x_i \in [0,
+      1)$).
 
   \item{\textbf{Three-criteria binary knapsack problem}}
     \begin{align*}
@@ -127,10 +124,10 @@ The experiments were performed using following problems:
     \end{align*}
 
     Two-criteria problems can be easily visualised and analysed, however in
-    real-life applications there is often a need for three and more
-    criteria. There is a moving from two to multiple, so it is worth comparing
-    the results achieved on the three-criteria knapsack problem with its
-    two-criteria counterpart. 
+    real-life applications there is often a need for three or more
+    criteria. There is a leap in moving from two- to multiple-criteria, so it
+    is worth comparing the results achieved on the three-criteria knapsack
+    problem with its two-criteria counterpart.
 
   \item{\textbf{Three-criteria DTLZ problem generated using constraint surface
     approach}}
@@ -149,8 +146,8 @@ The experiments were performed using following problems:
 
     This problem consists of three simple linear criteria. The solution space
     is three dimensional cube bounded by the $0 \le x_i \le 1$ constraint. To
-    make the problem more interesting parts of the solution space are being
-    cut off by additional constraints.
+    make the problem challenging parts of the solution space are being cut off
+    by additional constraints.
 
     This problem was build according to constraint surface approach presented
     in~[ref].
@@ -185,7 +182,7 @@ The experiments were performed using following problems:
     form of intervals. For readability's sake they were named and defined
     below the criteria.
 
-    The goal is to decide quantity of each product ($A, B, C$) to be
+    The goal is to set quantity of each product ($A, B, C$) to be
     produced. One wants to maximise the profit and minimised the total time it
     takes to produce the products. $p_i$ is the price of a product $i \in \{A,
     B, C\}$ on the market. There is also maximal demand the market can consume
@@ -196,9 +193,11 @@ The experiments were performed using following problems:
 
     Coefficients are given in form of intervals, so each solution has to be
     evaluated on many scenarios of uncertainty. This is why no exact values
-    are given in the supposed utility function. Percentiles are given instead
-    (see~[inref]). $\text{goal}^{25\%}$ means the best solution of the worst
-    $25\%$ of them.
+    are used in the supposed utility function --- one can not do it because
+    there are no exact values, only a series of evaluation
+    results. Percentiles are used instead (see~[inref]). $\text{goal}^{25\%}$
+    means a result of the best evaluation among the worst $25\%$ of
+    evaluations.
 
   \item{\textbf{Four-criteria robust DTLZ7 problem}}
     \begin{align*}

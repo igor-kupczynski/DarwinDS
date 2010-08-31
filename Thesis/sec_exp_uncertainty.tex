@@ -1,5 +1,5 @@
 \section{Uncertainty}
-In the previous sections the algorithm results were analysed. It was assumed
+In the previous sections the algorithm's results were analysed. It was assumed
 that the problems were well-specified with no room for uncertainty. It was a
 way to test the algorithm's behaviour and to get the idea about its
 properties.
@@ -30,13 +30,13 @@ results were averaged unless stated otherwise.
 
 \subsection{Single run analysis}
 Before evaluating performances on exemplary problems it is a good idea to
-analyse single run on single problem. It can indicate interesting properties
+analyse single run on a single problem. It can indicate interesting properties
 or potential problems of the algorithm.
 
-The problem being evaluated is a two-criteria mix problem (not that this a
-problem from original DARWIN lecture given at~[ref]). Note that although the
-problem has only two-criteria in its definition it has to be considered in a
-space with more dimensions. This is because the supposed utility function is
+The problem being evaluated is a two-criteria mix problem (this a problem
+presented at the original DARWIN lecture given at~[ref]). Note that although
+the problem has only two-criteria in its definition it has to be considered in
+a space with more dimensions. This is because the supposed utility function is
 defined not in the original two-criteria space (\textit{max} profit,
 \textit{min} time) but rather in a quantile space (see~[inref]). The function
 is defined as follows:
@@ -149,7 +149,7 @@ besides profit$^{50\%}$ and time$^{50\%}$ explains the phenomenon.
 \clearpage{}
 
 \subsection{The performance on exemplary problems}
-To see how well the DARWIN can infer the decision maker's preferences
+To see how well the DARWIN can infer the decision maker's preferences a
 comparison with supposed utility function is given. It section the experiments
 where performed on all exemplary problems with interval coefficients --- mix
 problem (also labeled as presentation problem), dtlz1 (version with four and
@@ -234,14 +234,14 @@ value as an objective in evolutionary optimisation.
     test \ optimisation & supposed & rules & distance \\
     \hline
     \hline
-    mix\_base & 6683.1389116 & 6678.95315893333 & 0.06\% \\
-    mix\_gen60 & 6680.04755986667 & 6661.40905693333 & 0.28\% \\
-    dtlz1\_c4\_base & 7.0080924 & 12.8092118666667 & 45.29\% \\
-    dtlz1\_c4\_gen60 & 6.4837556 & 15.17629275 & 57.28\% \\
-    dtlz1\_c10\_base & 7.597114 & 13.7340478666667 & 44.68\% \\
-    dtlz1\_c10\_gen60 & 5.60679086666667 & 17.9988671333333 & 68.85\% \\
-    dtlz7\_c4\_base & 104.724579166667 & 108.741367166667 & 3.69\% \\
-    dtlz7\_c4\_gen60 & 104.954425714286 & 110.277812181818 & 4.83\% \\
+    mix\_base & 6683.14 & 6678.95 & 0.06\% \\
+    mix\_gen60 & 6680.05 & 6661.41 & 0.28\% \\
+    dtlz1\_c4\_base & 7.01 & 12.81 & 45.29\% \\
+    dtlz1\_c4\_gen60 & 6.48 & 15.18 & 57.28\% \\
+    dtlz1\_c10\_base & 7.60 & 13.73 & 44.68\% \\
+    dtlz1\_c10\_gen60 & 5.61 & 18.00 & 68.85\% \\
+    dtlz7\_c4\_base & 104.72 & 108.74 & 3.69\% \\
+    dtlz7\_c4\_gen60 & 104.95 & 110.28 & 4.83\% \\
     \hline
   \end{tabular}
 \end{table}
@@ -252,9 +252,9 @@ and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
 (less than $1\%$) and minor difference for the dtlz7 problem --- less than
 $5\%$. Unfortunately differences for dtlz1 problems (both four- and
 ten-criteria) were important and noticeable --- about $50\%$ percent after ten
-iterations. It looks like that the problem is here to blame. This particular
-one is difficult for the method. The conclusion is that analyst should always
-check if the method fits for given problem. In fact according to the
+iterations. It looks like the problem is here to blame. This particular one is
+difficult for the method. The conclusion is that analyst should always check
+if the method fits for a given problem. In fact according to the
 no-free-lunch([ref]) theorem one should always do that, because there is no
 optimisation algorithm which is universally better than the others.
 

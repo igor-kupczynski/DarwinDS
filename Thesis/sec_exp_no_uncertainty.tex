@@ -6,29 +6,29 @@ criteria binary knapsack problem (see [inref]). Problem is simple and number
 of criteria small in order to focus on the algorithm. Also no uncertainty in
 form of interval coefficients is considered.
 
-Although this section is illustrated by an example run on the single problem
-the conclusions drawn here applies globally. Compare with further sections of
-the chapter.
+Although this section is illustrated only by an example of a single run on the
+single problem the conclusions drawn here applies globally. Compare with
+further sections of the chapter.
 
-The exterior loop of the DARWIN was repeated ten times. The algorithm runs
-with default parameters (see [inref]). Exterior loop was repeated ten
-times. This means that ten times results (in form of solutions) were presented
-to the (mocked) decision maker. The solutions were recorded.
+The algorithm runs with default parameters (see [inref]). Exterior loop was
+repeated ten times. This means that ten times results (in form of solutions)
+were presented to the (mocked) decision maker. Results were recorded.
 
-The same problem was also solved by a mathematical programming solver
-(glpk~[ref]). One used supposed utility function as a optimisation goal for
-the solver. This way the best solutions was obtained (for the considered
-instance best supposed utility function value is $4154.441453$).
+The same problem was solved in an exact way by a mathematical programming
+solver (glpk~[ref]). One used supposed utility function as a optimisation goal
+for the solver. This way the optimal solutions was obtained (for the
+considered instance best supposed utility function value is $4154.441453$).
 
 Results of the run from the exterior loop perspective are given on
-figure~\ref{c2_utilouter}. All of the solutions generated during interior loop
-run were recorded. On the chart one see best and worst solutions in given run
-(the rest lies between them). Also best of the solutions shown to the DM is
-presented (labeled as ``last''). This is because for evolutionary algorithm it
-is possible to find and then forget ``good'' solutions (note that optimisation
---- the internal loop is not aware of supposed utility function, it only tries
-to approximate it using induced decision rules). However most of the times
-``last'' solution equals ``best'' solution.
+figure~\ref{c2_utilouter}. All of the results generated during the interior
+loop run were recorded. On the chart one can see best and worst solutions in
+given run (the rest lies between them). Also best of the solutions shown to
+the DM is presented (labeled as ``last''). This is because for evolutionary
+algorithm it is possible to find and then forget ``good'' solutions (note that
+the optimisation --- the internal loop --- is not aware of supposed utility
+function, it only tries to approximate it using induced decision
+rules). However most of the times ``last'' solution equals ``best'' solution
+which is good.
 
 One can see that in every iteration there is an improvement, however the
 improvements are getting smaller and smaller. This is because the better the
@@ -41,7 +41,7 @@ in the paper. The results are presented on figures \ref{c2_utilgen_01},
 loop are also called \textit{generations} because of their evolutionary
 nature.
 
-On the charts one can see supposed utility function dependent on
+On the charts one can see supposed utility function dependent on a
 generation. Also value of the primary score is included for reference. To
 recapitulate --- the better the solution fits to induced decision rules the
 higher the primary score; in case of a draw (i.e. the primary score for two
@@ -55,11 +55,11 @@ fact rare. Nevertheless the algorithm shouldn't be shut down after reaching
 maximum primary score. Although preference information extracted before the
 run are now exploited still an improvement can occur. More importantly the
 diversification effort is ongoing now --- when the primary score (rule based)
-of all the population is identical the secondary score (distance based --- the
-less the solution is crowded the higher the score) start to play major role in
-the process, pushing individuals in the population to new areas in solution
-space. This can result in major breakthrough --- the population may acquire
-traits wanted by the DM.
+of all the population is identical, then the secondary score (distance based
+--- the less the solution is crowded the higher the score) start to play major
+role in the process, pushing individuals in the population to new areas in
+solution space. This can result in major breakthrough --- the population may
+acquire traits wanted by the DM.
 
 Rules driving the interior loops are presented below
 
@@ -79,7 +79,7 @@ Note that there are only two classes --- \texttt{GOOD} and \texttt{NOT GOOD}
 so essentially $\text{class} \ge \texttt{GOOD}$ means $\text{class} =
 \texttt{GOOD}$.
 
-In order to verify how the rules influences the algorithm behaviour charts
+In order to verify how the rules influences the algorithm's behaviour charts
 were prepared (fig.~\ref{c2_valweight_01}, \ref{c2_valweight_03} and
 \ref{c2_valweight_07}). For two-criteria problem it is possible to present the
 search space on two-dimensional chart.
@@ -91,12 +91,12 @@ diversification occurs. 7th iteration is a bit different though. Evolution
 generation. Soon after individuals covering both solutions were included the
 whole population drifted to the region marked by both rules.
 
-It can be also insightful to see the mocked DM choices and compare them with the
-inferred  rules. They are presented on charts (fig.~\ref{c2_dmchoices_01},
+It can be also insightful to see the mocked DM choices and compare them with
+the inferred rules. They are presented on charts (fig.~\ref{c2_dmchoices_01},
 \ref{c2_dmchoices_03}, \ref{c2_dmchoices_07}). It is the case that the choices
 directly affected the rules. One can also see another interesting trait of the
-problem. The further (in goal functions' space) the selected individuals are
-the harder it is to achieve maximal possible primary score.
+problem. The further (in objective space) the selected individuals are the
+harder it is to achieve maximal possible primary score.
 
 Finally charts presenting how supposed utility and primary score changed in
 the population together with succeeding generations (fig.~\ref{c2_utilind_01},
@@ -113,40 +113,27 @@ algorithm parameters. This is done in the further sections.
 %% Charts
 \begin{figure}[tb]
   \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilouter}
-  \caption{Supposed utility function in exterior loop iterations}
+  \caption{Supposed utility function in the exterior loop iterations}
   \label{c2_utilouter}
 \end{figure}
-
-%% \begin{figure}
-%%   \makebox[1\textwidth]{
-%%     \subfloat[Subfloat]{
-%%       \includegraphics[width=0.6\textwidth]{exp/nouncert/c2_utilouter}
-%%     }
-%%     \subfloat[Subfloat]{
-%%       \includegraphics[width=0.6\textwidth]{exp/nouncert/c2_utilouter}
-%%     }
-%%   }
-%%   \caption{Supposed utility function in exterior loop iterations}
-%%   \label{c2_utilouter}
-%% \end{figure}
 
 
 %% Utilgen
 \begin{figure}
   \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilgen_01}
-  \caption{Supposed utility function in interior loop iterations}
+  \caption{Supposed utility function in the interior loop iterations}
   \label{c2_utilgen_01}
 \end{figure}
 
 \begin{figure}
   \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilgen_03}
-  \caption{Supposed utility function in interior loop iterations}
+  \caption{Supposed utility function in the interior loop iterations}
   \label{c2_utilgen_03}
 \end{figure}
 
 \begin{figure}
   \centering \includegraphics[width=1.0\textwidth]{exp/nouncert/c2_utilgen_07}
-  \caption{Supposed utility function in interior loop iterations}
+  \caption{Supposed utility function in the interior loop iterations}
   \label{c2_utilgen_07}
 \end{figure}
 
@@ -221,9 +208,9 @@ algorithm parameters. This is done in the further sections.
 \label{nouncert-performance}
 It is important to know what performance can be expected from an
 algorithm. When no uncertainty is considered in a problem and one assumes
-supposed utility function is easy to get optimal solution using linear
-programming solver. Of course in real-world applications supposed utility
-function is not known a priori. One can test this algorithm in such an
+supposed utility function, then it is easy to get the optimal solution using
+linear programming solver. Of course in real-world applications supposed
+utility function is not known a priori. One can test this algorithm in such an
 artificially created environment and then assume that the behaviour will be
 similar on similar real-world problems.
 
@@ -237,11 +224,11 @@ Results of the evaluation on the following problems are given (see~[inref]):
 
 The test were repeated at least fifteen times and the results averaged. They
 are presented on figure~\ref{simple_performance} and
-table~\ref{t:opt_dist}. Depending on a problem $10$ or $20$ iterations of
+table~\ref{t:opt_dist}. Depending on a problem $10$ or $20$ iterations of the
 exterior loop were simulated. Normally it would be up to the DM to stop when
 he or she is satisfied with the solution. However one can safely assume that
-if no satisfactory solution is found in $10$ the decision maker will not want
-to investigate the problem with this method further.
+if no satisfactory solution is found up to $10^{th}$ iteration the decision
+maker will not want to investigate the problem with this method further.
 
 \begin{figure}
   \centering
@@ -340,19 +327,20 @@ This is the case because generated decision rules:
 \item $f_1 \le 0.14033 \Rightarrow \text{class} \ge \texttt{GOOD}$
 \item $f_3 \le 0.56462 \Rightarrow \text{class} \ge \texttt{GOOD}$
 \end{enumerate}
-are not selective enough. It is possible than switching DomLem to another
-algorithm, generating all possible rules instead of minimal set would help
-here. Still the results achieved by the DARWIN method are good on this
+are not selective enough. It is possible that switching DomLem to another
+algorithm --- generating all possible rules instead of a minimal set would
+help here. Still the results achieved by the DARWIN method are good on this
 problem.
 
 In contrary continuous knapsack problem performs extremely poor --- only
 $55\%$ of the optimum after $10^{th}$ run and $58\%$, so almost no
 improvement, after $20^{th}$. Investigating single runs in details provided no
 more details. The problem lies in the evolutionary algorithm, more precisely
-in its crossover operator. Authors suggested a from of distance preserving
-crossover --- child is somewhere in between its parents. However in continuous
-it is usually the case to take items one-by-one starting with the one with
-greatest value per unit until the weight constraint is reached.
+in its crossover operator. For the DARWIN method a from of distance preserving
+crossover, where a child is somewhere in between its parents is
+suggested. However in continuous variant it is usually the case to take items
+one-by-one starting with the one with greatest value per unit until the weight
+constraint is reached.
 
 Considering the constraints ($ \forall_{x_i \in items}: \hspace{0.1cm} 0 \leq
 x_i \leq 1 $) --- most of the individuals will have its decision variables in
@@ -360,8 +348,8 @@ form of $x_i \approx 0.5$ after a few generations. But for the optimal
 solutions most of the variables takes either $1$ or $0$. That is why
 improvement is happening so slowly here.
 
-According to authors intuition changing the crossover operator would solve the
-problem with continuous knapsack. Choosing the right operator for a given
+According to the author intuition changing the crossover operator would solve
+the problem with continuous knapsack. Choosing the right operator for a given
 problem is a well-known subject in the multi-objective optimisation
 ([ref]). However it is out-of-scope of this paper.
 
@@ -369,8 +357,8 @@ For completeness charts presenting the algorithm behaviour when more exterior
 loop iterations are allowed are given (fig.~\ref{outer},
 table~\ref{t:opt_dist_long}). After the twentieth loop improvements are small
 (if any). In author's opinion this is a good thing because there is no reason
-not to stop algorithm. If it works for the problem it will be evident from the
-first few iterations.
+not to stop algorithm. If the algorithm works well on a problem it will be
+evident from the first few iterations.
 
 \begin{figure}
   \centering
@@ -611,8 +599,9 @@ They are used in the interior loop (see~[inref]).
 
 There is no clear patter through the problems. In general changing the other
 parameters have only a minor influence over the algorithm. This is a good
-think, because the solution given to the DM is robust. However analyst should
-try to tune the parameters on problem basis. 
+thing, because the solution given to the DM is robust with respect to those
+parameters. However analyst should try to tune the parameters on a problem
+basis.
 
 \subsection{Noise in the DM's decisions}
 
@@ -657,15 +646,15 @@ solutions to be selected be taken from $[\text{toSelect} -
   \text{toSelectDelta}, \text{toSelect} + \text{toSelectDelta}]$ with uniform
 distribution.
 
-Second thing is that the human decision maker is fallible. He or her can make
+Second thing is that the human decision maker is fallible. He or she can make
 wrong decision and not select best solutions according to supposed utility
 function. Another parameter was introduced to simulate this phenomenon ---
 noiseLimit. After sorting the solutions based on the supposed utility value
 the individuals $1, 2, \dots, \text{noiseLimit}$ are shuffled. So lets say one
-want to select three solutions. If the noiseLimit parameter is set to $0$ (the
-default) three best solutions will be selected. However if an experimenter
-sets the noiseLimit to $6$ three out of $6$ best solutions will be picked by
-random.
+wants to select three solutions. If the noiseLimit parameter is set to $0$
+(the default) three best solutions will be selected. However if an
+experimenter sets the noiseLimit to $6$ three out of $6$ best solutions will
+be picked by random.
 
 The noisy version of the algorithm~\ref{alg:dmselection} is shown below.
 \begin{algorithm}
@@ -702,7 +691,7 @@ Following tests were performed:
 Note that noise$_1$ to noise$_4$ are rather minor ones, noise$_5$ is medium
 noise and finally noise$_6$ is a big one, unlikely to happen in practise ---
 half of the solutions are considered as good. If the decision maker is careful
-is his or her evaluations the algorithm will probably have to face a noise
+in his or her evaluations the algorithm will probably have to face a noise
 between $1$ and $4$.
 
 The results for the exemplary problems are shown on the charts below
@@ -758,7 +747,7 @@ without additional noise.
   \label{c3_surface_noise}
 \end{figure}
 
-Results of the DTLZ surface problem (table~\ref{t:noise} and
+Results of the DTLZ surface problem (table~\ref{t:noise1}, \ref{t:noise2} and
 fig.\ref{c3_surface_noise}) are inconclusive. This is because of the behavior
 described in section~\ref{nouncert-performance} --- the decision rules are not
 discriminating enough so that often the utility value drops between the
@@ -770,7 +759,7 @@ For the other problems however --- binary knapsacks (fig.~\ref{c2_noise} and
 results, while medium and major have only a small impact --- the value has
 decreased less than $5\%$ after ten iterations. This means that the solution
 generated by the DARWIN is robust with respect to the noise in the decision
-maker chooses. Even with the major noise the algorithm is able to return the
+maker choices. Even with the major noise the algorithm is able to provide the
 same results however a few iterations later.
 
 \begin{table}[h]

@@ -8,11 +8,11 @@ Optimisation (IMO, see~[inref]) and Evolutionary Multi-Objective Optimization
 (EMO, see~[inref]).
 
 In the IMO paradigm one wants to elicit decision maker's preferences by
-involving his or her in the process. This is done by a systematic dialog with
+involving him or her in the process. This is done by a systematic dialog with
 the decision maker (the DM). Questions are being asked and the DM provides
-answers. Based on these answers preference information is extracted. Algorithm
+answers. Preference information is extracted on the basis of these answers. Algorithm
 can then use the knowledge to produce solutions better fitted to his or her
-preferences. The IMO framework is presented on
+preferences. The IMO framework is presented in
 fig.~\ref{fig:interactive-process}.
 
 \begin{figure} 
@@ -30,7 +30,7 @@ fig.~\ref{fig:interactive-process}.
         \node (ask) [roundrect] {
           \begin{tabular}{c}
             2. Ask the DM \\
-            to indicate `good' ones
+            to indicate the `good' ones
         \end{tabular}}; \\
 
         \node (use) [roundrect] {
@@ -54,35 +54,36 @@ fig.~\ref{fig:interactive-process}.
   \end{center} 
 \end{figure} 
 
-Rationale behind the interactive process is that the decision maker is
+The rationale behind the interactive process is that the decision maker is
 interested only in a small subset of preferred solutions or even in a single
 most preferred one.
 
-This process makes possible to gather preference information and then use this
-information to construct a better solutions. However this is just a framework,
-details are left up to the analyst. Especially one has to think how to extract
-and store knowledge gathered on DM's answers and how to use this knowledge to
-generate and provide solutions better fitted to decision maker's preferences.
+This process makes it possible to gather preference information and then use
+this information to construct better solutions. However, this is just a
+framework, so details are left up to the analyst. One has to think
+particularly how to extract and store knowledge gathered on DM's answers and
+how to use this knowledge to generate and provide solutions better fitted to
+decision maker's preferences.
 
 Human factor is yet another thing to consider. The DM is a human being and
 thus his or her behavior is constantly changing. The challenge here is to find
-what questions should be asked, how often and how many intermediate solutions
-should be presented to evaluate.
+out what questions should be asked and how often, as well as how many
+intermediate solutions should be presented to evaluate.
 
 DARWIN is a realisation of the IMO process. It keeps generating solutions and
-improving them based on the DM's feedback. It only asks the DM to mark
-potentially good solutions, so only problem-domain knowledge is requires; its
-user does not need to have an expert knowledge in the decision support field.
+improving them on the basis of DM's feedback. It only asks the DM to mark
+potentially good solutions, so that only problem-domain knowledge is required;
+its user does not need to have expert knowledge in the decision support field.
 
-Evolutionary Multi-Objective Optimisation (EMO) provides a computational engine
-for generating new, better solutions from existing ones. Better in sense of
-objective function defined in the solution space. Most of the EMO methods are
-approximating Pareto-optimal front by a set of solutions. So one solution is
-better than the other if the former Pareto-dominates the latter. In case of
-two equivalent ones another factors have to be taken into account (for example
-crowding score in NSGA2 [ref]). This is the case because if no preference
-information is given all Pareto-optimal solutions have to be considered
-equivalent.
+Evolutionary Multi-Objective Optimisation (EMO) provides a computational
+engine for generating new, better solutions from existing ones --- better in
+sense of objective function defined in the solution space. Most of the EMO
+methods are approximating Pareto-optimal front by a set of solutions. So one
+solution is better than the other if the former Pareto-dominates the
+latter. In case of two equivalent ones another factors have to be taken into
+account (for example crowding score in NSGA2 [ref]). This is the case because
+if no preference information is given all Pareto-optimal solutions have to be
+considered equivalent.
 
 It seems natural to combine these two described approaches --- Interactive
 Multi-Objective Optimisation and Evolutionary Multi-Objective
@@ -90,9 +91,9 @@ Optimisation. (TODO: maybe a note and a ref about combining these two
 approaches). IMO is just a process framework but still needs an engine to
 generate and improve solutions. EMO is such an engine. On the other hand for
 EMO involving the decision maker in the procedure results in gathering
-preference information. This information allows the procedure to focus on
-specific region of Pareto-front --- the one most relevant to decision
-maker. So IMO and EMO are complementing each other.
+preference information. This information allows the procedure to focus on a
+specific region of Pareto-front --- the most relevant one to the decision
+maker. In this way IMO and EMO are complementing each other.
 
 \begin{figure}
   \centering \includegraphics[width=1.2\textwidth]{img/pareto}
@@ -100,12 +101,12 @@ maker. So IMO and EMO are complementing each other.
   \label{pareto}
 \end{figure}
 
-This is important because of the ``human factor''. If a number of solutions
-becomes huge DM can not effectively analyze it and find the one that fits best
-her preferences, thus Pareto-optimality is not sufficiently
-discriminative. However guiding the search to preferred regions of the
-solution space allows the method to coverage faster to good solutions. It is
-shown on fig.~\ref{pareto}.
+This is important because of the ``human factor''. If the number of solutions
+becomes huge, the DM can not effectively analyze them and find the one that
+fits his/her preferences best, thus Pareto-optimality is not sufficiently
+discriminative. However, guiding the search to preferred regions of the
+solution space allows the method to converge faster to good solutions. It is
+shown in fig.~\ref{pareto}.
 
 DARWIN uses EMO procedure to improve generated solutions based on the DM's
 preferences.
@@ -115,11 +116,11 @@ preferences.
 
 It is often the case that not all numbers and coefficients are precisely
 known. It may be easier for the decision maker to formulate the
-Multi-Objective Optimisation problem giving the problem coefficients in form
-of intervals of possible values. For example instead of saying that product
-price will equal 20 units one can say it will be in the $[19, 21]$
+Multi-Objective Optimisation problem giving the problem coefficients in the
+form of intervals of possible values. For example, instead of saying that
+product price will equal 20 units one can say it will be in the $[19, 21]$
 interval. In this situation the decision maker is often interested in finding
-best robust solution --- that is good and possible in a large part of
+the best robust solution --- that is good and possible in a large part of
 uncertainty scenarios. DARWIN allows to give the coefficients in a form of
 intervals.
 
@@ -129,11 +130,11 @@ intervals.
   \label{scenario}
 \end{figure}
 
-Set of all of the problem's coefficients given as intervals and fixed on one
-of possible values will be called scenario of imprecision (see
-fig.~\ref{scenario}). If intervals are allowed it is impossible to calculate
-exact value of problem's objectives for given solutions. To handle this case
-all the considered solutions are evaluated over a~set of uncertainty
+The set of all of the problem's coefficients given as intervals and fixed on
+one of possible values will be called scenario of imprecision (see
+fig.~\ref{scenario}). If intervals are allowed, it is impossible to calculate
+the exact value of problem's objectives for given solutions. To handle this
+case all the considered solutions are evaluated over a~set of uncertainty
 scenarios.
 
 \begin{figure}
@@ -145,31 +146,31 @@ scenarios.
  Results of this evaluation are then aggregated to quantile space. The
  quantiles are points taken at regular intervals from the cumulative
  distribution of a random variable. If the interval consists of $0.01$ of the
- distribution then the quantiles are called percentiles (percentiles of the
- normal distribution are shown on fig.~\ref{percentiles}). Instead of
- presenting all of the results the method calculates meaningful quantiles of
- results distribution for each objective. For example percentiles (like $1\%,
- 25\%$ and $50\%$) can be chosen. Percentiles divide ordered data in 100 of
+ distribution, then the quantiles are called percentiles (percentiles of the
+ normal distribution are shown in fig.~\ref{percentiles}). Instead of
+ presenting all of the results, the method calculates meaningful quantiles of
+ results distribution for each objective. For example, percentiles (like $1\%,
+ 25\%$ and $50\%$) can be chosen. Percentiles divide ordered data into 100 of
  equally-sized subsets --- $1\%$ percentile is the best of $1\%$ worst
- solutions or alternatively the worst of $99\%$ of best solutions.
+ solutions or alternatively the worst of $99\%$ of the best solutions.
 
-Choice of these quantiles is connected with DM's attitude towards risk. If he
-or she wants to avoid risk then his/her decision will be focused on quantiles
-from the beginning of the distribution (e.g. $10\%$). On the other hand when
-he or she is interested in best possible solution even if it is assisted with
-risk then the quantiles from the of the distribution will be inspected
-(e.g. $75\%$). 
+Choice of these quantiles is connected with the DM's attitude towards risk. If
+he or she wants to avoid risk then his/her decision will be focused on
+quantiles from the beginning of the distribution (e.g. $10\%$). On the other
+hand, when he or she is interested in the best possible solution even if there
+is a risk involved, then the quantiles from the end of the distribution will
+be inspected (e.g. $75\%$).
 
-In DARWIN DM's preferences are gathered and stored using DRSA methodology
+In DARWIN the DM's preferences are gathered and stored using DRSA methodology
 (see~[inref]). Dominance-Based Rough Set Approach is a~framework for reasoning
-about partially inconsistent preference data. DRSA already has a successful
+about partially inconsistent preference data. DRSA already has successful
 applications in IMO area ([ref]).
 
-DRSA will be applied in IMO process. After selecting ``good'' solutions
-from the provided set the decision rules are induced to store the
-preferences. These rules are given in form of \textit{``If ... then
+DRSA will be applied in IMO process. After selecting ``good'' solutions from
+the provided set the decision rules are induced to store the
+preferences. These rules are given in the form of \textit{``If ... then
   ...''}. Conditional part is a disjunction of conditions on attributes from
-quantile space. These attributes are compared to a specific values, e.g.
+quantile space. These attributes are compared to specific values, e.g.
 $\text{profit}_{25\%} >= 100 \land \text{time}_{1\%} <= 10$. The consequent
 part assigns a solution to a class (\textit{at least} or \textit{at most}),
 e.g. Class \textit{at least} Good. So the whole rule would be If
@@ -178,7 +179,7 @@ $\text{profit}_{25\%} >= 100 \land \text{time}_{1\%} <= 10$ then Class
 
 \section{The algorithm}
 
-DARWIN can operate on a Multi-Objective Optimisation (MMO) problems defined as
+DARWIN can operate on Multi-Objective Optimisation (MMO) problems defined as
 follows:
 
 \begin{equation}
@@ -207,14 +208,14 @@ Where:
 \end{description}
 
 It is possible to give some of the coefficients in objective functions or
-constraints in form of intervals (thus modeling ignorance --- uncertainty
-about real value of an coefficient). A vector of fixed values for each
-interval is called \textit{scenario} of imprecision (see fig.~\ref{scenario}).
+constraints in the form of intervals (thus modeling ignorance --- uncertainty
+about real value of a coefficient). A vector of fixed values for each interval
+is called \textit{scenario} of imprecision (see fig.~\ref{scenario}).
 
 DARWIN is composed of two nested loops --- exterior and interior. The former
 is a realisation of an interactive process and the latter is an EMO engine
 dedicated to improve solutions based on the decision maker's preferences. This
-is illustrated on a figure~\ref{fig:darwin-ext}.
+is illustrated in fig.~\ref{fig:darwin-ext}.
 
 \begin{figure} 
   \begin{center}
@@ -294,46 +295,46 @@ is illustrated on a figure~\ref{fig:darwin-ext}.
 
 
 The exterior loop algorithm, corresponding to the IMO interactive process is
-shown on alg.~\ref{alg:extloop}. More detailed description of each step
+shown on alg.~\ref{alg:extloop}. A More detailed description of each step
 follows.
 
-One has to generate a set of feasible solution to the MOO problem first. This
-can be done using the Monte Carlo method. A Monte Carlo concept itself is not
-new. A~concept of statistical sampling became popular after inventing digital
-computing machines (see~[ref]). This method can be described as random
-sampling a domain of a problem. In most basic variant one can just pick a
-solution at random and check if it is feasible. Unfortunately it could be
-impossible unless the non-feasible space is only a small part of the
-domain. Additional hints for the generator for example in form of analyst's
-suggestions can be taken into account.
+First, one has to generate a set of feasible solutions to the MOO problem
+first. This can be done using the Monte Carlo method. The Monte Carlo concept
+itself is not new. A~concept of statistical sampling became popular after
+digital computing machines had been invented (see~[ref]). This method can be
+described as random sampling a domain of a problem. In the most basic variant
+one can just pick a solution at random and check if it is
+feasible. Unfortunately, it will be impossible unless the non-feasible space
+is only a small part of the domain. Additional hints for the generator, for
+example in the form of analyst's suggestions, can be taken into account.
 
 At this stage goals and constraints are allowed to contain intervals
 corresponding to the uncertainty of a model. Thus a set of scenarios needs to
-be generated. Each one of these scenarios is a realisation of the problem with
+be generated. Each of these scenarios is a realisation of the problem with
 fixed values of the intervals (see~[inref]). It is worth noting that if the
 problem constraints are given in an uncertain form --- that is containing
-coefficients in form of intervals --- it could be impossible to determinate if
-given solution is possible. If that is the case then lines \ref{algin:solgen}
-and \ref{algin:scengen} should be swapped and feasibility of a solution set
-should be checked on generated scenarios.
+coefficients in the form of intervals --- it could be impossible to determine
+whether a given solution is possible. If that is the case, then lines
+\ref{algin:solgen} and \ref{algin:scengen} should be swapped and feasibility
+of a solution set should be checked on generated scenarios.
 
 In lines \ref{algin:evstart} to \ref{algin:evstop} each solution if evaluated
 over each scenario. Results of this evaluation phase are then gathered and
-showed the decision maker in \ref{algin:dmshow}. The DM is a human being
-though, so in order to get a valuable feedback one need to show the data in
+presented to the decision maker in \ref{algin:dmshow}. The DM is a human being
+though, so in order to get valuable feedback one need to show the data in
 aggregated form. The authors proposed a meaningful quantiles to be presented
 (see~[inref]). For example $f^{1\%}_1(x), f^{25\%}_1(x), f^{50\%}_1(x),$
 $\dots, f^{1\%}_k(x), f^{25\%}_k(x), f^{50\%}_k(x)$ for all $x \in X$.
 
-If the DM finds solution in the set of presented ones satisfactory then the
-problem is solved and algorithm ends here. If not however he or she is asked
-to indicated the ``good'' solutions in the set (line~\ref{algin:dmmark}).
-Based on this distinction method generates a set of decision rules
+If the DM finds solution in the set of presented ones satisfactorily, then the
+problem is solved and algorithm ends here. If not, however, he or she is asked
+to indicated the ``good'' solutions in the set (line~\ref{algin:dmmark}).  On
+the basis of this distinction, the method generates a set of decision rules
 (line~\ref{algin:rules}). These rules are then passed to the interior loop
 (line~\ref{algin:intloop}) where --- by using the EMO paradigm (see~[inref])
 --- DARWIN performs search of the solution space. The search is driven towards
-specific region based on the rules. Finally new solutions, better fitted to
-DM's expectations are generated and the process starts over again.
+a specific region on the basis of the rules. Finally new solutions, better
+fitted to DM's expectations are generated and the process starts over again.
 
 Algorithm~\ref{alg:intloop} shows the interior loop of DARWIN method. This
 loop is an EMO procedure [inref] guided by the decision rules induced in
@@ -365,16 +366,17 @@ exterior loop on DM's selections.
   \end{algorithmic}
 \end{algorithm}
 
-Procedure start by generating new set of feasible solutions and possible
-scenarios in lines~\ref{algin:solgen-int}, \ref{algin:scengen-int}. Then in
-line~\ref{algin:evloop} actual evolutionary optimisation starts.
+The procedure starts by generating a new set of feasible solutions and
+possible scenarios in lines~\ref{algin:solgen-int},
+\ref{algin:scengen-int}. Then in line~\ref{algin:evloop} actual evolutionary
+optimisation starts.
 
-Each solution is an individual. Solution set constitutes a
-population. Iterations of a~loop defined in line~\ref{algin:evloop} marks 
-generations of the population. Termination condition could be for example
-a fixed number of iterations or a fixed amount of time.
+Each solution is an individual. The solution set constitutes a
+population. Iterations of a~loop defined in line~\ref{algin:evloop} mark
+generations of the population. Termination condition could be for example a
+fixed number of iterations or a fixed amount of time.
 
-In every generation first the population is evaluated and ranked. The process
+First, in every generation the population is evaluated and ranked. The process
 starts with evaluation of each solution over every scenario
 (\ref{algin:evstart-int} -- \ref{algin:evstop-int}). After the evaluation
 meaningful quantiles are known for each solution. Then the procedure can
@@ -399,13 +401,13 @@ solutions matching this rule.
   because it allows to maintain diversity with respect to rules.
 
 \item $\textit{PrimaryScore}(x) = \sum_{\textit{rule}_h \in rules(x)}$
-  $w(\textit{rule}_h)$ \\
-Finally $\textit{PrimaryScore}(x)$ is a primary score of given solution ($x \in X$).
+  $w(\textit{rule}_h)$ \\ Finally $\textit{PrimaryScore}(x)$ is a primary
+  score of a given solution ($x \in X$).
 \end{description}
 
 In case of a draw also a secondary score is considered for each solution. This
 score is calculated similarly to a \textit{crowding distance} score in
-\textit{NSGA-II} method ([ref]). The difference lies in a fact, that this
+\textit{NSGA-II} method ([ref]). The difference lies in the fact, that this
 score is calculated in a~quantile space instead of original objective space,
 e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots \times $
 $f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k$. The procedure is shown in
@@ -439,16 +441,17 @@ alg.~\ref{alg:crowddist}.
 In line~\ref{algin:select} parents selection is done. The process is a Monte
 Carlo procedure; possibility of selecting a~solution $x \in X$ as a parent
 is:\\
-$$Pr(x) = \left( \frac{|X|-\textit{rank}(x) + 1}{|X|} \right)^\gamma - \left( \frac{|X|-\textit{rank}(x)}{|X|} \right)^\gamma$$
-where $\textit{rank}(x)$ is a rank of a solution $x \in X$ in the ranking made
-in line~\ref{algin:rank}. $\gamma \geq 1$ is an elitism coefficient. The higher
-the $\gamma$ the bigger the probability of selecting high-ranked solution as
-a~parent.
+$$Pr(x) = \left( \frac{|X|-\textit{rank}(x) + 1}{|X|} \right)^\gamma - \left(
+\frac{|X|-\textit{rank}(x)}{|X|} \right)^\gamma$$ where $\textit{rank}(x)$ is
+a rank of a solution $x \in X$ in the ranking made in
+line~\ref{algin:rank}. $\gamma \geq 1$ is an elitism coefficient. The higher
+the $\gamma$, the bigger the probability of selecting a high-ranked solution
+as a~parent.
 
 In line~\ref{algin:off} a new individual (a child) is created using two of the
-parents chosen in previous step --- $a \in P, b \in P$. The child is obtained
-by combining the parents together: $$z = \lambda a + (1 - \lambda) b$$
-$\lambda$ is a random real-valued number; $0 \leq \lambda \leq 1$.
+parents chosen in the previous step --- $a \in P, b \in P$. The child is
+obtained by combining the parents together: $$z = \lambda a + (1 - \lambda)
+b$$ $\lambda$ is a random real-valued number; $0 \leq \lambda \leq 1$.
 
 
 Mutation operator is applied to the offspring population. Probability of
