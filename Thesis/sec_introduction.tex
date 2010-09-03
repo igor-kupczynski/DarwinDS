@@ -1,90 +1,91 @@
-Optimization is a process of finding the best solution from a set of available
-alternatives. In the simplest case it involves only a single objective. An
-objective is a problem's goal, whose value has to be maximized (or
-minimized). An optimization problem consists of a set of decision variables;
-values of those variables affect the problem's objectives. A domain of the
+Optimization is a~process of finding the best solution from a~set of available
+alternatives. In the simplest case it involves only a~single objective. An
+objective is a~problem's goal, whose value has to be maximized (or
+minimized). An optimization problem consists of a~set of decision variables;
+values of those variables affect the problem's objectives. a~domain of the
 problem --- a~set of possible values that can be taken by the decision
 variables --- may be subject to additional constraints. An assignment of
-values to the decision variables is called a solution. The solution is
-feasible if the values meet the constraints imposed on the problem. Therefore,
-the task of optimization is to find a feasible solution, which maximizes
-(minimizes) the value of the problem's objectives.
+values to the decision variables is called a~solution. A~solution is feasible
+if the values meet the constraints imposed on the problem. Therefore, the task
+of optimization is to find a~feasible solution, which maximizes (minimizes)
+the value of the problem's objectives.
 
-Optimization is a field of applied mathematics, which has gained on importance
+Optimization is a~field of applied mathematics, which has gained importance
 during and after the Second World War. The driver for developments in the
 field are real-life, mainly military or industrial problems. They are often
-large-scale and of high importance; solving a problem of this kind usually
-yields a profit outranking the costs, that one has to bear to employ formal
-approach. To use optimization methods one has to formulate a problem in a
+large-scale and of high importance; solving a~problem of this kind usually
+yields a~profit outranking the costs that one has to bear to employ a~formal
+approach. To use optimization methods one has to formulate a~problem in a
 mathematical way --- build a~model of the problem. Therefore, it is common to
-distinct a stakeholder --- a decision maker (DM) having an expert knowledge in
-a problem domain and an analyst --- mathematician or scientist that will
-create the model and choose appropriate optimization technique.
+make a~distinction between a~stakeholder --- a~decision maker (DM) having
+expert knowledge in a~problem domain and an analyst --- a~mathematician or
+a~scientist that will create the model and choose an appropriate optimization
+technique.
 
 If there is only one, single objective in the problem definition, then the
-optimization usually results in the one optimal solution which has the best
+optimization usually results in a~one optimal solution which has the best
 possible value of the goal. However, this is not the case when multiple goals
 are considered. Usually the optimal value for one goal is far from being an
-optimal for the other; for example, consider a simple problem of choosing a
+optimal for the other; for example, consider a~simple problem of choosing a
 laptop computer to buy --- the one with the highest performance is not the
-cheapest and the cheapest will probably not offer a state-of-the-art
+cheapest and the cheapest will probably not offer a~state-of-the-art
 performance. No trade-offs between objectives can be assumed \textit{a
   priori}. This is because the importance of each goal may be different for
-different decision makers --- someone can choose a cheap computer, while the
+different decision makers --- someone can choose a~cheap computer, while the
 other will opt for the highest performance available. However, one can
-indicate a non-dominated set of solutions --- the Pareto-frontier of the
-problem. Informally a solution is Pareto-efficient if value of any of its
-criterion can not be improved without worsening the other values. In the
-laptop example it could be a list of the cheapest computers for different
+indicate a~non-dominated set of solutions --- the Pareto-frontier of the
+problem. Informally a~solution is Pareto-efficient if an value of any of its
+criteria can not be improved without worsening the other values. In the laptop
+example it could be a~list of the cheapest computers for different
 performances.
 
 Multi-Objective Optimization (MOO) methods are usually sophisticated, with
-many parameters for analyst to fine-tune them. However, the decision maker is
-usually not interested in the details of the method, but only in a single
-recommendation, possibly along with a justification. The analyst will set up
-the method and its parameters based on his or her intuition and on a research
-carried out earlier. Experienced analyst can usually decide what parameters'
-values should be used, but still it may be impossible to set the values
-precisely to the best possible options. If one can change parameters a bit and
-the resulting solution is similar to the one acquired before, then the
+many parameters for the analyst to fine-tune them. However, the decision maker
+is usually not interested in the details of the method, but only in a~single
+recommendation, possibly along with a~justification. The analyst will set up
+the method and its parameters based on his or her intuition and on a~research
+carried out earlier. An experienced analyst can usually decide what
+parameters' values should be used, but still it may be impossible to set the
+values precisely to the best possible options. If one can change parameters a
+bit and the resulting solution is similar to the one acquired before, then the
 solution is called robust. The same applies if the problem model can not be
-formulated precisely --- for example, it contains a values that may be only
-estimated, like future price of a raw material. The solution should be
+formulated precisely --- for example, it contains a~value that may be only
+estimated, like the future price of a~raw material. The solution should be
 resistant to small fluctuations in the problem's model parameters. The
-robustness in MOO context, is the ability to withstand changes in the
-parameters and in the problem formulation; it is a very important quality of
+robustness in MOO context is the ability to withstand changes in the
+parameters and in the problem formulation; it is a~very important quality of
 any MOO technique.
 
 To give final recommendation instead of the Pareto-frontier one has to engage
 the decision maker in the process. The method has to be interactive in order
-to gather the DM's preferences. It can by done by showing exemplary feasible
+to gather the DM's preferences. It can be done by showing exemplary feasible
 solutions and asking the decision maker to rank them or simply by asking about
 the inter-criteria trade-offs. These preferences are used to guide the search
 of the solution space in the directions desired by the DM. An optimization
 technique involving interaction with the decision maker is called the
 interactive multi-objective optimization (IMO) technique.
 
-The algorithm is a well defined list of instructions for completing a
+The algorithm is a~well-defined list of instructions for completing a
 task. Several researchers suggested that principles of the evolution ---
 particularly, the concept of population and survival of the fittest
-individuals can be a good model of operation for multi-criteria optimization
-algorithms. Methods using these principle are called the evolutionary
+individuals can be a~good model of operation for multi-criteria optimization
+algorithms. Methods using these principles are called the evolutionary
 algorithms (EAs) while the whole field of research is the evolutionary
 multi-objective optimization (EMO).
 
 In this paper the author presents the DARWIN method. DARWIN is an acronym for
-Dominace-based rough set Approach to handling Robust Winning solutions in
-INteractive multi-objective optimization). The DARWIN is an algorithm proposed
-by Salvatore Greco, Benedetto Matarazzo and Roman Słowiński; dedicated for
+Dominance-based rough set Approach to handling Robust Winning solutions in
+INteractive multi-objective optimization. DARWIN is an algorithm proposed by
+Salvatore Greco, Benedetto Matarazzo and Roman Słowiński; dedicated for
 solving multi-objective optimization problems. It interacts with the decision
 maker in order to infer his or her preferences. The preferences are then
-stored in form of decision rules guiding the optimization process. An
-evolutionary algorithm is used as an engine for optimization. Therefore the
-DARWIN combines IMO and EMO paradigms. It allows an analyst to model
-uncertainty in the problem definition, thus generating robust solutions.
+stored in the form of decision rules guiding the optimization process. An
+evolutionary algorithm is used as an engine for optimization. Therefore DARWIN
+combines IMO and EMO paradigms. It allows an analyst to model uncertainty in
+the problem definition, thus generating robust solutions.
 
-Firstly, the theoretical background is presented. The more detailed
-description of the DARWIN algorithm follows. The implementation on an IBM-PC
-class computer is discussed and the user manual is included. Experiment
-results are shown and discussed. Finally, areas of further research are
-indicated along with conclusions and recommendations about the method.
+Firstly, the theoretical background is presented. A~more detailed description
+of the DARWIN algorithm follows. The implementation on an IBM-PC class
+computer is discussed and the user manual is included. Experiment results are
+shown and discussed. Finally, areas of further research are indicated along
+with conclusions and recommendations about the method.
