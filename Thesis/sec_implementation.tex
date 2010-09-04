@@ -12,12 +12,20 @@ implementation and an experiment framework development.
 
 \section{The method's implementation}
 
+\subsection{The environment}
+
 The environment, in which DARWIN has to function is not empty; thus has to be
 taken into account during the development of the implementation. It is shown
 in~fig.~\ref{environ}. Darwin is a~realisation of an interactive process,
 therefore a way of complication with the decision maker is required. Another
 restriction is imposed by the need of inducing decision rules from the sorted
 examples of solutions.
+
+\begin{figure}
+  \centering \includegraphics[scale=0.5]{img/environ}
+  \caption{DARWIN's environment}
+  \label{environ}
+\end{figure}
 
 The DM has to provide a problem he wants to solve. It can be done in a model
 file. If one wants to change the default parameters' values a~configuration
@@ -29,19 +37,35 @@ section.
 
 Decision rules store the decision maker preferences, therefore they are
 a~symbolic representation of trade-offs he or she is willing to make, as well
-as the importance of each criterion. They are ensuring a~robustness of the
+as the importance of an each criterion. They are ensuring a~robustness of the
 resulting solutions because of an underlying DRSA framework. Te rules are
 a~very important part of the method. Thus, a~way --- an algorithm --- to
 generate them is need. In the method description a~phase of obtaining the
 rules is treated as a~black-box. It is assumed that a~component able to
-generate rules from the DM's selection exists.
+generate rules from the DM's selection exists. Details are omitted --- it is
+up to analyst (or to a~developer of an implementation) to use a~software
+component he or she will find feasible.
 
+An implementation of the DRSA framework, being able to induce decision rules
+from a~given set of examples is a complex task. Both in terms of possible
+technical challenges as well as a~conceptual and a~scientific work that needs
+to be carried. Such a software application deserves a paper of its
+own. Therefore, the author decided to use an existing implementation in order
+to focus on the DARWIN method. Java Rough Set (jRS) --- a~project of the
+Laboratory of Intelligent Decision Support Systems at Poznań University of
+Technology, that aims at providing DRSA framwork implementation in Java ---
+was chosen. It contains the DomLem algorithm able to generate a~minimal set of
+decision rules from the examples given as its input.
 
+jRS is written in Java programming language ([ref]) and runs on top of the
+Java Virtual Machine (JVM, [ref]). The JVM is a~portable platform capable of
+running the Java bytecode. However, the technical details of the Java platform
+are out-of-scope of this article. Having a~Java component (jRS in this case)
+effectively put a~constraint on the DARWIN implementation --- it is required
+that the implementation is also delivered as a JVM application.
 
-\begin{figure}
-  \centering \includegraphics[scale=0.5]{img/environ}
-  \caption{DARWIN's environment}
-  \label{environ}
-\end{figure}
+\subsection{The prototype}
+
+\subsection{The final implementation}
 
 \section{Experiment framework}
