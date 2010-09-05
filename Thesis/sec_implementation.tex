@@ -119,17 +119,62 @@ Fédérale de Lausanne (EPFL, [ref]). Because of the functional elements and
 different syntax Scala programs are usually sorter and easier to read that
 their Java counterparts, especially when dealing with mathematical operations.
 
-The code is divided into packages. Their structure is shown in
-fig.~\ref{packages}.
-
 \begin{figure}
   \centering \includegraphics[scale=0.9]{img/packages}
   \caption{The package structure of DARWIN}
   \label{packages}
 \end{figure}
 
+The code is divided into packages. Their structure is shown in
+fig.~\ref{packages}. Their description follows. \texttt{pl.poznan.put.darwin}
+is a~root package following Java naming conventions ([ref]). For readability
+its name is omitted in the following
+description. Packages:
+\begin{description}
+  \item{\texttt{evolution}} --- a module containing classes responsible for
+    the evolution of solutions. It contains a controller driving the process,
+    an engine of the evolutionary algorithm, evolutionary operators (mutation
+    and cross-over) and a~parent selection strategy.
+
+  \item{\texttt{jrsintegration}} --- an abstraction layer over the DRSA
+    framework. This module contains classes responsible for integration with
+    jRS and DomLem algorithm. They are able to convert DARWIN's solution to
+    a~format required by the jRS, invoke the DomLem algorithm and later ---
+    during the interior loop --- check if a given solution matches any of the
+    generated rules.
+
+  \item{\texttt{model}} --- models a hierarchy of objects for an abstract MOO
+    problem. Contains basic classes required to represent a~problem, its
+    variables, goals and constraints; as well as a solution to the problem and
+    a scenario of uncertainty. A problem parser --- for reading problem
+    instances from files, solution evaluator --- computing a value of solution
+    over given scenarios and configuration reader --- setting DARWIN's options
+    on basis of a file are also components of the \texttt{model} package.
+  \item{\texttt{simulation}} --- a package responsible for connecting all the
+    other parts together. It initialises the process by asking \texttt{model}
+    to read the problem and the configuration; takes care of a~interaction
+    with the DM, invokes \texttt{jrsintegration} to process the preferences
+    and to obtain the rules and finally interacts with the evolution
+    controller from the \texttt{evolution} package. It can also mock the
+    decision maker and generate reports if need for automated experiment
+    framework.
+
+  \item{\texttt{utils}} --- additional utility classes for the other modules.
+\end{description}
+
+In order to reduce the number of bugs and in a~try to eliminate recurring of
+the fixed bugs an extensive test-suite accompanies each of the packages. In
+order to streamline and to easy the build process, the Scala Build Tool (SBT,
+see~[ref]) is used to manage dependencies, take care of running the test suite
+and to build the application from its source code. The code contains javadoc
+([ref]) on most of the API methods and a lot of comments in places that could
+be particularly hard or tricky to understand. Therefore it should be possible
+for the other developer to use and extend the code delivered as a~part of the
+thesis. A manual for the end-user is enclosed at the end of the paper.
 
 \subsection{Configurable parameters}
+
+
 
 
 \section{Experiment framework}
