@@ -233,5 +233,124 @@ syntax of the configuration file is described in the user manual ([inref]).
 \end{table}
 
 
-
 \section{Experiment framework}
+One of the goals of the thesis was to evaluate the DARWIN's performance and
+the importance of the parameters. To do this a set tools was
+developed. Firstly, DARWIN can be instructed to log a~details of an execution
+to a file (see table~\ref{t:params}). These logs consists of two reports ---
+the evolution report and the DM's decisions report. The former contains the
+information about population shape and the latter about the decisions taken by
+the decision maker. The reports are in comma separated values format (CSV,
+[ref]).
+
+The algorithm is interactive, which means that a~constant human supervision is
+required. However, one need to repeat the experiments over and over again. For
+this reason the decision maker have been mocked. It is possible to pass an
+utility function for a supposed decision maker and then, the algorithm will
+make decision on its own on the supposed utility basis. This automates
+a~single run of DARWIN, however an operator is still required to start the
+program over and, if need be, to change the execution parameters.
+
+To streamline the experiment process the experiment framework is provided. One
+can define a base configuration along with a~test plan and then a computer
+will proceed with the test plan execution. Scripts composing the framework are
+written in Python --- a general, high-level programming language and glued
+together with the Bash shell scripts. A~manual describing how to use the
+framework is provided in the user manual ([ref]).
+
+A test plan execution will typically result in a~number of report files full
+of the runs' details. It would be a tremendous task to analyze them by
+hand. However, presenting this data in an aggregated form as a set of charts
+can greatly simplify the analysis.
+
+R is an environment for statistical computing ([ref]). The program along with
+ggplot library ([ref]) is used for automatic chart generation. The R scripts
+can import the cvs report, aggregate and process the data and finally generate
+a~chart. The whole experiment process is presented in fig.~\ref{framework}.
+
+First an user prepares a~test plan and sends it to the framework. The
+framework is repeatedly running DARWIN with mocked decision maker. The
+resulting reports are then process by the R~scripts. As a result the charts
+are generated.
+
+\begin{figure}
+  \centering \includegraphics[width=\textwidth]{img/framework}
+  \caption{The experiment process}
+  \label{framework}
+\end{figure}
+
+It is possible to generate the following type of charts (they are shown in
+fig.~\ref{chart_examples} and \ref{chart_examples2}).
+\begin{itemize}
+\item A change of the utility value during the exterior loop
+  iterations. Example shown in fig.~\ref{ch_ex_a}. This is a basic chart to
+  analyze, because it shows a high-level overview of the run from the decision
+  maker's perspective.
+\item The change of population shape during the interior loop run. May show a
+  convergence of a population to a specific region. Fig.~\ref{ch_ex_b}.
+\item A change of the utility value along with the primary score during the
+  interior loop --- a run of the evolutionary algorithm. Fig.~\ref{ch_ex_c}.
+\item Shows the change in population of evolutionary algorithm from the
+  utility and the primary score perspective. Fig.~\ref{ch_ex_b}.
+\item A comparison chart --- to put the utility value change of multiple tests
+  (possible with different parameters) side-by-side. Each test consists of one
+  or more runs. Fig.~\ref{ch_ex_2a}.
+\item A comparison chart --- to compare results of several tests. Each tests
+  consists of several runs. The results are charted on a box plot consist, so
+  the analyst can easily compare a median, first and second quartile and
+  outliers of each test. Fig.~\ref{ch_ex_2a}.
+\item A chart showing decision maker's selections. Whole presented population
+  is shown and selected individuals are marked.
+\end{itemize}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat[Exterior loop iterations $\rightarrow$ the utility value]{
+      \includegraphics[width=0.65\textwidth]{charts/utilouter}
+      \label{ch_ex_a}
+    }
+    \subfloat[The population shape change]{
+      \includegraphics[width=0.65\textwidth]{charts/valweight_01}
+      \label{ch_ex_b}
+    }
+  }
+  \makebox[\textwidth]{
+    \subfloat[Interior loop generations $\rightarrow$ the utility value, the primary score]{
+      \includegraphics[width=0.65\textwidth]{charts/utilgen_01}
+      \label{ch_ex_c}
+    }
+    \subfloat[The change of the utility and the primary score in a population]{
+      \includegraphics[width=0.65\textwidth]{charts/utilind_01}
+      \label{ch_ex_d}
+    }
+  }
+  \caption{Type of charts available in the experiment framework}
+  \label{chart_examples}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat[The comparison of test runs]{
+      \includegraphics[width=0.65\textwidth]{charts/summary1}
+      \label{ch_ex2_a}
+    }
+    \subfloat[The comparison of test runs]{
+      \includegraphics[width=0.65\textwidth]{charts/summary2}
+      \label{ch_ex2_b}
+    }
+  }
+  \makebox[\textwidth]{
+    \subfloat[The decision maker choices]{
+      \includegraphics[width=0.65\textwidth]{charts/dm_choices_01}
+      \label{ch_ex2_c}
+    }
+  }
+  \caption{Type of charts available in the experiment framework}
+  \label{chart_examples2}
+\end{figure}
+
+The framework is just an utility, however an important one to evaluate the
+performance of the method. The implementation presented in this chapter was
+evaluated. The results are given in the next chapter.
