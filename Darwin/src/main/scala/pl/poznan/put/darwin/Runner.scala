@@ -2,8 +2,9 @@ package pl.poznan.put.darwin.model
 
 import java.io.FileOutputStream
 import pl.poznan.put.darwin.simulation.{BriefReportGenerator, EvolutionReportGenerator,
-                                        DMReportGenerator, Simulation}
+                                        DMReportGenerator, Simulation, DMMock}
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
+import pl.poznan.put.darwin.model.solution._
 import org.ini4j.ConfigParser
   
 class Runner(problemFilename: String, configFilename: String) {
@@ -25,7 +26,9 @@ class Runner(problemFilename: String, configFilename: String) {
     val dmOut = if (config.DM_REPORT != "")
       new FileOutputStream(config.DM_REPORT) else null
 
-    
+    var markedSolutions: List[MarkedSolution] = null
+    var evaluatedSolutions: List[EvaluatedSolution] = null
+  
     try {
       if (config.BRIEF_REPORT)
         sim.registerObserver(new BriefReportGenerator(sim))
@@ -33,7 +36,13 @@ class Runner(problemFilename: String, configFilename: String) {
         sim.registerObserver(new EvolutionReportGenerator(sim, evoOut))
       if (dmOut != null)
         sim.registerObserver(new DMReportGenerator(sim, dmOut))
-      sim.run()
+      val dmMock = new DMMock(sim)
+      var idx = 0
+      while (idx < config.OUTER_COUNT) {
+        evaluatedSolutions = sim.run(markedSolutions)
+        markedSolutions = dmMock(evaluatedSolutions)
+        idx = idx + 1
+      }
     } finally {
       if (evoOut != null)
         evoOut.close()

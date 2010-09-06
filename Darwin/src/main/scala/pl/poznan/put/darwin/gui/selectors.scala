@@ -9,6 +9,9 @@ import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.simulation.Simulation
 
 class Selectors extends GridPanel(2, 3) {
+  hGap = 3
+  vGap = 3
+  
   private var configFileName = "--- empty ---"
   private var problemFileName = "--- empty ---"
 
@@ -21,11 +24,11 @@ class Selectors extends GridPanel(2, 3) {
   val chooser = new FileChooser
   
   contents += new Label("Problem")
-  contents += configFileLabel
-  contents += configButton
-  contents += new Label("Parameters")
   contents += problemFileLabel
   contents += problemButton
+  contents += new Label("Parameters")
+  contents += configFileLabel
+  contents += configButton
 
   border = Swing.EmptyBorder(5, 5, 5, 5)
 

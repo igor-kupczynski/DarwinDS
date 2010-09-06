@@ -8,6 +8,8 @@ class DarwinProject(info: ProjectInfo) extends DefaultProject(info)
   val scalaToolsSnaphot = "Scala Tools Snapshot" at
                           "http://www.scala-tools.org/repo-snapshots/"
 
+  val swing = "org.scala-lang" % "scala-swing" % "2.8.0" withSources()
+  
   val trove = "trove" % "trove" % "2.1.1" // Used by jRS
   val ini4j = "org.ini4j" % "ini4j" % "0.5.1"
   val args4j = "args4j" % "args4j" % "2.0.9"

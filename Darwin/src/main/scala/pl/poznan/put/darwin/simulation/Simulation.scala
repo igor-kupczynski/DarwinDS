@@ -8,35 +8,25 @@ import pl.poznan.put.darwin.model.Scenario
   
 class Simulation(val config: Config, val problem: Problem) {
   
-  private val fired = false
-
+  private var fired = false
+  private val evolver = new DarwinEvolver()
   private[simulation] var observers: List[SimulationObserver] = List()
   
-  def run() {
-    if (fired)
-      throw new Exception("Already fired")
-
-    var scenarios: List[Map[String, Double]] = Nil
-    for (idx <- 1 to config.SCENARIO_COUNT) {
-      scenarios = Scenario.generate(problem) :: scenarios
-    }
-  
-    var solutions: List[Solution] = Nil
-    for (idx <- 1 to config.SOLUTION_COUNT) {
-      solutions = Solution.random(this, scenarios) :: solutions
-    }
-
-    var evaluatedSolutions = EvaluatedSolution(solutions, scenarios)
-
-    val evolver = new DarwinEvolver()
-    var idx = 0
-
-    val dMMock = new DMMock(this)
-    
-    while (idx < config.OUTER_COUNT) {
-      idx += 1
-      val markedResult: List[MarkedSolution] = dMMock(evaluatedSolutions)
-      evaluatedSolutions = evolver.preformEvolution(markedResult)
+  def run(markedSolutions: List[MarkedSolution]): List[EvaluatedSolution] = {
+    if (!fired) {
+      fired = true
+      var scenarios: List[Map[String, Double]] = Nil
+      for (idx <- 1 to config.SCENARIO_COUNT) {
+        scenarios = Scenario.generate(problem) :: scenarios
+      }
+      
+      var solutions: List[Solution] = Nil
+      for (idx <- 1 to config.SOLUTION_COUNT) {
+        solutions = Solution.random(this, scenarios) :: solutions
+      }
+      EvaluatedSolution(solutions, scenarios)
+    } else {
+      evolver.preformEvolution(markedSolutions)
     }
   }
 
