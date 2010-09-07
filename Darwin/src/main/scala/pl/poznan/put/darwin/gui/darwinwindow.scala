@@ -34,6 +34,9 @@ class DarwinWindow(main: Window) extends BorderPanel {
     while (true) {
       evaluated = sim.run(marked)
       marked = DarwinDialog.show(main, sim, evaluated)
+      if (marked == null) {
+        System.exit(0)
+      }
     }
   }
 }
