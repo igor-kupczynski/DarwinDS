@@ -8,7 +8,7 @@ object RunnerGUI extends SimpleSwingApplication {
 
   def top = new MainFrame {
     title = "DARWIN"
-    contents = new DarwinWindow()
+    contents = new DarwinWindow(this)
   }
 
 }
