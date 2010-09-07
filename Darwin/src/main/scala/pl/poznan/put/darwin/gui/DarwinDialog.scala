@@ -23,9 +23,11 @@ class DarwinDialog(window: Window, val sim: Simulation,
   visible = false
   modal = true
   private val btn = new Button("Mark")
+
+  val table = new Table(rowData, columnNames)
   
   contents = new BoxPanel(Orientation.Vertical) {
-    contents += new ScrollPane(new Table(rowData, columnNames))
+    contents += new ScrollPane(table)
     contents += btn
   }
 
@@ -36,17 +38,21 @@ class DarwinDialog(window: Window, val sim: Simulation,
   reactions += {
     case ButtonClicked(btn) => {
       var idx = 0
-      marked = evaluated.map(e => {
-        idx += 1
-        if (idx < 5)
-          MarkedSolution(e, true)
-        else
-          MarkedSolution(e, false)
-      })
+      marked = markSelected
       visible = false
     }
   }
 
+  private def markSelected(): List[MarkedSolution] = {
+    val m = table.model
+    var idx = -1
+    evaluated.map(e => {
+      idx += 1
+      val good: Boolean = (m.getValueAt(idx, 1)).asInstanceOf[Boolean]
+      MarkedSolution(e, good)
+    })
+  }
+  
   private def rowData(): Array[Array[Any]] = {
     val cols = 2 + sim.problem.goals.length * sim.config.PERCENTILES.length
     val rows = evaluated.length
@@ -76,7 +82,6 @@ class DarwinDialog(window: Window, val sim: Simulation,
         result = result :+ ("%s_%s" format (g.name, p))
       }
     }
-    println(result)
     result
   }
 }
