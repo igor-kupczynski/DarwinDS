@@ -22,24 +22,40 @@ class DarwinDialog(window: Window, val sim: Simulation,
     extends Dialog(window) {
   visible = false
   modal = true
-  private val btn = new Button("Mark")
+  private val btnMark = new Button("Mark")
+  private val btnShow = new Button("Show")
 
   val table = new Table(rowData, columnNames)
   
   contents = new BoxPanel(Orientation.Vertical) {
     contents += new ScrollPane(table)
-    contents += btn
+    contents += new FlowPanel {
+      contents += btnMark
+      contents += btnShow
+    }
   }
 
   var marked: List[MarkedSolution] = null
   
-  listenTo(btn)
+  listenTo(btnMark, btnShow)
 
   reactions += {
-    case ButtonClicked(btn) => {
-      var idx = 0
+    case ButtonClicked(`btnMark`) => {
       marked = markSelected
       visible = false
+    }
+
+    case ButtonClicked(`btnShow`) => {
+      var msg: String = ""
+      for (r <- table.selection.rows) {
+        var row = ">>> Solution %02d:\n" format r
+        val s: EvaluatedSolution = evaluated(r)
+        for ((k, v) <- s.values) {
+          row = row + ("  %s = %s\n" format (k, v))
+        }
+        msg = msg + row + "\n"
+      }
+      Dialog.showMessage(table, msg)
     }
   }
 

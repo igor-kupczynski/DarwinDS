@@ -7,7 +7,7 @@ import pl.poznan.put.darwin.model.solution._
 
 class DarwinWindow(main: Window) extends BorderPanel {
 
-  preferredSize = new Dimension(320, 240)
+  preferredSize = new Dimension(500, 140)
   
   val selectors = new Selectors
   val controls = new Controls
