@@ -33,10 +33,12 @@ class Config(parser: ConfigParser) {
   val BASE_GOOD_COUNT: Int = parser.getInt("mockeddm", "basegoodcount")
   val GOOD_COUNT_DELTA: Int = parser.getInt("mockeddm", "goodcountdelta")
   val NOISE_LEVEL: Int = parser.getInt("mockeddm", "noiselevel")
+
   /*
-   * DOMLEM CONFIG
+   * ALGO CONFIG
    */
-  val DOMLEM_CONFIDECE_LEVEL = parser.getDouble("domlem", "confidencelevel")
+  val ALL_RULES = parser.getBoolean("algo", "allrules")
+  val DOMLEM_CONFIDECE_LEVEL = parser.getDouble("algo", "domlemconfidencelevel")
   val CONDITION_SELECTION_METHOD = VCDomLem.MIX_CONDITIONS_FROM_DIFFERENT_OBJECTS
   val NEGATIVE_EXAMPLES_TREATMENT = VCDomLem.COVER_ONLY_INCONSISTENT_AND_BOUNDARY_NEGATIVE_EXAMPLES
 

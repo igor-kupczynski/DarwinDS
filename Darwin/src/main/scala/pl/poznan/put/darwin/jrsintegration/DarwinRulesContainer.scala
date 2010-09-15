@@ -4,18 +4,25 @@ import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import pl.poznan.put.darwin.model.solution.EvaluatedSolution
 import pl.poznan.put.darwin.model.Config
 
+
+abstract class AbstractRulesContainer {
+  def getScore(solution: EvaluatedSolution): Double
+}
+
+  
 /**
  * Container for rules generated in JRS. Rules are stored together with their
  * weights. Can be asked about weight of given example (aka. solution)
  *
  * @author: Igor Kupczynski
  */
-class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]]) {
+class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]])
+    extends AbstractRulesContainer {
 
   /** 
   * Returns score of given solution on set of rules in the container
   */ 
-  def getScore(solution: EvaluatedSolution): Double = {
+  override def getScore(solution: EvaluatedSolution): Double = {
     rules.foldLeft[Double](0.0)(
       (sum: Double, pair: Tuple2[Rule, Double]) => {
         val r = pair._1
@@ -29,6 +36,9 @@ class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]]) {
   }
 }
 
+
+
+  
 /**
  * Factory object for creating DarwinRuleContainer and calculating
  * appropriate weights for each rule. Uses only one rules container

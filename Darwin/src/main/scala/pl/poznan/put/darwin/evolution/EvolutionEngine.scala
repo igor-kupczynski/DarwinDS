@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.evolution
 
-import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
+import pl.poznan.put.darwin.jrsintegration.AbstractRulesContainer
 import pl.poznan.put.darwin.model.Scenario
 import pl.poznan.put.darwin.model.solution.{EvaluatedSolution, RankedSolution}
 import pl.poznan.put.darwin.simulation.Simulation
@@ -10,7 +10,7 @@ import pl.poznan.put.darwin.simulation.Simulation
  *
  * @author Igor Kupczynski
  */
-class EvolutionEngine(sim: Simulation, rulesContainer: DarwinRulesContainer) {
+class EvolutionEngine(sim: Simulation, rulesContainer: AbstractRulesContainer) {
   private var generation: Int = _
   private var scenarios: List[Map[String, Double]] = _
 

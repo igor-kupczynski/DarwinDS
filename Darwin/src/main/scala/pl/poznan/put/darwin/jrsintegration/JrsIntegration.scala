@@ -11,18 +11,22 @@ import pl.poznan.put.darwin.model.solution.MarkedSolution
 object JrsIntegration {
   var counter = 0
 
-  def apply(result: List[MarkedSolution]): DarwinRulesContainer = {
+  def apply(result: List[MarkedSolution]): AbstractRulesContainer = {
     val sim = result(0).sim
-    var container: RulesContainer = getSingleContainer(result, 0, false)
-    counter = counter + 1
-    if (sim.config.MULTI_RULES) {
-      var containers = List(container)
-      for (idx <- 1 to sim.config.MULTI_RULES_COUNT) {
-        containers = containers :+ getSingleContainer(result, idx, true)
-      }
-      DarwinRulesContainer(containers, result)
+    if (sim.config.ALL_RULES) {
+      null
     } else {
-      DarwinRulesContainer(container, result)
+      var container: RulesContainer = getSingleContainer(result, 0, false)
+      counter = counter + 1
+      if (sim.config.MULTI_RULES) {
+        var containers = List(container)
+        for (idx <- 1 to sim.config.MULTI_RULES_COUNT) {
+          containers = containers :+ getSingleContainer(result, idx, true)
+        }
+        DarwinRulesContainer(containers, result)
+      } else {
+        DarwinRulesContainer(container, result)
+      }
     }
   }
 

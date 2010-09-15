@@ -1,6 +1,6 @@
 package pl.poznan.put.darwin.model.solution
 
-import pl.poznan.put.darwin.jrsintegration.DarwinRulesContainer
+import pl.poznan.put.darwin.jrsintegration.AbstractRulesContainer
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.Goal
 import pl.poznan.put.darwin.simulation.Simulation
@@ -57,7 +57,7 @@ object RankedSolution {
    * Solutions are sorted at the end
    */
   def apply(solutions: List[EvaluatedSolution],
-            rulesContainer: DarwinRulesContainer):
+            rulesContainer: AbstractRulesContainer):
       List[RankedSolution] = {
     val primaryScores: Map[EvaluatedSolution, Double] =
       calculatePrimary(rulesContainer, solutions)
@@ -98,7 +98,7 @@ object RankedSolution {
 
 
   // Part for calculating primary score
-  private def calculatePrimary(container: DarwinRulesContainer,
+  private def calculatePrimary(container: AbstractRulesContainer,
                                solutions: List[EvaluatedSolution]):
         Map[EvaluatedSolution, Double] = {
     var scores: Map[EvaluatedSolution, Double] = Map()
