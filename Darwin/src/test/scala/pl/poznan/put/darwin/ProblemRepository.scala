@@ -35,8 +35,9 @@ trait ProblemRepository {
   goodCountDelta = 0
   noiseLevel = 0
 
-  [DomLem]
-  confidenceLevel = 1.0
+  [algo]
+  allrules = false
+  domlemconfidenceLevel = 1.0
   
   [reports]
   evolutionReport = out/evolution_report.csv
@@ -74,9 +75,10 @@ trait ProblemRepository {
   goodCountDelta = 0
   noiseLevel = 0
 
-  [DomLem]
-  confidenceLevel = 1.0
-
+  [algo]
+  allrules = false
+  domlemconfidenceLevel = 1.0
+  
   [reports]
   evolutionReport = out/evolution_report.csv
   DMReport = out/dm_report.csv
