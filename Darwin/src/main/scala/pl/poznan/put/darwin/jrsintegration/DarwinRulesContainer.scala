@@ -2,7 +2,7 @@ package pl.poznan.put.darwin.jrsintegration
 
 import pl.poznan.put.cs.idss.jrs.rules.{Rule, RulesContainer}
 import pl.poznan.put.darwin.model.solution.EvaluatedSolution
-import pl.poznan.put.darwin.model.Config
+import pl.poznan.put.allrules.model.{Rule => ARRule}
 
 
 abstract class AbstractRulesContainer {
@@ -16,7 +16,7 @@ abstract class AbstractRulesContainer {
  *
  * @author: Igor Kupczynski
  */
-class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]])
+class DarwinRulesContainer(val rules: List[Tuple2[AbstractRule, Double]])
     extends AbstractRulesContainer {
 
   /** 
@@ -24,10 +24,10 @@ class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]])
   */ 
   override def getScore(solution: EvaluatedSolution): Double = {
     rules.foldLeft[Double](0.0)(
-      (sum: Double, pair: Tuple2[Rule, Double]) => {
+      (sum: Double, pair: Tuple2[AbstractRule, Double]) => {
         val r = pair._1
         val w = pair._2
-        if (r covers ExampleFactory(solution))
+        if (r covers solution)
           sum + w
         else
           sum
@@ -37,13 +37,46 @@ class DarwinRulesContainer(val rules: List[Tuple2[Rule, Double]])
 }
 
 
+abstract class AbstractRule {
+  def covers(s: EvaluatedSolution): Boolean
+}
 
+class JrsRule(rule: Rule) extends AbstractRule {
+  override def covers(s: EvaluatedSolution): Boolean = {
+    rule covers ExampleFactory(s)
+  }
+}
+
+class AllRule(rule: ARRule[Double]) extends AbstractRule {
+  def covers(s: EvaluatedSolution): Boolean = {
+    rule covers ObjectFactory(s)
+  }
+}
+  
+trait WeightCalculator {
+  def calculateWeights(rulesAtLeast: List[AbstractRule],
+                       rulesAtMost: List[AbstractRule],
+                               solutions: List[EvaluatedSolution]):
+      Map[AbstractRule, Double] = {
+    val sim = solutions(0).sim
+    var weights: Map[AbstractRule, Double] = Map()
+    rulesAtLeast foreach ((rule: AbstractRule) => {
+      val count = solutions.filter(s => rule covers s).length
+      weights += (rule -> math.pow(1 - sim.config.DELTA, count))
+    })
+    rulesAtMost foreach ((rule: AbstractRule) => {
+      val count = solutions.filter(s => rule covers s).length
+      weights += (rule -> (-1) * math.pow(1 - sim.config.DELTA, count))
+    })
+    weights
+  }  
+}
   
 /**
  * Factory object for creating DarwinRuleContainer and calculating
  * appropriate weights for each rule. Uses only one rules container
  */
-object DarwinRulesContainer {
+object DarwinRulesContainer extends WeightCalculator {
 
   /**
    * Create new instance of DarwinRuleContainer. Rules will be based on
@@ -61,35 +94,23 @@ object DarwinRulesContainer {
   def apply(rulesContainers: List[RulesContainer], examples: List[EvaluatedSolution]):
         DarwinRulesContainer = {
     val sim = examples(0).sim
-    var rulesAtLeast: List[Rule] = Nil
-    var rulesAtMost: List[Rule] = Nil
+    var rulesAtLeast: List[JrsRule] = Nil
+    var rulesAtMost: List[JrsRule] = Nil
     for (rulesContainer <- rulesContainers) {
       val ral = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST)
       if (ral != null) 
-        rulesAtLeast = ral.toArray(new Array[Rule](0)).toList ::: rulesAtLeast
+        rulesAtLeast = ral.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) :::
+          rulesAtLeast
       if (sim.config.USE_AT_MOST) {
         val ram = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_MOST)
         if (ram != null)
-          rulesAtMost = ram.toArray(new Array[Rule](0)).toList ::: rulesAtMost
+          rulesAtMost = ram.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) :::
+            rulesAtMost
       }
     }
-    val weights: Map[Rule, Double] = calculateWeights(rulesAtLeast, rulesAtMost, examples)
+    val weights: Map[AbstractRule, Double] =
+      calculateWeights(rulesAtLeast, rulesAtMost, examples)
     new DarwinRulesContainer(weights.toList)
   }
 
-  private def calculateWeights(rulesAtLeast: List[Rule], rulesAtMost: List[Rule],
-                               solutions: List[EvaluatedSolution]):
-      Map[Rule, Double] = {
-    val sim = solutions(0).sim
-    var weights: Map[Rule, Double] = Map()
-    rulesAtLeast foreach ((rule: Rule) => {
-      val count = solutions.filter(s => rule covers ExampleFactory(s)).length
-      weights += (rule -> math.pow(1 - sim.config.DELTA, count))
-    })
-    rulesAtMost foreach ((rule: Rule) => {
-      val count = solutions.filter(s => rule covers ExampleFactory(s)).length
-      weights += (rule -> (-1) * math.pow(1 - sim.config.DELTA, count))
-    })
-    weights
-  }
 }

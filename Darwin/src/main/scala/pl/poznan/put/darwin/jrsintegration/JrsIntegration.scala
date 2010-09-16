@@ -14,7 +14,7 @@ object JrsIntegration {
   def apply(result: List[MarkedSolution]): AbstractRulesContainer = {
     val sim = result(0).sim
     if (sim.config.ALL_RULES) {
-      null
+      getAllRulesContainer(result)
     } else {
       var container: RulesContainer = getSingleContainer(result, 0, false)
       counter = counter + 1
@@ -30,6 +30,12 @@ object JrsIntegration {
     }
   }
 
+
+  private def getAllRulesContainer(result: List[MarkedSolution]): AbstractRulesContainer = {
+    null
+  }
+  
+  
   private def getSingleContainer(result: List[MarkedSolution], id: Int, randomize: Boolean):
   RulesContainer = {
     val sim = result(0).sim

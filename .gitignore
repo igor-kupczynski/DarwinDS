@@ -1,10 +1,10 @@
 # IDEA files
-Darwin/.classpath
-Darwin/.idea
-Darwin/.project
-Darwin/.scala_dependencies
-Darwin/Darwin.iml
-Darwin/out
+.classpath
+.idea
+.project
+.scala_dependencies
+*.iml
+
 
 # Libs
 lib/
