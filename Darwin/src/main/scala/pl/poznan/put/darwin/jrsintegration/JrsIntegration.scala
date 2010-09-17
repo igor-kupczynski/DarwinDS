@@ -12,12 +12,12 @@ object JrsIntegration {
   var counter = 0
 
   def apply(result: List[MarkedSolution]): AbstractRulesContainer = {
+    counter = counter + 1
     val sim = result(0).sim
     if (sim.config.ALL_RULES) {
       getAllRulesContainer(result)
     } else {
       var container: RulesContainer = getSingleContainer(result, 0, false)
-      counter = counter + 1
       if (sim.config.MULTI_RULES) {
         var containers = List(container)
         for (idx <- 1 to sim.config.MULTI_RULES_COUNT) {
@@ -48,7 +48,9 @@ object JrsIntegration {
         ObjectFactory(s._1, columns)
       )
     }
-    ARRulesContainer((new AllRules[Boolean](t)).generate, result)
+    val rules = (new AllRules[Boolean](t)).generate
+    AllRules.saveToFile("rules/rule_%03d.txt".format(counter), rules)
+    ARRulesContainer(rules, result)
   }
   
   

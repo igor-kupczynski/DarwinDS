@@ -78,7 +78,10 @@ object ARRulesContainer extends WeightCalculator {
       DarwinRulesContainer = {
     val sim = examples(0).sim
     val rulesAtLeast: List[AllRule] = rules.filter(_.atLeast) map {new AllRule(_)}
-    val rulesAtMost: List[AllRule] = rules.filter(!_.atLeast) map {new AllRule(_)}
+    var rulesAtMost: List[AllRule] = Nil
+    if (sim.config.USE_AT_MOST) {
+      rulesAtMost = rules.filter(!_.atLeast) map {new AllRule(_)}
+    }
     val weights: Map[AbstractRule, Double] =
       calculateWeights(rulesAtLeast, rulesAtMost, examples)
     new DarwinRulesContainer(weights.toList)

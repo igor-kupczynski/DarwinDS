@@ -29,6 +29,9 @@ case class RuleCondition[+T](field: String, gt: Boolean, value: T) {
       throw TableException("Can not cast to Int of Float or Double")
     }
   }
+
+  override def toString =
+    "(%s %s %s)" format (field, if (gt) ">=" else "<=", value)
 }
   
 case class Rule[+T](conditions: List[RuleCondition[Any]], atLeast: Boolean, value: T) {
@@ -54,5 +57,10 @@ case class Rule[+T](conditions: List[RuleCondition[Any]], atLeast: Boolean, valu
       if (!c.covers(obj)) return false
     }
     true
+  }
+
+  override def toString = {
+    val fff = conditions.foldLeft("")({(a, b) => "%s & %s" format (a, b)})
+    "%s => (dec %s %s)" format (fff, if (atLeast) ">=" else "<=", value)
   }
 }
