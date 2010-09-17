@@ -4,9 +4,9 @@ import pl.poznan.put.cs.idss.jrs.core.Transfer
 import pl.poznan.put.cs.idss.jrs.core.mem.{MemoryOutput, MemoryContainer}
 import pl.poznan.put.cs.idss.jrs.wrappers.{VCdomLEMWrapperOpt, RulesGeneratorWrapper}
 import pl.poznan.put.cs.idss.jrs.rules.{RulesContainer}
-import java.io.File
-import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.MarkedSolution
+import pl.poznan.put.allrules.AllRules
+import pl.poznan.put.allrules.model.{ColumnFactory, Column, Table}
 
 object JrsIntegration {
   var counter = 0
@@ -30,9 +30,25 @@ object JrsIntegration {
     }
   }
 
-
   private def getAllRulesContainer(result: List[MarkedSolution]): AbstractRulesContainer = {
-    null
+    val sim = result(0).sim
+    val goals = result(0).goals
+    var columns: Map[String, Column[Any]] = Map()
+    for (g <- goals) {
+      for (p <- sim.config.PERCENTILES) {
+        val name = "%s_%s" format (g.name, p)
+        columns = columns + (name -> ColumnFactory.get[Double](name, false, g.max))
+      }
+    }
+    columns = columns + ("Good" -> ColumnFactory.get[Boolean]("Good", true, true))
+    val t = new Table[Boolean](Set(columns.values.toList: _*))
+    for (s <- result.zipWithIndex) {
+      t.addObject(
+        s._2.toString,
+        ObjectFactory(s._1, columns)
+      )
+    }
+    ARRulesContainer((new AllRules[Boolean](t)).generate, result)
   }
   
   

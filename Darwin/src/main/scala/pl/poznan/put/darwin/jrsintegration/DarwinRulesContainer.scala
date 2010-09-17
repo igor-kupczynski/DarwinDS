@@ -47,7 +47,7 @@ class JrsRule(rule: Rule) extends AbstractRule {
   }
 }
 
-class AllRule(rule: ARRule[Double]) extends AbstractRule {
+class AllRule(rule: ARRule[Any]) extends AbstractRule {
   def covers(s: EvaluatedSolution): Boolean = {
     rule covers ObjectFactory(s)
   }
@@ -71,7 +71,20 @@ trait WeightCalculator {
     weights
   }  
 }
-  
+
+object ARRulesContainer extends WeightCalculator {
+
+  def apply(rules: List[ARRule[Any]], examples: List[EvaluatedSolution]):
+      DarwinRulesContainer = {
+    val sim = examples(0).sim
+    val rulesAtLeast: List[AllRule] = rules.filter(_.atLeast) map {new AllRule(_)}
+    val rulesAtMost: List[AllRule] = rules.filter(!_.atLeast) map {new AllRule(_)}
+    val weights: Map[AbstractRule, Double] =
+      calculateWeights(rulesAtLeast, rulesAtMost, examples)
+    new DarwinRulesContainer(weights.toList)
+  }
+}
+
 /**
  * Factory object for creating DarwinRuleContainer and calculating
  * appropriate weights for each rule. Uses only one rules container
