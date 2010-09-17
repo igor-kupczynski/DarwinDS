@@ -100,11 +100,13 @@ class Table[+T](cols: Set[Column[Any]]) {
   private def isBetterOnColumn[A](c: Column[A], bVal: A, aVal: A)(implicit ord: Ordering[A]) =
     (c.gain && ord.gt(bVal, aVal)) || (!c.gain && ord.lt(bVal, aVal))
 
+  private def isStronglyBetterOnColumn[A](c: Column[A], bVal: A, aVal: A)(implicit ord: Ordering[A]) =
+    (c.gain && ord.gteq(bVal, aVal)) || (!c.gain && ord.lteq(bVal, aVal))
+
   def weeklyDominates(a: Map[Column[Any], Any], b: Map[Column[Any], Any]): Boolean = {
     if (a.size != b.size) throw TableException(
       "Objects being compared should have the same attributes")
     for (c <- a.keys) {
-      println("?[%s] %s > %s" format (c, a, b))
       if (!c.decision && isBetterOnColumn(c, b(c), a(c))(c.ord)) {
         return false
       }
@@ -112,14 +114,11 @@ class Table[+T](cols: Set[Column[Any]]) {
     true
   }
 
-  def stronglyDominates[U >: T](a: Map[Column[Any], Any], b: Map[Column[Any], Any])
-      (implicit ord: Ordering[U]): Boolean = {
+  def stronglyDominates(a: Map[Column[Any], Any], b: Map[Column[Any], Any]): Boolean = {
     if (a.size != b.size) throw TableException(
       "Objects being compared should have the same attributes")
     for (c <- a.keys) {
-      if (!c.decision &&
-          (c.gain && ord.gteq(b(c).asInstanceOf[T], a(c).asInstanceOf[T])) ||
-          (!c.gain && ord.lteq(b(c).asInstanceOf[T], a(c).asInstanceOf[T]))) {
+      if (!c.decision && isStronglyBetterOnColumn(c, b(c), a(c))(c.ord)) {
             return false
           }
     }

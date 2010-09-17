@@ -8,7 +8,9 @@ import collection.SortedSet
 case class Column[+T](name: String, decision: Boolean, gain: Boolean) {
 
   private[model] var _ord: Ordering[Any] = _
-  def ord[U >: T] = _ord.asInstanceOf[Ordering[U]]
+  def ord[U >: T]: Ordering[U] = {
+    _ord.asInstanceOf[Ordering[U]]
+  }
 
   var _rows: Map[String, Any] = Map()
 

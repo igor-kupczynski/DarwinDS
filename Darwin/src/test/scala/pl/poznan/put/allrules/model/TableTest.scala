@@ -3,9 +3,9 @@ package pl.poznan.put.allrules.model
 import org.specs.Specification
 
 class TableTest extends Specification {
-  val power = Column[Int]("Power", false, true)
-  val cost = Column[Int]("Cost", false, false)
-  val dec = Column[Int]("Decision", true, true)
+  val power = ColumnFactory.get[Int]("Power", false, true)
+  val cost = ColumnFactory.get[Int]("Cost", false, false)
+  val dec = ColumnFactory.get[Int]("Decision", true, true)
   val cols: Set[Column[Any]] = Set(power, cost, dec)
 
 
