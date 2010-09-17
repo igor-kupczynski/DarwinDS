@@ -59,6 +59,33 @@ class AllRulesTest extends Specification {
                    RuleCondition[Double]("Cost",true,2.0)),false,false)
   )
 
+  // Table 3
+
+  val power3 = ColumnFactory.get[Double]("Power", false, true)
+  val cost3 = ColumnFactory.get[Boolean]("Cost", false, false)
+  val dec3 = ColumnFactory.get[Boolean]("Decision", true, true)
+  val cols3: Set[Column[Any]] = Set(power3, cost3, dec3)
+
+  var t3: Table[Boolean] = _
+
+  val o13: Map[Column[Any], Any] = Map(power3 -> 10.0, cost3 ->  true, dec3 -> true)
+  val o23: Map[Column[Any], Any] = Map(power3 ->  2.0, cost3 -> false, dec3 -> false)
+  val o33: Map[Column[Any], Any] = Map(power3 ->  5.0, cost3 -> false, dec3 -> true)
+  val o43: Map[Column[Any], Any] = Map(power3 ->  3.0, cost3 -> false, dec3 -> false)
+
+  val rules3 = List(
+    Rule[Boolean](List(RuleCondition[Double]("Power",true,5.0)),true,true),
+    Rule[Boolean](List(RuleCondition[Double]("Power",false,3.0)),false,false),
+    Rule[Boolean](List(RuleCondition[Double]("Power",true,10.0),
+                       RuleCondition[Boolean]("Cost",false,true)),true,true),
+    Rule[Boolean](List(RuleCondition[Double]("Power",true,5.0),
+                       RuleCondition[Boolean]("Cost",false,false)),true,true),
+    Rule[Boolean](List(RuleCondition[Double]("Power",false,2.0),
+                       RuleCondition[Boolean]("Cost",true,false)),false,false),
+    Rule[Boolean](List(RuleCondition[Double]("Power",false,3.0),
+                   RuleCondition[Boolean]("Cost",true,false)),false,false)
+  )
+
   def initTable() = {
     t = new Table[Int](cols)
     t.addObject("1", o1)
@@ -71,6 +98,12 @@ class AllRulesTest extends Specification {
     t2.addObject("2", o22)
     t2.addObject("3", o32)
     t2.addObject("4", o42)
+
+    t3 = new Table[Boolean](cols3)
+    t3.addObject("1", o13)
+    t3.addObject("2", o23)
+    t3.addObject("3", o33)
+    t3.addObject("4", o43)
   }
 
   "AllRules" should {
@@ -81,6 +114,9 @@ class AllRulesTest extends Specification {
 
       val a2 = new AllRules(t2)
       a2.generate must haveTheSameElementsAs(rules2)
+
+      val a3 = new AllRules(t3)
+      a3.generate must haveTheSameElementsAs(rules3)
     }
   }
 }
