@@ -1,6 +1,7 @@
 package pl.poznan.put.allrules.model
 
 import collection.mutable.ListBuffer
+import pl.poznan.put.darwin.utils.TimeUtils
 
 /**
  * The expetion to be thrown when creating a table
@@ -175,7 +176,7 @@ class Table[+T](cols: Set[Column[Any]]) {
   def allConceptsLB[U >: T](attrNames: Set[String])(implicit ord: Ordering[U]):
       Map[Concept[U], Set[Map[Column[Any], Any]]] = {
     val ord2 = ord.asInstanceOf[Ordering[T]]
-    val ubs = allConceptsUB(attrNames)(ord2)
+    val ubs = TimeUtils.time("allConceptsUB", allConceptsUB(attrNames)(ord2))
     var result: Map[Concept[U], Set[Map[Column[Any], Any]]] = Map()
     for (c <- ubs.keys) {
       result = result + (c -> ubs(c).filter(!isInOpositeConcepts(_, c, ubs)(ord2)))

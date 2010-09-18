@@ -28,7 +28,7 @@ class AllRules[+T](table: Table[T]) {
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (attrNames <- TimeUtils.time("powerset", table.attributePowerset)) {
       if (debug) println(">>> %s" format attrNames)
-      for ((c, objLB) <- TimeUtils.time("allConcepts", table.allConceptsLB(attrNames))) {
+      for ((c, objLB) <- TimeUtils.time("allConceptsLB", table.allConceptsLB(attrNames))) {
         rules = rules ++ TimeUtils.time("rulesFromConcepts", rulesFromConcepts(objLB, c))
       }
     }
