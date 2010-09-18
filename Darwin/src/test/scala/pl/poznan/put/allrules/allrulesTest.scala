@@ -177,9 +177,9 @@ class AllRulesTest extends Specification {
       val a3 = new AllRules(t3)
       a3.generate(false) must haveTheSameElementsAs(rules3)
 
-      val a4 = new AllRules(t4)
-      println ("---Time test---")
-      TimeUtils.time("Generate", a4.generate(false))
+      //val a4 = new AllRules(t4)
+      //println ("---Time test---")
+      //TimeUtils.time("Generate", a4.generate(false))
     }
   }
 }

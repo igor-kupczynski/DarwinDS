@@ -78,28 +78,6 @@ class Table[+T](cols: Set[Column[Any]]) {
        throw TableException("The table should contain one decision attribute")
   }
 
-  private def getColumnForName(name: String): Column[Any] = {
-    for (c <- columns) if (c.name == name) return c
-    null
-  }
-
-  private def getColumns(names: Set[String]): Set[Column[Any]] = {
-    var result = new ListBuffer[Column[Any]]
-    for (n <- names) {
-      result += getColumnForName(n)
-    }
-    result.toSet
-  }
-
-  def equalsWRT(attrNames: Set[String],
-                a: Map[Column[Any], Any],
-                b: Map[Column[Any], Any]): Boolean = {
-    for (c <- getColumns(attrNames)) {
-      if (a(c) != b(c)) return false
-    }
-    true
-  }
-
   private def isBetterOnColumn[A](c: Column[A], bVal: A, aVal: A)(implicit ord: Ordering[A]) =
     (c.gain && ord.gt(bVal, aVal)) || (!c.gain && ord.lt(bVal, aVal))
 
