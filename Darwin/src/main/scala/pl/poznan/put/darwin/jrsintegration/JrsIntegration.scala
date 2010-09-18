@@ -50,7 +50,7 @@ object JrsIntegration {
       )
     }
     if (sim.config.DEBUG) println("<=> Prepared table")
-    val rules = TimeUtils.time("generate", (new AllRules[Boolean](t)).generate(sim.config.DEBUG))
+    val rules = TimeUtils.time("generate", (new AllRules[Boolean](t)).generate(false))
     if (sim.config.DEBUG) println("<=> Got rules")
     AllRules.saveToFile("rules/rule_%03d.txt".format(counter), rules)
     if (sim.config.DEBUG) println("<=> Saved rules")

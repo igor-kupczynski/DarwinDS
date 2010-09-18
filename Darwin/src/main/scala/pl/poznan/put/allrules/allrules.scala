@@ -24,7 +24,7 @@ class AllRules[+T](table: Table[T]) {
     rules.toList
   }
 
-  def generate[U >: T](debug: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
+  def generate[U >: T](minimal: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
     val rules = new ListBuffer[Rule[Any]]
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (attrNames <- table.attributePowerset) {
@@ -32,12 +32,33 @@ class AllRules[+T](table: Table[T]) {
         rules ++= rulesFromConcepts(objLB, c)
       }
     }
-    rules.toList
+    if (minimal) {
+      minimize(rules.toList)
+    } else {
+      rules.toList
+    }
   }
 
-//  def minimize(List[Rule[Any]]): List[Rule[Any]] = {
-//    val minimal = new ListBuffer[Rule[Any]]
-//  }
+  def minimize(rules: List[Rule[Any]]): List[Rule[Any]] = {
+
+    def isMinimal(item: Rule[Any], reference: List[Rule[Any]]): Boolean = {
+      for (el <- reference) {
+        if (el.isSmallerThan(item)) {
+          return false
+        }
+      }
+      true
+    }
+
+    def extractMinimal(toExtract: List[Rule[Any]], minimal: List[Rule[Any]]): List[Rule[Any]] = {
+      if (toExtract.length == 0) minimal
+      else if (isMinimal(toExtract.head, minimal ::: toExtract.tail))
+        extractMinimal(toExtract.tail, toExtract.head :: minimal)
+      else extractMinimal(toExtract.tail, minimal)
+    }
+
+    extractMinimal(rules, List())
+  }
 }
 
 

@@ -41,7 +41,7 @@ case class Column[+T](name: String, decision: Boolean, gain: Boolean) {
   
   def toRuleCondition(obj: Map[Column[Any], Any], dec: Boolean):
       RuleCondition[T] = {
-    RuleCondition[T](name, if (dec) gain else !gain, obj(this).asInstanceOf[T])
+    RuleCondition[T](this, if (dec) gain else !gain, obj(this).asInstanceOf[T])
   }
 }
 

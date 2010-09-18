@@ -1,37 +1,25 @@
 package pl.poznan.put.allrules.model
 
-case class RuleCondition[+T](field: String, gt: Boolean, value: T) {
-  
-  def covers(obj: Map[String, Any]): Boolean = {
-    val objAnyVal = obj(field)
+case class RuleCondition[+T](column: Column[T], gt: Boolean, value: T) {
 
-    // Ugly, should be changed to something better
-  
-    if (objAnyVal.isInstanceOf[Int]) {
-      val objVal: Int = obj(field).asInstanceOf[Int]
-      if (gt)
-        (objVal >= value.asInstanceOf[Int])
-      else
-        (objVal <= value.asInstanceOf[Int])
-    } else if (objAnyVal.isInstanceOf[Float]) {
-      val objVal: Float = obj(field).asInstanceOf[Float]
-      if (gt)
-        (objVal >= value.asInstanceOf[Float])
-      else
-        (objVal <= value.asInstanceOf[Float])
-    } else if (objAnyVal.isInstanceOf[Double]) {
-      val objVal: Double = obj(field).asInstanceOf[Double]
-      if (gt)
-        (objVal >= value.asInstanceOf[Double])
-      else
-        (objVal <= value.asInstanceOf[Double])
-    } else {
-      throw TableException("Can not cast to Int of Float or Double")
+  def isSmallerThan[U >: T](other: RuleCondition[U]) : Option[Boolean] = {
+    if (this.column != other.column || this.gt != other.gt) {
+      return None
     }
+    val result = if (gt) column.ord.lt(value, other.value)
+    else column.ord.gt(value, other.value)
+    Some(result)
+  }
+
+  def covers(obj: Map[String, Any]): Boolean = {
+    val objVal = obj(column.name)
+
+    if (gt) column.ord.gteq(objVal, value)
+    else column.ord.lteq(objVal, value)
   }
 
   override def toString =
-    "(%s %s %s)" format (field, if (gt) ">=" else "<=", value)
+    "(%s %s %s)" format (column.name, if (gt) ">=" else "<=", value)
 }
   
 case class Rule[+T](conditions: List[RuleCondition[Any]], atLeast: Boolean, value: T) {
@@ -41,11 +29,24 @@ case class Rule[+T](conditions: List[RuleCondition[Any]], atLeast: Boolean, valu
    * decision but smaller number of conditions.
    */
   def isSmallerThan[U >: T](other: Rule[U]): Boolean = {
-    if (this.atLeast != other.atLeast || this.value != other.value)
+    if (this.atLeast != other.atLeast || this.value != other.value) {
       return false
+    }
+    if (this.conditions.length > other.conditions.length) {
+      return false
+    }
     for (c <- this.conditions) {
-      if (!other.conditions.contains(c)) {
-        // Different condition, can not compare
+      var oneNotUndef = false
+      for (oc <- other.conditions) {
+        val sss = oc.isSmallerThan(c)
+        if (sss != None) {
+          oneNotUndef = true
+          if (sss.get) {
+            return false
+          }
+        }
+      }
+      if (!oneNotUndef) {
         return false
       }
     }

@@ -22,16 +22,16 @@ class AllRulesTest extends Specification {
   val o4: Map[Column[Any], Any] = Map(power ->  3, cost ->  2, dec -> 0)
 
   val rules = List(
-    Rule[Int](List(RuleCondition[Int]("Power",true,5)),true,1),
-    Rule[Int](List(RuleCondition[Int]("Power",false,3)),false,0),
-    Rule[Int](List(RuleCondition[Int]("Power",true,10),
-                   RuleCondition[Int]("Cost",false,10)),true,1),
-    Rule[Int](List(RuleCondition[Int]("Power",true,5),
-                   RuleCondition[Int]("Cost",false,2)),true,1),
-    Rule[Int](List(RuleCondition[Int]("Power",false,2),
-                   RuleCondition[Int]("Cost",true,2)),false,0),
-    Rule[Int](List(RuleCondition[Int]("Power",false,3),
-                   RuleCondition[Int]("Cost",true,2)),false,0)
+    Rule[Int](List(RuleCondition[Int](power,true,5)),true,1),
+    Rule[Int](List(RuleCondition[Int](power,false,3)),false,0),
+    Rule[Int](List(RuleCondition[Int](power,true,10),
+                   RuleCondition[Int](cost,false,10)),true,1),
+    Rule[Int](List(RuleCondition[Int](power,true,5),
+                   RuleCondition[Int](cost,false,2)),true,1),
+    Rule[Int](List(RuleCondition[Int](power,false,2),
+                   RuleCondition[Int](cost,true,2)),false,0),
+    Rule[Int](List(RuleCondition[Int](power,false,3),
+                   RuleCondition[Int](cost,true,2)),false,0)
   )
 
   // Table 2
@@ -49,16 +49,25 @@ class AllRulesTest extends Specification {
   val o42: Map[Column[Any], Any] = Map(power2 ->  3.0, cost2 ->  2.0, dec2 -> false)
 
   val rules2 = List(
-    Rule[Boolean](List(RuleCondition[Double]("Power",true,5.0)),true,true),
-    Rule[Boolean](List(RuleCondition[Double]("Power",false,3.0)),false,false),
-    Rule[Boolean](List(RuleCondition[Double]("Power",true,10.0),
-                       RuleCondition[Double]("Cost",false,10.0)),true,true),
-    Rule[Boolean](List(RuleCondition[Double]("Power",true,5.0),
-                       RuleCondition[Double]("Cost",false,2.0)),true,true),
-    Rule[Boolean](List(RuleCondition[Double]("Power",false,2.0),
-                       RuleCondition[Double]("Cost",true,2.0)),false,false),
-    Rule[Boolean](List(RuleCondition[Double]("Power",false,3.0),
-                   RuleCondition[Double]("Cost",true,2.0)),false,false)
+    Rule[Boolean](List(RuleCondition[Double](power2,true,5.0)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power2,false,3.0)),false,false),
+    Rule[Boolean](List(RuleCondition[Double](power2,true,10.0),
+                       RuleCondition[Double](cost2,false,10.0)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power2,true,5.0),
+                       RuleCondition[Double](cost2,false,2.0)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power2,false,2.0),
+                       RuleCondition[Double](cost2,true,2.0)),false,false),
+    Rule[Boolean](List(RuleCondition[Double](power2,false,3.0),
+                   RuleCondition[Double](cost2,true,2.0)),false,false)
+  )
+
+  var t2b: Table[Boolean] = _
+  val o52: Map[Column[Any], Any] = Map(power2 ->  1.0, cost2 ->  1.0, dec2 -> true)
+
+  val rules2b = List(
+    Rule[Boolean](List(RuleCondition[Double](power2,true,5.0)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power2,false,3.0), RuleCondition[Double](cost2,true,2.0)),false,false),
+    Rule[Boolean](List(RuleCondition[Double](cost2,false,1.0)),true,true)
   )
 
   // Table 3
@@ -76,16 +85,16 @@ class AllRulesTest extends Specification {
   val o43: Map[Column[Any], Any] = Map(power3 ->  3.0, cost3 -> false, dec3 -> false)
 
   val rules3 = List(
-    Rule[Boolean](List(RuleCondition[Double]("Power",true,5.0)),true,true),
-    Rule[Boolean](List(RuleCondition[Double]("Power",false,3.0)),false,false),
-    Rule[Boolean](List(RuleCondition[Double]("Power",true,10.0),
-                       RuleCondition[Boolean]("Cost",false,true)),true,true),
-    Rule[Boolean](List(RuleCondition[Double]("Power",true,5.0),
-                       RuleCondition[Boolean]("Cost",false,false)),true,true),
-    Rule[Boolean](List(RuleCondition[Double]("Power",false,2.0),
-                       RuleCondition[Boolean]("Cost",true,false)),false,false),
-    Rule[Boolean](List(RuleCondition[Double]("Power",false,3.0),
-                   RuleCondition[Boolean]("Cost",true,false)),false,false)
+    Rule[Boolean](List(RuleCondition[Double](power3,true,5.0)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power3,false,3.0)),false,false),
+    Rule[Boolean](List(RuleCondition[Double](power3,true,10.0),
+                       RuleCondition[Boolean](cost3,false,true)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power3,true,5.0),
+                       RuleCondition[Boolean](cost3,false,false)),true,true),
+    Rule[Boolean](List(RuleCondition[Double](power3,false,2.0),
+                       RuleCondition[Boolean](cost3,true,false)),false,false),
+    Rule[Boolean](List(RuleCondition[Double](power3,false,3.0),
+                   RuleCondition[Boolean](cost3,true,false)),false,false)
   )
 
 
@@ -147,6 +156,13 @@ class AllRulesTest extends Specification {
     t2.addObject("3", o32)
     t2.addObject("4", o42)
 
+    t2b = new Table[Boolean](cols2)
+    t2b.addObject("1", o12)
+    t2b.addObject("2", o22)
+    t2b.addObject("3", o32)
+    t2b.addObject("4", o42)
+    t2b.addObject("5", o52)
+
     t3 = new Table[Boolean](cols3)
     t3.addObject("1", o13)
     t3.addObject("2", o23)
@@ -168,18 +184,22 @@ class AllRulesTest extends Specification {
   "AllRules" should {
     initTable()
     "generate rules" in {
-      val a = new AllRules(t)
-      a.generate(false) must haveTheSameElementsAs(rules)
+//      val a = new AllRules(t)
+//      a.generate(false) must haveTheSameElementsAs(rules)
+//
+//      val a2 = new AllRules(t2)
+//      a2.generate(false) must haveTheSameElementsAs(rules2)
 
-      val a2 = new AllRules(t2)
-      a2.generate(false) must haveTheSameElementsAs(rules2)
+      val a2b = new AllRules(t2b)
+      a2b.generate(true) must haveTheSameElementsAs(rules2b)
 
-      val a3 = new AllRules(t3)
-      a3.generate(false) must haveTheSameElementsAs(rules3)
-
-      val a4 = new AllRules(t4)
-      println ("---Time test---")
-      TimeUtils.time("Generate", a4.generate(false))
+//      val a3 = new AllRules(t3)
+//      a3.generate(false) must haveTheSameElementsAs(rules3)
+//
+//      val a4 = new AllRules(t4)
+//      println ("---Time test---")
+//      TimeUtils.time("Generate", a4.generate(false))
+//      TimeUtils.time("Generate-minimize", a4.generate(true))
     }
   }
 }

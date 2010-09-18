@@ -3,7 +3,10 @@ package pl.poznan.put.allrules.model
 import org.specs.Specification
 
 class RulesTest extends Specification {
-  
+
+  val power = ColumnFactory.get[Int]("power", false, true)
+  val price = ColumnFactory.get[Int]("price", false, false)
+
   var a: Map[String, Any] = Map(
     "power" -> 3,
     "price" -> 1,
@@ -16,10 +19,10 @@ class RulesTest extends Specification {
     "dec" -> 0
   )
 
-  val rc1 = RuleCondition[Int]("power", true, 2)
-  val rc2 = RuleCondition[Int]("power", true, 4)
-  val rc3 = RuleCondition[Int]("price", false, 1)
-  val rc4 = RuleCondition[Int]("price", true, 2)
+  val rc1 = RuleCondition[Int](power, true, 2)
+  val rc2 = RuleCondition[Int](power, true, 4)
+  val rc3 = RuleCondition[Int](price, false, 1)
+  val rc4 = RuleCondition[Int](price, true, 2)
   
   "RuleCondition" should {
     "match objects only covered by the condition" in {
