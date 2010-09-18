@@ -2,6 +2,8 @@ package pl.poznan.put.allrules.model
 
 import collection.mutable.ListBuffer
 import pl.poznan.put.darwin.utils.TimeUtils
+import reflect.{ClassManifest, Manifest}
+import collection.immutable.VectorBuilder
 
 /**
  * The expetion to be thrown when creating a table
@@ -54,16 +56,16 @@ class Table[+T](cols: Set[Column[Any]]) {
       decision.valueScale(ord2)
     else
       decision.valueScale(ord2).reverse
-    var result = new ListBuffer[Concept[U]]
+    var result = new VectorBuilder[Concept[T]]
       for(i <- (decisionScale.length -1).to(1, -1)) {
         val x = decisionScale(i)
-        result += (new Concept[U](true, decisionScale filter {ord2.gteq(_, x)}))
+        result += (new Concept[T]( true, decisionScale filter {ord2.gteq(_, x)} ))
       }
       for(i <- 0 to (decisionScale.length -2)) {
         val x = decisionScale(i)
-        result +=  (new Concept[U](false, decisionScale filter {ord2.lteq(_, x)}))
+        result += (new Concept[T](false, decisionScale filter {ord2.lteq(_, x)} ))
       } 
-    result.toList
+    result.result.toList
   }
 
   /**
@@ -154,7 +156,7 @@ class Table[+T](cols: Set[Column[Any]]) {
   def allConceptsLB[U >: T](attrNames: Set[String])(implicit ord: Ordering[U]):
       Map[Concept[U], Set[Map[Column[Any], Any]]] = {
     val ord2 = ord.asInstanceOf[Ordering[T]]
-    val ubs = TimeUtils.time("allConceptsUB", allConceptsUB(attrNames)(ord2))
+    val ubs = allConceptsUB(attrNames)(ord2)
     var result: Map[Concept[U], Set[Map[Column[Any], Any]]] = Map()
     for (c <- ubs.keys) {
       result = result + (c -> ubs(c).filter(!isInOpositeConcepts(_, c, ubs)(ord2)))
@@ -162,7 +164,7 @@ class Table[+T](cols: Set[Column[Any]]) {
     result
   }
 
-  def toRule[U >: T](obj: Map[Column[Any], Any], atLeast: Boolean, values: List[U])
+  def toRule[U >: T](obj: Map[Column[Any], Any], atLeast: Boolean, values: Vector[U])
     (implicit cmp: Ordering[U]):
       Rule[U] =
     Rule[U](
@@ -172,9 +174,9 @@ class Table[+T](cols: Set[Column[Any]]) {
         .toList,
       atLeast,
       if (atLeast)
-        values.asInstanceOf[List[U]].min
+        values.min
       else
-        values.asInstanceOf[List[U]].max
+        values.max
     )
 }
 

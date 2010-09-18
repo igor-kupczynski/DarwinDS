@@ -14,8 +14,8 @@ class TableTest extends Specification {
   val o3: Map[Column[Any], Any] = Map(power ->  5, cost ->  2, dec -> 1)
   val o4: Map[Column[Any], Any] = Map(power ->  3, cost ->  2, dec -> 0)
 
-  val c1 = Concept[Int](true, List(1))
-  val c2 = Concept[Int](false, List(0))
+  val c1 = Concept[Int](true, Vector(1))
+  val c2 = Concept[Int](false, Vector(0))
   
   val o5: Map[Column[Any], Any] = Map(power ->  10, cost ->  3, dec -> 2)
   
@@ -48,8 +48,8 @@ class TableTest extends Specification {
       t.allConcepts must haveTheSameElementsAs(concepts)
 
       t.addObject("5", o5)
-      val concepts2 = Set(Concept[Int](true, List(2)),  Concept[Int](true, List(1, 2)),
-                          Concept[Int](false, List(0)), Concept[Int](false, List(0, 1))
+      val concepts2 = Set(Concept[Int](true, Vector(2)),  Concept[Int](true, Vector(1, 2)),
+                          Concept[Int](false, Vector(0)), Concept[Int](false, Vector(0, 1))
                       )
       t.allConcepts must haveTheSameElementsAs(concepts2)
     }

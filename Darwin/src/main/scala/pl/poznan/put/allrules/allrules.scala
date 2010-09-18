@@ -27,14 +27,17 @@ class AllRules[+T](table: Table[T]) {
   def generate[U >: T](debug: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
     val rules = new ListBuffer[Rule[Any]]
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
-    for (attrNames <- TimeUtils.time("powerset", table.attributePowerset)) {
-      if (debug) println(">>> %s" format attrNames)
-      for ((c, objLB) <- TimeUtils.time("allConceptsLB", table.allConceptsLB(attrNames))) {
-        rules ++= TimeUtils.time("rulesFromConcepts", rulesFromConcepts(objLB, c))
+    for (attrNames <- table.attributePowerset) {
+      for ((c, objLB) <- table.allConceptsLB(attrNames)) {
+        rules ++= rulesFromConcepts(objLB, c)
       }
     }
     rules.toList
   }
+
+//  def minimize(List[Rule[Any]]): List[Rule[Any]] = {
+//    val minimal = new ListBuffer[Rule[Any]]
+//  }
 }
 
 

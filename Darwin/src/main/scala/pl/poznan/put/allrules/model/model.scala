@@ -23,9 +23,9 @@ case class Column[+T](name: String, decision: Boolean, gain: Boolean) {
 
   private def values(): List[T] = rows.iterator.map(_._2).toList.asInstanceOf[List[T]] 
   
-  def valueScale[U >: T](implicit ord: Ordering[U]): List[T] = {
+  def valueScale[U >: T](implicit ord: Ordering[U]): Vector[T] = {
     val ord2 = ord.asInstanceOf[Ordering[T]]
-    SortedSet(values: _*)(ord2).toList
+    Vector(SortedSet(values: _*)(ord2).toSeq: _*)
   }
 
   def objectsForValue[U >: T](value: U): Set[String] = Set(
@@ -45,7 +45,7 @@ case class Column[+T](name: String, decision: Boolean, gain: Boolean) {
   }
 }
 
-case class Concept[+T](upwards: Boolean, values: List[T])  
+case class Concept[+T](upwards: Boolean, values: Vector[T])  
 
 object ColumnFactory {
   def get[T](name: String, decision: Boolean, gain: Boolean)(implicit ord: Ordering[T]): Column[T] = {
