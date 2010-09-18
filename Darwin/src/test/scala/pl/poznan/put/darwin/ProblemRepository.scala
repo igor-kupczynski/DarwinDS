@@ -15,6 +15,7 @@ trait ProblemRepository {
 
   val defConf = """
   [main]
+  debug = false
   solutionCount = 30
   scenarioCount = 30
   generationCount = 60
@@ -55,6 +56,7 @@ trait ProblemRepository {
 
   val confWithAvg = """
   [main]
+  debug = false
   solutionCount = 30
   scenarioCount = 30
   generationCount = 60

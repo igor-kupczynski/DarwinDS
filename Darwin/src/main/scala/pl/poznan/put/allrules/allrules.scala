@@ -2,25 +2,34 @@ package pl.poznan.put.allrules
 
 import model._
 import java.io.{FileWriter, File}
+import pl.poznan.put.darwin.utils.TimeUtils
 
 class AllRules[+T](table: Table[T]) {
   
-  def generate[U >: T](implicit ord2: Ordering[U]): List[Rule[Any]] = {
+  def rulesFromConcepts[U >: T](objLB: Set[Map[Column[Any], Any]], c: Concept[U])(implicit ord2: Ordering[U]): scala.List[Rule[Any]] = {
+    var rules: scala.List[Rule[Any]] = List()
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
-    var rules: List[Rule[Any]] = List()
-    for (attrNames <- table.attributePowerset) {
-      for ((c, objLB) <- table.allConceptsLB(attrNames)) {
-        for (obj <- objLB) {
-          if (c.upwards) {
-            if (objLB.forall({x => (obj == x || !table.stronglyDominates(obj, x))})) {
-              rules = rules :+ table.toRule(obj, true, c.values)
-            }
-          } else {
-            if (objLB.forall({x => (obj == x || !table.stronglyDominates(x, obj))})) {
-              rules = rules :+ table.toRule(obj, false, c.values)
-            }
-          }
+    for (obj <- objLB) {
+      if (c.upwards) {
+        if (objLB.forall({x => (obj == x || !table.stronglyDominates(obj, x))})) {
+          rules = rules :+ table.toRule(obj, true, c.values)
         }
+      } else {
+        if (objLB.forall({x => (obj == x || !table.stronglyDominates(x, obj))})) {
+          rules = rules :+ table.toRule(obj, false, c.values)
+        }
+      }
+    }
+    rules
+  }
+
+  def generate[U >: T](debug: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
+    var rules: List[Rule[Any]] = List()
+    implicit val ord = ord2.asInstanceOf[Ordering[T]]
+    for (attrNames <- TimeUtils.time("powerset", table.attributePowerset)) {
+      if (debug) println(">>> %s" format attrNames)
+      for ((c, objLB) <- TimeUtils.time("allConcepts", table.allConceptsLB(attrNames))) {
+        rules = rules ++ TimeUtils.time("rulesFromConcepts", rulesFromConcepts(objLB, c))
       }
     }
     rules

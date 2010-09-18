@@ -10,6 +10,9 @@ class Config(parser: ConfigParser) {
   /*
    * Main parameters
    */
+  val DEBUG: Boolean = parser.getBoolean("main", "debug")
+
+
   val SOLUTION_COUNT: Int = parser.getInt("main", "solutioncount")
   val SCENARIO_COUNT: Int = parser.getInt("main", "scenariocount")
   val GENERATION_COUNT: Int = parser.getInt("main", "generationcount")

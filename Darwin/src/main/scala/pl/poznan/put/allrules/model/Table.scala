@@ -1,5 +1,7 @@
 package pl.poznan.put.allrules.model
 
+import collection.mutable.ListBuffer
+
 /**
  * The expetion to be thrown when creating a table
  */
@@ -51,16 +53,16 @@ class Table[+T](cols: Set[Column[Any]]) {
       decision.valueScale(ord2)
     else
       decision.valueScale(ord2).reverse
-    var result: List[Concept[U]] = List()
+    var result = new ListBuffer[Concept[U]]
       for(i <- (decisionScale.length -1).to(1, -1)) {
         val x = decisionScale(i)
-        result = result :+ new Concept[U](true, decisionScale filter {ord2.gteq(_, x)})
+        result += (new Concept[U](true, decisionScale filter {ord2.gteq(_, x)}))
       }
       for(i <- 0 to (decisionScale.length -2)) {
         val x = decisionScale(i)
-        result = result :+ new Concept[U](false, decisionScale filter {ord2.lteq(_, x)})
+        result +=  (new Concept[U](false, decisionScale filter {ord2.lteq(_, x)}))
       } 
-    result
+    result.toList
   }
 
   /**

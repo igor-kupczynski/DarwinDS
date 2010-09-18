@@ -7,6 +7,7 @@ import pl.poznan.put.cs.idss.jrs.rules.{RulesContainer}
 import pl.poznan.put.darwin.model.solution.MarkedSolution
 import pl.poznan.put.allrules.AllRules
 import pl.poznan.put.allrules.model.{ColumnFactory, Column, Table}
+import pl.poznan.put.darwin.utils.TimeUtils
 
 object JrsIntegration {
   var counter = 0
@@ -48,9 +49,14 @@ object JrsIntegration {
         ObjectFactory(s._1, columns)
       )
     }
-    val rules = (new AllRules[Boolean](t)).generate
+    if (sim.config.DEBUG) println("<=> Prepared table")
+    val rules = TimeUtils.time("generate", (new AllRules[Boolean](t)).generate(sim.config.DEBUG))
+    if (sim.config.DEBUG) println("<=> Got rules")
     AllRules.saveToFile("rules/rule_%03d.txt".format(counter), rules)
-    ARRulesContainer(rules, result)
+    if (sim.config.DEBUG) println("<=> Saved rules")
+    val r: DarwinRulesContainer = ARRulesContainer(rules, result)
+    if (sim.config.DEBUG) println("<=> Got container")
+    r
   }
   
   

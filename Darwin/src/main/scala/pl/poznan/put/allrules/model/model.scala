@@ -1,7 +1,7 @@
 package pl.poznan.put.allrules.model
 
 import collection.SortedSet
-  
+
 /** 
  * A class representing a single column in the information table
  */

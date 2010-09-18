@@ -31,7 +31,7 @@ ITEMS=(
 JAR="$DARWIN_DIR/target/scala_2.8.0/darwin_2.8.0-0.1.jar"
 CP="$JAR"
 
-for idx in $(seq 0 $((${#ITEMS[@]} - 1)))
+for idx in $(gseq 0 $((${#ITEMS[@]} - 1)))
 do
     CP="$CP:$DARWIN_DIR/${ITEMS[$idx]}"
 done

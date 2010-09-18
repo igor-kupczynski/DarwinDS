@@ -64,7 +64,7 @@ object Runner {
   
   def main(args: Array[String]) {
     (new Runner(
-      getArg(args, "--problem", "etc/problems/knapsack300_darwin.mod"),
+      getArg(args, "--problem", "etc/problems/dtlz7_c4.mod"),
       getArg(args, "--config", "etc/config.ini")
       )
     ).run()
