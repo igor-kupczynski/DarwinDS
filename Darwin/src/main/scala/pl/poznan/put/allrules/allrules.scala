@@ -3,36 +3,37 @@ package pl.poznan.put.allrules
 import model._
 import java.io.{FileWriter, File}
 import pl.poznan.put.darwin.utils.TimeUtils
+import collection.mutable.ListBuffer
 
 class AllRules[+T](table: Table[T]) {
   
   def rulesFromConcepts[U >: T](objLB: Set[Map[Column[Any], Any]], c: Concept[U])(implicit ord2: Ordering[U]): scala.List[Rule[Any]] = {
-    var rules: scala.List[Rule[Any]] = List()
+    val rules = new ListBuffer[Rule[Any]]
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (obj <- objLB) {
       if (c.upwards) {
         if (objLB.forall({x => (obj == x || !table.stronglyDominates(obj, x))})) {
-          rules = rules :+ table.toRule(obj, true, c.values)
+          rules += table.toRule(obj, true, c.values)
         }
       } else {
         if (objLB.forall({x => (obj == x || !table.stronglyDominates(x, obj))})) {
-          rules = rules :+ table.toRule(obj, false, c.values)
+          rules += table.toRule(obj, false, c.values)
         }
       }
     }
-    rules
+    rules.toList
   }
 
   def generate[U >: T](debug: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
-    var rules: List[Rule[Any]] = List()
+    val rules = new ListBuffer[Rule[Any]]
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (attrNames <- TimeUtils.time("powerset", table.attributePowerset)) {
       if (debug) println(">>> %s" format attrNames)
       for ((c, objLB) <- TimeUtils.time("allConceptsLB", table.allConceptsLB(attrNames))) {
-        rules = rules ++ TimeUtils.time("rulesFromConcepts", rulesFromConcepts(objLB, c))
+        rules ++= TimeUtils.time("rulesFromConcepts", rulesFromConcepts(objLB, c))
       }
     }
-    rules
+    rules.toList
   }
 }
 

@@ -84,11 +84,11 @@ class Table[+T](cols: Set[Column[Any]]) {
   }
 
   private def getColumns(names: Set[String]): Set[Column[Any]] = {
-    var result: Set[Column[Any]] = Set()
+    var result = new ListBuffer[Column[Any]]
     for (n <- names) {
-      result = result + getColumnForName(n)
+      result += getColumnForName(n)
     }
-    result
+    result.toSet
   }
 
   def equalsWRT(attrNames: Set[String],

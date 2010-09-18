@@ -1,6 +1,7 @@
 package pl.poznan.put.allrules.model
 
 import collection.SortedSet
+import collection.mutable.ListBuffer
 
 /** 
  * A class representing a single column in the information table
@@ -31,11 +32,11 @@ case class Column[+T](name: String, decision: Boolean, gain: Boolean) {
     rows.iterator.filter(_._2 == value).toList.map(_._1): _*)
 
   def objectsForConcept[U >: T](c: Concept[U]): Set[String] = {
-    var result: Set[String] = Set()
+    var result = new ListBuffer[String]
     for (v <- c.values) {
-      result = result ++ objectsForValue(v)
+      result ++= objectsForValue(v)
     }
-    result
+    result.toSet
   }
   
   def toRuleCondition(obj: Map[Column[Any], Any], dec: Boolean):
