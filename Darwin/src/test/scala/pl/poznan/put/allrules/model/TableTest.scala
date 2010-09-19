@@ -39,9 +39,9 @@ class TableTest extends Specification {
       }
     }
     "return powerset of attributes" in {
-      val powerset = Set(
-        Set("Power", "Decision"), Set("Cost", "Decision"), Set("Power", "Cost", "Decision"))
-      t.decisionPowerset must haveTheSameElementsAs(powerset)
+      val powerset = List(
+        Set("Power"), Set("Cost"), Set("Power", "Cost"))
+      t.attributePowerset must containInOrder(powerset)
     }
     "return all possible concepts" in {
       val concepts = Set(c1, c2)

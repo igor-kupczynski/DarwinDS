@@ -4,6 +4,7 @@ import collection.mutable.ListBuffer
 import pl.poznan.put.darwin.utils.TimeUtils
 import reflect.{ClassManifest, Manifest}
 import collection.immutable.VectorBuilder
+import collection.SortedSet
 
 /**
  * The expetion to be thrown when creating a table
@@ -22,7 +23,6 @@ class Table[+T](cols: Set[Column[Any]]) {
    private[model] val attributes = cols.filter(c => !c.decision)
    private[model] val decision: Column[T] = (cols.filter(c => c.decision).head).
           asInstanceOf[Column[T]]
-  
 
   /**
    * Adds an object (as a row) to the table
@@ -31,20 +31,19 @@ class Table[+T](cols: Set[Column[Any]]) {
     for (col <- columns) {
       col.addObject(name, obj(col))
     }
-  } 
-  
+  }
+
   /**
    * Returns all subsets of the table's attributes
    */
-  def attributePowerset(): Set[Set[String]] = {
+  def attributePowerset(): List[Set[String]] = {
     def powerset[A](s: Set[A]) = s.foldLeft(Set(Set.empty[A])) {
       case (ss, el) => ss ++ ss.map(_ + el)
     }
-    powerset(attributes map {_.name}).filter(s => s != s.empty)
-  }
-
-  def decisionPowerset(): Set[Set[String]] = {
-    attributePowerset map { _ + decision.name }
+    val s = powerset(attributes map {_.name}).filter(s => s != s.empty)
+    s.toList.sorted(new Ordering[Set[String]] {
+      def compare(a: Set[String], b: Set[String]) = a.size - b.size
+    })
   }
   
   /**

@@ -2,18 +2,18 @@ package pl.poznan.put.allrules
 
 import model._
 import java.io.{FileWriter, File}
-import pl.poznan.put.darwin.utils.TimeUtils
-import collection.mutable.ListBuffer
 
 class AllRules[+T](table: Table[T]) {
 
-  def isMinimal(item: Rule[Any], reference: List[Rule[Any]]): Boolean = {
-      for (el <- reference) {
-        if (el.isSmallerThan(item)) {
-          return false
-        }
+  def addToMinimal(item: Rule[Any], ll: List[Rule[Any]]): List[Rule[Any]] = {
+    ll match {
+      case Nil => List(item)
+      case head :: tail => {
+        if (head.isSmallerThan(item)) head :: tail
+        else if (item.isSmallerThan(head)) item :: tail
+        else head :: addToMinimal(item, tail)
       }
-      true
+    }
   }
 
   def rulesFromConcepts[U >: T](objLB: Set[Map[Column[Any], Any]], c: Concept[U], minimal: Boolean)
@@ -24,14 +24,18 @@ class AllRules[+T](table: Table[T]) {
       if (c.upwards) {
         if (objLB.forall({x => (obj == x || !table.stronglyDominates(obj, x))})) {
           val r = table.toRule(obj, true, c.values)
-          if (!minimal || isMinimal(r, rules))
+          if (minimal)
+            rules = addToMinimal(r, rules)
+          else
             rules = r :: rules
         }
       } else {
         if (objLB.forall({x => (obj == x || !table.stronglyDominates(x, obj))})) {
           val r = table.toRule(obj, false, c.values)
-          if (!minimal || isMinimal(r, rules))
-            rules = r :: rules                
+          if (minimal)
+            rules = addToMinimal(r, rules)
+          else
+            rules = r :: rules
         }
       }
     }
@@ -39,30 +43,20 @@ class AllRules[+T](table: Table[T]) {
   }
 
   def generate[U >: T](minimal: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
-    val rules = new ListBuffer[Rule[Any]]
+    var rules: List[Rule[Any]] = Nil
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (attrNames <- table.attributePowerset) {
       for ((c, objLB) <- table.allConceptsLB(attrNames)) {
-        rules ++= rulesFromConcepts(objLB, c, minimal)
+        val rc = rulesFromConcepts(objLB, c, minimal)
+        for (r <- rc) {
+          if (minimal)
+            rules = addToMinimal(r, rules)
+          else
+            rules = r :: rules
+        }
       }
     }
-    if (minimal) {
-      TimeUtils.time("Minimize", minimize(rules.toList))
-    } else {
-      rules.toList
-    }
-  }
-
-  def minimize(rules: List[Rule[Any]]): List[Rule[Any]] = {
-
-    def extractMinimal(toExtract: List[Rule[Any]], minimal: List[Rule[Any]]): List[Rule[Any]] = {
-      if (toExtract.length == 0) minimal
-      else if (isMinimal(toExtract.head, minimal ::: toExtract.tail))
-        extractMinimal(toExtract.tail, toExtract.head :: minimal)
-      else extractMinimal(toExtract.tail, minimal)
-    }
-
-    extractMinimal(rules, List())
+    rules
   }
 }
 
