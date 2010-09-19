@@ -6,22 +6,36 @@ import pl.poznan.put.darwin.utils.TimeUtils
 import collection.mutable.ListBuffer
 
 class AllRules[+T](table: Table[T]) {
-  
-  def rulesFromConcepts[U >: T](objLB: Set[Map[Column[Any], Any]], c: Concept[U])(implicit ord2: Ordering[U]): scala.List[Rule[Any]] = {
-    val rules = new ListBuffer[Rule[Any]]
+
+  def isMinimal(item: Rule[Any], reference: List[Rule[Any]]): Boolean = {
+      for (el <- reference) {
+        if (el.isSmallerThan(item)) {
+          return false
+        }
+      }
+      true
+  }
+
+  def rulesFromConcepts[U >: T](objLB: Set[Map[Column[Any], Any]], c: Concept[U], minimal: Boolean)
+                               (implicit ord2: Ordering[U]): List[Rule[Any]] = {
+    var rules: List[Rule[Any]] = List()
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (obj <- objLB) {
       if (c.upwards) {
         if (objLB.forall({x => (obj == x || !table.stronglyDominates(obj, x))})) {
-          rules += table.toRule(obj, true, c.values)
+          val r = table.toRule(obj, true, c.values)
+          if (!minimal || isMinimal(r, rules))
+            rules = r :: rules
         }
       } else {
         if (objLB.forall({x => (obj == x || !table.stronglyDominates(x, obj))})) {
-          rules += table.toRule(obj, false, c.values)
+          val r = table.toRule(obj, false, c.values)
+          if (!minimal || isMinimal(r, rules))
+            rules = r :: rules                
         }
       }
     }
-    rules.toList
+    rules
   }
 
   def generate[U >: T](minimal: Boolean)(implicit ord2: Ordering[U]): List[Rule[Any]] = {
@@ -29,26 +43,17 @@ class AllRules[+T](table: Table[T]) {
     implicit val ord = ord2.asInstanceOf[Ordering[T]]
     for (attrNames <- table.attributePowerset) {
       for ((c, objLB) <- table.allConceptsLB(attrNames)) {
-        rules ++= rulesFromConcepts(objLB, c)
+        rules ++= rulesFromConcepts(objLB, c, minimal)
       }
     }
     if (minimal) {
-      minimize(rules.toList)
+      TimeUtils.time("Minimize", minimize(rules.toList))
     } else {
       rules.toList
     }
   }
 
   def minimize(rules: List[Rule[Any]]): List[Rule[Any]] = {
-
-    def isMinimal(item: Rule[Any], reference: List[Rule[Any]]): Boolean = {
-      for (el <- reference) {
-        if (el.isSmallerThan(item)) {
-          return false
-        }
-      }
-      true
-    }
 
     def extractMinimal(toExtract: List[Rule[Any]], minimal: List[Rule[Any]]): List[Rule[Any]] = {
       if (toExtract.length == 0) minimal
