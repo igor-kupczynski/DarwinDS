@@ -1,10 +1,14 @@
->domlem/10
+>supp/15
+[evolution]
+compareUsingSupposedUtility = true
+
+>domlem/15
 [algo]
 allRules = false
 [mockedDM]
 baseGoodCount = 3
 
->all_rules/10
+>all_rules/15
 [algo]
 allRules = true
 [mockedDM]
