@@ -49,7 +49,7 @@ object JrsIntegration {
         ObjectFactory(s._1, columns)
       )
     }
-    val rules = TimeUtils.time("generate", (new AllRules[Boolean](t)).generate(true))
+    val rules = (new AllRules[Boolean](t)).generate(true)
     AllRules.saveToFile("rules/rule_%03d.txt".format(counter), rules)
     ARRulesContainer(rules, result)
   }
