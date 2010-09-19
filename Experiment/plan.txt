@@ -1,0 +1,23 @@
+>domlem/10
+[algo]
+allRules = false
+[mockedDM]
+baseGoodCount = 3
+
+>all_rules/10
+[algo]
+allRules = true
+[mockedDM]
+baseGoodCount = 3
+
+>domlem_15good/10
+[algo]
+allRules = false
+[mockedDM]
+baseGoodCount = 15
+
+>allrules_15good/10
+[algo]
+allRules = true
+[mockedDM]
+baseGoodCount = 15
