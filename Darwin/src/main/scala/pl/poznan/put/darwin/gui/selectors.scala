@@ -8,17 +8,15 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.simulation.Simulation
 
-class Selectors extends GridPanel(2, 3) {
+class Selectors(main: Window) extends GridPanel(1, 4) {
   hGap = 3
   vGap = 3
-  
-  private var configFileName = "--- empty ---"
+
   private var problemFileName = "--- empty ---"
 
-  val configFileLabel = new Label(configFileName)
   val problemFileLabel = new Label(problemFileName)
 
-  val configButton = new Button("Open")
+  val configButton = new Button("Options")
   val problemButton = new Button("Open")
   
   val chooser = new FileChooser
@@ -26,17 +24,17 @@ class Selectors extends GridPanel(2, 3) {
   contents += new Label("Problem")
   contents += problemFileLabel
   contents += problemButton
-  contents += new Label("Parameters")
-  contents += configFileLabel
   contents += configButton
 
-  border = Swing.EmptyBorder(5, 5, 5, 5)
+  border = Swing.EmptyBorder(2, 5, 2, 5)
 
   listenTo(configButton, problemButton)
 
-  private var config: Config = null
+  private var config: Config = Config()
   private var problem: Problem = null
-   
+
+  def hasProblem = problem != null
+
   def newSim: Simulation = {
     new Simulation(config, problem)
   }
@@ -44,20 +42,12 @@ class Selectors extends GridPanel(2, 3) {
   
   reactions += {
     case ButtonClicked(this.configButton) => {
-      val rc = chooser.showOpenDialog(this)
-      if (rc == FileChooser.Result.Approve) {
-        var file = chooser.selectedFile
-        configFileName = chooser.nameFor(file)
-        configFileLabel.text = configFileName
-        val parser = new ConfigParser()
-        parser.read(file)
-        config = new Config(parser)
-      }
+      config = ConfigDialog.show(main, config)
     }
     case ButtonClicked(this.problemButton) => {
       val rc = chooser.showOpenDialog(this)
       if (rc == FileChooser.Result.Approve) {
-        var file = chooser.selectedFile
+        val file = chooser.selectedFile
         problemFileName = chooser.nameFor(file)
         problemFileLabel.text = problemFileName
         val lines = io.Source.fromFile(file).mkString

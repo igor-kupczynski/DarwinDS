@@ -23,6 +23,8 @@ class DarwinProject(info: ProjectInfo) extends DefaultProject(info)
   val mockito = "org.mockito" % "mockito-all" % "1.8.4" % "test" withSources()
   val junit = "junit" % "junit" % "4.8.1" % "test"
 
+  override def mainClass = Some("pl.poznan.put.darwin.RunnerGUI")
+
   lazy val downloadJrs = task {
     val url = new URL("http://github.com/downloads/puszczyk/DarwinDS/jrs_2010-04-30.jar")
     val target = new File("lib/jrs_2010-04-30.jar")

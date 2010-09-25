@@ -7,6 +7,9 @@ import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
 import java.io.ByteArrayInputStream
 
 object Config {
+
+  def apply(): Config = new Config(Config.parser)
+
   def parser: ConfigParser = {
     val defConf = """
     [main]

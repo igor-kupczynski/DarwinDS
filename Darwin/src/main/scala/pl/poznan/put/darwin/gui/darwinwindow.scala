@@ -7,9 +7,9 @@ import pl.poznan.put.darwin.model.solution._
 
 class DarwinWindow(main: Window) extends BorderPanel {
 
-  preferredSize = new Dimension(500, 140)
+  preferredSize = new Dimension(500, 80)
   
-  val selectors = new Selectors
+  val selectors = new Selectors(main)
   val controls = new Controls
   var sim: Simulation = null
 
@@ -22,8 +22,13 @@ class DarwinWindow(main: Window) extends BorderPanel {
 
   reactions += {
     case ButtonClicked(controls.solve) if (!running) => {
-      running = true
-      runSim()
+      if (selectors.hasProblem) {
+        running = true
+        runSim()
+      }
+      else {
+        Dialog.showMessage(this, "Select a problem first", "No problem selected", Dialog.Message.Error) 
+      }
     }
   }
 
