@@ -14,7 +14,6 @@ object DarwinDialog {
     d.visible = true
     d.marked
   }
-       
 }
   
 class DarwinDialog(window: Window, val sim: Simulation,

@@ -4,6 +4,83 @@ import java.util.Random
 import org.ini4j.ConfigParser
 import scala.util.matching.Regex
 import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
+import java.io.ByteArrayInputStream
+
+object Config {
+  def parser: ConfigParser = {
+    val defConf = """
+    [main]
+    debug = false
+    solutionCount = 30
+    scenarioCount = 30
+    generationCount = 60
+    outerCount = 10
+    delta = 0.1
+    gamma = 2.0
+    eta = 0.5
+    omega = 0.1
+    useAvg = false
+    useAtMost = false
+    mutationTries = 100
+    percentiles = 1.0, 25.0, 50.0
+    multiRules = false
+    multiRulesCount = 3
+
+    [mockedDM]
+    baseGoodCount = 3
+    goodCountDelta = 0
+    noiseLevel = 0
+
+    [algo]
+    allrules = false
+    domlemconfidenceLevel = 1.0
+
+    [reports]
+    evolutionReport = out/evolution_report.csv
+    DMReport = out/dm_report.csv
+    briefReport = true
+
+    [evolution]
+    regenerateEvery = 1000
+    regeneratePercent = 0.0
+    compareusingsupposedutility = False
+    """
+    val parser = new ConfigParser()
+    parser.read(new ByteArrayInputStream(defConf.getBytes("UTF-8")))
+    parser
+  }
+
+  def preconfParser(preconf: Config): ConfigParser = {
+    val p = parser
+    p.set("main", "debug", preconf.DEBUG)
+    p.set("main", "solutioncount", preconf.SOLUTION_COUNT)
+    p.set("main", "scenariocount", preconf.SCENARIO_COUNT)
+    p.set("main", "generationcount", preconf.GENERATION_COUNT)
+    p.set("main", "outercount", preconf.OUTER_COUNT)
+    p.set("main", "percentiles", preconf.PERCENTILES.mkString(", "))
+    p.set("main", "delta", preconf.DELTA)
+    p.set("main", "gamma", preconf.GAMMA)
+    p.set("main", "mutationtries", preconf.MUTATION_TRIES)
+    p.set("main", "eta", preconf.ETA)
+    p.set("main", "omega", preconf.OMEGA)
+    p.set("main", "useavg", preconf.USE_AVG)
+    p.set("main", "useatmost", preconf.USE_AT_MOST)
+    p.set("main", "multirules", preconf.MULTI_RULES)
+    p.set("main", "multirulescount", preconf.MULTI_RULES_COUNT)
+    p.set("mockeddm", "basegoodcount", preconf.BASE_GOOD_COUNT)
+    p.set("mockeddm", "goodcountdelta", preconf.GOOD_COUNT_DELTA)
+    p.set("mockeddm", "noiselevel", preconf.NOISE_LEVEL)
+    p.set("algo", "allrules", preconf.ALL_RULES)
+    p.set("algo", "domlemconfidencelevel", preconf.DOMLEM_CONFIDECE_LEVEL)
+    p.set("reports", "evolutionreport", preconf.EVOLUTION_REPORT)
+    p.set("reports", "dmreport", preconf.DM_REPORT)
+    p.set("reports", "briefreport", preconf.BRIEF_REPORT)
+    p.set("evolution", "regenerateevery", preconf.REGENERATE_SCENARIONS_EVERY_GENERATIONS)
+    p.set("evolution", "regeneratepercent", preconf.REGENERATE_PERCENT_OF_SCENARIONS)
+    p.set("evolution", "compareusingsupposedutility", preconf.COMPARE_USING_SUPPOSED_UTILITY)
+    p
+  }
+}
 
 class Config(parser: ConfigParser) {
 
@@ -11,7 +88,6 @@ class Config(parser: ConfigParser) {
    * Main parameters
    */
   val DEBUG: Boolean = parser.getBoolean("main", "debug")
-
 
   val SOLUTION_COUNT: Int = parser.getInt("main", "solutioncount")
   val SCENARIO_COUNT: Int = parser.getInt("main", "scenariocount")
@@ -68,6 +144,7 @@ class Config(parser: ConfigParser) {
     val r = new Regex(",")
     r.split(str).toList.map(x => x.toDouble)
   }
+  
 }
 
 
