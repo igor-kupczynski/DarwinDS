@@ -29,10 +29,12 @@ class ConfigDialog(window: Window, val default: ConfigParser)
   private val btnCancel = new Button("Cancel")
 
   private val tabs = new TabbedPane
-  tabs.pages += new TabbedPane.Page("main", ConfigTab.mainTab)
+  tabs.pages += new TabbedPane.Page("Main", ConfigTab.mainTab)
+  tabs.pages += new TabbedPane.Page("Algorithm", ConfigTab.algorithmTab)
+  tabs.pages += new TabbedPane.Page("Fine Tuning", ConfigTab.finetuneTab)
 
   contents = new BoxPanel(Orientation.Vertical) {
-    contents += new ScrollPane(tabs)
+    contents += tabs
     contents += new FlowPanel {
       contents += btnSave
       contents += btnCancel
@@ -43,13 +45,11 @@ class ConfigDialog(window: Window, val default: ConfigParser)
 
   reactions += {
     case ButtonClicked(`btnSave`) => {
-      println("Save clicked!")
       config = new Config(parser)
       visible = false
     }
 
     case ButtonClicked(`btnCancel`) => {
-      println("Cancel clicked!")
       config = defaultConfig
       visible = false
     }
@@ -60,14 +60,34 @@ object ConfigTab {
 
   def mainTab: Panel = {
     val w = List(
-      ("main", "debug", "Debug mode", new TextField("false"))  
-    )
+      ("main", "solutioncount", "Number of solutions", new TextField("30")),
+      ("main", "scenariocount", "Number of scenarios", new TextField("30")),
+      ("main", "generationcount", "Number of generations", new TextField("30")),
+      ("main", "percentiles", "Percentiles", new TextField("1.0, 25.0, 50.0")),
+      ("main", "useavg", "Use average in quantiles", new CheckBox())
+      )
     create(w)
   }
 
+  def algorithmTab = create(List(
+    ("algo", "allrules", "Use all rules instead of DomLEM", new CheckBox()),
+    ("algo", "domlemconfidencelevel", "DomLEM confidence level", new TextField("1.0")),
+    ("evolution", "compareusingsupposedutility", "Compare using supposed utility", new CheckBox())
+  ))
+
+  def finetuneTab = create(List(
+      ("main", "delta", "Delta", new TextField("0.1")),
+      ("main", "gamma", "Gamma", new TextField("2.0")),
+      ("main", "eta", "Eta", new TextField("0.5")),
+      ("main", "omega", "Omega", new TextField("0.1"))
+  ))
+
   def create(widgets: List[(String, String, String, Component)]): Panel = {
-    val p = new BoxPanel(Orientation.Vertical)
-      widgets.foreach({p.contents += _._4})
+    val p = new GridPanel(0, 2)
+      widgets.foreach( { case (sec, name, label, comp) => {
+        p.contents += new Label(label)
+        p.contents += comp
+      }})
     p
   }
 }

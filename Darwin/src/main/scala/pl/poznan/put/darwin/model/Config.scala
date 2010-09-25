@@ -39,9 +39,9 @@ object Config {
     domlemconfidenceLevel = 1.0
 
     [reports]
-    evolutionReport = out/evolution_report.csv
-    DMReport = out/dm_report.csv
-    briefReport = true
+    evolutionReport =
+    DMReport =
+    briefReport = false
 
     [evolution]
     regenerateEvery = 1000
