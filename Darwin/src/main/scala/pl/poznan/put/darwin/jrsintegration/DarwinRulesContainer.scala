@@ -103,6 +103,27 @@ object DarwinRulesContainer extends WeightCalculator {
     apply(List(rulesContainer), examples)
   }
 
+  def certainAndPossible(cont: RulesContainer, ttt: Int, includePossible: Boolean) = {
+    var result:List[JrsRule] = List()
+    val rules1 = cont.getRules(Rule.CERTAIN, ttt)
+    if (rules1 != null) {
+      result = rules1.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) ::: result
+    }
+    if (includePossible) {
+      val rules2 = cont.getRules(Rule.POSSIBLE, ttt)
+      if (rules2 != null)
+        result = rules2.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) ::: result
+      val rules3 = cont.getRules(Rule.APPROXIMATE, ttt)
+      if (rules3 != null)
+        result = rules3.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) ::: result
+    }
+    if (result.length > 0) {
+      result
+    }
+    else null
+  }
+    
+  
   /**
    * Create new instance of DarwinRuleContainer. Rules will be based on
    * the given containers and their weights on given example list.
@@ -113,15 +134,13 @@ object DarwinRulesContainer extends WeightCalculator {
     var rulesAtLeast: List[JrsRule] = Nil
     var rulesAtMost: List[JrsRule] = Nil
     for (rulesContainer <- rulesContainers) {
-      val ral = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_LEAST)
+      val ral = certainAndPossible(rulesContainer, Rule.AT_LEAST, sim.config.DOMLEM_CONFIDECE_LEVEL < 1.0)
       if (ral != null) 
-        rulesAtLeast = ral.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) :::
-          rulesAtLeast
+        rulesAtLeast = ral ::: rulesAtLeast
       if (sim.config.USE_AT_MOST) {
-        val ram = rulesContainer.getRules(Rule.CERTAIN, Rule.AT_MOST)
+        val ram = certainAndPossible(rulesContainer, Rule.AT_MOST, sim.config.DOMLEM_CONFIDECE_LEVEL < 1.0)
         if (ram != null)
-          rulesAtMost = ram.toArray(new Array[Rule](0)).toList.map({new JrsRule(_)}) :::
-            rulesAtMost
+          rulesAtMost = ram ::: rulesAtMost
       }
     }
     val weights: Map[AbstractRule, Double] =

@@ -31,7 +31,7 @@ ITEMS=(
 JAR="$DARWIN_DIR/target/scala_2.8.0/darwin_2.8.0-0.1.jar"
 CP="$JAR"
 
-for idx in $(gseq 0 $((${#ITEMS[@]} - 1)))
+for idx in $(seq 0 $((${#ITEMS[@]} - 1)))
 do
     CP="$CP:$DARWIN_DIR/${ITEMS[$idx]}"
 done
@@ -55,7 +55,7 @@ cd $OUT_DIR || {
 }
 cp $CONFIG_FILE input/config.ini
 cp $PROBLEM_FILE input/problem.mod
-java -Xms768m -Xmx768m -classpath "$CP" $MAIN_CLASS --config $CONFIG_FILE --problem $PROBLEM_FILE
+java -Xms3096m -Xmx3096m -classpath "$CP" $MAIN_CLASS --config $CONFIG_FILE --problem $PROBLEM_FILE
 cd - > /dev/null
 
 exit 0

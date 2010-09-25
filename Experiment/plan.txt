@@ -1,27 +1,42 @@
->supp/15
+>supp/7
 [evolution]
 compareUsingSupposedUtility = true
 
->domlem/15
+>avg_domlem/7
+[main]
+useAvg = true
 [algo]
 allRules = false
-[mockedDM]
-baseGoodCount = 3
+domlemConfidenceLevel = 1.0
 
->all_rules/15
+>avg_allrules/7
+[main]
+useAvg = true
 [algo]
 allRules = true
-[mockedDM]
-baseGoodCount = 3
 
->domlem_15good/10
+>avg_domlem_15/7
+[main]
+useAvg = true
 [algo]
 allRules = false
+domlemConfidenceLevel = 1.0
 [mockedDM]
 baseGoodCount = 15
 
->allrules_15good/10
+>avg_allrules_15/7
+[main]
+useAvg = true
 [algo]
 allRules = true
+[mockedDM]
+baseGoodCount = 15
+
+>avg_domlem_15_conf06/7
+[main]
+useAvg = true
+[algo]
+allRules = false
+domlemConfidenceLevel = 0.6
 [mockedDM]
 baseGoodCount = 15
