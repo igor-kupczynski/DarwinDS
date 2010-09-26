@@ -47,6 +47,7 @@ class DarwinWindow(main: Window) extends BorderPanel {
       history.append(evaluated)
       postrun()
       marked = DarwinDialog.show(main, sim, history)
+      println(marked)
       if (marked == null) {
         System.exit(0)
       }
