@@ -15,8 +15,6 @@ class DarwinWindow(main: Window) extends BorderPanel {
   val controls = new Controls
   var sim: Simulation = null
 
-  val history = new ArrayBuffer[List[EvaluatedSolution]]
-
   private var running = false
   
   layout(selectors) = BorderPanel.Position.Center
@@ -38,18 +36,24 @@ class DarwinWindow(main: Window) extends BorderPanel {
   }
 
   private def runSim() = {
+    val history = new ArrayBuffer[List[EvaluatedSolution]]
     sim = selectors.newSim
     var evaluated: List[EvaluatedSolution] = null
     var marked: List[MarkedSolution] = null
-    while (true) {
+    var break = false
+    while (!break) {
       prerun()
       evaluated = sim.run(marked)
       history.append(evaluated)
       postrun()
       marked = DarwinDialog.show(main, sim, history)
-      println(marked)
       if (marked == null) {
         System.exit(0)
+      }
+      if (marked.filter({_.good}).length == 0) {
+        running = false
+        controls.solve.enabled = true
+        break = true
       }
     }
   }

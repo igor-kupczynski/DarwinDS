@@ -67,7 +67,15 @@ class DarwinDialog(window: Window, val sim: Simulation,
   reactions += {
     case ButtonClicked(`btnMark`) => {
       marked = markSelected
-      visible = false
+      var confirm = true
+      if (marked.filter({_.good}).length == 0) {
+        val d = Dialog.showConfirmation(bp,
+          "You have not selected any solutions. Do you want to end the run?", "End of run",
+          Dialog.Options.YesNo)
+        confirm = (d == Dialog.Result.Yes)
+      }
+      if (confirm)
+        visible = false
     }
 
     case ButtonClicked(`btnShow`) => {
