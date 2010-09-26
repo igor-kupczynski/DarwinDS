@@ -4,6 +4,8 @@ import swing._
 import event._
 import pl.poznan.put.darwin.simulation._
 import pl.poznan.put.darwin.model.solution._
+import java.awt.Cursor
+import collection.mutable.ArrayBuffer
 
 class DarwinWindow(main: Window) extends BorderPanel {
 
@@ -12,6 +14,8 @@ class DarwinWindow(main: Window) extends BorderPanel {
   val selectors = new Selectors(main)
   val controls = new Controls
   var sim: Simulation = null
+
+  val history = new ArrayBuffer[List[EvaluatedSolution]]
 
   private var running = false
   
@@ -24,6 +28,7 @@ class DarwinWindow(main: Window) extends BorderPanel {
     case ButtonClicked(controls.solve) if (!running) => {
       if (selectors.hasProblem) {
         running = true
+        controls.solve.enabled = false
         runSim()
       }
       else {
@@ -37,12 +42,23 @@ class DarwinWindow(main: Window) extends BorderPanel {
     var evaluated: List[EvaluatedSolution] = null
     var marked: List[MarkedSolution] = null
     while (true) {
+      prerun()
       evaluated = sim.run(marked)
-      marked = DarwinDialog.show(main, sim, evaluated)
+      history.append(evaluated)
+      postrun()
+      marked = DarwinDialog.show(main, sim, history)
       if (marked == null) {
         System.exit(0)
       }
     }
+  }
+
+  private def prerun() {
+    cursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)
+  }
+
+  private def postrun() {
+    cursor = Cursor.getDefaultCursor
   }
 }
   

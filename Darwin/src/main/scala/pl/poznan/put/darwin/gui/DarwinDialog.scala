@@ -7,12 +7,13 @@ import pl.poznan.put.darwin.model.solution._
 import javax.swing.JTable
 import javax.swing.table.AbstractTableModel
 import java.lang.{Class, String}
+import collection.mutable.ArrayBuffer
 
 object DarwinDialog {
   def show(window: Window,
            sim: Simulation,
-           evaluated: List[EvaluatedSolution]): List[MarkedSolution] = {
-    val d = new DarwinDialog(window, sim, evaluated)
+           history: ArrayBuffer[List[EvaluatedSolution]]): List[MarkedSolution] = {
+    val d = new DarwinDialog(window, sim, history)
     d.setLocationRelativeTo(window)
     d.visible = true
     d.marked
@@ -20,30 +21,48 @@ object DarwinDialog {
 }
   
 class DarwinDialog(window: Window, val sim: Simulation,
-                   val evaluated: List[EvaluatedSolution])
+                   history: ArrayBuffer[List[EvaluatedSolution]])
     extends Dialog(window) {
+
+  var currentRun = history.size - 1
+  var evaluated = history(currentRun)
+
   visible = false
   modal = true
-  private val btnMark = new Button("Mark")
-  private val btnShow = new Button("Show")
+  private val btnMark = new Button("Mark as good")
+  private val btnShow = new Button("Solution details")
 
-  val jTable: JTable = new JTable(new DarwinTableModel)
-  jTable.setAutoCreateRowSorter(true)
-  val table: Component = new Component {
-    override lazy val peer = jTable
-  }
+  private val btnPrev = new Button("Previous")
+  private val btnNext = new Button("Next")
+  private val histLabel = new Label()
+  resetButtons
+
+  var jTable: JTable = _
+  var table: Component = _
+  createTable
   
-  contents = new BoxPanel(Orientation.Vertical) {
+  val bp =  new BoxPanel(Orientation.Vertical) {
+    contents += new FlowPanel {
+      contents += new Label("History:")
+      contents += btnPrev
+      contents += histLabel
+      contents += btnNext
+    }
     contents += new ScrollPane(table)
     contents += new FlowPanel {
-      contents += btnMark
       contents += btnShow
+      contents += btnMark
+    }
+
+    def changeTable(t: Component) {
+      contents(1) = new ScrollPane(t)
     }
   }
+  contents = bp
 
   var marked: List[MarkedSolution] = null
-  
-  listenTo(btnMark, btnShow)
+
+  listenTo(btnMark, btnShow, btnPrev, btnNext)
 
   reactions += {
     case ButtonClicked(`btnMark`) => {
@@ -54,7 +73,23 @@ class DarwinDialog(window: Window, val sim: Simulation,
     case ButtonClicked(`btnShow`) => {
       val sd = new SolutionDialog(this, evaluated, jTable.getSelectedRows)
       sd.setLocationRelativeTo(this)
-      sd.visible = true      
+      sd.visible = true
+    }
+
+    case ButtonClicked(`btnPrev`) => {
+      currentRun -= 1
+      evaluated = history(currentRun)
+      resetButtons
+      createTable
+      bp.changeTable(table)
+    }
+
+    case ButtonClicked(`btnNext`) => {
+      currentRun += 1
+      evaluated = history(currentRun)
+      resetButtons
+      createTable
+      bp.changeTable(table)
     }
   }
 
@@ -68,6 +103,19 @@ class DarwinDialog(window: Window, val sim: Simulation,
     })
   }
   
+  private def resetButtons() = {
+    btnPrev.enabled = currentRun > 0
+    btnNext.enabled = currentRun < (history.size - 1)
+    histLabel.text = "(%d/%d)" format (currentRun+1, history.size)
+  }
+
+  private def createTable() = {
+   jTable = new JTable(new DarwinTableModel)
+   jTable.setAutoCreateRowSorter(true)
+   table  = new Component {
+    override lazy val peer = jTable
+   }
+  }
 
 
   class DarwinTableModel extends AbstractTableModel {
