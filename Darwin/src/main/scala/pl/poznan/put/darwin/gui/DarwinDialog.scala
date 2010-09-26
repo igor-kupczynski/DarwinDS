@@ -26,7 +26,6 @@ class DarwinDialog(window: Window, val sim: Simulation,
   modal = true
   private val btnMark = new Button("Mark")
   private val btnShow = new Button("Show")
-  private val btnRef = new Button("Refresh")
 
   val jTable: JTable = new JTable(new DarwinTableModel)
   jTable.setAutoCreateRowSorter(true)
@@ -39,7 +38,6 @@ class DarwinDialog(window: Window, val sim: Simulation,
     contents += new FlowPanel {
       contents += btnMark
       contents += btnShow
-      contents += btnRef
     }
   }
 
@@ -54,17 +52,9 @@ class DarwinDialog(window: Window, val sim: Simulation,
     }
 
     case ButtonClicked(`btnShow`) => {
-      var msg: String = ""
-
-      for (r <- jTable.getSelectedRows) {
-        var row = ">>> Solution %02d:\n" format r
-        val s: EvaluatedSolution = evaluated(r)
-        for ((k, v) <- s.values) {
-          row = row + ("  %s = %s\n" format (k, v))
-        }
-        msg = msg + row + "\n"
-      }
-      Dialog.showMessage(table, msg)
+      val sd = new SolutionDialog(this, evaluated, jTable.getSelectedRows)
+      sd.setLocationRelativeTo(this)
+      sd.visible = true      
     }
   }
 
@@ -131,6 +121,28 @@ class DarwinDialog(window: Window, val sim: Simulation,
       result
     }
 
+  }
+}
+
+class SolutionDialog(window: Window, evaluated: List[EvaluatedSolution], rows: Array[Int])
+        extends Dialog(window) {
+
+  visible = false
+  modal = false
+
+  val tp = new TabbedPane
+  for (r <- rows) {
+    tp.pages += new TabbedPane.Page("Solution %02d" format r,
+      new SolutionPanel(evaluated(r)))
+  }
+
+  contents = tp
+}
+
+class SolutionPanel(e: EvaluatedSolution) extends GridPanel(0, 2) {
+  for ((k, v) <- e.values) {
+    contents += new Label(k)
+    contents += new Label(v.toString)
   }
 }
 

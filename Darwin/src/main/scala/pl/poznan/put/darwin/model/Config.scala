@@ -16,7 +16,7 @@ object Config {
     debug = false
     solutionCount = 30
     scenarioCount = 30
-    generationCount = 60
+    generationCount = 30
     outerCount = 10
     delta = 0.1
     gamma = 2.0
