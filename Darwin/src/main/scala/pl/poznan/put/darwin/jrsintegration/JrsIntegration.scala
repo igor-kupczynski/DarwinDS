@@ -50,7 +50,8 @@ object JrsIntegration {
       )
     }
     val rules = (new AllRules[Boolean](t)).generate(true)
-    AllRules.saveToFile("rules/rule_%03d.txt".format(counter), rules)
+    if (sim.config.RULES_DIRECTORY != "")
+      AllRules.saveToFile("%s/rule_%03d.txt".format(sim.config.RULES_DIRECTORY, counter), rules)
     ARRulesContainer(rules, result)
   }
   
@@ -67,7 +68,8 @@ object JrsIntegration {
                              sim.config.NEGATIVE_EXAMPLES_TREATMENT)
     wrapper.setInducePossibleRules(false)
     val container: RulesContainer = wrapper.generateRules(mc)
-    container.writeRules("rules/rule_%03d_%03d.txt".format(id, counter), true, true)
+    if (sim.config.RULES_DIRECTORY != "")
+      container.writeRules("%s/rule_%03d_%03d.txt".format(sim.config.RULES_DIRECTORY, id, counter), true, true)
     container
   }
 }

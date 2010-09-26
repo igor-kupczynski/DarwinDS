@@ -19,7 +19,7 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
   val configButton = new Button("Options")
   val problemButton = new Button("Open")
   
-  val chooser = new FileChooser
+  val chooser = new FileChooser(new File ("."))
   
   contents += new Label("Problem")
   contents += problemFileLabel

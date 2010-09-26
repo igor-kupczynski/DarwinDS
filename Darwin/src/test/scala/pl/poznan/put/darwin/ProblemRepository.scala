@@ -44,6 +44,7 @@ trait ProblemRepository {
   evolutionReport = out/evolution_report.csv
   DMReport = out/dm_report.csv
   briefReport = true
+  rulesdirectory= rules
 
   [evolution]
   regenerateEvery = 1000
@@ -85,6 +86,7 @@ trait ProblemRepository {
   evolutionReport = out/evolution_report.csv
   DMReport = out/dm_report.csv
   briefReport = true
+  rulesdirectory = rules
 
   [evolution]
   regenerateEvery = 1000

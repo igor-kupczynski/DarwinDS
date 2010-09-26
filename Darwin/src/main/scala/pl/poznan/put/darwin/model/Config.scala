@@ -42,6 +42,7 @@ object Config {
     evolutionReport =
     DMReport =
     briefReport = false
+    rulesDirectory = rules
 
     [evolution]
     regenerateEvery = 1000
@@ -78,6 +79,7 @@ object Config {
     p.set("reports", "evolutionreport", preconf.EVOLUTION_REPORT)
     p.set("reports", "dmreport", preconf.DM_REPORT)
     p.set("reports", "briefreport", preconf.BRIEF_REPORT)
+    p.set("reports", "rulesdirectory", preconf.RULES_DIRECTORY)
     p.set("evolution", "regenerateevery", preconf.REGENERATE_SCENARIONS_EVERY_GENERATIONS)
     p.set("evolution", "regeneratepercent", preconf.REGENERATE_PERCENT_OF_SCENARIONS)
     p.set("evolution", "compareusingsupposedutility", preconf.COMPARE_USING_SUPPOSED_UTILITY)
@@ -131,6 +133,7 @@ class Config(parser: ConfigParser) {
   val EVOLUTION_REPORT = parser.get("reports", "evolutionreport")
   val DM_REPORT = parser.get("reports", "dmreport")
   val BRIEF_REPORT = parser.getBoolean("reports", "briefreport")
+  val RULES_DIRECTORY = parser.get("reports", "rulesdirectory")
 
 
   /*
