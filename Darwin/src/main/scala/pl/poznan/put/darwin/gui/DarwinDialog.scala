@@ -4,6 +4,9 @@ import swing._
 import event._
 import pl.poznan.put.darwin.simulation._
 import pl.poznan.put.darwin.model.solution._
+import javax.swing.JTable
+import javax.swing.table.AbstractTableModel
+import java.lang.{Class, String}
 
 object DarwinDialog {
   def show(window: Window,
@@ -23,14 +26,20 @@ class DarwinDialog(window: Window, val sim: Simulation,
   modal = true
   private val btnMark = new Button("Mark")
   private val btnShow = new Button("Show")
+  private val btnRef = new Button("Refresh")
 
-  val table = new Table(rowData, columnNames)
+  val jTable: JTable = new JTable(new DarwinTableModel)
+  jTable.setAutoCreateRowSorter(true)
+  val table: Component = new Component {
+    override lazy val peer = jTable
+  }
   
   contents = new BoxPanel(Orientation.Vertical) {
     contents += new ScrollPane(table)
     contents += new FlowPanel {
       contents += btnMark
       contents += btnShow
+      contents += btnRef
     }
   }
 
@@ -46,7 +55,8 @@ class DarwinDialog(window: Window, val sim: Simulation,
 
     case ButtonClicked(`btnShow`) => {
       var msg: String = ""
-      for (r <- table.selection.rows) {
+
+      for (r <- jTable.getSelectedRows) {
         var row = ">>> Solution %02d:\n" format r
         val s: EvaluatedSolution = evaluated(r)
         for ((k, v) <- s.values) {
@@ -59,7 +69,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
   }
 
   private def markSelected(): List[MarkedSolution] = {
-    val m = table.model
+    val m = jTable.getModel
     var idx = -1
     evaluated.map(e => {
       idx += 1
@@ -68,36 +78,59 @@ class DarwinDialog(window: Window, val sim: Simulation,
     })
   }
   
-  private def rowData(): Array[Array[Any]] = {
-    val cols = 2 + sim.problem.goals.length * sim.config.PERCENTILES.length
-    val rows = evaluated.length
-    var result: Array[Array[Any]] = Array.ofDim(rows, cols)
 
-    var rowIdx = 0
-    var colIdx = 0
-    for (e <- evaluated) {
-      result(rowIdx)(0) = rowIdx
-      result(rowIdx)(1) = false
-      colIdx = 2
+
+  class DarwinTableModel extends AbstractTableModel {
+
+    val columnNames = genColumnNames
+    val rowData = genRowData
+
+    def getColumnCount: Int = columnNames.size
+    def getRowCount: Int = rowData.size
+    def getValueAt(rowIndex: Int, columnIndex: Int): AnyRef =
+      rowData.get(rowIndex).get(columnIndex)
+
+    override def getColumnName(column: Int): String = columnNames.get(column)
+    override def getColumnClass(columnIndex: Int): Class[_] = getValueAt(0, columnIndex).getClass
+
+    override def isCellEditable(rowIndex: Int, columnIndex: Int): Boolean =
+      if (columnIndex == 1) true else false
+    override def setValueAt(aValue: AnyRef, rowIndex: Int, columnIndex: Int): Unit = {
+      rowData.get(rowIndex).set(columnIndex, aValue)
+    }
+
+    private def genColumnNames(): java.util.Vector[String] = {
+      var result: java.util.Vector[String] = new java.util.Vector()
+      result.add("Id")
+      result.add("Is good?")
       for (g <- sim.problem.goals) {
         for (p <- sim.config.PERCENTILES) {
-          result(rowIdx)(colIdx) = e.getPercentile(g, p)
-          colIdx += 1
+          result.add("%s_%s" format (g.name, p))
         }
       }
-      rowIdx += 1
+      result
     }
-    result
-  }
-  
-  private def columnNames(): List[String] = {
-    var result: List[String] = List("id", "mark")
-    for (g <- sim.problem.goals) {
-      for (p <- sim.config.PERCENTILES) {
-        result = result :+ ("%s_%s" format (g.name, p))
+
+    private def genRowData(): java.util.Vector[java.util.Vector[Object]] = {
+      val result: java.util.Vector[java.util.Vector[Object]] = new java.util.Vector()
+
+      var rowIdx = 0
+      for (e <- evaluated) {
+        val row: java.util.Vector[Object] = new java.util.Vector()
+
+        row.add(rowIdx.asInstanceOf[Object])
+        row.add(false.asInstanceOf[Object])
+        for (g <- sim.problem.goals) {
+          for (p <- sim.config.PERCENTILES) {
+            row.add(e.getPercentile(g, p).asInstanceOf[Object])
+          }
+        }
+        result.add(row)
+        rowIdx += 1
       }
+      result
     }
-    result
+
   }
 }
 
