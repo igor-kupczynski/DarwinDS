@@ -251,13 +251,12 @@ and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
 (less than $1\%$) and a minor difference for the dtlz7 problem --- less than
 $5\%$. Unfortunately, differences for dtlz1 problems (both four- and
 ten-criteria) were important and noticeable --- about $50\%$ percent after ten
-iterations. It looks like the problem is here to blame. This particular one is
-difficult for the method. The conclusion is that the analyst should always
-check if the method fits the given problem. In fact, according to the
-no-free-lunch([ref]) theorem one should always do that, because there is no
-optimization algorithm which is universally better than the others.
+iterations. \textcolor{red}{The result for dtlz1 are far below the
+  expectations --- the default parameters are not appropriate for the
+  problem. A~better result here is still possible, however it requires
+  a~tuning of the parameters (see~[inref]).}
 
-\clearpage{}
+ \clearpage{}
 
 \subsection{The influence of parameters on the method}
 
@@ -277,7 +276,7 @@ magnitude as mean values of the results. So one should say the results are
 inconclusive here and it is impossible to make a suggestion based solely on
 these results.
 
-\begin{table}
+\begin{table}[htb]
   \centering
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
@@ -286,8 +285,6 @@ these results.
     \hline
     \hline
     base & 6665.60 & 57.27 & 0.00\% & -9.99 & 6.83 & 0.00\% \\
-    conf06 & 6677.63 & 44.01 & 0.18\% & -13.26 & 13.74 & 32.79\% \\
-    conf08 & 6671.75 & 47.59 & 0.09\% & -12.67 & 8.17 & 26.85\% \\
     generation45 & 6661.72 & 47.52 & -0.06\% & -16.04 & 12.47 & 60.63\% \\
     generation60 & 6661.14 & 45.08 & -0.07\% & -9.63 & 7.78 & -3.61\% \\
     scenario45 & 6617.60 & 47.33 & -0.72\% & -13.12 & 11.37 & 31.34\% \\
@@ -300,7 +297,7 @@ these results.
   \label{t:base2_imp_1}
 \end{table}
 
-\begin{table}
+\begin{table}[htb]
   \centering
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
@@ -309,8 +306,6 @@ these results.
     \hline
     \hline
     base & -15.30 & 11.20 & 0.00\% & -109.23 & 5.87 & 0.00\% \\
-    conf06 & -16.98 & 13.01 & 10.95\% & -107.51 & 4.43 & -1.57\% \\
-    conf08 & -15.31 & 9.06 & 0.07\% & -112.58 & 6.45 & 3.07\% \\
     generation45 & -15.92 & 13.27 & 4.03\% & -109.23 & 6.96 & 0.00\% \\
     generation60 & -21.63 & 12.55 & 41.37\% & -108.33 & 10.87 & -0.82\% \\
     scenario45 & -17.32 & 11.15 & 13.17\% & -111.98 & 5.34 & 2.52\% \\
@@ -330,17 +325,17 @@ these results.
       \includegraphics[scale=0.53]{exp/uncert/pres_params}
       \label{pres_params}
     }
-    \subfloat[DTLZ1 four-criteria]{
+    \subfloat[DTLZ1 four criteria]{
       \includegraphics[scale=0.53]{exp/uncert/dtlz1_c4_params}
       \label{dtlz1_c4_params}
     }
   }
   \makebox[\textwidth]{
-    \subfloat[DTLZ1 ten-criteria]{
+    \subfloat[DTLZ1 ten criteria]{
       \includegraphics[scale=0.53]{exp/uncert/dtlz1_c10_params}
       \label{dtlz1_c10_params}
     }
-    \subfloat[DTLZ7 four-criteria]{
+    \subfloat[DTLZ7 four criteria]{
       \includegraphics[scale=0.53]{exp/uncert/dtlz7_c4_params}
       \label{dtlz7_c4_params}
     }
@@ -398,7 +393,7 @@ solution is still robust with respect to the noise.
 \end{figure}
 
 
-\begin{table}
+\begin{table}[htb]
   \centering
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
@@ -419,7 +414,7 @@ solution is still robust with respect to the noise.
   \label{t:un_noise_1}
 \end{table}
 
- \begin{table}
+ \begin{table}[htb]
   \centering
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
@@ -440,7 +435,481 @@ solution is still robust with respect to the noise.
   \label{t:un_noise_2}
 \end{table}
 
+\clearpage{}
+\subsection{DomLem parameters}
 
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{r c c c c c c c}
+    & & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
+    \hline
+    test & good count & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+domlem             & 3   & 6676.25 & 50.34 & 0.00\% & -16.45 & 13.80 & 0.00\% \\
+domlem             & 15 & 6649.69 & 37.74 & -0.40\% & -19.51 & 10.97 & -18.59\% \\
+domlem conf 0.6 & 3   & 6655.11 & 43.51 & -0.32\% & -17.44 & 9.48 & -5.99\% \\
+domlem conf 0.6 & 15 & 6695.45 & 59.81 & 0.29\% & -19.06 & 15.29 & -15.87\% \\
+domlem conf 0.8 & 3   &  6662.44 & 56.97 & -0.21\% & -20.61 & 16.91 & -25.27\% \\
+domlem conf 0.8 & 15 & 6662.55 & 66.35 & -0.21\% & -10.28 & 7.88 & \textbf{37.52\%} \\
+domlem multirules & 3  & 6680.08 & 33.44 & 0.06\% & -6.74 & 5.60 & \textbf{59.00\%} \\
+domlem multirules & 15 & 6658.61 & 27.97 & -0.26\% & -12.83 & 10.38 & \textbf{22.00\%} \\    \hline
+  \end{tabular}
+  \caption{Influence of the DomLem parameters in robust environment}
+  \label{t:un_domlem_1}
+\end{table}
+
+ \begin{table}[htb]
+  \centering
+  \begin{tabular}{r c c c c c c c}
+    & & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
+    \hline
+    test & good count & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+domlem               & 3 & -21.05 & 17.52 & 0.00\% & -108.94 & 4.01 & 0.00\% \\
+domlem               & 15 & -15.50 & 9.28 & \textbf{26.35\%} & -109.28 & 4.96 & -0.31\% \\
+domlem conf 0.6 & 3 &  -22.44 & 8.82 & -6.60\% & -112.68 & 4.15 & -3.43\% \\
+domlem conf 0.6 & 15 & -9.09 & 7.39 & \textbf{56.82\%} & -109.28 & 7.95 & -0.31\% \\
+domlem conf 0.8 & 3 &  -22.66 & 14.83 & -7.67\% & -108.83 & 5.28 & 0.10\% \\
+domlem conf 0.8 &  15 &-26.76 & 17.14 & -27.14\% & -108.53 & 7.29 & 0.38\% \\
+domlem multirules & 3 &  -18.14 & 14.80 & 13.81\% & -112.03 & 5.79 & -2.83\% \\
+domlem multirules &  15 &-17.71 & 10.34 & 15.86\% & -110.17 & 5.48 & -1.13\% \\
+    \hline
+  \end{tabular}
+  \caption{Influence of the DomLem parameters in robust environment}
+  \label{t:un_domlem_2}
+\end{table}
+
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/presentation}
+      \label{pres_domlem1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/presentationb}
+      \label{pres_domlem1b}
+    }
+  }
+  \caption{Influence of the DomLem parameters on the mix problem}
+  \label{pres_domlem}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/dtlz1_c4}
+      \label{dtlz1_c4_domlem1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/dtlz1_c4b}
+      \label{dtlz1_c4_domlem1b}
+    }
+  }
+  \caption{Influence of the DomLem parameters on the four-criteria DTLZ1 problem}
+  \label{dtlz1_c4_domlem}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/dtlz1_c10}
+      \label{dtlz1_c10_domlem1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/dtlz1_c10b}
+      \label{dtlz1_c10_domlem1b}
+    }
+  }
+  \caption{Influence of the DomLem parameters on the ten-criteria DTLZ1 problem}
+  \label{dtlz1_c10_domlem}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/dtlz7_c4}
+      \label{dtlz7_c4_domlem1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_dom/dtlz7_c4b}
+      \label{dtlz7_c4_domlem1b}
+    }
+  }
+  \caption{Performance comparison on the four-criteria DTLZ7 problem}
+  \label{dtlz7_c4_perf}
+\end{figure}
+
+
+\clearpage{}
+\subsection{AllRules algorithm}
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{r c c c c c c c}
+    & & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
+    \hline
+    test & good count & mean & sd & improvement & mean & sd & improvement \\
+    \hline
+    \hline
+allrules & 3 & 6658.39 & 69.98 & 0.00\% & -13.05 & 11.80 & 0.00\% \\
+allrules & 15& 6572.14 & 79.91 & -1.30\% & -4.52 & 3.05 & 65.36\% \\
+\hline
+  \end{tabular}
+  \caption{AllRules --- number of solutions chosen and its influence on the result}
+  \label{t:un_allrules_1}
+\end{table}
+
+ \begin{table}[htb]
+  \centering
+  \begin{tabular}{r c c c c}
+    & & \multicolumn{3}{c}{DTLZ7 c4} \\
+    \hline
+    test & good count & mean & sd & improvement \\
+    \hline
+    \hline
+allrules & 3 &-111.80 & 3.68 & 0.00\% \\
+allrules &15 & -110.07 & 7.84 & 1.55\% \\
+    \hline
+  \end{tabular}
+  \caption{AllRules --- number of solutions chosen and its influence on the result}
+  \label{t:un_allrules_2}
+\end{table}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l l c c c c}
+    \hline
+    problem & test & good count & mean & sd & improvement \\
+    \hline
+    \hline
+mix problem & allrules & 3 & 6658.39 & 69.98 & 0.00\% \\
+mix problem & domlem conf 0.6 & 15 & 6695.45 & 59.81 &\textbf{ 0.56\%} \\
+\hline
+dtlz1 four criteria & allrules & 15 & -4.52 & 3.05 & \textbf{0.00\%} \\
+dtlz1 four criteria & domlem & 3 & -16.45 & 13.80 & -263.83\% \\
+\hline
+dtlz7 four criteria & allrules & 15 & -110.07 & 7.84 & 0.00\% \\
+dtlz7 four criteria & domlem conf 0.8 & 15 & -108.53 & 7.29 & \textbf{1.40\%} \\
+    \hline
+  \end{tabular}
+  \caption{AllRules and DomLem comparison}
+  \label{t:un_alldom_2}
+\end{table}
+
+
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_all/presentation}
+      \label{pres_allrules1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_all/presentationb}
+      \label{pres_allrules1b}
+    }
+  }
+  \caption{AllRules --- number of solutions chosen and its influence on the mix problem}
+  \label{pres_allrules}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_all/dtlz1_c4}
+      \label{dtlz1_c4_allrules1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_all/dtlz1_c4b}
+      \label{dtlz1_c4_allrules1b}
+    }
+  }
+  \caption{AllRules --- number of solutions chosen and its influence on the four-criteria DTLZ1 problem}
+  \label{dtlz1_c4_allrules}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_all/dtlz7_c4}
+      \label{dtlz7_c4_allrules}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_all/dtlz7_c4b}
+      \label{dtlz7_c4_allrules}
+    }
+  }
+  \caption{AllRules --- number of solutions chosen and its influence on the four-criteria DTLZ7 problem}
+  \label{dtlz7_c4_allrules}
+\end{figure}
+
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_allvsdom/presentation}
+      \label{pres_alldom}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_allvsdom/presentationb}
+      \label{pres_alldom}
+    }
+  }
+  \caption{AllRules and DomLem comparison on the mix problem}
+  \label{pres_alldom}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_allvsdom/dtlz1_c4}
+      \label{dtlz1_c4_alldom}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_allvsdom/dtlz1_c4b}
+      \label{dtlz1_c4_alldom}
+    }
+  }
+  \caption{AllRules and DomLem comparison on the four-criteria DTLZ1 problem}
+  \label{dtlz1_c4_alldom}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_allvsdom/dtlz7_c4}
+      \label{dtlz7_c4_alldom}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/algo_allvsdom/dtlz7_c4b}
+      \label{dtlz7_c4_alldom}
+    }
+  }
+  \caption{AllRules and DomLem comparison on the four-criteria DTLZ7 problem}
+  \label{dtlz7_c4_alldom}
+\end{figure}
+
+
+\clearpage{}
+\subsection{Average in quantiles}
+\textcolor{green}{TODO}
+
+
+
+\subsection{Best results}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l c c c c c}
+    \hline
+outer & mean supposed utility & supp stddev & domlem conf 0.6 15 & stddev & improvement \\
+    \hline
+    \hline
+1 & 6551.03 & 105.13 & 6399.34 & 208.67 & -2.32\% \\
+2 & 6618.31 & 59.98 & 6516.66 & 108.81 & -1.54\% \\
+3 & 6627.03 & 55.99 & 6555.59 & 94.60 & -1.08\% \\
+4 & 6641.97 & 56.68 & 6603.19 & 88.61 & -0.58\% \\
+5 & 6646.64 & 52.71 & 6607.81 & 90.20 & -0.58\% \\
+6 & 6657.24 & 43.55 & 6623.12 & 70.84 & -0.51\% \\
+7 & 6660.01 & 42.18 & 6626.90 & 55.62 & -0.50\% \\
+8 & 6674.68 & 41.26 & 6661.15 & 78.86 & -0.20\% \\
+9 & 6678.98 & 42.18 & 6686.50 & 68.39 & 0.11\% \\
+10 & 6678.98 & 42.18 & 6695.45 & 59.81 & 0.25\% \\
+11 & 6682.55 & 38.42 & 6697.46 & 54.06 & 0.22\% \\
+12 & 6688.63 & 42.88 & 6697.46 & 54.06 & 0.13\% \\
+13 & 6688.88 & 42.58 & 6693.87 & 59.44 & 0.07\% \\
+14 & 6688.88 & 42.58 & 6693.59 & 59.62 & 0.07\% \\
+15 & 6691.59 & 40.16 & 6698.10 & 57.73 & 0.10\% \\
+16 & 6695.68 & 41.14 & 6698.10 & 57.73 & 0.04\% \\
+17 & 6701.35 & 39.70 & 6697.50 & 57.20 & -0.06\% \\
+18 & 6701.35 & 39.70 & 6707.60 & 46.91 & 0.09\% \\
+19 & 6710.87 & 40.02 & 6707.98 & 47.62 & -0.04\% \\
+    \hline
+  \end{tabular}
+  \caption{Best run for the mix problem}
+  \label{t:un_best_1}
+\end{table}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l c c c c c}
+    \hline
+outer & mean supposed utility & supp stddev & allrules 15 & stddev & improvement \\
+    \hline
+    \hline
+1 & -18.3391432 & 9.816309925 & -15.9057201 & 5.855560357 & 13.27\% \\
+2 & -13.2356894 & 8.624514343 & -10.3998425 & 4.765240651 & 21.43\% \\
+3 & -11.94097973 & 8.741655213 & -9.0707026 & 4.40860178 & 24.04\% \\
+4 & -10.79149427 & 8.534598525 & -8.2907986 & 3.942180864 & 23.17\% \\
+5 & -9.858469467 & 8.329327334 & -7.1591062 & 3.293595183 & 27.38\% \\
+6 & -9.5595594 & 8.4703238 & -6.1006858 & 2.989990226 & 36.18\% \\
+7 & -9.245239733 & 8.552617493 & -5.6530246 & 3.231994959 & 38.85\% \\
+8 & -8.828774867 & 8.490932909 & -5.3074947 & 3.472475913 & 39.88\% \\
+9 & -8.744311933 & 8.500549926 & -4.812787 & 3.265940892 & 44.96\% \\
+10 & -8.233213133 & 8.381281926 & -4.5213741 & 3.047627164 & 45.08\% \\
+11 & -8.117539467 & 8.375530506 & -4.2083127 & 3.189215908 & 48.16\% \\
+12 & -7.759438 & 8.320247724 & -4.1838711 & 3.471391475 & 46.08\% \\
+13 & -7.624005867 & 8.403986271 & -3.7924346 & 3.647954718 & 50.26\% \\
+14 & -7.305845067 & 8.416626846 & -3.2418574 & 3.552557886 & 55.63\% \\
+15 & -7.131843267 & 8.260038646 & -2.9737998 & 3.51227313 & 58.30\% \\
+16 & -7.023623867 & 8.200634129 & -2.8526141 & 3.493516972 & 59.39\% \\
+17 & -6.884764333 & 8.090375153 & -2.5747586 & 3.35765165 & 62.60\% \\
+18 & -6.8254398 & 8.119784484 & -2.6394718 & 3.451976393 & 61.33\% \\
+19 & -6.7802564 & 8.09374618 & -2.3148267 & 3.139534874 & 65.86\% \\
+    \hline
+  \end{tabular}
+  \caption{Best run for the four criteria DTLZ1}
+  \label{t:un_best_2}
+\end{table}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l c c c c c}
+    \hline
+outer & mean supposed utility & supp stddev & domlem conf 0.6 15 & stddev & improvement \\
+    \hline
+    \hline
+1 & -22.0671162 & 11.81221109 & -50.98594943 & 24.75871578 & -131.05\% \\
+2 & -15.2574986 & 9.239740188 & -24.21716357 & 16.77122463 & -58.72\% \\
+3 & -13.29195727 & 8.487948732 & -18.69859471 & 13.77507211 & -40.68\% \\
+4 & -12.0341928 & 8.079224415 & -15.25463729 & 10.52913999 & -26.76\% \\
+5 & -11.40818833 & 8.04300494 & -13.12703 & 7.687244559 & -15.07\% \\
+6 & -10.60111927 & 7.642058813 & -12.10850086 & 7.460299736 & -14.22\% \\
+7 & -10.18095873 & 7.69139632 & -11.78263214 & 7.960205031 & -15.73\% \\
+8 & -10.01096693 & 7.772909933 & -10.437213 & 8.285092823 & -4.26\% \\
+9 & -9.781664733 & 7.707954471 & -9.715185 & 7.362741762 & 0.68\% \\
+10 & -9.5584798 & 7.654400128 & -9.088617143 & 7.392192847 & 4.92\% \\
+11 & -9.139964 & 7.736231986 & -8.743928714 & 7.470572912 & 4.33\% \\
+12 & -9.002532867 & 7.765302614 & -12.46026357 & 11.1796289 & -38.41\% \\
+13 & -8.689782067 & 7.68784697 & -11.63526557 & 10.83305606 & -33.90\% \\
+14 & -8.561289733 & 7.66531129 & -11.50929814 & 10.90953999 & -34.43\% \\
+15 & -8.474676 & 7.634723952 & -11.06478314 & 10.22698944 & -30.56\% \\
+16 & -8.1745484 & 7.415208842 & -10.52982071 & 10.90394306 & -28.81\% \\
+17 & -7.911673733 & 7.080111009 & -9.893255714 & 10.52191342 & -25.05\% \\
+18 & -7.802236533 & 6.996802051 & -10.00049071 & 10.73859231 & -28.17\% \\
+19 & -7.6602518 & 6.940040831 & -9.923938143 & 10.794256 & -29.55\% \\
+    \hline
+  \end{tabular}
+  \caption{Best run for the ten criteria DTLZ1}
+  \label{t:un_best_3}
+\end{table}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{tabular}{l c c c c c}
+    \hline
+outer & mean supposed utility & supp stddev & domlem conf 0.8 15 & stddev & improvement \\
+    \hline
+    \hline
+1 & -120.2772493 & 8.039988526 & -117.6669706 & 8.004180083 & 2.17\% \\
+2 & -115.9788085 & 5.895890786 & -116.5251077 & 7.360542554 & -0.47\% \\
+3 & -114.9282388 & 5.787799554 & -109.9061894 & 10.01388804 & 4.37\% \\
+4 & -112.5450371 & 4.802897424 & -108.7117053 & 7.373151029 & 3.41\% \\
+5 & -111.3539033 & 5.184944445 & -108.7787427 & 7.325173991 & 2.31\% \\
+6 & -110.9726441 & 4.918187912 & -108.7787427 & 7.325173991 & 1.98\% \\
+7 & -109.6983671 & 3.74911646 & -109.8350957 & 8.299804069 & -0.12\% \\
+8 & -109.4611734 & 3.742920616 & -108.8381816 & 7.355288378 & 0.57\% \\
+9 & -109.3742536 & 3.893640829 & -108.5325297 & 7.287757082 & 0.77\% \\
+10 & -109.0023713 & 3.845689702 & -108.5325297 & 7.287757082 & 0.43\% \\
+11 & -108.8015726 & 4.10144061 & -108.3799799 & 7.083443369 & 0.39\% \\
+12 & -108.7211353 & 4.119324006 & -108.3799799 & 7.083443369 & 0.31\% \\
+13 & -108.5149614 & 3.891988238 & -108.2653301 & 6.940526742 & 0.23\% \\
+14 & -107.8140517 & 3.343199259 & -106.419321 & 8.297684379 & 1.29\% \\
+15 & -106.399801 & 3.4605045 & -106.419321 & 8.297684379 & -0.02\% \\
+16 & -105.8915002 & 3.290188099 & -106.419321 & 8.297684379 & -0.50\% \\
+17 & -105.8915002 & 3.290188099 & -106.419321 & 8.297684379 & -0.50\% \\
+18 & -104.8832882 & 3.695900636 & -106.419321 & 8.297684379 & -1.46\% \\
+19 & -103.5687726 & 3.673183507 & -105.5442733 & 8.652636152 & -1.91\% \\
+    \hline
+  \end{tabular}
+  \caption{Best run for the four criteria DTLZ7}
+  \label{t:un_best_2}
+\end{table}
+
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/presentation}
+      \label{pres_best1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/presentationb}
+      \label{pres_best1b}
+    }
+  }
+  \caption{Best runs for the mix problem}
+  \label{pres_best}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/dtlz1_c4}
+      \label{dtlz1_c4_best1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/dtlz1_c4b}
+      \label{dtlz1_c4_best1b}
+    }
+  }
+  \caption{Best runs for the four-criteria DTLZ1 problem}
+  \label{dtlz1_c4_best}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/dtlz1_c10}
+      \label{dtlz1_c10_best1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/dtlz1_c10b}
+      \label{dtlz1_c10_best1b}
+    }
+  }
+  \caption{Best runs for the ten-criteria DTLZ1 problem}
+  \label{dtlz1_c10_best}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \makebox[\textwidth]{
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/dtlz7_c4}
+      \label{dtlz7_c4_best1}
+    }
+    \subfloat{
+      \includegraphics[scale=0.53]{exp/uncert/best/dtlz7_c4b}
+      \label{dtlz7_c4_best1b}
+    }
+  }
+  \caption{Best runs for the four-criteria DTLZ7 problem}
+  \label{dtlz7_c4_best}
+\end{figure}
+
+\clearpage{}
 %%% Local Variables: 
 %%% mode: latex
 %%% TeX-master: "main"
