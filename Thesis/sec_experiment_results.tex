@@ -64,7 +64,7 @@ for all the problems (this is impossible according to no-free-lunch theorem
 
 The experiments were performed using following problems:
 \begin{description}
-  \item{\textbf{Two-criteria binary knapsack problem}}
+  \item{\textbf{Two criteria binary knapsack problem}}
     \begin{align*}
       & \bar{x} = [x_1, x_2, \dots, x_{300}]  \\
       & x_i \in \{0, 1\};  \hspace{0.5cm} i = 1, 2, \dots, 300 \\
@@ -92,7 +92,7 @@ The experiments were performed using following problems:
     vectors of values in $[0,10)$ interval.
 
 
-  \item{\textbf{Two-criteria continuous knapsack problem}}
+  \item{\textbf{Two criteria continuous knapsack problem}}
     \begin{align*}
       & \bar{x} = [x_1, x_2, \dots, x_{300}]  \\
       & x_i \in [0, 1);  \hspace{0.5cm} i = 1, 2, \dots, 300 \\
@@ -110,7 +110,7 @@ The experiments were performed using following problems:
     items can be partially selected ($\forall_{x_i \in \bar{x}} x_i \in [0,
       1)$).
 
-  \item{\textbf{Three-criteria binary knapsack problem}}
+  \item{\textbf{Three criteria binary knapsack problem}}
     \begin{align*}
       & \bar{x} = [x_1, x_2, \dots, x_{300}]  \\
       & x_i \in \{0, 1\};  \hspace{0.5cm} i = 1, 2, \dots, 300 \\
@@ -124,13 +124,13 @@ The experiments were performed using following problems:
       & \hspace{0.5cm} 1 * \text{value}_1 - 1 * \text{value}_2 + 2 * \text{value}_22
     \end{align*}
 
-    Two-criteria problems can be easily visualised and analyzed. However, in
+    Two criteria problems can be easily visualized and analyzed. However, in
     real-life applications there is often a need for three or more
     criteria. There is a leap in moving from two- to multiple-criteria, so it
-    is worth comparing the results achieved on the three-criteria knapsack
-    problem with its two-criteria counterpart.
+    is worth comparing the results achieved on the three criteria knapsack
+    problem with its two criteria counterpart.
 
-  \item{\textbf{Three-criteria DTLZ problem generated using constraint surface
+  \item{\textbf{Three criteria DTLZ problem generated using constraint surface
     approach}}
     \begin{align*}
       & \textit{min}\text{ f$_1$:} \hspace{0.2cm} x_1 \\
@@ -153,7 +153,7 @@ The experiments were performed using following problems:
     This problem was build according to constraint surface approach presented
     in~[ref].
 
-  \item{\textbf{Two-criteria robust mix problem}}
+  \item{\textbf{Two criteria robust mix problem}}
     \begin{align*}
       & \textit{max}\text{ profit:} \hspace{0.2cm} p_A \text{min}(x_A, d_A)
       + p_B \text{min}(x_B, d_B) +  p_C \text{min}(x_C, d_C) \\
@@ -200,7 +200,7 @@ The experiments were performed using following problems:
     means a result of the best evaluation among the worst $25\%$ of
     evaluations.
 
-  \item{\textbf{Four-criteria robust DTLZ7 problem}}
+  \item{\textbf{Four criteria robust DTLZ7 problem}}
     \begin{align*}
       & \textit{min}\text{ $f_j(x)$:} \hspace{0.2cm}
       0.1 * \sum_{10(j-1) + 1}^{10j}x_i + [0, 2*(4-j)], \hspace{0.2cm}
@@ -284,12 +284,27 @@ situations so the impact of noise in DM's decisions was measured.
 
 Knowing the characteristics, performance and impact of the parameters and the
 noise one can check if the algorithm with similar characteristics on problems
-with interval coefficients.
+with interval coefficients. \textcolor{red}{Not being satisfied with the
+  performance on DTLZ1 problems author checked the influence of DomLem
+  paramters on the result and included second rules generating algorithm ---
+  the AllRules algorithm. As a result a~rich set of data, containing
+  performance characteristics was gathered.}
 
 To conclude, the DARWIN method can handle MOO very well problems. A resulting
 solution is robust with respect to algorithm parameters, decision-maker's
 noise and finally to the uncertainty in the problem definition. Nevertheless
 the analyst should be careful and investigate the problem instead of using the
 method blindly. There are some problems which are hard for DARWIN to solve
-(e.g. DTLZ1). Even if the problem is appropriate and the method promises good
-results one has to fine-tune the parameters.
+(e.g. DTLZ1). \textcolor{red}{Even for these  problems satisfactory results can be achieved,
+however one has to fine-tune the parameters and carefully observe their impact
+on the result.}
+
+\textcolor{red}{The method is simple to use for the decision maker even if he
+  or she has no knowledge in the decision support field. However for some
+  problems the analyst assistance may be necessary in order to select
+  appropriate values for the parameters.}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

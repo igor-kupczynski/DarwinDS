@@ -34,9 +34,9 @@ properties or potential problems of the algorithm.
 
 The problem being evaluated is a two criteria mix problem (this a problem
 presented at the original DARWIN lecture given at~[ref]). Note that although
-the problem has only two-criteria in its definition it has to be considered in
+the problem has only two criteria in its definition it has to be considered in
 a space with more dimensions. This is because the supposed utility function is
-defined not in the original two-criteria space (\textit{max} profit,
+defined not in the original two criteria space (\textit{max} profit,
 \textit{min} time) but rather in a quantile space (see~[inref]). The function
 is defined as follows:
 \begin{equation*}
@@ -188,7 +188,7 @@ function value as an objective in evolutionary optimization.
       \label{dtlz1_c4_perf1b}
     }
   }
-  \caption{Performance comparison on the four-criteria DTLZ1 problem}
+  \caption{Performance comparison on the four criteria DTLZ1 problem}
   \label{dtlz1_c4_perf}
 \end{figure}
 
@@ -204,7 +204,7 @@ function value as an objective in evolutionary optimization.
       \label{dtlz1_c10_perf1b}
     }
   }
-  \caption{Performance comparison on the ten-criteria DTLZ1 problem}
+  \caption{Performance comparison on the ten criteria DTLZ1 problem}
   \label{dtlz1_c10_perf}
 \end{figure}
 
@@ -220,7 +220,7 @@ function value as an objective in evolutionary optimization.
       \label{dtlz7_c4_perf1b}
     }
   }
-  \caption{Performance comparison on the four-criteria DTLZ7 problem}
+  \caption{Performance comparison on the four criteria DTLZ7 problem}
   \label{dtlz7_c4_perf}
 \end{figure}
 
@@ -250,7 +250,7 @@ figure~\ref{pres_perf}, \ref{dtlz1_c4_perf}, \ref{dtlz1_c10_perf}
 and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
 (less than $1\%$) and a minor difference for the dtlz7 problem --- less than
 $5\%$. Unfortunately, differences for dtlz1 problems (both four- and
-ten-criteria) were important and noticeable --- about $50\%$ percent after ten
+ten criteria) were important and noticeable --- about $50\%$ percent after ten
 iterations. \textcolor{red}{The result for dtlz1 are far below the
   expectations --- the default parameters are not appropriate for the
   problem. A~better result here is still possible, however it requires
@@ -274,7 +274,7 @@ more than a $1\%$ after ten iterations.For the DTLZ7 problem the situation is
 similar --- differences are bigger now, however still less than $5\%$.
 
 Differences are bigger and important for the DTLZ1 problems (four- and
-ten-criteria). However, the standard deviations are of the same order of
+ten criteria). However, the standard deviations are of the same order of
 magnitude as mean values of the results. So one should say the results are
 inconclusive here and it is impossible to make a suggestion based solely on
 these results.
@@ -376,17 +376,17 @@ solution is still robust with respect to the noise.
       \includegraphics[scale=0.53]{exp/uncert/pres_noise}
       \label{pres_noise}
     }
-    \subfloat[DTLZ1 four-criteria]{
+    \subfloat[DTLZ1 four criteria]{
       \includegraphics[scale=0.53]{exp/uncert/dtlz1_c4_noise}
       \label{dtlz1_c4_noise}
     }
   }
   \makebox[\textwidth]{
-    \subfloat[DTLZ1 ten-criteria]{
+    \subfloat[DTLZ1 ten criteria]{
       \includegraphics[scale=0.53]{exp/uncert/dtlz1_c10_noise}
       \label{dtlz1_c10_noise}
     }
-    \subfloat[DTLZ7 four-criteria]{
+    \subfloat[DTLZ7 four criteria]{
       \includegraphics[scale=0.53]{exp/uncert/dtlz7_c4_noise}
       \label{dtlz7_c4_noise}
     }
@@ -757,7 +757,8 @@ outer & domlem conf=0.8, good=15 & supp stddev & all rules, good=15 & stddev & i
       \label{dtlz1_c4_allrules1b}
     }
   }
-  \caption{AllRules --- number of solutions chosen and its influence on the four-criteria DTLZ1 problem}
+  \caption{AllRules --- number of solutions chosen and its influence on the
+    four criteria DTLZ1 problem}
   \label{dtlz1_c4_allrules}
 \end{figure}
 
@@ -773,7 +774,8 @@ outer & domlem conf=0.8, good=15 & supp stddev & all rules, good=15 & stddev & i
       \label{dtlz7_c4_allrules}
     }
   }
-  \caption{AllRules --- number of solutions chosen and its influence on the four-criteria DTLZ7 problem}
+  \caption{AllRules --- number of solutions chosen and its influence on the
+    four criteria DTLZ7 problem}
   \label{dtlz7_c4_allrules}
 \end{figure}
 
@@ -806,7 +808,7 @@ outer & domlem conf=0.8, good=15 & supp stddev & all rules, good=15 & stddev & i
       \label{dtlz1_c4_alldomb}
     }
   }
-  \caption{AllRules and DomLem comparison on the four-criteria DTLZ1 problem}
+  \caption{AllRules and DomLem comparison on the four criteria DTLZ1 problem}
   \label{dtlz1_c4_alldom}
 \end{figure}
 
@@ -822,7 +824,7 @@ outer & domlem conf=0.8, good=15 & supp stddev & all rules, good=15 & stddev & i
       \label{dtlz7_c4_alldomb}
     }
   }
-  \caption{AllRules and DomLem comparison on the four-criteria DTLZ7 problem}
+  \caption{AllRules and DomLem comparison on the four criteria DTLZ7 problem}
   \label{dtlz7_c4_alldom}
 \end{figure}
 
@@ -1025,7 +1027,7 @@ outer & mean supposed utility & supp stddev & domlem conf 0.8 15 & stddev & impr
       \label{dtlz1_c4_best1b}
     }
   }
-  \caption{Best runs for the four-criteria DTLZ1 problem}
+  \caption{Best runs for the four criteria DTLZ1 problem}
   \label{dtlz1_c4_best}
 \end{figure}
 
@@ -1041,7 +1043,7 @@ outer & mean supposed utility & supp stddev & domlem conf 0.8 15 & stddev & impr
       \label{dtlz1_c10_best1b}
     }
   }
-  \caption{Best runs for the ten-criteria DTLZ1 problem}
+  \caption{Best runs for the ten criteria DTLZ1 problem}
   \label{dtlz1_c10_best}
 \end{figure}
 
@@ -1057,7 +1059,7 @@ outer & mean supposed utility & supp stddev & domlem conf 0.8 15 & stddev & impr
       \label{dtlz7_c4_best1b}
     }
   }
-  \caption{Best runs for the four-criteria DTLZ7 problem}
+  \caption{Best runs for the four criteria DTLZ7 problem}
   \label{dtlz7_c4_best}
 \end{figure}
 

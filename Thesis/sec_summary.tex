@@ -5,15 +5,17 @@ DARWIN was first proposed by Salvatore Greco, Benedetto Matarazzo and Roman
 Słowiński in~[ref]. However, in this paper the first implementation and
 numerical results are provided.
 
-The novelty of the method consists in utilizing an IMO process along with the
-EMO procedure. DARWIN not only optimizes the population of solutions, but also
-drives the optimization towards regions preferred by the decision maker. In
-order to do it, the preference information has to be gathered. This is done by
-asking the DM a series of simple questions. A~list of feasible solutions is
-given and he or she is asked to indicate the ``good'' ones among them. The
-procedure uses dominance-based rough set approach and the DomLem algorithm to
-obtain a~set of \textit{``if \dots, then \dots''} decision rules. DARWIN is
-a~first MOO technique using the decision rules.
+The novelty of the method consists in utilizing an IMO process along
+with the EMO procedure. DARWIN not only optimizes the population of
+solutions, but also drives the optimization towards regions preferred
+by the decision maker. In order to do it, the preference information
+has to be gathered. This is done by asking the DM a series of simple
+questions. A~list of feasible solutions is given and he or she is
+asked to indicate the ``good'' ones among them. The procedure uses
+dominance-based rough set approach and the DomLem or AllRules
+algorithms to obtain a~set of \textit{``if \dots, then \dots''}
+decision rules. DARWIN is a~first MOO technique using the decision
+rules.
 
 The condition part of each rule corresponds to a~dominance cone in the
 objective space built on a~subset of objectives. If a~given solution matches
@@ -56,18 +58,19 @@ runs on top of the Java Virtual Machine (JVM). The JVM is a well-tested
 platform with enormous popularity in an enterprise class of solutions. The
 platform is available on all of the popular hardware and software
 architectures. This ensures portability of the code as well stability of the
-developed solution. Creating a~component for a java platform increases the
+developed system. Creating a~component for a java platform increases the
 possibility of reusing the component in further projects and solutions.
 
-Future work may include performing more computational experiments. One could
-prepare a~catalogue of problems along with a~description of DARWIN's behavior
-and results that can be achieved on them. One could also modify the
-evaluational optimization framework and check if it leads to a~different
-behavior on some of the problems. For generating a set of decision rules the
-DomLem algorithm is used, however one can check if switching the algorithm to
-another one will lead to substantial changes in the results. Finally, one
-could prepare an easy-to-use computer software for the analyst and the
-decision maker and, if possible, distribute it under an open-source licence.
+\textcolor{red}{Future work may include performing more computational
+  experiments. A~catalogue of problems along with a~description of DARWIN's
+  behavior and results that can be achieved on them could be prepared. One
+  could also modify the evaluational optimization framework and check if, for
+  example, introducing other crossover operators leads to a~different behavior
+  on some of the problems.} 
+
+\textcolor{red}{ In the current implementation the Monte Carlo procedure are
+  using a~uniform distribution of values in intervals.  An extension adding
+  the possibility of selecting different distributions could be developed. }
 
 The goal of the thesis was to describe, implement and test the DARWIN
 method. Implementation was prepared and experiments conducted. Recommendations
@@ -75,3 +78,8 @@ on parameter values, problems that can be solved and the expected performance
 are given. To summarize, it can be stated that the goals of the thesis have
 been achieved.
 
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
