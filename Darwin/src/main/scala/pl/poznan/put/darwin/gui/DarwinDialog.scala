@@ -201,7 +201,10 @@ class SolutionDialog(window: Window, evaluated: List[EvaluatedSolution], rows: A
 }
 
 class SolutionPanel(e: EvaluatedSolution) extends GridPanel(0, 2) {
-  for ((k, v) <- e.values) {
+  for ((k, v) <- e.values.toList.sortWith(
+      (a, b) => {
+        a._1 < b._1
+    })) {
     contents += new Label(k)
     contents += new Label(v.toString)
   }
