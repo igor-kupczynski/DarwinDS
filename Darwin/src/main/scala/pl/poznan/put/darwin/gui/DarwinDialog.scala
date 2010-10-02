@@ -146,7 +146,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
     }
 
     private def genColumnNames(): java.util.Vector[String] = {
-      var result: java.util.Vector[String] = new java.util.Vector()
+      val result: java.util.Vector[String] = new java.util.Vector()
       result.add("Id")
       result.add("Is good?")
       for (g <- sim.problem.goals) {
@@ -168,13 +168,18 @@ class DarwinDialog(window: Window, val sim: Simulation,
         row.add(false.asInstanceOf[Object])
         for (g <- sim.problem.goals) {
           for (p <- sim.config.PERCENTILES) {
-            row.add(e.getPercentile(g, p).asInstanceOf[Object])
+            row.add(round(e.getPercentile(g, p)).asInstanceOf[Object])
           }
         }
         result.add(row)
         rowIdx += 1
       }
       result
+    }
+
+    private def round(x: Double): Double = {
+        val num = math.pow(10, sim.config.DIGITS_AFTER_DOT)
+        (num * x).round.doubleValue / num
     }
 
   }

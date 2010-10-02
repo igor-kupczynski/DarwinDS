@@ -34,6 +34,7 @@ class ConfigDialog(window: Window, val default: ConfigParser)
   tabs.pages += new TabbedPane.Page("Algorithm", ConfigTab.algorithmTab(parser))
   tabs.pages += new TabbedPane.Page("Fine Tuning", ConfigTab.finetuneTab(parser))
   tabs.pages += new TabbedPane.Page("Reports", ConfigTab.reportsTab(parser))
+  tabs.pages += new TabbedPane.Page("GUI", ConfigTab.guiTab(parser))
 
   contents = new BoxPanel(Orientation.Vertical) {
     contents += tabs
@@ -96,6 +97,10 @@ object ConfigTab {
       ("main", "eta", "Eta", new TextField(p.get("main", "eta"))),
       ("main", "omega", "Omega", new TextField(p.get("main", "omega")))
   ), p)
+
+  def guiTab(p: ConfigParser) = create(List(
+      ("gui", "digits", "Digits after a dot", new TextField(p.get("gui", "digits")))
+    ), p)
 
 
   def reportsTab(parser: ConfigParser): Panel = {

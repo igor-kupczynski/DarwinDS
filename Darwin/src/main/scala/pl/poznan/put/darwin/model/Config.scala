@@ -48,6 +48,9 @@ object Config {
     regenerateEvery = 1000
     regeneratePercent = 0.0
     compareusingsupposedutility = False
+
+    [gui]
+    digits = 2
     """
     val parser = new ConfigParser()
     parser.read(new ByteArrayInputStream(defConf.getBytes("UTF-8")))
@@ -83,6 +86,7 @@ object Config {
     p.set("evolution", "regenerateevery", preconf.REGENERATE_SCENARIONS_EVERY_GENERATIONS)
     p.set("evolution", "regeneratepercent", preconf.REGENERATE_PERCENT_OF_SCENARIONS)
     p.set("evolution", "compareusingsupposedutility", preconf.COMPARE_USING_SUPPOSED_UTILITY)
+    p.set("gui", "digits", preconf.DIGITS_AFTER_DOT)
     p
   }
 }
@@ -145,7 +149,14 @@ class Config(parser: ConfigParser) {
     parser.getDouble("evolution", "regeneratepercent")
   val COMPARE_USING_SUPPOSED_UTILITY: Boolean =
     parser.getBoolean("evolution", "compareusingsupposedutility")
-  
+
+
+  /*
+   * Gui options
+   */
+  val DIGITS_AFTER_DOT = if (parser.hasOption("gui", "digits"))
+     parser.getInt("gui", "digits") else 2
+
   private def getListOfDoubles(str: String): List[Double] = {
     val r = new Regex(",")
     r.split(str).toList.map(x => x.toDouble)
