@@ -2,7 +2,7 @@
 \subsection{Single run analysis}
 In order to observe the algorithm's behavior a detailed analysis of a single
 run is presented in this section. The problem being analyzed is the
-two criteria binary knapsack problem (see [inref]). The problem is simple and
+two-criteria binary knapsack problem (see [inref]). The problem is simple and
 the number of criteria small in order to focus on the algorithm. Moreover, no
 uncertainty in the form of interval coefficients is considered.
 
@@ -84,7 +84,7 @@ so essentially $\text{class} \ge \texttt{GOOD}$ means $\text{class} =
 
 In order to verify how the rules influence the algorithm's behavior, charts
 were prepared (fig.~\ref{c2_valweight_01}, \ref{c2_valweight_03} and
-\ref{c2_valweight_07}). For two criteria problem it is possible to present the
+\ref{c2_valweight_07}). For two-criteria problem it is possible to present the
 search space on two-dimensional chart.
 
 The iterations $1$ and $3$ show a typical run. Before the 10th generation the
@@ -219,10 +219,10 @@ resemble the one in real-world problems.
 
 Results of the evaluation on the following problems are given (see~[inref]):
 \begin{itemize}
-\item Two criteria binary knapsack problem, optimal value $= 4154.441453$.
-\item Two criteria continuous knapsack problem, optimal value $= 32700.41689$.
-\item Three criteria binary knapsack problem, optimal value $= 31502.10927$.
-\item Three criteria DTLZ problem generated using constraint surface approach, optimal value $= -1.1$.
+\item Two-criteria binary knapsack problem, optimal value $= 4154.441453$.
+\item Two-criteria continuous knapsack problem, optimal value $= 32700.41689$.
+\item Three-criteria binary knapsack problem, optimal value $= 31502.10927$.
+\item Three-criteria DTLZ problem generated using constraint surface approach, optimal value $= -1.1$.
 \end{itemize}
 
 The tests were repeated at least fifteen times and the results averaged. They
@@ -454,7 +454,7 @@ The author considers the basic parameters to be:
       \label{c2_params1b}
     }
   }
-  \caption{Basic parameters for the two criteria binary knapsack problem}
+  \caption{Basic parameters for the two-criteria binary knapsack problem}
   \label{c2_params}
 \end{figure}
 
@@ -470,7 +470,7 @@ The author considers the basic parameters to be:
       \label{c2_cont_params1b}
     }
   }
-  \caption{Basic parameters for the two criteria continuous knapsack problem}
+  \caption{Basic parameters for the two-criteria continuous knapsack problem}
   \label{c2_cont_params}
 \end{figure}
 
@@ -486,7 +486,7 @@ The author considers the basic parameters to be:
       \label{c3_params1b}
     }
   }
-  \caption{Basic parameters for the three criteria binary knapsack problem}
+  \caption{Basic parameters for the three-criteria binary knapsack problem}
   \label{c3_params}
 \end{figure}
 
@@ -502,7 +502,7 @@ The author considers the basic parameters to be:
       \label{c3_surface_params1b}
     }
   }
-  \caption{Basic parameters for the three criteria DTLZ surface problem}
+  \caption{Basic parameters for the three-criteria DTLZ surface problem}
   \label{c3_surface_params}
 \end{figure}
 
@@ -568,15 +568,15 @@ They are used in the interior loop (see~[inref]).
 \begin{figure}
   \centering
   \makebox[\textwidth]{
-    \subfloat[Two criteria binary knapsack]{
+    \subfloat[Two-criteria binary knapsack]{
       \includegraphics[width=0.60\textwidth]{exp/nouncert/c2_params2}
     }
-    \subfloat[Two criteria continuous knapsack]{
+    \subfloat[Two-criteria continuous knapsack]{
       \includegraphics[width=0.60\textwidth]{exp/nouncert/c2_cont_params2}
     }
   }
   \makebox[\textwidth]{
-    \subfloat[Three criteria binary knapsack]{
+    \subfloat[Three-criteria binary knapsack]{
       \includegraphics[width=0.60\textwidth]{exp/nouncert/c3_params2}
     }
     \subfloat[DTLZ surface problem]{
@@ -701,7 +701,7 @@ without additional noise.
       \label{c2_noiseb}
     }
   }
-  \caption{The impact of noise for the two criteria binary knapsack problem}
+  \caption{The impact of noise for the two-criteria binary knapsack problem}
   \label{c2_noise}
 \end{figure}
 
@@ -717,7 +717,7 @@ without additional noise.
       \label{c3_noiseb}
     }
   }
-  \caption{The impact of noise for the three criteria binary knapsack problem}
+  \caption{The impact of noise for the three-criteria binary knapsack problem}
   \label{c3_noise}
 \end{figure}
 
@@ -733,7 +733,7 @@ without additional noise.
       \label{c3_surface_noiseb}
     }
   }
-  \caption{The impact of noise for the three criteria DTLZ surface problem}
+  \caption{The impact of noise for the three-criteria DTLZ surface problem}
   \label{c3_surface_noise}
 \end{figure}
 
@@ -921,7 +921,7 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
       \label{c3_bin_algob}
     }
   }
-  \caption{Rule generating algorithms comparison for the three criteria binary knapsack problem}
+  \caption{Rule generating algorithms comparison for the three-criteria binary knapsack problem}
   \label{c3_algo}
 \end{figure}
 
@@ -937,7 +937,7 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
       \label{c3_surface_algob}
     }
   }
-  \caption{Rule generating algorithms comparison for the three criteria DTLZ surface problem}
+  \caption{Rule generating algorithms comparison for the three-criteria DTLZ surface problem}
   \label{c3_surface_algo}
 \end{figure}
 
@@ -1010,15 +1010,15 @@ algorithm is superior to AllRules.
 \begin{figure}
   \centering
   \makebox[\textwidth]{
-    \subfloat[Two criteria binary knapsack]{
+    \subfloat[Two-criteria binary knapsack]{
       \includegraphics[width=0.60\textwidth]{exp/nouncert/best/knapsack_c2_bin}
     }
-    \subfloat[Two criteria continuous knapsack]{
+    \subfloat[Two-criteria continuous knapsack]{
       \includegraphics[width=0.60\textwidth]{exp/nouncert/best/knapsack_c2_cont}
     }
   }
   \makebox[\textwidth]{
-    \subfloat[Three criteria binary knapsack]{
+    \subfloat[Three-criteria binary knapsack]{
       \includegraphics[width=0.60\textwidth]{exp/nouncert/best/knapsack_c3_bin}
     }
     \subfloat[DTLZ surface problem]{
