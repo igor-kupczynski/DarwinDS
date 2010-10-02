@@ -812,24 +812,24 @@ the same results, however a few iterations later.
 \end{table}
 \clearpage{}
 
-\subsection{Different rule generating algorithm}
+\subsection{A Different rule generating algorithm}
 Details of a~rule generating algorithm is not part of the DARWIN
 specification. The choice of the algorithm is left to the one implementing
 DARWIN. In this paper two approaches were evaluated --- the DomLem algorithm
 [ref] generating a~minimal set of rules and the AllRules algorithm [ref]
 generating an extensive set of all rules.
 
-One can lower a~confidence of the rules generated in the DomLem algorithm
+One can lower confidence of the rules generated in the DomLem algorithm
 (compare with~[inref]). $100\%$ confidence may seem a good idea; however,
 lowering it would allow more gradual improvements of the goal function in the
 evolutionary algorithm which could lead to better results. Values $60\%$ and
 $80\%$ were tested. In the tests conducted earlier it was assumed that the
-decision maker selects only few solutions. In this section it is also compared
-with selecting half of the solutions as good.
+decision maker selects only a~few solutions. In this section it is also
+compared with marking half of the solutions as good.
 
 The results are presented in tables~\ref{t:algo_1a} and~\ref{t:algo_1b} and
 figures~\ref{c2_bin_algo}, \ref{c2_cont_algo}, \ref{c3_algo}
-and~\ref{c3_surface_algo}. When no uncertainty is considered DomLem performs
+and~\ref{c3_surface_algo}. When no uncertainty is considered, DomLem performs
 better than AllRules and it is better to select three solutions than fifteen
 --- a~half. Confidence however yields an interesting result --- the algorithm
 is robust with respect to confidence.
@@ -889,7 +889,7 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
       \label{c2_bin_algob}
     }
   }
-  \caption{Rule generation algoritms comparison for the two criteria binary knapsack problem}
+  \caption{Rule generating algorithms comparison for the two-criteria binary knapsack problem}
   \label{c2_bin_algo}
 \end{figure}
 
@@ -905,7 +905,7 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
       \label{c2_cont_algob}
     }
   }
-  \caption{Rule generation algoritms comparison for the two criteria continuos knapsack problem}
+  \caption{Rule generating algorithms comparison for the two-criteria continuous knapsack problem}
   \label{c2_cont_algo}
 \end{figure}
 
@@ -921,7 +921,7 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
       \label{c3_bin_algob}
     }
   }
-  \caption{Rule generation algoritms comparison for the three criteria binary knapsack problem}
+  \caption{Rule generating algorithms comparison for the three criteria binary knapsack problem}
   \label{c3_algo}
 \end{figure}
 
@@ -937,27 +937,27 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
       \label{c3_surface_algob}
     }
   }
-  \caption{Rule generation algoritms comparison for the three criteria DTLZ surface problem}
+  \caption{Rule generating algorithms comparison for the three criteria DTLZ surface problem}
   \label{c3_surface_algo}
 \end{figure}
 
 
 \clearpage{}
 
-\subsection{Best results}
+\subsection{The Best results}
 One may be interested in the best performances achieved during the experiment
 runs. The results are presented in the table~\ref{t:best1} and in
 figure~\ref{best1}. All the test problems performed extremely well and the
 distance from the optimal solution is minimal. For the reasons mentioned above
 the continuous knapsack problem is an exception and its performance is not
-satisfactory. Changing a~crossover operator should greatly improve the
+satisfactory. Changing a~crossover operator should immensely improve the
 results.
 
-The settings resulting in this performances are presented in
+The settings resulting in these performances are presented in
 table~\ref{t:best1_conf}. It is worth noting that when no uncertainty is
-consider, selecting only three solutions in every exterior loop iteration
-leads to the best results. Also in three out of four cases the DomLem algorithm is
-superior to AllRules.
+considered, selecting only three solutions in each exterior loop iteration
+leads to the best results. Also in three out of four cases the DomLem
+algorithm is superior to AllRules.
 
 \begin{table}[h]
   \centering
@@ -986,7 +986,7 @@ superior to AllRules.
     19 & 2.41\% & 39.71\% & 1.84\% & 0.48\% \\
     \hline
   \end{tabular}
-  \caption{Best runs for the test problems. Distance from the optimum}
+  \caption{The best runs for the test problems. Distance from the optimum}
   \label{t:best1}
 \end{table} 
 
@@ -994,7 +994,7 @@ superior to AllRules.
   \centering
   \begin{tabular}{r c c}
     \hline
-    Problem & Algorithm & Numer of solutions marked as good \\
+    Problem & Algorithm & Number of solutions marked as good \\
     \hline
     Knapsack 2c bin & Domlem, consistency $= 100\%$ & 3 \\
     Knapsack 2c cont & Domlem, consistency $= 100\%$ & 3 \\
@@ -1002,7 +1002,7 @@ superior to AllRules.
     Surface & All rules & 3 \\
     \hline
   \end{tabular}
-  \caption{Settings resulting in best performance for the test problems}
+  \caption{Settings resulting in the best performance for the test problems}
   \label{t:best1_conf}
 \end{table} 
 
@@ -1025,7 +1025,7 @@ superior to AllRules.
       \includegraphics[width=0.60\textwidth]{exp/nouncert/best/surface}
     }
   }
-  \caption{Best runs for the test problems}
+  \caption{The best runs for the test problems}
   \label{best1}
 \end{figure}
 

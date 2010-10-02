@@ -55,7 +55,9 @@ class DarwinDialog(window: Window, val sim: Simulation,
     }
 
     def changeTable(t: Component) {
-      contents(1) = new ScrollPane(t)
+      val sp = new ScrollPane(t)
+      sp.horizontalScrollBarPolicy = ScrollPane.BarPolicy.AsNeeded
+      contents(1) = sp
     }
   }
   contents = bp

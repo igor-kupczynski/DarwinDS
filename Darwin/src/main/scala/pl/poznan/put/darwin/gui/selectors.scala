@@ -7,6 +7,7 @@ import org.ini4j.ConfigParser
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.simulation.Simulation
+import pl.poznan.put.darwin.utils.TimeUtils
 
 class Selectors(main: Window) extends GridPanel(1, 4) {
   hGap = 3
@@ -51,7 +52,7 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
         problemFileName = chooser.nameFor(file)
         problemFileLabel.text = problemFileName
         val lines = io.Source.fromFile(file).mkString
-        problem = Parser.fromText(lines)
+        problem = TimeUtils.time("Parser.fromText", Parser.fromText(lines))
       }
     }
   }

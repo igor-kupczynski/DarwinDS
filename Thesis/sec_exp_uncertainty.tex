@@ -249,15 +249,14 @@ The results are shown in table~\ref{t:perf-comp} and presented in
 figure~\ref{pres_perf}, \ref{dtlz1_c4_perf}, \ref{dtlz1_c10_perf}
 and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
 (less than $1\%$) and a minor difference for the dtlz7 problem --- less than
-$5\%$. Unfortunately, differences for dtlz1 problems (both four- and
-ten criteria) were important and noticeable --- about $50\%$ percent after ten
-iterations. \textcolor{red}{The result for dtlz1 are far below the
-  expectations --- the default parameters are not appropriate for the
-  problem. A~better result here is still possible, however it requires
-  a~tuning of the parameters (see~[inref]).}
+$5\%$. Unfortunately, differences for dtlz1 problems (both four- and ten
+criteria) were important and noticeable --- about $50\%$ percent after ten
+iterations. The results for dtlz1 are far below the expectations --- the
+default parameters are not appropriate for the problem. A~better result here
+is still possible, however it requires tuning the parameters (see~[inref]).
 
-\textcolor{red}{\textit{Note:} When box plots are given, they are always
-charted for the tenth iteration. The same applies to comparison tables. }
+\textit{Note:} When box plots are given, they are always charted for the tenth
+iteration. The same applies to comparison tables.
 
  \clearpage{}
 
@@ -441,25 +440,25 @@ solution is still robust with respect to the noise.
 \clearpage{}
 \subsection{DomLem parameters}
 
-As it was mentioned in [inref] the algoritm for rules generation is left to
-analyst. In the paper both DomLem and AllRules were used. In this section the
-DomLem algorithm is being analyzed. 
+As it was mentioned in [inref], the algorithm for rules generation is left to
+the analyst. In this paper both DomLem and AllRules were used. In this section
+the DomLem algorithm is being analyzed.
 
-One can set different confidence value for the rules --- runs with 100\%, 80\%
-and 60\% were tried. The decision maker can indicate different number of
-solutions as ``good'' ones --- 3 and 15 int the tests. DomLem returns minimal
-set of rules covering all the examples. Usually this means that only a small
-number of rules will be generated. However, DomLem is an~heuristic algorithm,
-running it with swapped columns in the table will result in different
-rules. This feature was exploited to generate more rulles. Algorithm were run
-three times with different attribute ordering. This test is called
-\textit{multirules}.
+One can set different confidence values for the rules --- runs with 100\%,
+80\% and 60\% were tried. The decision maker can indicate different solutions
+as ``good''.  3 and 15 in the tests. DomLem returns a~minimal set of rules
+covering all the examples. Usually it means that only a small number of rules
+will be generated. However, DomLem is an~heuristic algorithm, so running it
+with swapped columns in the table will result in different rules. This feature
+was exploited to generate more rules. Algorithm was run three times with
+different attribute ordering. This test is called \textit{multirules}.
 
-Numerical results are given in the tables~\ref{t:un_domlem_1} and \ref{t:un_domlem_2}. Charts
-visualizing he date were prepared. See figures~\ref{pres_domlem},
-\ref{dtlz1_c4_domlem}, \ref{dtlz1_c10_domlem} and \ref{dtlz7_c4_domlem}.
+Numerical results are given in the tables~\ref{t:un_domlem_1} and
+\ref{t:un_domlem_2}. Charts visualizing the data were prepared. See
+figures~\ref{pres_domlem}, \ref{dtlz1_c4_domlem}, \ref{dtlz1_c10_domlem} and
+\ref{dtlz7_c4_domlem}.
 
-Again, it is impossible to give clear guidelines what values should be chosen
+Again, it is impossible to give clear guidelines which values should be chosen
 for the parameters. For the mix problem and four criteria DTLZ7 problem the
 solutions are robust --- differences are no more than 1\% and 5\%
 respectively. However, the situation changes for the DTLZ1 problem. In case of
@@ -470,9 +469,9 @@ and setting the confidence level to 80\% results in almost 40\% improvement.
 
 For the ten criteria variant selecting fifteen solutions and certain
 (confidence $= 100\%$) rules results in over 25\% improvement. Choosing
-``multirules'' can improve the result between 13\% and 16\%. For the problem
-the best results are achieved by selecting 15 solutions and setting the
-confidence to 60\%. This will improve the results over 55\%.
+``multirules'' can improve the result by 13\% and 16\%. For the problem the
+best results are achieved by selecting 15 solutions and setting the confidence
+to 60\%. This will improve the results by 55\%.
 
 \begin{table}[htb]
   \centering
@@ -586,27 +585,27 @@ domlem multirules &  15 &-17.71 & 10.34 & \textbf{15.86\%} & -110.17 & 5.48 & -1
 \clearpage{}
 \subsection{AllRules algorithm}
 
-Second option for the rule generator is the AllRuels algorithm. The version
-used for the paper has no configuration parameter, but one can of course
-change the number of solutions selected as good. Results are presented on the
-table~\ref{t:un_allrules_1} and charts~\ref{pres_allrules},
+The second option for the rule generator is the AllRules algorithm. The
+version used for the paper has no configuration parameter, but one can
+obviously change the number of solutions marked as good. Results are presented
+in the table~\ref{t:un_allrules_1} and charts~\ref{pres_allrules},
 \ref{dtlz1_c4_allrules} and \ref{dtlz7_c4_allrules}. For the mix and DTLZ7
-problems the differences between 3 and 15 good solutions the differences are
-small and insignificant. On the other hand for the DTLZ1 problem, the
-difference is over 60\% when marking 15 out 30 solutions as good.
+problems the differences between 3 and 15 good solutions are small and
+insignificant. On the other hand, for the DTLZ1 problem the difference is over
+60\% when marking 15 out 30 solutions as good.
 
 Unfortunately, because of the huge memory footprint, it was impossible to run
-AllRules for ten criteria DTLZ1 problem. 
+AllRules for the ten criteria DTLZ1 problem.
 
 A comparison between both approaches --- DomLem and AllRules was also made in
 order to check if generating more rules will improve the results. For the
-three problem best series for DomLem and AllRules were chosen and
-compared. Results are given in the tables~\ref{t:un_alldom_2a},
+three problems the best series for DomLem and AllRules were chosen and
+compared. The results are given in the tables~\ref{t:un_alldom_2a},
 \ref{t:un_alldom_2b} and~\ref{t:un_alldom_2c}, as well as charted in
 figures~\ref{pres_alldom}, \ref{dtlz1_c4_alldom} and~\ref{dtlz7_c4_alldom}.
 
 In general DomLem performed a~bit better, however for the DTLZ1 choosing
-AllRules result in huge --- about 70\% improvement.
+AllRules result in a huge (about 70\%) improvement.
 
 \begin{table}[htb]
   \centering
@@ -835,22 +834,22 @@ outer & domlem conf=0.8, good=15 & stddev & all rules, good=15 & stddev & improv
 
 
 \clearpage{}
-\subsection{Best results}
+\subsection{The best results}
 
 Like in the section where no uncertainty was considered, one may be interested
 in the best performance achieved during the experiments. The results can not
-be directly compared to the optimal values, because there is not such thing as
+be directly compared to the optimal values, because there is no such thing as
 an optimal solution. Thus, the comparison is made to the supposed value
-optimization. Also, instead of single run, the series of runs are a subject of
-this comparison. The set of parameter values producing this results is also
-given. The analysis is made on problem basis.
+optimization. Also, instead of single run, the series of runs are the subject
+of this comparison. The set of parameter values producing these results is
+also given. The analysis is made on the basis of the problem.
 
-Results are presented in tables~\ref{t:un_best_1}, \ref{t:un_best_2},
+The results are presented in tables~\ref{t:un_best_1}, \ref{t:un_best_2},
 \ref{t:un_best_3} and \ref{t:un_best_4} and in figures~\ref{pres_best},
 \ref{dtlz1_c4_best}, \ref{dtlz1_c10_best} and \ref{dtlz7_c4_best}. For all the
 problems it was possible to match the performance of the supposed utility
-optimization. Ten criteria DTLZ1 was the hardest problem, but four criteria
-version was the easiest one.
+optimization. Ten criteria DTLZ1 was the hardest problem, but the
+four-criteria version was the easiest one.
 
 The parameter values are as follows:
 \begin{center}
@@ -865,7 +864,8 @@ The parameter values are as follows:
   \hline
 \end{tabular}
 \end{center}
-They can serve as a~guidelines for an analyst solving other problems with DARWIN.
+They can serve as guidelines for an analyst solving other problems with
+DARWIN.
 
 \begin{table}[htb]
   \centering
@@ -895,7 +895,7 @@ outer & mean supposed utility & stddev & domlem conf 0.6 15 & stddev & improveme
 19 & 6710.87 & 40.02 & 6707.98 & 47.62 & -0.04\% \\
     \hline
   \end{tabular}
-  \caption{Best run for the mix problem}
+  \caption{The best run for the mix problem}
   \label{t:un_best_1}
 \end{table}
 
@@ -928,7 +928,7 @@ outer & mean supposed utility & stddev & allrules 15 & stddev & improvement \\
 19 & -6.78 & 8.09 & -2.31 & 3.14 & 65.86\% \\
     \hline
   \end{tabular}
-  \caption{Best run for the four criteria DTLZ1}
+  \caption{The best run for the four criteria DTLZ1}
   \label{t:un_best_2}
 \end{table}
 
@@ -961,7 +961,7 @@ outer & mean supposed utility & stddev & domlem conf 0.6 15 & stddev & improveme
 19 & -7.66 & 6.94 & -9.92 & 10.79 & -29.55\% \\
     \hline
   \end{tabular}
-  \caption{Best run for the ten criteria DTLZ1}
+  \caption{The best run for the ten criteria DTLZ1}
   \label{t:un_best_3}
 \end{table}
 
@@ -994,7 +994,7 @@ outer & mean supposed utility & stddev & domlem conf 0.8 15 & stddev & improveme
 19 & -103.57 & 3.67 & -105.54 & 8.65 & -1.91\% \\
     \hline
   \end{tabular}
-  \caption{Best run for the four criteria DTLZ7}
+  \caption{The best run for the four criteria DTLZ7}
   \label{t:un_best_4}
 \end{table}
 
@@ -1011,7 +1011,7 @@ outer & mean supposed utility & stddev & domlem conf 0.8 15 & stddev & improveme
       \label{pres_best1b}
     }
   }
-  \caption{Best runs for the mix problem}
+  \caption{The best runs for the mix problem}
   \label{pres_best}
 \end{figure}
 
@@ -1027,7 +1027,7 @@ outer & mean supposed utility & stddev & domlem conf 0.8 15 & stddev & improveme
       \label{dtlz1_c4_best1b}
     }
   }
-  \caption{Best runs for the four criteria DTLZ1 problem}
+  \caption{The best runs for the four criteria DTLZ1 problem}
   \label{dtlz1_c4_best}
 \end{figure}
 
@@ -1043,7 +1043,7 @@ outer & mean supposed utility & stddev & domlem conf 0.8 15 & stddev & improveme
       \label{dtlz1_c10_best1b}
     }
   }
-  \caption{Best runs for the ten criteria DTLZ1 problem}
+  \caption{The best runs for the ten criteria DTLZ1 problem}
   \label{dtlz1_c10_best}
 \end{figure}
 
@@ -1059,7 +1059,7 @@ outer & mean supposed utility & stddev & domlem conf 0.8 15 & stddev & improveme
       \label{dtlz7_c4_best1b}
     }
   }
-  \caption{Best runs for the four criteria DTLZ7 problem}
+  \caption{The best runs for the four criteria DTLZ7 problem}
   \label{dtlz7_c4_best}
 \end{figure}
 
