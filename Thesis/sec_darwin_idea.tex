@@ -4,8 +4,8 @@ be described in the following paragraph.
 \section{Background}
 
 The method combines two different approaches --- Interactive Multi-Objective
-Optimization (IMO, see~[inref]) and Evolutionary Multi-Objective Optimization
-(EMO, see~[inref]).
+Optimization (IMO, see~\ref{sec_ia_in_moo}) and Evolutionary Multi-Objective
+Optimization (EMO, see~\ref{sec_ea_in_moo}).
 
 In the IMO paradigm one wants to elicit decision maker's preferences by
 involving him or her in the process. This is done by a systematic dialog with
@@ -87,8 +87,7 @@ considered equivalent.
 
 It seems natural to combine these two described approaches --- Interactive
 Multi-Objective Optimization and Evolutionary Multi-Objective
-Optimization. (TODO: maybe a note and a ref about combining these two
-approaches). IMO is just a process framework but still needs an engine to
+Optimization. IMO is just a process framework but still needs an engine to
 generate and improve solutions. EMO is such an engine. On the other hand for
 EMO involving the decision maker in the procedure results in gathering
 preference information. This information allows the procedure to focus on a
@@ -113,6 +112,7 @@ preferences.
 
 
 \section{Modeling of uncertainty}
+\label{uncert-mod}
 
 It is often the case that not all numbers and coefficients are precisely
 known. It may be easier for the decision maker to formulate the
@@ -178,6 +178,8 @@ $\text{profit}_{25\%} >= 100 \land \text{time}_{1\%} <= 10$ then Class
 \textit{at least} Good.
 
 \section{The algorithm}
+\label{idea-algo}
+
 
 DARWIN can operate on Multi-Objective Optimization (MOO) problems defined as
 follows:
@@ -311,34 +313,35 @@ example in the form of analyst's suggestions, can be taken into account.
 At this stage goals and constraints are allowed to contain intervals
 corresponding to the uncertainty of a model. Thus a set of scenarios needs to
 be generated. Each of these scenarios is a realisation of the problem with
-fixed values of the intervals (see~[inref]). It is worth noting that if the
-problem constraints are given in an uncertain form --- that is containing
-coefficients in the form of intervals --- it could be impossible to determine
-whether a given solution is possible. If that is the case, then lines
-\ref{algin:solgen} and \ref{algin:scengen} should be swapped and feasibility
-of a solution set should be checked on generated scenarios.
+fixed values of the intervals. It is worth noting that if the problem
+constraints are given in an uncertain form --- that is containing coefficients
+in the form of intervals --- it could be impossible to determine whether a
+given solution is possible. If that is the case, then lines \ref{algin:solgen}
+and \ref{algin:scengen} should be swapped and feasibility of a solution set
+should be checked on generated scenarios.
 
 In lines \ref{algin:evstart} to \ref{algin:evstop} each solution if evaluated
 over each scenario. Results of this evaluation phase are then gathered and
 presented to the decision maker in \ref{algin:dmshow}. The DM is a human being
 though, so in order to get valuable feedback one need to show the data in
-aggregated form. The authors proposed a meaningful quantiles to be presented
-(see~[inref]). For example $f^{1\%}_1(x), f^{25\%}_1(x), f^{50\%}_1(x),$
-$\dots, f^{1\%}_k(x), f^{25\%}_k(x), f^{50\%}_k(x)$ for all $x \in X$.
+aggregated form. The authors proposed a meaningful quantiles to be
+presented. For example $f^{1\%}_1(x), f^{25\%}_1(x), f^{50\%}_1(x),$ $\dots,
+f^{1\%}_k(x), f^{25\%}_k(x), f^{50\%}_k(x)$ for all $x \in X$.
 
 If the DM finds solution in the set of presented ones satisfactorily, then the
 problem is solved and algorithm ends here. If not, however, he or she is asked
 to indicated the ``good'' solutions in the set (line~\ref{algin:dmmark}).  On
 the basis of this distinction, the method generates a set of decision rules
 (line~\ref{algin:rules}). These rules are then passed to the interior loop
-(line~\ref{algin:intloop}) where --- by using the EMO paradigm (see~[inref])
---- DARWIN performs search of the solution space. The search is driven towards
-a specific region on the basis of the rules. Finally new solutions, better
-fitted to DM's expectations are generated and the process starts over again.
+(line~\ref{algin:intloop}) where --- by using the EMO paradigm
+(see~\ref{sec_ea_in_moo}) --- DARWIN performs search of the solution
+space. The search is driven towards a specific region on the basis of the
+rules. Finally new solutions, better fitted to DM's expectations are generated
+and the process starts over again.
 
 Algorithm~\ref{alg:intloop} shows the interior loop of DARWIN method. This
-loop is an EMO procedure [inref] guided by the decision rules induced in
-exterior loop on DM's selections.
+loop is an EMO procedure guided by the decision rules induced in exterior loop
+on DM's selections.
 
 \begin{algorithm}
 \caption{DARWIN's interior loop}\label{alg:intloop}
@@ -463,3 +466,8 @@ $\omega = 0.1, \epsilon = 0.5$.
 
 In this section DARWIN idea was explained. The implementation is given in the
 next chapter.
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 

@@ -6,8 +6,8 @@ way to test the algorithm's behavior and to get the idea about its properties.
 It is often impossible to specify the exact values of each coefficient in the
 problem. One may want to specify some of the coefficients in the form of
 intervals of the possible values. Then he or she is interested in a robust
-solution taking into account many possible scenarios of imprecision
-(see~[inref]). This is possible with the DARWIN method.
+solution taking into account many possible scenarios of imprecision. This is
+possible with the DARWIN method.
 
 Now the tests performed earlier will be extended to ``robust'' problems ---
 i.e.the ones with interval coefficients. Note that now it is impossible to
@@ -17,7 +17,7 @@ performance can be expected from the method. The author decided to compare the
 results with the supposed utility function optimization.
 
 As a reference point for comparison result generated as follows was taken. The
-whole exterior loop (see~[inref]) is left intact but in the interior loop the
+whole exterior loop (see~\ref{idea-algo}) is left intact but in the interior loop the
 goal function for evolutionary optimization changes. Instead of optimization
 based on primary and secondary score the supposed utility function is the one
 to be taken into account. This way it is possible to measure how well the DM's
@@ -37,8 +37,8 @@ presented at the original DARWIN lecture given at~[ref]). Note that although
 the problem has only two-criteria in its definition it has to be considered in
 a space with more dimensions. This is because the supposed utility function is
 defined not in the original two-criteria space (\textit{max} profit,
-\textit{min} time) but rather in a quantile space (see~[inref]). The function
-is defined as follows:
+\textit{min} time) but rather in a quantile space. The function is defined as
+follows:
 \begin{equation*}
 \textit{max}: \hspace{0.2cm} \text{profit}^{1\%} + 3 * \text{profit}^{25\%} +
 2 * \text{profit}^{50\%} - \text{time}^{1\%} - 3 * \text{time}^{25\%} - 2 *
@@ -253,7 +253,7 @@ $5\%$. Unfortunately, differences for dtlz1 problems (both four- and ten
 criteria) were important and noticeable --- about $50\%$ percent after ten
 iterations. The results for dtlz1 are far below the expectations --- the
 default parameters are not appropriate for the problem. A~better result here
-is still possible, however it requires tuning the parameters (see~[inref]).
+is still possible, however it requires tuning the parameters.
 
 \textit{Note:} When box plots are given, they are always charted for the tenth
 iteration. The same applies to comparison tables.
@@ -349,6 +349,8 @@ these results.
 \clearpage{}
 
 \subsection{Noise in the DM's decisions}
+\label{noise-dm2}
+
 
 In order to check the impact of a noise in DM's decisions, experiments were
 performed. The results are presented in figure~\ref{noise} and in the
@@ -439,8 +441,9 @@ solution is still robust with respect to the noise.
 
 \clearpage{}
 \subsection{DomLem parameters}
+\label{domlem-par}
 
-As it was mentioned in [inref], the algorithm for rules generation is left to
+As it was mentioned in~\ref{environ}, the algorithm for rules generation is left to
 the analyst. In this paper both DomLem and AllRules were used. In this section
 the DomLem algorithm is being analyzed.
 

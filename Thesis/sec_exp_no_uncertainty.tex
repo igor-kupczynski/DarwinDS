@@ -2,7 +2,7 @@
 \subsection{Single run analysis}
 In order to observe the algorithm's behavior a detailed analysis of a single
 run is presented in this section. The problem being analyzed is the
-two-criteria binary knapsack problem (see [inref]). The problem is simple and
+two-criteria binary knapsack problem. The problem is simple and
 the number of criteria small in order to focus on the algorithm. Moreover, no
 uncertainty in the form of interval coefficients is considered.
 
@@ -10,10 +10,9 @@ Although this section is illustrated only by an example of a single run on the
 single problem the conclusions drawn here apply globally. Compare with
 further sections of the chapter.
 
-The algorithm runs with default parameters (see [inref]). Exterior loop was
-repeated ten times. This means that ten times results (in the form of
-solutions) were presented to the (mocked) decision maker. The Results were
-recorded.
+The algorithm runs with default parameters. Exterior loop was repeated ten
+times. This means that ten times results (in the form of solutions) were
+presented to the (mocked) decision maker. The Results were recorded.
 
 The same problem was solved in an exact way by a mathematical programming
 solver (glpk~[ref]). One used the supposed utility function as an optimization
@@ -217,7 +216,7 @@ utility function is not known a priori. One can test this algorithm in such an
 artificially created environment and then assume that the behavior will
 resemble the one in real-world problems.
 
-Results of the evaluation on the following problems are given (see~[inref]):
+Results of the evaluation on the following problems are given:
 \begin{itemize}
 \item Two-criteria binary knapsack problem, optimal value $= 4154.441453$.
 \item Two-criteria continuous knapsack problem, optimal value $= 32700.41689$.
@@ -563,7 +562,7 @@ The other parameters are:
 \item Omega ($\omega$) --- decay rate of the mutation.
 \end{itemize}
 
-They are used in the interior loop (see~[inref]).
+They are used in the interior loop (see~\ref{idea-algo}).
 
 \begin{figure}
   \centering
@@ -594,6 +593,8 @@ parameters. However, analyst should try to tune the parameters on a problem
 basis.
 
 \subsection{Noise in the DM's decisions}
+\label{dm-noise}
+
 
 In the experiments performed the decision maker was mocked by a computer
 algorithm. Its choices were based on the assumed supposed utility
