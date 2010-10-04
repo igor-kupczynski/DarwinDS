@@ -120,11 +120,16 @@ class DarwinDialog(window: Window, val sim: Simulation,
   }
 
   private def createTable() = {
-   jTable = new JTable(new DarwinTableModel)
-   jTable.setAutoCreateRowSorter(true)
-   table  = new Component {
-    override lazy val peer = jTable
-   }
+    jTable = new JTable(new DarwinTableModel)
+    jTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF)
+    jTable.setAutoCreateRowSorter(true)
+    for (idx <- 2 to (jTable.getColumnCount - 1)) {
+      val col = jTable.getColumnModel.getColumn(idx)
+      col.setPreferredWidth(85)
+    }
+    table  = new Component {
+      override lazy val peer = jTable
+    }
   }
 
 
