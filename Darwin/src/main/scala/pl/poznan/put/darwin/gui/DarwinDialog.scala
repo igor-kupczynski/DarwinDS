@@ -16,7 +16,9 @@ object DarwinDialog {
     val d = new DarwinDialog(window, sim, history)
     d.setLocationRelativeTo(window)
     d.visible = true
-    d.marked
+    val result = d.marked
+    d.close
+    result
   }
 }
   
