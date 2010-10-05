@@ -1,10 +1,12 @@
 package pl.poznan.put.darwin.model.problem
 import scala.util.parsing.combinator._
+import pl.poznan.put.darwin.utils.TimeUtils
 
 object Parser {
 
   def fromText(text: String): Problem = {
-    val result: ProblemParser.ParseResult[Problem] = ProblemParser.parse(text)
+    println(">>> from text")
+    val result: ProblemParser.ParseResult[Problem] = TimeUtils.time("parse", ProblemParser.parse(text))
     if (result.successful == false) {
       throw new Exception("%s" format result)
     }
