@@ -5,8 +5,7 @@ import pl.poznan.put.darwin.utils.TimeUtils
 object Parser {
 
   def fromText(text: String): Problem = {
-    println(">>> from text")
-    val result: ProblemParser.ParseResult[Problem] = TimeUtils.time("parse", ProblemParser.parse(text))
+    val result: ProblemParser.ParseResult[Problem] = ProblemParser.parse(text)
     if (result.successful == false) {
       throw new Exception("%s" format result)
     }
@@ -18,8 +17,9 @@ object Parser {
     def problem: Parser[Problem] =
         rep(line) ^^ { case ll => Problem(ll) }
 
-    def line: Parser[ProblemElement] =
+    def line: Parser[ProblemElement] = {
         (expr ~ ";") ^^ {case e ~ _ => e}
+    }
 
     def expr: Parser[ProblemElement] =
         utilityFunc ^^ {case e => e} |

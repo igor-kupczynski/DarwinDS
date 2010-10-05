@@ -8,6 +8,7 @@ import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.simulation.Simulation
 import pl.poznan.put.darwin.utils.TimeUtils
+import java.awt.Cursor
 
 class Selectors(main: Window) extends GridPanel(1, 4) {
   hGap = 3
