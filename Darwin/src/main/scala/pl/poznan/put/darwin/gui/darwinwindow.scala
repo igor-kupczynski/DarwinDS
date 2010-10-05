@@ -41,14 +41,14 @@ class DarwinWindow(main: Window) extends BorderPanel {
   private def runSim() = {
     history = new ArrayBuffer[List[EvaluatedSolution]]
     sim = selectors.newSim
-    this.cursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)
+    markBusy
     val evaluated = sim.run(null)
     nextIter(evaluated)
   }
 
 
   def nextIter(evaluated: List[EvaluatedSolution]) {
-    this.cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR)
+    markNotBusy
     history.append(evaluated)
     var marked = DarwinDialog.show(main, sim, history)
     if (marked == null) {
@@ -57,18 +57,40 @@ class DarwinWindow(main: Window) extends BorderPanel {
     if (marked.filter({_.good}).length == 0) {
       running = false
       controls.solve.enabled = true
+      markNotBusy
+    } else {
+      (new SimRunner(this, marked)).execute
+      markBusy
     }
-    (new SimRunner(this, marked)).execute
+  }
+
+  def markBusy = {
     this.cursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)
+    controls.solve.visible = false
+    controls.progressBar.visible = true
+  }
+
+  def markNotBusy = {
+    this.cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR)
+    controls.solve.visible = true
+    controls.progressBar.visible = false
   }
 }
   
 class Controls extends FlowPanel {
 
   val solve = new Button("Solve")
+  val progressBar = new ProgressBar
+  progressBar.indeterminate = true
+  progressBar.label = "                                           "
+  progressBar.labelPainted = true
+  
 
-  def components: List[Publisher] = {solve :: Nil}
+  def components: List[Publisher] = {solve :: progressBar :: Nil}
   contents += solve
+  contents += progressBar
+
+  progressBar.visible = false  
 }
 
 class SimRunner(dW: DarwinWindow,
