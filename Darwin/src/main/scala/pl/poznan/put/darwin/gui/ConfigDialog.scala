@@ -31,10 +31,10 @@ class ConfigDialog(window: Window, val default: ConfigParser)
 
   private val tabs = new TabbedPane
   tabs.pages += new TabbedPane.Page("Main", ConfigTab.mainTab(parser))
-  tabs.pages += new TabbedPane.Page("Algorithm", ConfigTab.algorithmTab(parser))
+  tabs.pages += new TabbedPane.Page("The Algorithm", ConfigTab.algorithmTab(parser))
   tabs.pages += new TabbedPane.Page("Fine Tuning", ConfigTab.finetuneTab(parser))
   tabs.pages += new TabbedPane.Page("Reports", ConfigTab.reportsTab(parser))
-  tabs.pages += new TabbedPane.Page("GUI", ConfigTab.guiTab(parser))
+  tabs.pages += new TabbedPane.Page("GUI Parameters", ConfigTab.guiTab(parser))
 
   contents = new BoxPanel(Orientation.Vertical) {
     contents += tabs
@@ -76,19 +76,19 @@ object ConfigTab {
 
   def mainTab(p: ConfigParser): Panel = {
     val w = List(
-      ("main", "solutioncount", "Number of solutions", new TextField(p.get("main", "solutioncount"))),
-      ("main", "scenariocount", "Number of scenarios", new TextField(p.get("main", "scenariocount"))),
-      ("main", "generationcount", "Number of generations", new TextField(p.get("main", "generationcount"))),
+      ("main", "solutioncount", "The number of solutions", new TextField(p.get("main", "solutioncount"))),
+      ("main", "scenariocount", "The number of scenarios", new TextField(p.get("main", "scenariocount"))),
+      ("main", "generationcount", "The number of generations", new TextField(p.get("main", "generationcount"))),
       ("main", "percentiles", "Percentiles", new TextField(p.get("main", "percentiles"))),
-      ("main", "useavg", "Use average in quantiles", cb(p, "main", "useavg"))
+      ("main", "useavg", "Use an average in quantiles", cb(p, "main", "useavg"))
       )
     create(w, p)
   }
 
   def algorithmTab(p: ConfigParser) = create(List(
-    ("algo", "allrules", "Use all rules instead of DomLEM", cb(p, "algo", "allrules")),
-    ("algo", "domlemconfidencelevel", "DomLEM confidence level", new TextField(p.get("algo", "domlemconfidencelevel"))),
-    ("evolution", "compareusingsupposedutility", "Compare using supposed utility", cb(p, "evolution", "compareusingsupposedutility"))
+    ("algo", "allrules", "Use All Rules instead of DomLEM", cb(p, "algo", "allrules")),
+    ("algo", "domlemconfidencelevel", "The DomLEM confidence level", new TextField(p.get("algo", "domlemconfidencelevel"))),
+    ("evolution", "compareusingsupposedutility", "Compare using the supposed utility function", cb(p, "evolution", "compareusingsupposedutility"))
   ), p)
 
   def finetuneTab(p: ConfigParser) = create(List(
@@ -135,13 +135,13 @@ object ConfigTab {
       val button = new Button("Change")
       val rulesButton = new Button("Change")
 
-      contents += new Label("Report directory")
+      contents += new Label("The reports directory")
       contents += button
-      contents += new Label("Save evolutionary report")
+      contents += new Label("Save the evolutionary report")
       contents += evReportCb
-      contents += new Label("Save decision maker report")
+      contents += new Label("Save the decision maker's report")
       contents += dmReportCb
-      contents += new Label("Rules directory")
+      contents += new Label("The rules directory")
       contents += rulesButton
       contents += new Label("Save rules")
       contents += rulesCb
