@@ -166,8 +166,43 @@ the history toolbar (see\ref{manual_10_history}).
   \label{manual_10_history}
 \end{figure}
 
-
+\clearpage{}
 \section*{The DARWIN .mod file format}
+
+MMO problems for DARWIN are specified in external files. These files are called the
+DARWIN model files and usually have the \texttt{.mod} extension. The
+application contains a~parser for the model files. The parser grammar in
+Extended Backus---Naur Form (EBNF, see~[ref]) is described below.
+
+\lstinputlisting{res/parser.txt}
+
+Comments handled by a~preprocessor are possible --- (1) line comments,
+starting with \texttt{\#}, e.g. \texttt{ \#a-line-comment} and (2) block
+comments, enclosed in \texttt{/* */}. Whitespaces are ignored.
+
+A problem file consists of lines, each one contains a~statement ended by
+a~semicolon (\texttt{;}). A statement can define the supposed utility
+function, a~variable, a~goal or a~constraint. The variables are defining the
+problem domain. They can be continuous (with double floating point precision),
+binary (indicated by a \texttt{(B)} flag) or integer (\texttt{(I)} flag). An
+upper and lower limit of the variable value has to be provided. Each variable
+has a name and can be referred by the name in the succeeding statements. Goals
+are the optimization criteria to be minimized or maximized. They are named
+expressions and therefore can be referred later by the name. Constraints are
+named inequalities. The inequality is not strict and both its sides can be
+expressions. Finally, the supposed utility function is an expression prefixed
+with \texttt{!dec:}. The function is useful only if one wants to mock the
+decision maker.
+
+An example file with the mix-problem definition is included below.
+
+\lstinputlisting{res/presentation.mod}
+
+The expressions are utilizing intervals (e.g. \texttt{[pa:20, 24]}) and the
+supposed utility function is using meaningful percentiles
+(e.g. profit$^{25\%}$: \texttt{<profit, 0.25>}).
+
+
 
 \section*{Compiling DARWIN from the source code}
 
