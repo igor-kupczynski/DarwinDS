@@ -1,0 +1,48 @@
+problem ::= { line }
+
+line ::= statement, ";"
+
+statement ::= utility_function |
+              variable         |
+              goal             |
+              constraint
+
+variable ::= "var" , "[", [var_type_constraint],  floating_point_number, ",",
+                                                  floating_point_number,
+                      "]", identifier
+
+var_type_constraint ::= "(B)" | "(I)"
+
+goal ::= ("min" | "max"), identifier, ":", expression
+
+constraint ::= identifier, ":", expression, (">=" | "<="), expression
+
+utility_function ::= "!dec:", expression
+
+expression ::= term, ("+" | "-"), expression |
+               term
+
+term ::= factor, ("*" | "/"), term |
+         factor
+
+factor ::= floating_point_number      |
+           ("+" | "-" | "ln"), factor |
+           quantile                   |
+           aggregate                  |
+           identifier                 |
+           interval                   |
+           "(", expression, ")"
+
+quantile ::= "<", identifier, ",", floating_point_number, ">"
+
+interval ::= "[", identifier, ":", floating_point_number, ",",
+                                   floating_point_number,
+             "]"
+
+aggregate ::= aggregate_operator, "(", expression, [{ ",", expression}], ")"
+
+aggregate_operator ::= "sum" | "min" | "cos"
+
+floating_point_number ::= ? A floating point number with an optional sign ?
+
+identifier ::= ? A valid Java identifier ?

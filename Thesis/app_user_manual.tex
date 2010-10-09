@@ -206,6 +206,51 @@ supposed utility function is using meaningful percentiles
 
 \section*{Compiling DARWIN from the source code}
 
+It is possible to build a DARWIN binary from the source code. It can be done
+using command line on Windows, Linux and MacOSX.  Instructions are given
+below.
+
+\begin{enumerate}
+
+\item \textbf{Get the source code}. Sources are included in a~disk attached to
+  the thesis. Alternatively, most recent version is stored in the git
+  (see~[ref]) repository and can be cloned with command:\\
+  \texttt{\$ git clone git://github.com/puszczyk/DarwinDS.git}
+\item \textbf{Prepare a build tool}. DARWIN uses sbt (see~[ref])--- a~build
+  tool for Scala. Detailed setup instructions are in the project's
+  webpage. The easiest way is to install Scala (system-dependent, consult
+  \texttt{http://scala-lang.org} for details) and then prepare a script
+  running sbt. Download sbt-launch.jar from the sbt website: \\
+  \texttt{http://simple-build-tool.googlecode.com/files/sbt-launch-0.7.4.jar}
+  \\
+  Put somewhere in \text{PATH} a script with content: \\
+  \texttt{java -Xmx512M -jar `dirname \$0`/sbt-launch.jar "\$@"} \\
+  or (in case of Windows operating system): \\
+  \texttt{set SCRIPT\_DIR=\%~dp0} \\
+  \texttt{java -Xmx512M -jar "\%SCRIPT\_DIR\%sbt-launch.jar" \%*} \\
+  Make the file executable. Further it is assumed that the script is named
+  \texttt{sbt}.
+\item \textbf{Build the DARWIN binaries}. Source code is located in the
+  \texttt{Darwin} directory. First get required dependencies: \\
+  \texttt{\$ cd DarwinDS/Darwin} \\
+  \texttt{\$ sbt} \\
+  \texttt{> download-jars} \\
+  Then run a set of unit-test to check if everything went fine up to this
+  point:\\
+  \texttt{> test} \\
+  This should end with message: \\
+  \texttt{[info] All tests PASSED.} \\
+  \texttt{[success] Successful.} \\
+  Now DARWIN can be compiled: \\
+  \texttt{> compile} \\
+  And run: \\
+  \texttt{> run} \\
+  To create a \texttt{.jar} package type: \\
+  \texttt{> package} \\
+  This will generate DARWIN binaries in a subdirectory named \texttt{target}.
+\end{enumerate}
+
+
 \section*{The Experiment framework} 
 
 %%% Local Variables: 
