@@ -251,7 +251,96 @@ below.
 \end{enumerate}
 
 
-\section*{The Experiment framework} 
+\section*{The experiment framework} 
+
+Instead of a graphical user interface DARWIN can be run in a~batch mode. Which
+is useful for running a~set of experiments. The batch run can be achieved
+through an experiment framework located in an \texttt{Experiment}
+directory. The directory contains a few useful scripts written in Bash and
+Python. As such it requirers MacOSX or a Linux distribution or a Windows
+operating system with Cygwin ([ref]) installed. The utility scripts are
+described below:
+
+\begin{itemize}
+\item \texttt{runTestPlan.py} --- a script for running set of tests. As an
+  input it requires darwin location, problem file, darwin configuration and
+  test plan specification. Problem file is a DARWIN .mod problem
+  file. Configuration is an .ini file with structure as follows:
+  \begin{lstlisting}
+    [section]
+    option1 = value1
+    option2 = value2
+    (...)
+    optionN = valueN
+  \end{lstlisting}
+
+  
+  Required sections and options are described in the
+  table~\ref{t:params}. Test plan specification is a text file with
+  a~following structure:
+  \begin{lstlisting}
+    >test_name_1/number-of-runs
+    [section-to-override]
+    option-to-override1 = value1
+    (...)
+    >test_name_N/number-of-runs
+    (...)
+  \end{lstlisting}
+
+  Each test is run \texttt{number-of-runs} times. For each test one can
+  specify a~list of options from the default configuration to be
+  overridden. It is useful for testing an influence of a parameter. Example
+  test plan is presented below.
+  \begin{lstlisting}
+    >delta005/15
+    [main]
+    delta = 0.05
+
+    >delta015/15
+    [main]
+    delta = 0.15
+
+    >delta020/15
+    [main]
+    delta = 0.20
+
+    >delta040/15
+    [main]
+    delta = 0.40
+  \end{lstlisting}
+
+  This plan will run DARWIN fifteen times for each \texttt{delta} value. Run
+  reports are saved in a directory named after current date and time. Test
+  names are the names of subdirectories.
+
+\item \texttt{genCharts.sh} --- a script for charting run reports. It requires
+  installing the \texttt{R} environment (see~[ref]) with \texttt{ggplot2} and
+  \texttt{reshape} libraries. The charts to be generated are included in the
+  \texttt{Chart} directory of the DARWIN distribution. The usage is: \\
+  \texttt{\$ genCharts.sh --brief/--full criteria-no best-val charts-dir
+    testplan-out-dir} \\
+  \texttt{--brief/--full} decides whether all charts should be generated or
+  only the overview chart. \texttt{criteria-no} is a~number of criteria in the
+  problem. \texttt{best-val} --- optimal value of the problem, if can not be
+  given should be set to $0$. \texttt{charts-dir} is the directory with the
+  \texttt{R} charts to be generated. Finally, \texttt{testplan-out-dir} is
+  output directory of the \texttt{runTestPlan.py} script.
+
+  The script will generate distinct charts for each test run. If one wants a
+  comparison between the tests, then \texttt{./genSummaryChart.sh} should be
+  used instead.
+
+\item \texttt{genSummaryChart.sh} --- a script for charting a comparison
+  between different test runs. The usage is similar to \texttt{genCharts.sh},
+  however number of criteria can be omitted, because is irrelevant to the
+  task. The usage is: \\
+  \texttt{\$ ./genSummaryChart.sh best-val charts-dir testplan-out-dir
+    problem-name}
+
+
+
+\end{itemize}
+
 
 %%% Local Variables: 
 %%% mode: latex
