@@ -96,7 +96,7 @@ specific region of Pareto-front --- the most relevant one to the decision
 maker. In this way IMO and EMO are complementing each other.
 
 \begin{figure}
-  \centering \includegraphics[width=1.2\textwidth]{img/pareto}
+  \centering \includegraphics[scale=0.65]{img/pareto}
   \caption{Pareto-front and area preferred by the decision maker}
   \label{pareto}
 \end{figure}
@@ -126,7 +126,7 @@ uncertainty scenarios. DARWIN allows to give the coefficients in a form of
 intervals.
 
 \begin{figure}
-  \centering \includegraphics[width=0.5\textwidth]{img/scenario}
+  \centering \includegraphics[scale=0.5]{img/scenario}
   \caption{Scenario --- set of intervals fixed on specific values}
   \label{scenario}
 \end{figure}
@@ -139,7 +139,7 @@ case all the considered solutions are evaluated over a~set of uncertainty
 scenarios.
 
 \begin{figure}
-  \centering \includegraphics[width=0.8\textwidth]{img/percentile}
+  \centering \includegraphics[scale=0.6]{img/percentile}
   \caption{Percentiles of the normal distribution}
   \label{percentiles}
 \end{figure}
@@ -222,55 +222,6 @@ is illustrated in fig.~\ref{fig:darwin-ext}.
 
 \begin{figure} 
   \begin{center}
-    % \begin{tikzpicture}
-    %   \matrix[row sep=10mm, column sep=10mm]{
-
-        
-    %     \node (gen)     [roundrect] {
-    %       \begin{tabular}{c}
-    %         (0) Generate:\\
-    %         * solutions\\
-    %         * scenarios
-    %     \end{tabular}}; &
-
-    %     \node (presentation) [greenrect] {
-    %       \begin{tabular}{c}
-    %         (1) Presentation \\
-    %         of results
-    %     \end{tabular}}; &
-
-    %     \node (eval) [greenrect] {
-    %       \begin{tabular}{c}
-    %         (2) DM\\
-    %         evaluation
-    %     \end{tabular}}; \\
-
-    %     \node (stop) [redrect] {
-    %       \begin{tabular}{c}
-    %         STOP
-    %     \end{tabular}}; &
-
-    %     \node (inner) [greenrect] {
-    %       \begin{tabular}{c}
-    %         (4) Evolutionary \\
-    %         loop
-    %     \end{tabular}}; &
-
-    %     \node (rules) [greenrect] {
-    %       \begin{tabular}{c}
-    %         (3) Rules \\
-    %         generation
-    %     \end{tabular}}; \\
-    %   };
-    %   \path (gen) edge[->] (presentation);
-    %   \path (presentation) edge[->] (eval);
-    %   \path (eval) edge[->] (rules);
-    %   \path (rules) edge[->] (inner);
-    %   \path (inner) edge[->] (presentation);
-    %   \path (presentation) edge[->] (stop);
-    % \end{tikzpicture}
-    % \caption{DARWIN states and transitions. Steps (1) - (4) are forming
-    %   exterior loop and step (4) is the interior loop.
     \includegraphics[scale=0.65]{img/darwin.pdf}
     \caption{Activity diagram for DARWIN. ``Perform an evolutionary
       optimization'' step is forming the interior loop 
