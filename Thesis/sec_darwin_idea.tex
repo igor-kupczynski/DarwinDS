@@ -3,6 +3,12 @@ be described in the following paragraph.
 
 \section{Background}
 
+\begin{figure}
+  \centering \includegraphics[scale=0.65]{img/pareto}
+  \caption{Pareto-front and area preferred by the decision maker}
+  \label{pareto}
+\end{figure}
+
 The method combines two different approaches --- Interactive Multi-Objective
 Optimization (IMO, see~\ref{sec_ia_in_moo}) and Evolutionary Multi-Objective
 Optimization (EMO, see~\ref{sec_ea_in_moo}).
@@ -14,46 +20,6 @@ answers. Preference information is extracted on the basis of these
 answers. Algorithm can then use the knowledge to produce solutions better
 fitted to his or her preferences. The IMO framework is presented in
 fig.~\ref{fig:imoprocess_uml}.
-
-%\begin{figure} 
-%  \begin{center}
-    % \begin{tikzpicture}
-    %   \matrix[row sep=10mm, column sep=10mm]{
-
-        
-    %     \node (gen)     [roundrect] {
-    %       \begin{tabular}{c}
-    %         1. Generate set\\
-    %         of possible solutions
-    %     \end{tabular}}; &
-
-    %     \node (ask) [roundrect] {
-    %       \begin{tabular}{c}
-    %         2. Ask the DM \\
-    %         to indicate the `good' ones
-    %     \end{tabular}}; \\
-
-    %     \node (use) [roundrect] {
-    %       \begin{tabular}{c}
-    %         4. Improve solution set
-    %     \end{tabular}}; &
-
-    %     \node (store) [roundrect] {
-    %       \begin{tabular}{c}
-    %         3. Extract \\
-    %         preference information
-    %     \end{tabular}}; \\
-    %   };
-    %   \path (gen) edge[->] (ask);
-    %   \path (ask) edge[->] (store);
-    %   \path (store) edge[->] (use);
-    %   \path (use) edge[->] (gen);
-    % \end{tikzpicture}
- %   \includegraphics[scale=0.65]{img/imoprocess}
-%    \caption{Typical Interactive Multiobjective
-%      Optimization process framework\label{fig:interactive-process}}
-%  \end{center} 
-%\end{figure} 
 
 The rationale behind the interactive process is that the decision maker is
 interested only in a small subset of preferred solutions or even in a single
@@ -94,12 +60,6 @@ EMO involving the decision maker in the procedure results in gathering
 preference information. This information allows the procedure to focus on a
 specific region of Pareto-front --- the most relevant one to the decision
 maker. In this way IMO and EMO are complementing each other.
-
-\begin{figure}
-  \centering \includegraphics[scale=0.65]{img/pareto}
-  \caption{Pareto-front and area preferred by the decision maker}
-  \label{pareto}
-\end{figure}
 
 This is important because of the ``human factor''. If the number of solutions
 becomes huge, the DM can not effectively analyze them and find the one that
