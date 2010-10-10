@@ -17,38 +17,39 @@ fig.~\ref{fig:interactive-process}.
 
 \begin{figure} 
   \begin{center}
-    \begin{tikzpicture}
-      \matrix[row sep=10mm, column sep=10mm]{
+    % \begin{tikzpicture}
+    %   \matrix[row sep=10mm, column sep=10mm]{
 
         
-        \node (gen)     [roundrect] {
-          \begin{tabular}{c}
-            1. Generate set\\
-            of possible solutions
-        \end{tabular}}; &
+    %     \node (gen)     [roundrect] {
+    %       \begin{tabular}{c}
+    %         1. Generate set\\
+    %         of possible solutions
+    %     \end{tabular}}; &
 
-        \node (ask) [roundrect] {
-          \begin{tabular}{c}
-            2. Ask the DM \\
-            to indicate the `good' ones
-        \end{tabular}}; \\
+    %     \node (ask) [roundrect] {
+    %       \begin{tabular}{c}
+    %         2. Ask the DM \\
+    %         to indicate the `good' ones
+    %     \end{tabular}}; \\
 
-        \node (use) [roundrect] {
-          \begin{tabular}{c}
-            4. Improve solution set
-        \end{tabular}}; &
+    %     \node (use) [roundrect] {
+    %       \begin{tabular}{c}
+    %         4. Improve solution set
+    %     \end{tabular}}; &
 
-        \node (store) [roundrect] {
-          \begin{tabular}{c}
-            3. Extract \\
-            preference information
-        \end{tabular}}; \\
-      };
-      \path (gen) edge[->] (ask);
-      \path (ask) edge[->] (store);
-      \path (store) edge[->] (use);
-      \path (use) edge[->] (gen);
-    \end{tikzpicture}
+    %     \node (store) [roundrect] {
+    %       \begin{tabular}{c}
+    %         3. Extract \\
+    %         preference information
+    %     \end{tabular}}; \\
+    %   };
+    %   \path (gen) edge[->] (ask);
+    %   \path (ask) edge[->] (store);
+    %   \path (store) edge[->] (use);
+    %   \path (use) edge[->] (gen);
+    % \end{tikzpicture}
+    \includegraphics[scale=0.65]{img/imoprocess}
     \caption{Typical Interactive Multiobjective
       Optimization process framework\label{fig:interactive-process}}
   \end{center} 
@@ -415,6 +416,7 @@ score is calculated in a~quantile space instead of original objective space,
 e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots \times $
 $f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k$. The procedure is shown in
 alg.~\ref{alg:crowddist}.
+
 
 \begin{algorithm}
   \caption{Procedure calculating crowding distance}\label{alg:crowddist}
