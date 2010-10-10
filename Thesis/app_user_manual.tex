@@ -337,7 +337,8 @@ are described below:
   the problem. \texttt{best-val} --- an optimal value of the problem, if can
   not be given should be set to $0$. \texttt{charts-dir} is the directory with
   the \texttt{R} charts to be generated. Finally, \texttt{testplan-out-dir} is
-  an output directory of the \texttt{runTestPlan.py} script.
+  an output directory of the \texttt{runTestPlan.py} script. Available types
+  of charts are presented in figure~\ref{chart_examples}.
 
   The script will generate distinct charts for each test run. If one wants a
   comparison between the tests, then \texttt{./genSummaryChart.sh} should be
@@ -348,7 +349,8 @@ are described below:
   however the number of criteria can be omitted, because is irrelevant to the
   task. The usage is: \\
   \texttt{\$ ./genSummaryChart.sh best-val charts-dir testplan-out-dir
-    problem-name}
+    problem-name}\\
+  Available types of charts are presented in figure~\ref{chart_examples2}.
 
 
 

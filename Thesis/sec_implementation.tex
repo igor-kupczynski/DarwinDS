@@ -16,17 +16,10 @@ implementation and an experiment framework development.
 \label{environ}
 
 The environment in which DARWIN has to function is not empty; thus it has to
-be taken into account during the development of the implementation. It is
-shown in~fig.~\ref{environ}. DARWIN is a~realization of an interactive
-process, therefore a way of communication with the decision maker is
-required. Another restriction is imposed by the need of inducing decision
-rules from the DM's evaluated examples of solutions.
-
-\begin{figure}
-  \centering \includegraphics[scale=0.5]{img/environ}
-  \caption{DARWIN's environment}
-  \label{environ}
-\end{figure}
+be taken into account during the development of the implementation. DARWIN is
+a~realization of an interactive process, therefore a way of communication with
+the decision maker is required. Another restriction is imposed by the need of
+inducing decision rules from the DM's evaluated examples of solutions.
 
 The decision maker has to provide a problem he or she wants to solve. It can
 be done in a model file. If one wants to change the default parameters'
@@ -132,7 +125,7 @@ different syntax Scala programs are usually shorter and easier to read than
 their Java counterparts, especially when dealing with mathematical operations.
 
 \begin{figure}
-  \centering \includegraphics[width=0.9\textwidth]{img/packages}
+  \centering \includegraphics[scale=0.45]{img/packages}
   \caption{The package structure of DARWIN}
   \label{packages}
 \end{figure}
@@ -281,18 +274,11 @@ can immensely simplify the analysis.
 R is an environment for statistical computing ([ref]). The program along with
 ggplot library ([ref]) has been used for the automatic chart generation. The R
 scripts can import the CSV reports, aggregate and process the data and finally
-generate a~chart. The whole experiment process is presented in
-fig.~\ref{framework}.
+generate a~chart.
 
 First, a user prepares a~test plan and sends it to the framework. The
 framework is repeatedly running DARWIN with a~mocked decision maker. Resulting
 reports are then processed by the R~scripts. As a result charts are generated.
-
-\begin{figure}
-  \centering \includegraphics[width=\textwidth]{img/framework}
-  \caption{The experiment process}
-  \label{framework}
-\end{figure}
 
 It is possible to generate the following type of charts (they are shown in
 fig.~\ref{chart_examples} and \ref{chart_examples2}).

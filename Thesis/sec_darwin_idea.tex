@@ -222,55 +222,59 @@ is illustrated in fig.~\ref{fig:darwin-ext}.
 
 \begin{figure} 
   \begin{center}
-    \begin{tikzpicture}
-      \matrix[row sep=10mm, column sep=10mm]{
+    % \begin{tikzpicture}
+    %   \matrix[row sep=10mm, column sep=10mm]{
 
         
-        \node (gen)     [roundrect] {
-          \begin{tabular}{c}
-            (0) Generate:\\
-            * solutions\\
-            * scenarios
-        \end{tabular}}; &
+    %     \node (gen)     [roundrect] {
+    %       \begin{tabular}{c}
+    %         (0) Generate:\\
+    %         * solutions\\
+    %         * scenarios
+    %     \end{tabular}}; &
 
-        \node (presentation) [greenrect] {
-          \begin{tabular}{c}
-            (1) Presentation \\
-            of results
-        \end{tabular}}; &
+    %     \node (presentation) [greenrect] {
+    %       \begin{tabular}{c}
+    %         (1) Presentation \\
+    %         of results
+    %     \end{tabular}}; &
 
-        \node (eval) [greenrect] {
-          \begin{tabular}{c}
-            (2) DM\\
-            evaluation
-        \end{tabular}}; \\
+    %     \node (eval) [greenrect] {
+    %       \begin{tabular}{c}
+    %         (2) DM\\
+    %         evaluation
+    %     \end{tabular}}; \\
 
-        \node (stop) [redrect] {
-          \begin{tabular}{c}
-            STOP
-        \end{tabular}}; &
+    %     \node (stop) [redrect] {
+    %       \begin{tabular}{c}
+    %         STOP
+    %     \end{tabular}}; &
 
-        \node (inner) [greenrect] {
-          \begin{tabular}{c}
-            (4) Evolutionary \\
-            loop
-        \end{tabular}}; &
+    %     \node (inner) [greenrect] {
+    %       \begin{tabular}{c}
+    %         (4) Evolutionary \\
+    %         loop
+    %     \end{tabular}}; &
 
-        \node (rules) [greenrect] {
-          \begin{tabular}{c}
-            (3) Rules \\
-            generation
-        \end{tabular}}; \\
-      };
-      \path (gen) edge[->] (presentation);
-      \path (presentation) edge[->] (eval);
-      \path (eval) edge[->] (rules);
-      \path (rules) edge[->] (inner);
-      \path (inner) edge[->] (presentation);
-      \path (presentation) edge[->] (stop);
-    \end{tikzpicture}
-    \caption{DARWIN states and transitions. Steps (1) - (4) are forming
-      exterior loop and step (4) is the interior loop.\label{fig:darwin-ext}}
+    %     \node (rules) [greenrect] {
+    %       \begin{tabular}{c}
+    %         (3) Rules \\
+    %         generation
+    %     \end{tabular}}; \\
+    %   };
+    %   \path (gen) edge[->] (presentation);
+    %   \path (presentation) edge[->] (eval);
+    %   \path (eval) edge[->] (rules);
+    %   \path (rules) edge[->] (inner);
+    %   \path (inner) edge[->] (presentation);
+    %   \path (presentation) edge[->] (stop);
+    % \end{tikzpicture}
+    % \caption{DARWIN states and transitions. Steps (1) - (4) are forming
+    %   exterior loop and step (4) is the interior loop.
+    \includegraphics[scale=0.65]{img/darwin.pdf}
+    \caption{Activity diagram for DARWIN. ``Perform an evolutionary
+      optimization'' step is forming the interior loop 
+      \label{fig:darwin-ext}}
   \end{center} 
 \end{figure}
 
