@@ -10,13 +10,13 @@ Optimization (EMO, see~\ref{sec_ea_in_moo}).
 In the IMO paradigm one wants to elicit decision maker's preferences by
 involving him or her in the process. This is done by a systematic dialog with
 the decision maker (the DM). Questions are being asked and the DM provides
-answers. Preference information is extracted on the basis of these answers. Algorithm
-can then use the knowledge to produce solutions better fitted to his or her
-preferences. The IMO framework is presented in
-fig.~\ref{fig:interactive-process}.
+answers. Preference information is extracted on the basis of these
+answers. Algorithm can then use the knowledge to produce solutions better
+fitted to his or her preferences. The IMO framework is presented in
+fig.~\ref{fig:imoprocess_uml}.
 
-\begin{figure} 
-  \begin{center}
+%\begin{figure} 
+%  \begin{center}
     % \begin{tikzpicture}
     %   \matrix[row sep=10mm, column sep=10mm]{
 
@@ -49,11 +49,11 @@ fig.~\ref{fig:interactive-process}.
     %   \path (store) edge[->] (use);
     %   \path (use) edge[->] (gen);
     % \end{tikzpicture}
-    \includegraphics[scale=0.65]{img/imoprocess}
-    \caption{Typical Interactive Multiobjective
-      Optimization process framework\label{fig:interactive-process}}
-  \end{center} 
-\end{figure} 
+ %   \includegraphics[scale=0.65]{img/imoprocess}
+%    \caption{Typical Interactive Multiobjective
+%      Optimization process framework\label{fig:interactive-process}}
+%  \end{center} 
+%\end{figure} 
 
 The rationale behind the interactive process is that the decision maker is
 interested only in a small subset of preferred solutions or even in a single
@@ -78,7 +78,7 @@ its user does not need to have expert knowledge in the decision support field.
 
 Evolutionary Multi-Objective Optimization (EMO) provides a computational
 engine for generating new, better solutions from existing ones --- better in
-sense of objective function defined in the solution space. Most of the EMO
+sense of an objective function defined in the solution space. Most of the EMO
 methods are approximating Pareto-optimal front by a set of solutions. So one
 solution is better than the other if the former Pareto-dominates the
 latter. In case of two equivalent ones another factors have to be taken into
