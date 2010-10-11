@@ -81,8 +81,59 @@ solution is given, but also the problem understanding by the DM is better.
 \section{Evolutionary Approaches to MOO}
 \label{sec_ea_in_moo}
 
+\begin{figure}
+  \centering \includegraphics[scale=0.65]{img/eo}
+  \caption{An evolutionary optimization procedure}
+  \label{eo}
+\end{figure}
 
-\section{Dominance-Based Rough Set Approach in MOO}
+In 1859, Charles Darwin published his work ``On the origin of
+species''~\cite{Dar1859}. He introduced a~scientific theory describing the
+evolution of species through the process called natural selection.  According
+to the theory, a trait can become less or more common in the population in
+dependence on its effect upon the survival and reproduction of the individual
+bearing the trait.
+
+This idea can be easily transfered to the optimization field. A solution to
+the problem --- that is, the set of values of problem's decision variables ---
+is a~single individual in the population. The problem is the environment ---
+the higher te solution evaluation on a~given problem, the better it is fitted
+to the environment. A~better fitness means higher chance that the traits of
+a~solution will be present in the next iteration (an analogue of reproduction
+success rate). First successful applications of the idea were done in the
+electrical engineering field (see~\cite{Fog64}) and in the fluid mechanics
+(see~\cite{Rec65, Sch65}).
+
+The main differences between the classical and the evolutionary optimization
+(EO) are (see~\cite{Deb08}):
+
+\begin{itemize}
+\item \textbf{Population-based}. An EO procedure uses a~population of
+  solutions (a~population approach), whereas the classical algorithms
+  maintains one solution at a~time (a~point approach). It enables an algorithm
+  to maintain multiple optimal solutions, possible from different parts of the
+  solution space. Unfortunately it rises the memory and computational
+  footprint of an EO algorithm.
+\item \textbf{Stochastic operators}. An EO procedure uses stochastic operators
+  (e.g. selection, crossover or mutation) instead of deterministic ones.
+\item \textbf{Gradient information}. An EO procedure does not usually use
+  gradient information directly in performing a~search. This means that the
+  procedure is immune to local optima in a~search space. However, the EO
+  procedure may not be competitive with dedicated gradient approach.
+\end{itemize}
+
+
+
+The basic evolutionary optimization procedure is shown in figure~\ref{eo}.
+
+TODO: Describe the process
+
+TODO: MMO
+
+TODO: NSGA2
+
+
+\Section{Dominance-Based Rough Set Approach in MOO}
 \label{sec_drsa_in_moo}
 
 
