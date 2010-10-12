@@ -140,10 +140,49 @@ neighborhood. Finally, the elitism operator combines the old population with
 the newly created offspring. Coping best solutions from the former ensures the
 algorithm has a monotonically non-degrading value of the best solution.
 
+\begin{figure}
+  \centering \includegraphics[scale=0.55]{img/nsga}
+  \caption{The NSGA-II evaluation}
+  \label{nsga}
+\end{figure}
 
-TODO: MMO
+The choice of a~fitness function is critical to the algorithm's
+performance. In case of a~problem with single criterion this is trivial ---
+a~value of the goal can be used. However, in the case of the Multi-Objective
+Optimization, there are a number of objective functions to be
+optimized. A~possible approach to the problem is to use the dominance
+principle (\cite{Gol89}):
 
-TODO: NSGA2
+\textit{A solution x is said to dominate the other solution y, if both the
+  following conditions are true:}
+\begin{enumerate}
+\item \textit{The solution x is no worse than y in all objectives. Thus, the
+    solutions are compared based on their objective function values.}
+\item \textit{The solution x is strictly better than y in at least one
+    objective.}
+\end{enumerate}
+
+All the solutions that are non-dominated are forming the Pareto-frontier of
+the problem.
+
+According to~\cite{Deb08} there are two ideal goals of the MOO:
+\begin{enumerate}
+\item Find a set of solutions which lie on the Pareto-optimal front, and
+\item Fina a set of solutions which are diverse enough to represent the entire
+  range of the Pareto-optimal front.
+\end{enumerate}
+
+An example of the Evolutionary Multi-objective Optimization (EMO) algorithm is
+the NSGA-II (\cite{Deb00}). The basic idea behind the algorithm is to assign
+each solution in a~population to a~number of different Pareto-frontiers. All
+non-dominated individuals are assigned to first Pareto-frontier and then
+removed from the population. All non-dominated individuals after the removal
+are then assigned to second frontier. The process repeats until there are
+individuals in the population. The lower the number of the~frontier, which an
+individual belongs to, the higher the fitness function for it. In case of draw
+the crowding score this taken into account --- the lesser the crowd in the
+solution's neighborhood in an objective space, the better the solution's
+evaluation. This is illustrated in fig.~\ref{nsga}.
 
 
 \section{Dominance-Based Rough Set Approach in MOO}
