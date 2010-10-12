@@ -122,18 +122,31 @@ The main differences between the classical and the evolutionary optimization
   procedure may not be competitive with dedicated gradient approach.
 \end{itemize}
 
+The basic evolutionary optimization procedure is shown in figure~\ref{eo}. The
+algorithm starts with creating a~population of solutions. Usually the
+population is created at random within bounds of decision variables. Then
+a~succesion of generations starts. The populations is updated by a~sequence of
+operators.
 
+First, the population is evaluated. The evaluation means establishing relative
+preference order, that is sorting solutions from best to worst. After the
+evaluation the algorithm chooses solutions to fill the mating pool. The better
+the solution the higher the probability to be chosen. Then, the variation
+operator is being used. It is a series of steps, such as crossover or
+mutation, generating succeeding generation from parents in the mating
+pool. Crossover ensures that parents' traits will be present in the next
+generation while mutation acts as local search in the solution's
+neighborhood. Finally, the elitism operator combines the old population with
+the newly created offspring. Coping best solutions from the former ensures the
+algorithm has a monotonically non-degrading value of the best solution.
 
-The basic evolutionary optimization procedure is shown in figure~\ref{eo}.
-
-TODO: Describe the process
 
 TODO: MMO
 
 TODO: NSGA2
 
 
-\Section{Dominance-Based Rough Set Approach in MOO}
+\section{Dominance-Based Rough Set Approach in MOO}
 \label{sec_drsa_in_moo}
 
 
