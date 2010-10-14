@@ -1,7 +1,13 @@
+Often the model of a~problem contains multiple objectives. This is the case
+when goals are conflicting and thus, cannot be easily converted to a~single
+objective. The decision support when more than one goal is considered is not
+an easy task to perform, however there are several developed approaches. These
+approches are described in the chapter.
+
 \section{Interactive Approaches in MOO}
 \label{sec_ia_in_moo}
 
-The Multi-Objectie Optimization Problems usually have multiple Pareto-optimal
+The Multi-Objectie Optimization problems usually have multiple Pareto-optimal
 solutions. However, the Decision Maker is usually interested in a~single
 recommendation --- a~single solution he or she may implement. The
 most-preferred solution is a solution from the Pareto-frontier of the problem,
@@ -187,6 +193,103 @@ evaluation. This is illustrated in fig.~\ref{nsga}.
 
 \section{Dominance-Based Rough Set Approach in MOO}
 \label{sec_drsa_in_moo}
+
+A rough set is an approximation of a~conventional set --- it is a pair of set
+being a~lower and an upper approximation of the original set
+(\cite{Paw82}). The lower approximation is a~set of all objects that
+unambiguously can be classified as members of the target set. On the other
+hand the upper approximation is a~set containing objects that cannot be
+unambiguously classified as members of the complement of the target set.
+A~boundary region is the part of solution space being part of the upper
+approximation, but not of the lower one.
+
+\begin{figure}
+  \centering \includegraphics[scale=0.5]{img/drsa}
+  \caption{An example of the DRSA approach}
+  \label{drsa}
+\end{figure}
+
+Dominance-based Rough Set Approach (DRSA) is an extension of the rough set
+theory introduced in~\cite{GMS01, GMS02, GMS05}. The indiscernibility relation
+is replaced by the dominance relation (defined in the former section). DRSA is
+applicable in the decision support field.
+
+DRSA can model the situations in which there are objects --- vectors of values
+in the decision variable space --- and each object belongs to one of the
+decision classes. The classes are sorted in preference order. An example is
+shown in figure~\ref{drsa}.
+
+The data in Dominance-based Rough Set Approach are often presented in
+a~decision table. The objects being considered are written in table rows, the
+decision attributes are table columns. The last column is a~classification of
+an object to a decision class. A formal definition of the decision table can
+be easily found in the literature. An example is given in
+table~\ref{t:dec_tab-example}.
+
+\begin{table}
+  \centering
+  \begin{tabular}{c c c c | c}
+   \hline
+   Student & Mathematics & Physics & Literature & Overall class \\
+   \hline
+   \hline
+   1 & good & medium & bad & bad \\
+   2 & medium & medium & bad & medium \\
+   3 & medium & medium & medium & medium \\
+   4 & medium & medium & medium & good \\
+   5 & good & medium & good & good \\
+   6 & good & good & good & good \\
+   7 & bad & medium & medium & bad \\
+   8 & bad & bad & medium & bad \\
+   \hline
+  \end{tabular}
+  \caption{An example of the decision table}
+  \label{t:dec_tab-example}
+\end{table}
+
+On the basis of the table, decision rules may be induced. They are generalized
+description of the knowledge represented in the table. A~decision rule is a
+Horn clause (see~\cite{Hor51}) in form of \textit{``if~..., then~...''}. The
+former part is called \textit{condition} and the latter ---
+\textit{consequent}. The condition part compares a~value of an object
+attributes with given thresholds and the consequent part is the object
+classification (to the union of classes) when the condition part holds. Rules
+can be either \textit{certain} --- based on objects from the lower
+approximation of the class, \textit{possible} --- based on objects from the
+upper approximation and \textit{approximate} --- based on the boundary
+region. Each decision rule should be minimal, i.e. cardinality of the set of
+conditions should be minimal.
+
+Example rules generated from the table~\ref{t:dec_tab-example}:
+\begin{enumerate}
+\item If \textit{Literature $\ge$ good} then \textit{Student $\ge$ good},
+\item If \textit{Mathematics $\le$ bad} and \textit{Physic $\le$ medium} then
+  \textit{Student $\le$ bad},
+\item If \textit{Mathematics $\ge$ medium} then \textit{Student $\ge$ medium}
+  (possible).
+\end{enumerate}
+
+DRSA can handle uncertainty and contradictions in the data, thus it is a~good
+model for a wide class of problems. For each rule $r$ given in from $\Phi \to
+\Psi$ following measures are defined:
+\begin{itemize}
+\item Support: $\textit{supp}(\Phi, \Psi) = \textit{cardinality}(||\Phi \land
+  \Psi||)$ --- is the number of objects for which the condition of the rule
+  holds and the object classification is consistent with the consequent of the
+  rule.
+\item Confidence: $\textit{confidence}(\Phi, \Psi) =
+  \dfrac{\textit{supp}(\Phi, \Psi)}{\textit{cardinality}(||\Phi||)}$ --- is
+  the number of objects supporting the rule in relation to the number of
+  objects for which the rule's condition holds.
+\end{itemize}.
+
+Objects supporting rule$_3$ are \{S2, S3, S4, S5\}, but the condition part
+holds also for S1. The support is: $\textit{supp}(r_3) = \frac{4}{5} = 0.8$.
+
+To extract all rules from the decision table one can use the All Rules
+algoritm (an optimized version is described in~\cite{Zur01}). The other option
+is to use the DomLem (\cite{GMS+01}) algorithm generating minimal set of rules
+covering all the objects from a given decision table.
 
 
 %%% Local Variables: 
