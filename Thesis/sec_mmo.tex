@@ -1,22 +1,22 @@
-Often the model of a~problem contains multiple objectives. This is the case
-when goals are conflicting and thus, cannot be easily converted to a~single
-objective. The decision support when more than one goal is considered is not
-an easy task to perform, however there are several developed approaches. These
-approches are described in the chapter.
+Often a~model of a~problem contains multiple objectives. This is the case when
+conflicting goals cannot be easily converted to a~single objective. The
+decision support when more than one goal is considered to be not an easy task
+to perform, however, several approaches exists. These approches are described
+in the chapter.
 
 \section{Interactive Approaches in MOO}
 \label{sec_ia_in_moo}
 
 The Multi-Objectie Optimization problems usually have multiple Pareto-optimal
 solutions. However, the Decision Maker is usually interested in a~single
-recommendation --- a~single solution he or she may implement. The
+recommendation --- the single solution he or she may implement. The
 most-preferred solution is a solution from the Pareto-frontier of the problem,
 for which the DM is convinced it is his or her best option.
 
-To find the most preferred solution an interaction with the DM is
-necessary. A~problem solver needs to know the Decision Maker preferences in
-order to differentiate Pareto-optimal solutions. Without the preferences they
-have to be considered equal.
+To find the most preferred solution, an interaction with the DM is
+necessary. A~problem solver needs to know the Decision Maker's preferences in
+order to differentiate Pareto-optimal solutions. Without the preferences all
+solutions on the Pareto-frontier have to be considered equal.
 
 The DM can build his or her global preference model before an algorithm
 solving the problem starts and give this model as an input. This is call the
@@ -25,7 +25,7 @@ hard for the Decision Maker to give the full preference structure. It is
 possible also, that he or she will change his or her preferences after
 evaluating solutions received from the problem-solver. 
 
-The interactive approach overcome this weakness by involving the DM in the
+The interactive approach overcome this weaknesses by involving the DM in the
 process. A~basic structure of the approach is shown in
 figure~\ref{imoprocess_uml}. At first, an initial set of solutions is
 generated. It can be a subset of the Pareto-frontier or just a set of feasible
@@ -45,7 +45,7 @@ Maker. This can save the computational cost, because the algorithm doesn't
 have to go through the whole search space.
 
 Again, new solutions, probably better fitted to the DM's preferences are
-generated and the algorithm shows them to he or she. If he or she finds it
+generated and the algorithm shows them to him or her. If he or she finds it
 satisfactory (or a~stop condition is met) then the algorithm stops. Otherwise
 it advances to the next iteration.
 
@@ -57,25 +57,25 @@ in-depth description):
   benefit on another criterion (or criteria). These methods ask the DM
   questions about the trade-offs he or she can accept and then, a~preference
   model is inferred based on the tread-offs.
-\item \textbf{Reference point approaches} where the DM specifies bounds on
-  values of the objective functions (i.e. reference points) and can observe
-  the effect of this points on the generated solutions.
+\item \textbf{Reference point approaches} --- the DM specifies bounds on
+  values of the objective functions (i.e. reference points) and then, he or
+  she can observe the effect of the bounds on the generated solutions.
 \item \textbf{Classification-based methods}. It is not possible to improve a
   value of a goal of a solution from the Pareto-frontier without worsening
-  another goals of the solutions. In the classification-based methods the DM
-  is asked to select goals that can be impaired and the ones that he or she
-  wants to improve.
+  other goals of the solutions. In the classification-based methods the DM is
+  asked to select goals that can be impaired and the ones that he or she wants
+  to improve.
 \end{itemize}
 
 The interactive approach requires the Decision Maker's collaboration during
-the process, however it has strong benefits to justify this
+the process, however the approach offers strong benefits to justify this
 dedication. Clearly, the computational cost required is lower than in other
 approaches, because there is no need to evaluate whole solution space, just
-its small subset. The DM may not be able to express global structure of his or
-her preferences up front. It is also possible that his or her preferences will
-change along with the change in problem understanding. During the interactive
-process the DM has an immediate feedback --- he or she may see how the
-decisions are affecting problem solutions.
+its small subset. The DM may not be able to express a~global structure of his
+or her preferences up front. It is also possible that his or her preferences
+will change along with the change in understanding of the problem. During the
+interactive process the DM has an immediate feedback --- he or she may see how
+the decisions are affecting problem solutions.
 
 One can say that solving a Multi-Objective Optimization problem is a
 constrictive process, where the Decision Maker learns more about the problem
@@ -97,27 +97,27 @@ In 1859, Charles Darwin published his work ``On the origin of
 species''~\cite{Dar1859}. He introduced a~scientific theory describing the
 evolution of species through the process called natural selection.  According
 to the theory, a trait can become less or more common in the population in
-dependence on its effect upon the survival and reproduction of the individual
+dependence on its effect upon the survival and reproduction of the individuals
 bearing the trait.
 
-This idea can be easily transfered to the optimization field. A solution to
-the problem --- that is, the set of values of problem's decision variables ---
+This idea can be easily transfered to the optimization field. A~solution to
+a~problem --- that is, the set of values of problem's decision variables ---
 is a~single individual in the population. The problem is the environment ---
-the higher te solution evaluation on a~given problem, the better it is fitted
+the higher the solution evaluation on a~given problem, the better it is fitted
 to the environment. A~better fitness means higher chance that the traits of
-a~solution will be present in the next iteration (an analogue of reproduction
-success rate). First successful applications of the idea were done in the
-electrical engineering field (see~\cite{Fog64}) and in the fluid mechanics
-(see~\cite{Rec65, Sch65}).
+a~solution will be present in the next iteration (an analogue of
+a~reproduction success rate). First successful applications of the idea were
+done in the electrical engineering field (see~\cite{Fog64}) and in the fluid
+mechanics (see~\cite{Rec65, Sch65}).
 
 The main differences between the classical and the evolutionary optimization
 (EO) are (see~\cite{Deb08}):
 
 \begin{itemize}
 \item \textbf{Population-based}. An EO procedure uses a~population of
-  solutions (a~population approach), whereas the classical algorithms
-  maintains one solution at a~time (a~point approach). It enables an algorithm
-  to maintain multiple optimal solutions, possible from different parts of the
+  solutions (a~population approach), whereas the classical algorithms maintain
+  one solution at a~time (a~point approach). It enables an algorithm to
+  maintain multiple optimal solutions, possibly from different parts of the
   solution space. Unfortunately it rises the memory and computational
   footprint of an EO algorithm.
 \item \textbf{Stochastic operators}. An EO procedure uses stochastic operators
@@ -134,17 +134,18 @@ population is created at random within bounds of decision variables. Then
 a~succesion of generations starts. The populations is updated by a~sequence of
 operators.
 
-First, the population is evaluated. The evaluation means establishing relative
-preference order, that is sorting solutions from best to worst. After the
-evaluation the algorithm chooses solutions to fill the mating pool. The better
-the solution the higher the probability to be chosen. Then, the variation
-operator is being used. It is a series of steps, such as crossover or
-mutation, generating succeeding generation from parents in the mating
-pool. Crossover ensures that parents' traits will be present in the next
-generation while mutation acts as local search in the solution's
-neighborhood. Finally, the elitism operator combines the old population with
-the newly created offspring. Coping best solutions from the former ensures the
-algorithm has a monotonically non-degrading value of the best solution.
+First, the population is evaluated. The evaluation means establishing an
+relative preference order, that is sorting solutions from the best to the
+worst. After the evaluation the algorithm chooses solutions to fill the mating
+pool. The better the solution the higher the probability to be chosen. Then,
+the variation operator is being used. It is a series of steps, such as
+crossover or mutation, generating a~succeeding generation (an offspring) from
+parents in the mating pool. The crossover ensures that parents' traits will be
+present in the next generation while the mutation acts as local search in the
+solution's neighborhood. Finally, the elitism operator combines the old
+population with the newly created offspring. Coping best solutions from the
+former ensures the algorithm has a monotonically non-degrading value of the
+best solution.
 
 \begin{figure}
   \centering \includegraphics[scale=0.55]{img/nsga}
@@ -153,14 +154,14 @@ algorithm has a monotonically non-degrading value of the best solution.
 \end{figure}
 
 The choice of a~fitness function is critical to the algorithm's
-performance. In case of a~problem with single criterion this is trivial ---
+performance. In case of a~problem with a~single criterion this is trivial ---
 a~value of the goal can be used. However, in the case of the Multi-Objective
 Optimization, there are a number of objective functions to be
 optimized. A~possible approach to the problem is to use the dominance
 principle (\cite{Gol89}):
 
-\textit{A solution x is said to dominate the other solution y, if both the
-  following conditions are true:}
+\vspace{0.5cm} \textit{A solution x is said to dominate the other solution y,
+  if both of the following conditions are true:}
 \begin{enumerate}
 \item \textit{The solution x is no worse than y in all objectives. Thus, the
     solutions are compared based on their objective function values.}
@@ -168,13 +169,13 @@ principle (\cite{Gol89}):
     objective.}
 \end{enumerate}
 
-All the solutions that are non-dominated are forming the Pareto-frontier of
-the problem.
+All the solutions that are non-dominated by any other solution are forming the
+Pareto-frontier of the problem.
 
-According to~\cite{Deb08} there are two ideal goals of the MOO:
+According to~\cite{Deb08} there are two ideal goals of the EMO:
 \begin{enumerate}
-\item Find a set of solutions which lie on the Pareto-optimal front, and
-\item Fina a set of solutions which are diverse enough to represent the entire
+\item Find a set of solutions which lies on the Pareto-optimal front, and
+\item Fina a set of solutions which is diverse enough to represent the entire
   range of the Pareto-optimal front.
 \end{enumerate}
 
@@ -194,14 +195,14 @@ evaluation. This is illustrated in fig.~\ref{nsga}.
 \section{Dominance-Based Rough Set Approach in MOO}
 \label{sec_drsa_in_moo}
 
-A rough set is an approximation of a~conventional set --- it is a pair of set
-being a~lower and an upper approximation of the original set
-(\cite{Paw82}). The lower approximation is a~set of all objects that
-unambiguously can be classified as members of the target set. On the other
-hand the upper approximation is a~set containing objects that cannot be
-unambiguously classified as members of the complement of the target set.
-A~boundary region is the part of solution space being part of the upper
-approximation, but not of the lower one.
+A rough set is an approximation of a~conventional set --- a pair of sets being
+a~lower and an upper approximation of the original set (\cite{Paw82}). The
+lower approximation is a~set of all objects that unambiguously can be
+classified as members of the target set. On the other hand, the upper
+approximation is a~set containing objects that cannot be unambiguously
+classified as members of the complement of the target set.  A~boundary region
+is the part of solution space being part of the upper approximation, but not
+the lower one.
 
 \begin{figure}
   \centering \includegraphics[scale=0.5]{img/drsa}
@@ -216,14 +217,14 @@ applicable in the decision support field.
 
 DRSA can model the situations in which there are objects --- vectors of values
 in the decision variable space --- and each object belongs to one of the
-decision classes. The classes are sorted in preference order. An example is
+decision classes. The classes are sorted in a~preference order. An example is
 shown in figure~\ref{drsa}.
 
 The data in Dominance-based Rough Set Approach are often presented in
 a~decision table. The objects being considered are written in table rows, the
-decision attributes are table columns. The last column is a~classification of
-an object to a decision class. A formal definition of the decision table can
-be easily found in the literature. An example is given in
+decision attributes are table columns. The last column is classification of
+the objects to a decision classes. A formal definition of the decision table
+can be easily found in the literature. An example is given in
 table~\ref{t:dec_tab-example}.
 
 \begin{table}
@@ -252,13 +253,13 @@ description of the knowledge represented in the table. A~decision rule is a
 Horn clause (see~\cite{Hor51}) in form of \textit{``if~..., then~...''}. The
 former part is called \textit{condition} and the latter ---
 \textit{consequent}. The condition part compares a~value of an object
-attributes with given thresholds and the consequent part is the object
-classification (to the union of classes) when the condition part holds. Rules
-can be either \textit{certain} --- based on objects from the lower
-approximation of the class, \textit{possible} --- based on objects from the
-upper approximation and \textit{approximate} --- based on the boundary
-region. Each decision rule should be minimal, i.e. cardinality of the set of
-conditions should be minimal.
+attributes with given thresholds and the consequent part represents the object
+classification if the condition part holds. Rules can be either
+\textit{certain} --- based on objects from the lower approximation of the
+class, \textit{possible} --- based on objects from the upper approximation and
+\textit{approximate} --- based on the boundary region. Each decision rule
+should be minimal, i.e. cardinality of the set of conditions should be
+minimal.
 
 Example rules generated from the table~\ref{t:dec_tab-example}:
 \begin{enumerate}
@@ -269,9 +270,9 @@ Example rules generated from the table~\ref{t:dec_tab-example}:
   (possible).
 \end{enumerate}
 
-DRSA can handle uncertainty and contradictions in the data, thus it is a~good
-model for a wide class of problems. For each rule $r$ given in from $\Phi \to
-\Psi$ following measures are defined:
+DRSA can handle uncertainty and contradictions in the data, thus it can model
+a~wide class of problems. For each rule $r$ given in from $\Phi \to \Psi$
+following measures are defined:
 \begin{itemize}
 \item Support: $\textit{supp}(\Phi, \Psi) = \textit{cardinality}(||\Phi \land
   \Psi||)$ --- is the number of objects for which the condition of the rule
@@ -279,7 +280,7 @@ model for a wide class of problems. For each rule $r$ given in from $\Phi \to
   rule.
 \item Confidence: $\textit{confidence}(\Phi, \Psi) =
   \dfrac{\textit{supp}(\Phi, \Psi)}{\textit{cardinality}(||\Phi||)}$ --- is
-  the number of objects supporting the rule in relation to the number of
+  the number of objects supporting the rule in a~relation to the number of
   objects for which the rule's condition holds.
 \end{itemize}.
 
@@ -288,8 +289,8 @@ holds also for S1. The support is: $\textit{supp}(r_3) = \frac{4}{5} = 0.8$.
 
 To extract all rules from the decision table one can use the All Rules
 algoritm (an optimized version is described in~\cite{Zur01}). The other option
-is to use the DomLem (\cite{GMS+01}) algorithm generating minimal set of rules
-covering all the objects from a given decision table.
+is to use the DomLem algorithm (\cite{GMS+01}) generating minimal set of rules
+covering all the objects from a given table.
 
 
 %%% Local Variables: 
