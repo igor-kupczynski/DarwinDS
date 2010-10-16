@@ -2,13 +2,13 @@ package pl.poznan.put.darwin.gui
 
 import swing._
 import event._
-import java.io.File
 import org.ini4j.ConfigParser
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
-import pl.poznan.put.darwin.simulation.Simulation
 import pl.poznan.put.darwin.utils.TimeUtils
 import java.awt.Cursor
+import java.io.{FileOutputStream, File}
+import pl.poznan.put.darwin.simulation.{DMReportGenerator, EvolutionReportGenerator, Simulation}
 
 class Selectors(main: Window) extends GridPanel(1, 4) {
   hGap = 3
@@ -38,7 +38,16 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
   def hasProblem = problem != null
 
   def newSim: Simulation = {
-    new Simulation(config, problem)
+    val sim = new Simulation(config, problem)
+    if (config.EVOLUTION_REPORT != ""  )
+      sim.registerObserver(
+        new EvolutionReportGenerator(sim,
+          new FileOutputStream(config.EVOLUTION_REPORT)))
+    if (config.DM_REPORT != "")
+      sim.registerObserver(
+        new DMReportGenerator(sim,
+          new FileOutputStream(config.DM_REPORT)))
+    sim
   }
 
   

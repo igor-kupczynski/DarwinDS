@@ -182,7 +182,6 @@ class Table[+T](cols: Set[Column[Any]]) {
 object Main {
 
   def main(args: Array[String]) {
-    println("Hello world!")
     val c1: Column[Any] = ColumnFactory.get[Int]("c1", false, true)
     val c2: Column[Any] = ColumnFactory.get[Int]("d", true, true)
     val t = new Table[Int](Set(c1, c2))

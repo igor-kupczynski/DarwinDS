@@ -32,10 +32,12 @@ class Runner(problemFilename: String, configFilename: String) {
     try {
       if (config.BRIEF_REPORT)
         sim.registerObserver(new BriefReportGenerator(sim))
-      if (evoOut != null)
+      if (evoOut != null) {
         sim.registerObserver(new EvolutionReportGenerator(sim, evoOut))
-      if (dmOut != null)
+      }
+      if (dmOut != null) {
         sim.registerObserver(new DMReportGenerator(sim, dmOut))
+      }
       val dmMock = new DMMock(sim)
       var idx = 0
       while (idx < config.OUTER_COUNT) {

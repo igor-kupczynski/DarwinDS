@@ -832,8 +832,51 @@ outer & domlem conf=0.8, good=15 & stddev & all rules, good=15 & stddev & improv
 
 
 \clearpage{}
-\subsection{Average in quantiles}
-\textcolor{green}{TODO}
+\subsection{The second-order stochastic dominance}
+
+Stochastic dominance is a~form of partial ordering over a~set of
+gambles. The~gamble is a~probability distribution over possible outcomes. In
+this section the author focuses on first- and second-order stochastic
+dominance comparison:
+
+\begin{description}
+\item[The first-order dominance] \textit{For two gambles, X and Y, the gamble
+    X has first-order stochastic dominance over the gamble Y if for every
+    possible outcome, X gives at least as high a probability of receiving the
+    outcome as Y does, and at least one possible outcome exists, for which X
+    gives higher probability of receiving at least the outcome. In case of
+    DARWIN, the dominance can be checked by comparing the highest values in
+    meaningful quantiles.}
+
+\item[The second-order dominance] \textit{For two gambles, X and Y, the gamble
+    X has second-order stochastic dominance over the gamble Y if the former
+    has as high the mean value as the latter, and involves less risk. In case
+    of DARWIN, it is comparing mean values in the quantiles instead of the
+    highest ones.}
+\end{description}
+
+An example of different stochastic dominance is shown in
+figure~\ref{stochdom}. The solution X dominates Y only when second-order
+stochastic dominance is considered. 
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[scale=0.55]{img/stochdom}
+  \caption{First- and second-order stochastic dominance comparison}
+  \label{stochdom}
+\end{figure}
+
+In the second-order dominance, worse scenarios gain on the importance. Thus,
+the dominance is more risk-averse than the first-order one. This is the case,
+because bad evaluations in mean values of all quantiles are taken into
+account, while good evaluations are taken into account in mean values of high
+quantiles only.
+
+It is possible to setup DARWIN to use mean in quantiles instead of the highest
+value. Therefore, one can make use of the second-order stochastic dominance.
+
+
+
 
 
 \clearpage{}

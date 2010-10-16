@@ -54,6 +54,7 @@ class DarwinWindow(main: Window) extends BorderPanel {
     if (marked == null) {
       System.exit(0)
     }
+    sim.postDMChoices(marked)
     if (marked.filter({_.good}).length == 0) {
       running = false
       controls.solve.enabled = true
