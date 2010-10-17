@@ -47,8 +47,8 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
       sim.registerObserver(
         new DMReportGenerator(sim,
           new FileOutputStream(config.DM_REPORT)))
-    sim.registerObserver(new FullEvoReportGenerator(sim,
-           new FileOutputStream("./reports/evofull.csv")))
+//    sim.registerObserver(new FullEvoReportGenerator(sim,
+//           new FileOutputStream("./reports/evofull.csv")))
     sim
   }
 
