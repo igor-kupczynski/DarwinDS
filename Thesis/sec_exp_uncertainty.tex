@@ -875,9 +875,43 @@ quantiles only.
 It is possible to setup DARWIN to use mean in quantiles instead of the highest
 value. Therefore, one can make use of the second-order stochastic dominance.
 
+\begin{figure}[t]
+  \centering
+    \subfloat{
+      \includegraphics[width=\textwidth]{img/domprof}
+      \label{dom_comparisiona}
+    }\\
+    \subfloat{
+      \includegraphics[width=\textwidth]{img/domtime}
+      \label{dom_comparisionb}
+    }
+    \caption{An exemplary probability distribution of goals' values}
+  \label{dom_comparision}
+\end{figure}
 
+Figure~\ref{dom_comparision} shows a probability for two exemplary solutions
+to the mix problem. The solutions were obtained by running DARWIN with default
+options (especially, with the DomLem algorithm). The exterior loop had been
+run three times, i.e. the Decision Maker marked ``good'' solutions three
+times. The DM preferred solutions with the highest profit$^{50\%}$ value. The
+experiment was conducted twice --- the first time with the highest value in
+quantile (first-order dominance) and the other with a~mean in quantiles
+(second-order dominance).
 
+The charts confirm the intuition. In case of profit, the criterion being the
+most important to the DM, it is clear that one can achieve better results with
+the first-order dominance --- the long tail in the right-hand side of the
+distribution. However, the distribution for the second-order dominance has
+less ``bad'' solutions. The distribution is symmetric with the peak value in
+the middle. Therefore, the latter it is better fitted for the risk-averse
+Decision Maker and the former for the risk-seeking one.
 
+In the second-order stochastic dominance the ``bad'' solutions are more
+important, therefore there were eliminated in favor of average ones. This is
+also the case for the time criterion (the lower the better). However,
+minimizing the time was not a~priority for the DM, as a result, there are no
+better solutions in the first-order distribution, because they would imply
+worsening the profit goal.
 
 \clearpage{}
 \subsection{The best results}
