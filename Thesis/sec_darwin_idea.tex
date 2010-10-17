@@ -48,9 +48,9 @@ sense of an objective function defined in the solution space. Most of the EMO
 methods are approximating Pareto-optimal front by a set of solutions. So one
 solution is better than the other if the former Pareto-dominates the
 latter. In case of two equivalent ones another factors have to be taken into
-account (for example crowding score in NSGA2 [ref]). This is the case because
-if no preference information is given all Pareto-optimal solutions have to be
-considered equivalent.
+account (for example crowding score in NSGA2~\cite{Deb00}). This is the case
+because if no preference information is given all Pareto-optimal solutions
+have to be considered equivalent.
 
 It seems natural to combine these two described approaches --- Interactive
 Multi-Objective Optimization and Evolutionary Multi-Objective
@@ -125,7 +125,7 @@ be inspected (e.g. $75\%$).
 In DARWIN the DM's preferences are gathered and stored using DRSA methodology
 (see~[inref]). Dominance-Based Rough Set Approach is a~framework for reasoning
 about partially inconsistent preference data. DRSA already has successful
-applications in IMO area ([ref]).
+applications in IMO area (see~\cite{GMS01, GMS02, GMS05}).
 
 DRSA will be applied in IMO process. After selecting ``good'' solutions from
 the provided set the decision rules are induced to store the
@@ -219,9 +219,9 @@ follows.
 First, one has to generate a set of feasible solutions to the MOO problem
 first. This can be done using the Monte Carlo method. The Monte Carlo concept
 itself is not new. A~concept of statistical sampling became popular after
-digital computing machines had been invented (see~[ref]). This method can be
-described as random sampling a domain of a problem. In the most basic variant
-one can just pick a solution at random and check if it is
+digital computing machines had been invented (see~\cite{Met87}). This method
+can be described as random sampling a domain of a problem. In the most basic
+variant one can just pick a solution at random and check if it is
 feasible. Unfortunately, it will be impossible unless the non-feasible space
 is only a small part of the domain. Additional hints for the generator, for
 example in the form of analyst's suggestions, can be taken into account.
@@ -326,10 +326,10 @@ solutions matching this rule.
 
 In case of a draw also a secondary score is considered for each solution. This
 score is calculated similarly to a \textit{crowding distance} score in
-\textit{NSGA-II} method ([ref]). The difference lies in the fact, that this
-score is calculated in a~quantile space instead of original objective space,
-e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots \times $
-$f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k$. The procedure is shown in
+\textit{NSGA-II} method (\cite{Deb00}). The difference lies in the fact, that
+this score is calculated in a~quantile space instead of original objective
+space, e.g. $f^{1\%}_1 \times f^{25\%}_1 \times f^{50\%}_1 \times \dots \times
+$ $f^{1\%}_k \times f^{25\%}_k \times f^{50\%}_k$. The procedure is shown in
 alg.~\ref{alg:crowddist}.
 
 

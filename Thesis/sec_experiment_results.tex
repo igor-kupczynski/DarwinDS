@@ -17,9 +17,9 @@ for application to 768MB. Tests were performed through CLI batch interface.
 
 Test framework is available in order to automate the experiment process. All
 experiments were repeated at least thirteen times. Data analysis and chart
-generation were performed using an R environment [ref]. The framework is a
-combination of the Python [ref] and Bash [ref] code communicating with main
-DARWIN code and with the modules written in R.
+generation were performed using an R environment~\cite{R}. The framework is
+a~combination of the Python~\cite{Pyt} and Bash~\cite{Bas}] code communicating
+with main DARWIN code and with the modules written in R.
 
 \section{The Decision Maker}
 
@@ -50,18 +50,19 @@ In the following problems the supposed utility function is also defined.
 
 The area of interest for Multi-Objective Optimization is huge and consists of
 many potential problems to be solved. There are multi-criteria versions of
-classical problems, like minimal spanning tree~[ref], traveling salesman
-problem (TSP)~[ref] or knapsack problem~[ref] as well as an artificially
-generated ones --- like the DTLZ problems [ref]. Some of them are interesting
-because of their real-life applications while the others are good for
-experimenting and testing purposes.
+classical problems, like minimum spanning tree~\cite{GH85}, traveling salesman
+problem (TSP)~\cite{CRS+01} or knapsack problem~\cite{PGP10} as well as an
+artificially generated ones --- like the DTLZ problem~\cite{DTL+02} Some of
+them are interesting because of their real-life applications while the others
+are good for experimenting and testing purposes.
 
 It is worth noting that the ordinary single-criterion versions of the problems
 can be easy to solve. However, in multi-criteria settings one has to infer the
 decision maker's preferences and approximate the supposed utility function
 correctly. The challenge here is not to build the best optimization algorithm
-for all the problems (this is impossible according to no-free-lunch theorem
-[ref]) but rather a framework for preference information extraction.
+for all the problems (this is impossible according to no-free-lunch
+theorem~\cite{WM97}) but rather a framework for preference information
+extraction.
 
 The experiments were performed using following problems:
 \begin{description}
@@ -152,7 +153,7 @@ The experiments were performed using following problems:
     by additional constraints.
 
     This problem was build according to constraint surface approach presented
-    in~[ref].
+    in~\cite{DTL+02}.
 
   \item{\textbf{Two-criteria robust mix problem}}
     \begin{align*}
@@ -179,10 +180,13 @@ The experiments were performed using following problems:
     \end{align*}
     
     
-    The problem was described in a presentation given on ... ([ref])
-    describing the DARWIN method. It contains a lot of coefficients given in
-    the form of intervals. For readability's sake they were named and defined
-    below the criteria.
+    The problem was described in a presentation \textit{DARWIN:
+      Dominance-based rough set Approach to handling Robust Winning solutions
+      in INteractive multiobjective optimization} given at 5th International
+    Workshop on Preferences and Decisions in Trento, 2009) describing the
+    DARWIN method. It contains a lot of coefficients given in the form of
+    intervals. For readability's sake they were named and defined below the
+    criteria.
 
     The goal is to set quantity of each product ($A, B, C$) to be
     produced. One wants to maximize the profit and minimized the total time it
@@ -219,9 +223,10 @@ The experiments were performed using following problems:
       -4 * \text{f}_3^{30\%} -2 * \text{f}_1^{30\%}
     \end{align*}
 
-    This problem is a variation of DTLZ7 problem from [ref] article. The
-    problem was constructed using constraint surface approach described in the
-    article. However, interval coefficients were added to the goals.
+    This problem is a variation of DTLZ7 problem from~~\cite{DTL+02}
+    article. The problem was constructed using constraint surface approach
+    described in the article. However, interval coefficients were added to the
+    goals.
 
 
   \item{\textbf{Robust DTLZ1 problem}}
@@ -245,10 +250,10 @@ The experiments were performed using following problems:
       & \hspace{0.5cm} \sum_{i=1}^M (-M+i-1) * f_i^{25\%} 
     \end{align*}
 
-  Another problem that is suggested in [ref]. It was constructed using
-  bottom-up approach ([ref]). Intervals were added to the goal functions. $M$
-  indicates the number of goals. In the experiments problems with 4 and 10 criteria
-  were used.
+    Another problem that is suggested in~\cite{DTL+02}. It was constructed
+    using bottom-up approach. Intervals were added to the goal functions. $M$
+    indicates the number of goals. In the experiments problems with 4 and 10
+    criteria were used.
 
 \end{description}
 
@@ -258,10 +263,10 @@ The experiments were performed using following problems:
 
 \section{Conclusions}
 
-The experiments performed confirmed that the method proposed in~[ref] can be
-used to solve multi-objective optimization problems even when the problem
-formulation does contain uncertainty in the form of intervals of possible
-values.
+The experiments performed confirmed that the method proposed in~\cite{GMS10,
+  GMS10b, GMS10c} can be used to solve multi-objective optimization problems
+even when the problem formulation does contain uncertainty in the form of
+intervals of possible values.
 
 At the moment of writing according to the author's knowledge there was no
 working implementation of the DARWIN method. The first task was to analyze

@@ -15,10 +15,10 @@ times. This means that ten times results (in the form of solutions) were
 presented to the (mocked) decision maker. The Results were recorded.
 
 The same problem was solved in an exact way by a mathematical programming
-solver (glpk~[ref]). One used the supposed utility function as an optimization
-goal for the solver. In this way the optimal solutions were obtained (for the
-considered instance the best supposed utility function value is
-$4154.441453$).
+solver (glpk~\cite{Glpk}). One used the supposed utility function as an
+optimization goal for the solver. In this way the optimal solutions were
+obtained (for the considered instance the best supposed utility function value
+is $4154.441453$).
 
 The results of the run from the exterior loop perspective are given in
 figure~\ref{c2_utilouter}. All of the results generated during the interior
@@ -353,7 +353,7 @@ improvement is happening so slowly here.
 Relying on the author's intuition changing the crossover operator would solve
 the problem with continuous knapsack. Choosing the right operator for a given
 problem is a well-known subject in the multi-objective optimization
-([ref]). However, it is out-of-scope of this paper.
+(\cite{Deb08}). However, it is out-of-scope of this paper.
 
 For completeness charts presenting the algorithm behavior when more exterior
 loop iterations are allowed are given (fig.~\ref{outer},
@@ -817,8 +817,8 @@ the same results, however a few iterations later.
 Details of a~rule-generating algorithm is not part of the DARWIN
 specification. The choice of the algorithm is left to the one implementing
 DARWIN. In this paper two approaches were evaluated --- the DomLem algorithm
-[ref] generating a~minimal set of rules and the AllRules algorithm [ref]
-generating an extensive set of all rules.
+(see~\cite{GMS+01}) generating a~minimal set of rules and the AllRules
+algorithm (see~\cite{GMS+01b}) generating an extensive set of all rules.
 
 One can lower confidence of the rules generated in the DomLem algorithm
 (compare with~[inref]). $100\%$ confidence may seem a good idea; however,
