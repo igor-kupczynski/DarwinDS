@@ -8,7 +8,7 @@ import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.utils.TimeUtils
 import java.awt.Cursor
 import java.io.{FileOutputStream, File}
-import pl.poznan.put.darwin.simulation.{DMReportGenerator, EvolutionReportGenerator, Simulation}
+import pl.poznan.put.darwin.simulation.{FullEvoReportGenerator, DMReportGenerator, EvolutionReportGenerator, Simulation}
 
 class Selectors(main: Window) extends GridPanel(1, 4) {
   hGap = 3
@@ -47,6 +47,8 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
       sim.registerObserver(
         new DMReportGenerator(sim,
           new FileOutputStream(config.DM_REPORT)))
+    sim.registerObserver(new FullEvoReportGenerator(sim,
+           new FileOutputStream("./reports/evofull.csv")))
     sim
   }
 
