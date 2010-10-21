@@ -2,10 +2,10 @@ DARWIN is a new method and according to the author's knowledge it hasn't been
 implemented before. Experiments are designed to check if the method is working
 at all, what parameters are important for the method and what should be their
 reasonable default values. To make the results repeatable the DM is
-mocked. Noise in his or her decisions is simulated. Unless uncertainty is
-involved, comparisons to the exact optimal solution are provided. In tests
-involving uncertainty results are compared to supposed utility function
-optimization.
+mocked. Inconsistencies in his or her decisions are simulated. Unless
+uncertainty is involved, comparisons to the exact optimal solution are
+provided. In tests involving uncertainty results are compared to supposed
+utility function optimization.
 
 \section{The environment}
 
@@ -41,8 +41,8 @@ however this can be configured) solutions with the highest supposed utility.
 
 Unfortunately real decision maker, being a human isn't as predictable and
 repeatable as the described process. In the sections~\ref{dm-noise}
-and~\ref{noise-dm2} the results of introducing noise to DM's decisions are
-presented.
+and~\ref{noise-dm2} the results of introducing inconsistencies to DM's
+decisions are presented.
 
 In the following problems the supposed utility function is also defined.
 
@@ -285,24 +285,24 @@ There are a lot of parameters in the algorithm itself, so the next logical
 step was to check the importance of the parameters. Experiments performed so
 far assumed that the decision maker is infallible, consistent and acts
 according to a well-defined utility function. It is not the case in real-life
-situations so the impact of noise in DM's decisions was measured.
+situations so the impact of inconsistencies in DM's decisions was measured.
 
 Knowing the characteristics, performance and impact of the parameters and the
-noise one can check if the algorithm with similar characteristics on problems
-with interval coefficients. Being unsatisfied with the performance on DTLZ1
-problems the author checked the influence of DomLem parameters on the result
-and included a~second rules generating algorithm --- the AllRules
-algorithm. As a result a~rich set of data containing performance
+inconsistent DM's decisions one can check if the algorithm with similar
+characteristics on problems with interval coefficients. Being unsatisfied with
+the performance on DTLZ1 problems the author checked the influence of DomLem
+parameters on the result and included a~second rules generating algorithm ---
+the AllRules algorithm. As a result a~rich set of data containing performance
 characteristics was gathered.
 
 To conclude, the DARWIN method can handle MOO very well problems. A resulting
-solution is robust with respect to algorithm parameters, decision-maker's
-noise and finally to the uncertainty in the problem definition. Nevertheless
-the analyst should be careful and investigate the problem instead of using the
-method blindly. There are some problems which are hard for DARWIN to solve
-(e.g. DTLZ1). Even for these problems satisfactory results can be achieved,
-however one has to fine-tune the parameters and carefully observe their impact
-on the result.
+solution is robust with respect to algorithm parameters, inconsistencies in
+Decision Maker's choices and finally to the uncertainty in the problem
+definition. Nevertheless the analyst should be careful and investigate the
+problem instead of using the method blindly. There are some problems which are
+hard for DARWIN to solve (e.g. DTLZ1). Even for these problems satisfactory
+results can be achieved, however one has to fine-tune the parameters and
+carefully observe their impact on the result.
 
 The method is simple to use for the decision maker even if he or she has no
 knowledge in the decision support field. However for some problems the

@@ -353,22 +353,23 @@ these results.
 \label{noise-dm2}
 
 
-In order to check the impact of a noise in DM's decisions, experiments were
-performed. The results are presented in Figure~\ref{noise} and in the
+In order to check the impact of inconsistencies in DM's decisions, experiments
+were performed. The results are presented in Figure~\ref{noise} and in the
 tables~\ref{t:un_noise_1} and~\ref{t:un_noise_2}.
 
 Again one has to analyze the results excluding the DTLZ1 problem. This is
 because of the standard deviation of the series of results --- again it is the
 same order of magnitude as the value itself.
 
-In the Mix and DTLZ7 problems the effect of the noise starts to be an
-important factor only in case of medium- (noise$_5$) --- the results differ
-about $8\%$ and in case of a major-noise (noise$_6$) --- difference about 12\%
-for the mix problem and about 8\% for the DTLZ7 problem.
+In the Mix and DTLZ7 problems the effect of inconsistencies in DM's decisions
+starts to be an important factor only in case of medium- (noise$_5$) --- the
+results differ about $8\%$ and in case of a major-inconsistencies (noise$_6$)
+--- difference about 12\% for the mix problem and about 8\% for the DTLZ7
+problem.
 
 The situation is similar to the impact on problems defined without
 uncertainty. Even if one adds the interval coefficients to the problem, the
-solution is still robust with respect to the noise.
+solution is still robust with respect to the inconsistencies in the DM's decisions.
 
 
 \begin{figure}
@@ -393,7 +394,7 @@ solution is still robust with respect to the noise.
       \label{dtlz7_c4_noise}
     }
   }
-  \caption{Effect of noise in DM's decisions}
+  \caption{Effect of inconsistencies in DM's decisions}
   \label{noise}
 \end{figure}
 
@@ -403,7 +404,7 @@ solution is still robust with respect to the noise.
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
     \hline
-    noise level & mean & sd & improvement & mean & sd & improvement \\
+    test & mean & sd & improvement & mean & sd & improvement \\
     \hline
     \hline
     base & 6678.95 & 53.86 & 0.00\% & -12.81 & 8.38 & 0.00\% \\
@@ -415,7 +416,7 @@ solution is still robust with respect to the noise.
     noise6 & 5858.94 & 924.72 & -12.28\% & -13.72 & 12.45 & -7.09\% \\
     \hline
   \end{tabular}
-  \caption{The impact of noise in robust environment}
+  \caption{The impact of inconsistencies in robust environment}
   \label{t:un_noise_1}
 \end{table}
 
@@ -424,7 +425,7 @@ solution is still robust with respect to the noise.
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
     \hline
-    noise level & mean & sd & improvement & mean & sd & improvement \\
+    test & mean & sd & improvement & mean & sd & improvement \\
     \hline
     \hline
     base & -13.73 & 8.08 & 0.00\% & -108.86 & 4.00 & 0.00\% \\
@@ -436,7 +437,7 @@ solution is still robust with respect to the noise.
     noise6 & -24.89 & 11.79 & -81.21\% & -117.45 & 7.21 & -7.89\% \\
     \hline
   \end{tabular}
-  \caption{The impact of noise in robust environment}
+  \caption{The impact of inconsistencies in robust environment}
   \label{t:un_noise_2}
 \end{table}
 
