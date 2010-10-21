@@ -226,7 +226,7 @@ Results of the evaluation on the following problems are given:
 
 The tests were repeated at least fifteen times and the results averaged. They
 are presented in figure~\ref{simple_performance} and
-table~\ref{t:opt_dist}. Depending on a problem $10$ or $20$ iterations of the
+Table~\ref{t:opt_dist}. Depending on a problem $10$ or $20$ iterations of the
 exterior loop were simulated. Normally it would be up to the DM to stop when
 he or she is satisfied with the solution. However, one can safely assume that
 if no satisfactory solution is found up to the $10$th iteration, the decision
@@ -357,7 +357,7 @@ problem is a well-known subject in the multi-objective optimization
 
 For completeness charts presenting the algorithm behavior when more exterior
 loop iterations are allowed are given (fig.~\ref{outer},
-table~\ref{t:opt_dist_long}). After the twentieth loop improvements are small
+Table~\ref{t:opt_dist_long}). After the twentieth loop improvements are small
 (if any). In author's opinion this is a good thing because there is no reason
 not to stop the algorithm. If the algorithm works well on a problem it will be
 evident from the first few iterations.
@@ -546,13 +546,12 @@ The author considers the basic parameters to be:
 \end{table}
 
 
-Numerical data are presented in table~\ref{t:base_imp_1}
+Numerical data are presented in Table~\ref{t:base_imp_1}
 and~\ref{t:base_imp_2}. The results are also shown in charts
 (fig.~\ref{c2_params}, \ref{c2_cont_params}, \ref{c3_params}
 and~\ref{c3_surface_params}). This agrees with the intuition. More solutions
 (individuals in the population) and longer interior loop (more generations)
-will result in a better value of supposed utility for all the
-problems. 
+will result in a better value of supposed utility for all the problems.
 
 The other parameters are:
 \begin{itemize}
@@ -738,7 +737,7 @@ without additional noise.
   \label{c3_surface_noise}
 \end{figure}
 
-Results of the DTLZ surface problem (table~\ref{t:noise1}, \ref{t:noise2} and
+Results of the DTLZ surface problem (Table~\ref{t:noise1}, \ref{t:noise2} and
 fig.\ref{c3_surface_noise}) are inconclusive. This is because of the behavior
 described in section~\ref{nouncert-performance} --- the decision rules are not
 discriminating enough so that often the utility value drops between the
@@ -947,7 +946,7 @@ allrules & 15 & 27979.16 & 772.90 & -4.45\% & -1.24 & 0.11 & 1.73\% \\
 
 \subsection{The best results}
 One may be interested in the best performances achieved during the experiment
-runs. The results are presented in the table~\ref{t:best1} and in
+runs. The results are presented in Table~\ref{t:best1} and in
 figure~\ref{best1}. All the test problems performed extremely well and the
 distance from the optimal solution is minimal. For the reasons mentioned above
 the continuous knapsack problem is an exception and its performance is not
@@ -955,7 +954,7 @@ satisfactory. Changing a~crossover operator should immensely improve the
 results.
 
 The settings resulting in these performances are presented in
-table~\ref{t:best1_conf}. It is worth noting that when no uncertainty is
+Table~\ref{t:best1_conf}. It is worth noting that when no uncertainty is
 considered, selecting only three solutions in each exterior loop iteration
 leads to the best results. Also in three out of four cases the DomLem
 algorithm is superior to AllRules.
