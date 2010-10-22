@@ -19,7 +19,7 @@ the decision maker (the DM). Questions are being asked and the DM provides
 answers. Preference information is extracted on the basis of these
 answers. Algorithm can then use the knowledge to produce solutions better
 fitted to his or her preferences. The IMO framework is presented in
-fig.~\ref{imoprocess_uml}.
+Figure~\ref{imoprocess_uml}.
 
 The rationale behind the interactive process is that the decision maker is
 interested only in a small subset of preferred solutions or even in a single
@@ -33,9 +33,9 @@ how to use this knowledge to generate and provide solutions better fitted to
 decision maker's preferences.
 
 Human factor is yet another thing to consider. The DM is a human being and
-thus his or her behavior is constantly changing. The challenge here is to find
-out what questions should be asked and how often, as well as how many
-intermediate solutions should be presented to evaluate.
+thus his or her behavior may change. The challenge here is to find out what
+questions should be asked and how often, as well as how many intermediate
+solutions should be presented to the DM for evaluation.
 
 DARWIN is a realisation of the IMO process. It keeps generating solutions and
 improving them on the basis of DM's feedback. It only asks the DM to mark
@@ -43,14 +43,14 @@ potentially good solutions, so that only problem-domain knowledge is required;
 its user does not need to have expert knowledge in the decision support field.
 
 Evolutionary Multi-Objective Optimization (EMO) provides a computational
-engine for generating new, better solutions from existing ones --- better in
-sense of an objective function defined in the solution space. Most of the EMO
-methods are approximating Pareto-optimal front by a set of solutions. So one
-solution is better than the other if the former Pareto-dominates the
-latter. In case of two equivalent ones another factors have to be taken into
-account (for example crowding score in NSGA2~\cite{Deb00}). This is the case
-because if no preference information is given all Pareto-optimal solutions
-have to be considered equivalent.
+engine for generating new, still better solutions in successive iterations ---
+better in sense of an objective function defined in the solution space. Most
+of the EMO methods are approximating Pareto-optimal front by a set of
+solutions. So one solution is better than the other if the former
+Pareto-dominates the latter. In case of two equivalent ones another factors
+have to be taken into account (for example crowding score of
+NSGAII~\cite{Deb00}). This is the case because if no preference information is
+given, all Pareto-optimal solutions have to be considered equivalent.
 
 It seems natural to combine these two described approaches --- Interactive
 Multi-Objective Optimization and Evolutionary Multi-Objective
@@ -66,7 +66,7 @@ becomes huge, the DM can not effectively analyze them and find the one that
 fits his/her preferences best, thus Pareto-optimality is not sufficiently
 discriminative. However, guiding the search to preferred regions of the
 solution space allows the method to converge faster to good solutions. It is
-shown in fig.~\ref{pareto}.
+shown in Figure~\ref{pareto}.
 
 DARWIN uses EMO procedure to improve generated solutions based on the DM's
 preferences.
@@ -93,7 +93,7 @@ intervals.
 
 The set of all of the problem's coefficients given as intervals and fixed on
 one of possible values will be called scenario of imprecision (see
-fig.~\ref{scenario}). If intervals are allowed, it is impossible to calculate
+Figure~\ref{scenario}). If intervals are allowed, it is impossible to calculate
 the exact value of problem's objectives for given solutions. To handle this
 case all the considered solutions are evaluated over a~set of uncertainty
 scenarios.
@@ -108,7 +108,7 @@ scenarios.
  quantiles are points taken at regular intervals from the cumulative
  distribution of a random variable. If the interval consists of $0.01$ of the
  distribution, then the quantiles are called percentiles (percentiles of the
- normal distribution are shown in fig.~\ref{percentiles}). Instead of
+ normal distribution are shown in Figure~\ref{percentiles}). Instead of
  presenting all of the results, the method calculates meaningful quantiles of
  results distribution for each objective. For example, percentiles (like $1\%,
  25\%$ and $50\%$) can be chosen. Percentiles divide ordered data into 100 of
@@ -173,12 +173,12 @@ Where:
 It is possible to give some of the coefficients in objective functions or
 constraints in the form of intervals (thus modeling ignorance --- uncertainty
 about real value of a coefficient). A vector of fixed values for each interval
-is called \textit{scenario} of imprecision (see fig.~\ref{scenario}).
+is called \textit{scenario} of imprecision (see Figure~\ref{scenario}).
 
 DARWIN is composed of two nested loops --- exterior and interior. The former
 is a realisation of an interactive process and the latter is an EMO engine
 dedicated to improve solutions based on the decision maker's preferences. This
-is illustrated in fig.~\ref{fig:darwin-ext}.
+is illustrated in Figure~\ref{fig:darwin-ext}.
 
 \begin{figure} 
   \begin{center}
@@ -381,8 +381,8 @@ Where $t$ is a number of current iteration, $\omega$ - mutation decay rate,
 $\epsilon$ - initial mutation probability. Suggested values are
 $\omega = 0.1, \epsilon = 0.5$.
 
-In this section DARWIN idea was explained. The implementation is given in the
-next chapter.
+In this section, the DARWIN idea was explained. Its implementation is
+described in the next chapter.
 
 %%% Local Variables: 
 %%% mode: latex

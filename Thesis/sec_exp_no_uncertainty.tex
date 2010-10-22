@@ -82,7 +82,7 @@ so essentially $\text{class} \ge \texttt{GOOD}$ means $\text{class} =
 \texttt{GOOD}$.
 
 In order to verify how the rules influence the algorithm's behavior, charts
-were prepared (fig.~\ref{c2_valweight_01}, \ref{c2_valweight_03} and
+were prepared (Figure~\ref{c2_valweight_01}, \ref{c2_valweight_03} and
 \ref{c2_valweight_07}). For two-criteria problem it is possible to present the
 search space on two-dimensional chart.
 
@@ -94,14 +94,14 @@ the 20th generation. Soon after individuals covering both solutions were
 included the whole population drifted to the region marked by both rules.
 
 It can be also insightful to see the mocked DM's choices and compare them with
-the inferred rules. They are presented in charts (fig.~\ref{c2_dmchoices_01},
+the inferred rules. They are presented in charts (Figure~\ref{c2_dmchoices_01},
 \ref{c2_dmchoices_03}, \ref{c2_dmchoices_07}). It is the case that the choices
 directly affected the rules. One can also see another interesting trait of the
 problem. The further (in objective space) the selected individuals are, the
 harder it is to achieve maximal possible primary score.
 
 Finally, charts presenting how the supposed utility and primary score changed
-in the population along with succeeding generations (fig.~\ref{c2_utilind_01},
+in the population along with succeeding generations (Figure~\ref{c2_utilind_01},
 \ref{c2_utilind_03} and \ref{c2_utilind_07}) are given. They support the
 conclusions stated above.
 
@@ -295,11 +295,11 @@ maker will not want to investigate the problem with this method any further.
 On both binary knapsack problems the performance is very good --- they are not
 further than $10\%$ away from the optimal solution after the $10$th
 iteration. The same is true for the surface problem. However, looking at the
-fig.~\ref{simple_performance4} one can see a bizarre phenomenon --- the
+Figure~\ref{simple_performance4} one can see a bizarre phenomenon --- the
 supposed utility is falling down in a few runs.
 
 On the other hand, the evolutionary algorithm knows nothing about the utility
-function so it may happen. The chart (fig.~\ref{simple_performance4}) was
+function so it may happen. The chart (Figure~\ref{simple_performance4}) was
 generated using aggregated (averaged) results, however this happened in most
 of the runs. To give a further insight charts showing evolution in a third
 exterior loop are presented (not that the charts are for a single run only,
@@ -356,7 +356,7 @@ problem is a well-known subject in the multi-objective optimization
 (\cite{Deb08}). However, it is out-of-scope of this paper.
 
 For completeness charts presenting the algorithm behavior when more exterior
-loop iterations are allowed are given (fig.~\ref{outer},
+loop iterations are allowed are given (Figure~\ref{outer},
 Table~\ref{t:opt_dist_long}). After the twentieth loop improvements are small
 (if any). In author's opinion this is a good thing because there is no reason
 not to stop the algorithm. If the algorithm works well on a problem it will be
@@ -548,7 +548,7 @@ The author considers the basic parameters to be:
 
 Numerical data are presented in Table~\ref{t:base_imp_1}
 and~\ref{t:base_imp_2}. The results are also shown in charts
-(fig.~\ref{c2_params}, \ref{c2_cont_params}, \ref{c3_params}
+(Figure~\ref{c2_params}, \ref{c2_cont_params}, \ref{c3_params}
 and~\ref{c3_surface_params}). This agrees with the intuition. More solutions
 (individuals in the population) and longer interior loop (more generations)
 will result in a better value of supposed utility for all the problems.
@@ -685,7 +685,7 @@ maker is careful in his or her evaluations, the algorithm will probably have
 to face a noise between $1$ and $4$.
 
 The results for the exemplary problems are shown in the charts below
-(fig.~\ref{c2_noise}, \ref{c3_noise} and
+(Figure~\ref{c2_noise}, \ref{c3_noise} and
 \ref{c3_surface_noise}). Inconsistency tests for the continuous knapsack are
 omitted --- the algorithm performs badly even without additional noise.
 
@@ -740,13 +740,13 @@ omitted --- the algorithm performs badly even without additional noise.
 \end{figure}
 
 Results of the DTLZ surface problem (Table~\ref{t:noise1}, \ref{t:noise2} and
-fig.\ref{c3_surface_noise}) are inconclusive. This is because of the behavior
+Figure\ref{c3_surface_noise}) are inconclusive. This is because of the behavior
 described in section~\ref{nouncert-performance} --- the decision rules are not
 discriminating enough so that often the utility value drops between the
 interior loops. This can be seen as a form of noise with even bigger impact
 than the one tested here, so it obscures results for this particular problem.
 
-For the other problems however --- binary knapsacks (fig.~\ref{c2_noise} and
+For the other problems however --- binary knapsacks (Figure~\ref{c2_noise} and
 \ref{c3_noise}) the results are clear. Minor inconsistencies make almost no
 harm to the results, while medium and major have only a small impact --- the
 value has decreased less than $5\%$ after ten iterations. This means that the
