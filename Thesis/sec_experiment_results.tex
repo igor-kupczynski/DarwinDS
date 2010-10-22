@@ -2,7 +2,7 @@ DARWIN is a new method and according to the author's knowledge it hasn't been
 implemented before. Experiments are designed to check if the method is working
 at all, what parameters are important for the method and what should be their
 reasonable default values. To make the results repeatable the DM is
-mocked. Inconsistencies in his or her decisions are simulated. Unless
+simulated. Inconsistencies in his or her decisions are simulated. Unless
 uncertainty is involved, comparisons to the exact optimal solution are
 provided. In tests involving uncertainty results are compared to supposed
 utility function optimization.
@@ -27,20 +27,21 @@ DARWIN code and with the modules written in R.
 \section{The Decision Maker}
 
 Experiments were repeated many times. In order to make it possible it was
-essential to mock the DM. Mocking the decision maker guarantees repeatable
-process across the test runs.
+essential to simulate the DM. Simulating the decision maker guarantees
+repeatable process across the test runs.
 
 In the DARWIN method interaction with the decision maker occurs by showing him
 or her a list of generated solutions (usually 30) and asking him or her to
 indicate a few ``good'' ones.
 
-To mock the DM one needs to simulate his or her selections. It is assumed that
-the decision maker acts according to an utility function he or her has in
+To simulate the DM one needs to simulate his or her selections. It is assumed
+that the decision maker acts according to an utility function he or her has in
 mind. This function will be called the supposed utility function.
 
-In the mocking process algorithm sorts the received solutions list according
-to this supposed utility function. Then it selects three (usually three,
-however this can be configured) solutions with the highest supposed utility.
+In the simulating process algorithm sorts the received solutions list
+according to this supposed utility function. Then it selects three (usually
+three, however this can be configured) solutions with the highest supposed
+utility.
 
 Unfortunately real decision maker, being a human isn't as predictable and
 repeatable as the described process. In the sections~\ref{dm-noise}

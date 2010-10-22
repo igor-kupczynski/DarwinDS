@@ -12,7 +12,7 @@ further sections of the chapter.
 
 The algorithm runs with default parameters. Exterior loop was repeated ten
 times. This means that ten times results (in the form of solutions) were
-presented to the (mocked) decision maker. The Results were recorded.
+presented to the (simulated) decision maker. The Results were recorded.
 
 The same problem was solved in an exact way by a mathematical programming
 solver\footnote{GNU Linear Programming Kit ---
@@ -94,12 +94,13 @@ though. The evolution not ``discovered'' a way to match the second rule before
 the 20th generation. Soon after individuals covering both solutions were
 included the whole population drifted to the region marked by both rules.
 
-It can be also insightful to see the mocked DM's choices and compare them with
-the inferred rules. They are presented in charts (Figure~\ref{c2_dmchoices_01},
-\ref{c2_dmchoices_03}, \ref{c2_dmchoices_07}). It is the case that the choices
-directly affected the rules. One can also see another interesting trait of the
-problem. The further (in objective space) the selected individuals are, the
-harder it is to achieve maximal possible primary score.
+It can be also insightful to see the simulated DM's choices and compare them
+with the inferred rules. They are presented in charts
+(Figure~\ref{c2_dmchoices_01}, \ref{c2_dmchoices_03},
+\ref{c2_dmchoices_07}). It is the case that the choices directly affected the
+rules. One can also see another interesting trait of the problem. The further
+(in objective space) the selected individuals are, the harder it is to achieve
+maximal possible primary score.
 
 Finally, charts presenting how the supposed utility and primary score changed
 in the population along with succeeding generations (Figure~\ref{c2_utilind_01},
@@ -596,19 +597,19 @@ basis.
 \label{dm-noise}
 
 
-In the experiments the decision maker was mocked by a computer algorithm. Its
-choices were based on the assumed supposed utility function. They were
-repeatable and always complying with the assumed function. This is not the
-case in a real-world situation where the DM is a human being and the supposed
-utility function is not known. His or her decisions will be noisy, not the
-best, sometimes even contradictory.
+In the experiments the decision maker was simulated by a~computer
+algorithm. Its choices were based on the assumed supposed utility
+function. They were repeatable and always complying with the assumed
+function. This is not the case in a real-world situation where the DM is a
+human being and the supposed utility function is not known. His or her
+decisions will be noisy, not the best, sometimes even contradictory.
 
 For this reason it is important to measure the impact of a ``noise'',
 inconsistencies in the DM's choices, on the algorithm. Normally, without
 introducing artificial inconsistencies the decisions are carried as follows:
 
 \begin{algorithm}
-\caption{Mocked DM indicating ``good'' solutions}\label{alg:dmselection}
+  \caption{Simulated DM indicating ``good'' solutions}\label{alg:dmselection}
   \begin{algorithmic}[1]
     \Procedure{SelectGoodSolutions}{solutions, toSelect} \\
     \Comment{solutions  --- a list of solutions generated in the interior
@@ -631,10 +632,10 @@ not enough to simulate human-made inconsistencies.
 
 First, note that one do not have to always select the same number of
 solutions. In fact, this is unrealistic because the decision maker will select
-as many solutions as he or she will think are appropriate. To mock this
+as many solutions as he or she will think are appropriate. To simulate this
 behavior an additional parameter was added --- toSelectDelta. Now the number
 of solutions to be selected are taken from $[\text{toSelect} -
-  \text{toSelectDelta}, \text{toSelect} + \text{toSelectDelta}]$ with uniform
+\text{toSelectDelta}, \text{toSelect} + \text{toSelectDelta}]$ with uniform
 distribution.
 
 Furthermore, the human decision maker is fallible. He or she can make a wrong
@@ -649,7 +650,8 @@ will be picked by random.
 
 The noisy version of the algorithm~\ref{alg:dmselection} is shown below.
 \begin{algorithm}
-\caption{Mocked DM indicating ``good'' solutions}\label{alg:noisydmselection}
+  \caption{Simulated DM indicating ``good''
+    solutions}\label{alg:noisydmselection}
   \begin{algorithmic}[1]
     \Procedure{NoisySelectGoodSolutions}{solutions, toSelect, toSelectDelta, 
       noiseLimit}
