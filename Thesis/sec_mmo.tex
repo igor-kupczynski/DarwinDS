@@ -163,9 +163,9 @@ principle (\cite{Gol89}):
 \vspace{0.5cm} \textit{A solution x is said to dominate the other solution y,
   if both of the following conditions are true:}
 \begin{enumerate}
-\item \textit{The solution x is no worse than y in all objectives. Thus, the
+\item \textit{The solution x is not worse than y on all objectives. Thus, the
     solutions are compared based on their objective function values.}
-\item \textit{The solution x is strictly better than y in at least one
+\item \textit{The solution x is strictly better than y on at least one
     objective.}
 \end{enumerate}
 
@@ -175,21 +175,21 @@ Pareto-frontier of the problem.
 According to~\cite{Deb08} there are two ideal goals of the EMO:
 \begin{enumerate}
 \item Find a set of solutions which lies on the Pareto-optimal front, and
-\item Fina a set of solutions which is diverse enough to represent the entire
+\item Find a set of solutions which is diverse enough to represent the entire
   range of the Pareto-optimal front.
 \end{enumerate}
 
-An example of the Evolutionary Multi-objective Optimization (EMO) algorithm is
-the NSGA-II (\cite{Deb00}). The basic idea behind the algorithm is to assign
-each solution in a~population to a~number of different Pareto-frontiers. All
-non-dominated individuals are assigned to first Pareto-frontier and then
-removed from the population. All non-dominated individuals after the removal
-are then assigned to second frontier. The process repeats until there are
-individuals in the population. The lower the number of the~frontier, which an
-individual belongs to, the higher the fitness function for it. In case of draw
-the crowding score this taken into account --- the lesser the crowd in the
-solution's neighborhood in an objective space, the better the solution's
-evaluation. This is illustrated in fig.~\ref{nsga}.
+The most representative example of the Evolutionary Multi-objective
+Optimization (EMO) algorithm is NSGA-II (\cite{Deb00}). The basic idea behind
+the algorithm is to assign each solution in a~population to a~number of
+different Pareto-frontiers. All non-dominated individuals are assigned to
+first Pareto-frontier and then removed from the population. All non-dominated
+individuals after the removal are then assigned to second frontier. The
+process repeats until there are individuals in the population. The lower the
+number of the~frontier, which an individual belongs to, the higher the fitness
+function for it. In case of a~tie the crowding score is taken into account ---
+the lesser the crowd in the solution's neighborhood in an objective space, the
+better the solution's evaluation. This is illustrated in fig.~\ref{nsga}.
 
 
 \section{Dominance-Based Rough Set Approach to MOO}
@@ -215,10 +215,14 @@ theory introduced in~\cite{GMS01, GMS02, GMS05}. The indiscernibility relation
 is replaced by the dominance relation (defined in the former section). DRSA is
 applicable in the decision support field.
 
-DRSA can model the situations in which there are objects --- vectors of values
-in the decision variable space --- and each object belongs to one of the
-decision classes. The classes are sorted in a~preference order. An example is
-shown in Figure~\ref{drsa}.
+DRSA can model the situations in which a~finite set of objects --- vectors of
+values in the decision variable space --- has been classified to some decision
+classes, such that one object belongs to exactly one class. The classes are
+preference ordered. The main task of DRSA is to structure the classification
+into lower and upper approximations of unions of ordered decision classes,
+prior to induction of monotonic decision rules, representing the preferences
+of an agent who made the classification decision. An example of the DRSA data
+structuring is given in Figure~\ref{drsa}.
 
 The data in Dominance-based Rough Set Approach are often presented in
 a~decision table. The objects being considered are written in table rows, the
@@ -261,7 +265,7 @@ class, \textit{possible} --- based on objects from the upper approximation and
 should be minimal, i.e. cardinality of the set of conditions should be
 minimal.
 
-Example rules generated from Table~\ref{t:dec_tab-example}:
+Example rules generated from Table~\ref{t:dec_tab-example} are as follows:
 \begin{enumerate}
 \item If \textit{Literature $\ge$ good} then \textit{Student $\ge$ good},
 \item If \textit{Mathematics $\le$ bad} and \textit{Physic $\le$ medium} then
@@ -271,8 +275,8 @@ Example rules generated from Table~\ref{t:dec_tab-example}:
 \end{enumerate}
 
 DRSA can handle uncertainty and contradictions in the data, thus it can model
-a~wide class of problems. For each rule $r$ given in from $\Phi \to \Psi$
-following measures are defined:
+a~wide class of real-world decision problems. For each rule $r$ given in from
+$\Phi \to \Psi$, the following measures are defined:
 \begin{itemize}
 \item Support: $\textit{supp}(\Phi, \Psi) = \textit{cardinality}(||\Phi \land
   \Psi||)$ --- is the number of objects for which the condition of the rule
@@ -284,12 +288,12 @@ following measures are defined:
   objects for which the rule's condition holds.
 \end{itemize}.
 
-Objects supporting rule$_3$ are \{S2, S3, S4, S5\}, but the condition part
-holds also for S1. The support is: $\textit{supp}(r_3) = \frac{4}{5} = 0.8$.
+Objects supporting rule no.~3  are \{S2, S3, S4, S5\}, but the condition part
+holds also for S1. The support is thus: $\textit{supp}(r_3) = \frac{4}{5} = 0.8$.
 
-To extract all rules from the decision table one can use the All Rules
-algoritm (an optimized version is described in~\cite{Zur01}). The other option
-is to use the DomLem algorithm (\cite{GMS+01}) generating minimal set of rules
+To induce all rules from the decision table one can use the All Rules algoritm
+(an optimized version is described in~\cite{Zur01}). Another option is to use
+the DomLem algorithm (\cite{GMS+01}) generating a~minimal set of rules
 covering all the objects from a given table.
 
 
