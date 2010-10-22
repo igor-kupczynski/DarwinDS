@@ -15,8 +15,9 @@ times. This means that ten times results (in the form of solutions) were
 presented to the (mocked) decision maker. The Results were recorded.
 
 The same problem was solved in an exact way by a mathematical programming
-solver (glpk~\cite{Glpk}). One used the supposed utility function as an
-optimization goal for the solver. In this way the optimal solutions were
+solver\footnote{GNU Linear Programming Kit ---
+  http://www.gnu.org/software/glpk/}. One used the supposed utility function
+as an optimization goal for the solver. In this way the optimal solutions were
 obtained (for the considered instance the best supposed utility function value
 is $4154.441453$).
 
@@ -158,7 +159,7 @@ algorithm parameters is. This is done in the further sections.
       \label{c2_valweight_07}
     }
   }
-  \caption{Individuals in the solution space}
+  \caption{Changes in the population}
 \end{figure}
 
 
@@ -206,7 +207,7 @@ algorithm parameters is. This is done in the further sections.
 
 
 \clearpage{}
-\subsection{The performance on exemplary problems}
+\subsection{The computational performance on exemplary problems}
 \label{nouncert-performance}
 It is important to know what performance can be expected from an
 algorithm. When no uncertainty is considered in a problem and one assumes the
@@ -595,12 +596,12 @@ basis.
 \label{dm-noise}
 
 
-In the experiments performed the decision maker was mocked by a computer
-algorithm. Its choices were based on the assumed supposed utility
-function. They were repeatable and always complying with the assumed
-function. This is not the case in a real-world situation where the DM is a
-human being and the supposed utility function is not known. His or her
-decisions will be noisy, not the best, sometimes even contradictory.
+In the experiments the decision maker was mocked by a computer algorithm. Its
+choices were based on the assumed supposed utility function. They were
+repeatable and always complying with the assumed function. This is not the
+case in a real-world situation where the DM is a human being and the supposed
+utility function is not known. His or her decisions will be noisy, not the
+best, sometimes even contradictory.
 
 For this reason it is important to measure the impact of a ``noise'',
 inconsistencies in the DM's choices, on the algorithm. Normally, without

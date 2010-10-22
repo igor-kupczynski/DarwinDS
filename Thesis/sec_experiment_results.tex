@@ -17,9 +17,12 @@ for application to 768MB. Tests were performed through CLI batch interface.
 
 Test framework is available in order to automate the experiment process. All
 experiments were repeated at least thirteen times. Data analysis and chart
-generation were performed using an R environment~\cite{R}. The framework is
-a~combination of the Python~\cite{Pyt} and Bash~\cite{Bas}] code communicating
-with main DARWIN code and with the modules written in R.
+generation were performed using an R environment\footnote{The R Project for
+  Statistical Computing --- http://www.r-project.org/}. The framework is
+a~combination of the Python\footnote{The Python Programming Language ---
+  http://python.org/} and Bash\footnote{Bourne-Again SHell ---
+  http://www.gnu.org/software/bash/bash.html} code communicating with main
+DARWIN code and with the modules written in R.
 
 \section{The Decision Maker}
 
@@ -263,16 +266,16 @@ The experiments were performed using following problems:
 
 \section{Conclusions}
 
-The experiments performed confirmed that the method proposed in~\cite{GMS10,
-  GMS10b, GMS10c} can be used to solve multi-objective optimization problems
-even when the problem formulation does contain uncertainty in the form of
-intervals of possible values.
+The experiments performed confirmed that the DARWIN method proposed
+in~\cite{GMS10, GMS10b, GMS10c} is a~good too for solving multi-objective
+optimization problems even when the problem formulation does contain
+uncertainty in the form of intervals of possible values.
 
-At the moment of writing according to the author's knowledge there was no
-working implementation of the DARWIN method. The first task was to analyze
-behavior of the algorithm on simple two-criteria problem without
-uncertainty. First evaluations allowed the author to learn the properties and
-to get to know the behavior of the algorithm.
+The presented implementation is the first implementation of the DARWIN method
+which permits performing so large computational experiments. The first task
+was to analyze behavior of the algorithm on simple two-criteria problem
+without uncertainty. First evaluations allowed the author to learn the
+properties and to get to know the behavior of the algorithm.
 
 Having confidence that the DARWIN works it was possible to advance to the next
 task --- to evaluate the performance of a richer set of the problem. It was
@@ -295,14 +298,14 @@ parameters on the result and included a~second rules generating algorithm ---
 the AllRules algorithm. As a result a~rich set of data containing performance
 characteristics was gathered.
 
-To conclude, the DARWIN method can handle MOO very well problems. A resulting
-solution is robust with respect to algorithm parameters, inconsistencies in
-Decision Maker's choices and finally to the uncertainty in the problem
-definition. Nevertheless the analyst should be careful and investigate the
-problem instead of using the method blindly. There are some problems which are
-hard for DARWIN to solve (e.g. DTLZ1). Even for these problems satisfactory
-results can be achieved, however one has to fine-tune the parameters and
-carefully observe their impact on the result.
+To conclude, the DARWIN method can handle very well a~large variety of MOO
+problems. A resulting solution is robust with respect to algorithm parameters,
+inconsistencies in Decision Maker's choices and finally to the uncertainty in
+the problem definition. Nevertheless the analyst should be careful and
+investigate the problem instead of using the method blindly. There are some
+problems which are hard for DARWIN to solve (e.g. DTLZ1). Even for these
+problems satisfactory results can be achieved, however, one has to fine-tune
+the parameters and carefully observe their impact on the result.
 
 The method is simple to use for the decision maker even if he or she has no
 knowledge in the decision support field. However for some problems the

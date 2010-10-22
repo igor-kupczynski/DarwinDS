@@ -51,13 +51,15 @@ of Technology that aims at providing DRSA framework implementation in Java ---
 was chosen. It contains the DomLem algorithm~\cite{GMS+01} able to generate
 a~minimal set of decision rules from the examples given as its input.
 
-jRS is written in Java programming language~\cite{Jav} and runs on top of the
-Java Virtual Machine (JVM~\cite{LY99}). The JVM is a~portable platform capable
-of running the Java bytecode. Having a~Java component (jRS in this case)
-effectively put a~constraint on the DARWIN implementation --- it is required
-that the implementation is also delivered as a JVM application. However, the
-technical details of the Java platform are out-of-scope of this paper, so they
-are omitted unless relevant for the DARWIN's description.
+jRS is written in Java programming language\footnote{Developer Resources for
+  Java Technology --- http://www.oracle.com/technetwork/java/index.html} and
+runs on top of the Java Virtual Machine (JVM~\cite{LY99}). The JVM is
+a~portable platform capable of running the Java bytecode. Having a~Java
+component (jRS in this case) effectively put a~constraint on the DARWIN
+implementation --- it is required that the implementation is also delivered as
+a JVM application. However, the technical details of the Java platform are
+out-of-scope of this paper, so they are omitted unless relevant for the
+DARWIN's description.
 
 Unfortunately, generating only a~minimal set of rules may not be
 sufficient. The primary score in the interior loop is based on a~number of
@@ -106,8 +108,9 @@ it is usually the case in the enterprise application market. However, what is
 a good solution for a~team is not essentially the best possible tool for
 a~single developer working on a~project.
 
-The author decided to develop the implementation in Scala~\cite{Sca}. Scala is
-a multi-paradigm programming language combining object-oriented features with
+The author decided to develop the implementation in Scala\footnote{The Scala
+  Programming Language --- http://www.scala-lang.org/}. Scala is a
+multi-paradigm programming language combining object-oriented features with
 functional programming. The former paradigm is a~dominant contemporary
 software development practice; it allows to program and model problem domain's
 objects as well as any relations between them. However, the latter makes it
@@ -171,12 +174,13 @@ In order to reduce the number of bugs and eliminate recurring of the fixed
 bugs an extensive test suite accompanies each of the packages. In order to
 streamline the building process the Scala Build Tool (SBT, see~\cite{sbt10})
 is used to manage dependencies, to take care of running the test suite and to
-build the application from its source code. The code contains javadoc
-(see~\cite{JavaDoc}) on most of the API methods and a lot of comments in
-places that could be particularly hard or tricky to understand. Therefore it
-should be possible for the other developer to use and extend the code
-delivered as a~part of the thesis. A manual for the end-user is enclosed at
-the end of the paper.
+build the application from its source code. The code contains
+javadoc\footnote{Javadoc Tool ---
+  http://www.oracle.com/technetwork/java/javase/documentation/index-jsp-135444.html}
+on most of the API methods and a lot of comments in places that could be
+particularly hard or tricky to understand. Therefore it should be possible for
+the other developer to use and extend the code delivered as a~part of the
+thesis. A manual for the end-user is enclosed at the end of the paper.
 
 A~lot of DARWIN parameters are mentioned throughout the paper. They are
 gathered and described in Table~\ref{t:params}. The parameters can be set in a
@@ -268,16 +272,18 @@ To bypass this limit and streamline the process, the experiment framework is
 provided. One can define a base configuration along with a~test plan and then
 a computer will proceed with an execution of the test plan. Scripts composing
 the framework are written in Python --- a general, high-level programming
-language~\cite{Pyt} and glued together using the Bash shell
-scripts~\cite{Bas}. A~description on how to use the framework is provided as
-a~part of the user manual~\ref{user-manual}.
+language\footnote{The Python Programming Language --- http://python.org/} and
+glued together using the Bash shell scripts\footnote{Bourne-Again SHell ---
+  http://www.gnu.org/software/bash/bash.html}. A~description on how to use the
+framework is provided as a~part of the user manual~\ref{user-manual}.
 
 A test plan execution will typically result in a~number of report files full
 of the runs' details. It would be a tremendous task to analyze them by
 hand. However, presenting this data in an aggregated form as a set of charts
 can immensely simplify the analysis.
 
-R is an environment for statistical computing~\cite{R}. The program along with
+R is an environment for statistical computing\footnote{The R Project for
+  Statistical Computing --- http://www.r-project.org/}. The program along with
 ggplot library (see~\cite{Wic09}) has been used for the automatic chart
 generation. The R scripts can import the CSV reports, aggregate and process
 the data and finally generate a~chart.
