@@ -42,7 +42,13 @@ class DarwinDialog(window: Window, val sim: Simulation,
   var jTable: JTable = _
   var table: Component = _
   createTable
-  
+
+  def tablePanel(): ScrollPane = {
+     new ScrollPane(table) {
+       preferredSize = new Dimension(1000, 515)
+     }
+  }
+
   val bp =  new BoxPanel(Orientation.Vertical) {
     contents += new FlowPanel {
       contents += new Label("History:")
@@ -50,7 +56,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
       contents += histLabel
       contents += btnNext
     }
-    contents += new ScrollPane(table)
+    contents += tablePanel()
     contents += new FlowPanel {
       contents += btnShow
       contents += btnMark
