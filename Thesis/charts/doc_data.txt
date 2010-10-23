@@ -3,9 +3,9 @@ InfoValue: R
 InfoKey: Title
 InfoValue: R Graphics Output
 InfoKey: Producer
-InfoValue: R 2.10.1
+InfoValue: R 2.11.1
 InfoKey: ModDate
-InfoValue: D:20100827210430
+InfoValue: D:20101023023632
 InfoKey: CreationDate
-InfoValue: D:20100827210430
-NumberOfPages: 10
+InfoValue: D:20101023023632
+NumberOfPages: 20
