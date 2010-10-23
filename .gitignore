@@ -23,6 +23,7 @@ src_managed/
 TAGS
 *~
 .ropeproject
+Thesis/main.synctex.gz
 
 # Files generated during run
 Darwin/rules/
@@ -39,3 +40,8 @@ main.pdf
 *.blg
 *.out
 *.toc
+
+Experiment/results
+distribution.zip
+distribution
+
