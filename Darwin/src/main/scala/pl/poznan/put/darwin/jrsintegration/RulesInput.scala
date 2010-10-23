@@ -34,8 +34,8 @@ class RulesInput(result: List[MarkedSolution], randomize: Boolean) extends Seria
     metadata
   }
 
-  private def createIterationOrder(randomize: Boolean): List[Tuple2[Goal, Double]] = {
-    var order: List[Tuple2[Goal, Double]] = Nil
+  private def createIterationOrder(randomize: Boolean): List[Tuple2[Goal, Int]] = {
+    var order: List[Tuple2[Goal, Int]] = Nil
     result(0).goals foreach ((g: Goal) => {
       sim.config.PERCENTILES foreach (p => order = order :+ (g, p))
     })

@@ -27,7 +27,7 @@ trait ProblemRepository {
   useAvg = false
   useAtMost = false
   mutationTries = 100
-  percentiles = 1.0, 25.0, 50.0
+  percentiles = 1, 25, 50
   multiRules = false
   multiRulesCount = 3
   
@@ -69,7 +69,7 @@ trait ProblemRepository {
   useAvg = true
   useAtMost = false
   mutationTries = 100
-  percentiles = 1.0, 25.0, 50.0
+  percentiles = 1, 25, 50
   multiRules = false
   multiRulesCount = 3
   

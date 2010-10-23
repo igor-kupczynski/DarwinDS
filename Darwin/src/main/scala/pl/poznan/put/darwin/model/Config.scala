@@ -25,7 +25,7 @@ object Config {
     useAvg = false
     useAtMost = false
     mutationTries = 100
-    percentiles = 1.0, 25.0, 50.0
+    percentiles = 1, 25, 50
     multiRules = false
     multiRulesCount = 3
 
@@ -102,7 +102,7 @@ class Config(parser: ConfigParser) {
   val SCENARIO_COUNT: Int = parser.getInt("main", "scenariocount")
   val GENERATION_COUNT: Int = parser.getInt("main", "generationcount")
   val OUTER_COUNT: Int  = parser.getInt("main", "outercount")
-  val PERCENTILES: List[Double] = getListOfDoubles(parser.get("main", "percentiles"))
+  val PERCENTILES: List[Int] = getListOfInts(parser.get("main", "percentiles"))
   val DELTA: Double = parser.getDouble("main", "delta")
   val GAMMA: Double = parser.getDouble("main", "gamma")
   val MUTATION_TRIES: Int = parser.getInt("main", "mutationtries")
@@ -157,9 +157,9 @@ class Config(parser: ConfigParser) {
   val DIGITS_AFTER_DOT = if (parser.hasOption("gui", "digits"))
      parser.getInt("gui", "digits") else 2
 
-  private def getListOfDoubles(str: String): List[Double] = {
+  private def getListOfInts(str: String): List[Int] = {
     val r = new Regex(",")
-    r.split(str).toList.map(x => x.toDouble)
+    r.split(str).toList.map(x => x.trim.toInt)
   }
   
 }

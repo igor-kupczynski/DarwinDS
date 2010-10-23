@@ -23,7 +23,7 @@ object ExampleFactory {
    * Converts solution to example including decision variable
    */
   def apply(solution: MarkedSolution, enumDomain: EnumDomain,
-            order: List[Tuple2[Goal, Double]]): Example = {
+            order: List[Tuple2[Goal, Int]]): Example = {
     val fields: List[Field] = getFields(solution, order) ::: List(
       new EnumField(if (solution.good) 1 else 0, enumDomain))
     new Example(fields.toArray[Field])
@@ -33,7 +33,7 @@ object ExampleFactory {
    * Perform extraction of non-decision attributes from solution
    */
   private def getFields(solution: EvaluatedSolution,
-                        order: List[Tuple2[Goal, Double]]): List[Field] = {
+                        order: List[Tuple2[Goal, Int]]): List[Field] = {
     var fields: List[Field] = new StringField("Solution") :: Nil
     order foreach { case (g, p) =>
       fields = new FloatField(solution.getPercentile(g, p)) :: fields
