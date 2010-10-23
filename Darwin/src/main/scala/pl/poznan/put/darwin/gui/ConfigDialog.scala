@@ -50,6 +50,7 @@ class ConfigDialog(window: Window, val default: ConfigParser)
     case ButtonClicked(`btnSave`) => {
       try {
         config = new Config(parser)
+        parser.write(new File("etc/gui_config.ini"))
         visible = false
       } catch {
         case e: NumberFormatException =>

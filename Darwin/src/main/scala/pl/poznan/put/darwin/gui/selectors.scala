@@ -32,7 +32,15 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
 
   listenTo(configButton, problemButton)
 
-  private var config: Config = Config()
+  private var config: Config = _
+  try {
+    val parser = new ConfigParser()
+    parser.read("etc/gui_config.ini")
+    config = new Config(parser)
+  } catch {
+    case _ => {config = Config()}
+  }
+
   private var problem: Problem = null
 
   def hasProblem = problem != null
