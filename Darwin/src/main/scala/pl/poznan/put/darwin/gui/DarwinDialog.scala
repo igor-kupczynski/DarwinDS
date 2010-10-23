@@ -111,9 +111,12 @@ class DarwinDialog(window: Window, val sim: Simulation,
     }
 
     case ButtonClicked(`btnShow`) => {
-      val sd = new SolutionDialog(this, evaluated, jTable.getSelectedRows)
-      sd.setLocationRelativeTo(this)
-      sd.visible = true
+      val sel = jTable.getSelectedRows
+      if (sel.size > 0) {
+        val sd = new SolutionDialog(this, evaluated, sel)
+        sd.setLocationRelativeTo(this)
+        sd.visible = true
+      }
     }
 
     case ButtonClicked(`btnPrev`) => {
