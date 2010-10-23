@@ -57,7 +57,7 @@ data <- prep.data(df)
 c <- gen.plot(data, args[5])
 opt <- as.numeric(args[2])
 if (opt != 0) {
-  c <- add.optimal(c, opt, length(data$outer))
+  c <- add.optimal(c, opt, length(data$exterior_iteration))
 }
 print(c)
 dev.off()

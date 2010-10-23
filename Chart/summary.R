@@ -59,7 +59,7 @@ data.box <- prep.data.box(df)
 c <- gen.plot.line(data)
 opt <- as.numeric(args[2])
 if (opt != 0) {
-  c <- c + optimal(opt, data$outer[length(data$exterior_iteration)])
+  c <- c + optimal(opt, data$exterior_iteration[length(data$exterior_iteration)])
 }
 print(c)
 dev.off()
