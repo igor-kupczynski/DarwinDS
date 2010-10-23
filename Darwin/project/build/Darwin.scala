@@ -23,6 +23,8 @@ class DarwinProject(info: ProjectInfo) extends DefaultProject(info)
   val mockito = "org.mockito" % "mockito-all" % "1.8.4" % "test" withSources()
   val junit = "junit" % "junit" % "4.8.1" % "test"
 
+  val slf4s = "com.weiglewilczek.slf4s" %% "slf4s" % "1.0.2"
+
   override def mainClass = Some("pl.poznan.put.darwin.RunnerGUI")
 
   lazy val downloadJrs = task {
