@@ -38,6 +38,7 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
   def hasProblem = problem != null
 
   def newSim: Simulation = {
+    config.problem_name = problemFileName
     val sim = new Simulation(config, problem)
     if (config.EVOLUTION_REPORT != ""  )
       sim.registerObserver(

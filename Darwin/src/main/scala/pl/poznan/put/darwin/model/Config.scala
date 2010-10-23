@@ -39,8 +39,8 @@ object Config {
     domlemconfidenceLevel = 1.0
 
     [reports]
-    evolutionReport =
-    DMReport =
+    evolutionReport = reports/evolution_report.csv
+    DMReport = reports/dm_report.csv
     briefReport = false
     rulesDirectory = rules
 
@@ -92,6 +92,8 @@ object Config {
 }
 
 class Config(parser: ConfigParser) {
+
+  var problem_name: String = "problem"
 
   /*
    * Main parameters

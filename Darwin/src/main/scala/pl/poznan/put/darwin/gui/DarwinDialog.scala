@@ -92,20 +92,31 @@ class DarwinDialog(window: Window, val sim: Simulation,
     }
 
     case ButtonClicked(`btnEnd`) => {
-      val d = Dialog.showConfirmation(bp,
-          "Do you want to end this run of the algorithm? Solutions marked as good will be saved.",
-          "Do you want to end?", Dialog.Options.YesNo)
-      var confirm = (d == Dialog.Result.Yes)
-      if (confirm) {
-        val chooser = new FileChooser(new File ("."))
-        val filter = new FileNameExtensionFilter("Text files", "txt")
-        chooser.fileFilter = filter
-
-        val rc = chooser.showSaveDialog(bp)
-        if (rc == FileChooser.Result.Approve) {
-          val file = chooser.selectedFile
-          saveSolutions(file)
+      marked = markSelected
+      if (marked.filter({_.good}).length == 0) {
+        val d = Dialog.showConfirmation(bp,
+            "No solutions selected. Do you want to end?",
+            "Do you want to end?", Dialog.Options.YesNo)
+        val confirm = (d == Dialog.Result.Yes)
+        if (confirm) {
           visible = false
+        }
+      } else {
+        val d = Dialog.showConfirmation(bp,
+            "Do you want to end this run of the algorithm? Solutions marked as good will be saved.",
+            "Do you want to end?", Dialog.Options.YesNo)
+        val confirm = (d == Dialog.Result.Yes)
+        if (confirm) {
+          val chooser = new FileChooser(new File ("."))
+          val filter = new FileNameExtensionFilter("Text files", "txt")
+          chooser.fileFilter = filter
+
+          val rc = chooser.showSaveDialog(bp)
+          if (rc == FileChooser.Result.Approve) {
+            val file = chooser.selectedFile
+            saveSolutions(file)
+            visible = false
+          }
         }
       }
     }
