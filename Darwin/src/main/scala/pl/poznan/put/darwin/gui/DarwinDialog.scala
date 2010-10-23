@@ -4,10 +4,12 @@ import swing._
 import event._
 import pl.poznan.put.darwin.simulation._
 import pl.poznan.put.darwin.model.solution._
-import javax.swing.JTable
 import javax.swing.table.AbstractTableModel
 import java.lang.{Class, String}
 import collection.mutable.ArrayBuffer
+import javax.swing.{Box, JTable}
+import java.io.{FileWriter, File}
+import javax.swing.filechooser.FileNameExtensionFilter
 
 object DarwinDialog {
   def show(window: Window,
@@ -31,8 +33,9 @@ class DarwinDialog(window: Window, val sim: Simulation,
 
   visible = false
   modal = true
-  private val btnMark = new Button("Mark as good")
+  private val btnMark = new Button("Next iteration")
   private val btnShow = new Button("Solution details")
+  private val btnEnd = new Button("End the algorithm")
 
   private val btnPrev = new Button("Previous")
   private val btnNext = new Button("Next")
@@ -58,6 +61,8 @@ class DarwinDialog(window: Window, val sim: Simulation,
     }
     contents += tablePanel()
     contents += new FlowPanel {
+      contents += btnEnd
+      contents += new Label("                 ")
       contents += btnShow
       contents += btnMark
     }
@@ -72,20 +77,37 @@ class DarwinDialog(window: Window, val sim: Simulation,
 
   var marked: List[MarkedSolution] = null
 
-  listenTo(btnMark, btnShow, btnPrev, btnNext)
+  listenTo(btnMark, btnShow, btnEnd, btnPrev, btnNext)
 
   reactions += {
     case ButtonClicked(`btnMark`) => {
       marked = markSelected
-      var confirm = true
       if (marked.filter({_.good}).length == 0) {
-        val d = Dialog.showConfirmation(bp,
-          "You have not selected any solutions. Do you want to end the run?", "End of run",
-          Dialog.Options.YesNo)
-        confirm = (d == Dialog.Result.Yes)
-      }
-      if (confirm)
+        val d = Dialog.showMessage(bp,
+          "You have not selected any solutions. Click the checkbox in 'Is good?' column to mark.",
+          "No solutions are selected")
+      } else {
         visible = false
+      }
+    }
+
+    case ButtonClicked(`btnEnd`) => {
+      val d = Dialog.showConfirmation(bp,
+          "Do you want to end this run of the algorithm? Solutions marked as good will be saved.",
+          "Do you want to end?", Dialog.Options.YesNo)
+      var confirm = (d == Dialog.Result.Yes)
+      if (confirm) {
+        val chooser = new FileChooser(new File ("."))
+        val filter = new FileNameExtensionFilter("Text files", "txt")
+        chooser.fileFilter = filter
+
+        val rc = chooser.showSaveDialog(bp)
+        if (rc == FileChooser.Result.Approve) {
+          val file = chooser.selectedFile
+          saveSolutions(file)
+          visible = false
+        }
+      }
     }
 
     case ButtonClicked(`btnShow`) => {
@@ -108,6 +130,37 @@ class DarwinDialog(window: Window, val sim: Simulation,
       resetButtons
       createTable
       bp.changeTable(table)
+    }
+  }
+
+  private def saveSolutions(file: File) = {
+    val out = new FileWriter(file)
+    try {
+      val m = jTable.getModel
+      var idx = -1
+      evaluated.map(e => {
+        idx += 1
+        val good: Boolean = (m.getValueAt(idx, 1)).asInstanceOf[Boolean]
+        if (good) {
+          out.write("--- Solution %02d ---\n\n" format idx)
+          out.write("Variables:\n")
+          for ((k, v) <- e.values.toList.sortWith(
+            (a, b) => {
+              a._1 < b._1
+            })) {
+            out.write("* %s: %s\n" format (k, v.toString))
+          }
+          out.write("\nGoals:\n")
+          for (g <- e.goals) {
+            for (p <- e.sim.config.PERCENTILES) {
+              out.write("* %s_%s: %s\n" format (g.name, p.toString, e.getPercentile(g, p).toString))
+            }
+          }
+          out.write("\n\n")
+        }
+      })
+    } finally {
+      out.close
     }
   }
 
