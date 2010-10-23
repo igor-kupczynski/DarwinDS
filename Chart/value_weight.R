@@ -11,7 +11,7 @@ prep.data <- function(outerIdx, x, g1, g2) {
 gen.plot <- function(outerIdx, data, g1, g2) {
   c <- ggplot(data, aes_string(x=g1, y=g2, colour="generation"))
   c <- c + geom_point()
-  c <- c + opts(title=paste(g1, " x ", g2, ", outer=", outerIdx, sep=""))
+  c <- c + opts(title=paste(g1, " x ", g2, ", ext.iter.=", outerIdx, sep=""))
   c
 }
 

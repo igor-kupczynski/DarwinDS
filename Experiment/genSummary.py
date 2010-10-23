@@ -20,11 +20,13 @@ def parse_outer(f, test_name):
     for item in reader:
         parsed = {
             'test': test_name,
-            'outer': int(item['outer']),
             'min': float(item['utility_min']),
-            'max': float(item['utility_max']),
-            'last': float(item['utility_last'])
+            'max': float(item['utility_max'])
             }
+        if 'outer' in item:
+        	parsed['outer'] = int(item['outer'])
+        else:
+        	parsed['outer'] = int(item['exterior_iteration'])
         result.append(parsed)                  
     return result
 
@@ -80,7 +82,7 @@ def process_directory(dirname):
         with open(fname) as f:
             l = parse_outer(f, testname)
             lists.append(l)
-    merged = merge_lists(lists, 'last')
+    merged = merge_lists(lists, 'max')
     with open(os.path.join(dirname, "summary.csv"), 'w') as out:
         writer = csv.DictWriter(out, ['test', 'try', 'outer', 'value'])
         writer.writerow({'test': 'test', 'try': 'try', 'outer': 'outer', 'value': 'value'})

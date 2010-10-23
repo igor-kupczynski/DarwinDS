@@ -26,7 +26,7 @@ gen.plot.util <- function(outerIdx, data) {
   c <- ggplot(dataM)
   c <- c + geom_point(aes(generation, value, colour=method))
   c <- c +  geom_line(aes(generation, value, colour=method))
-  c <- c + opts(title=paste("UtilGenComparison, outer=", outerIdx, sep=""))
+  c <- c + opts(title=paste("UtilGenComparison, ext.iter.=", outerIdx, sep=""))
   c
 }
 

@@ -28,7 +28,7 @@ gen.plot.util <- function(outerIdx, data) {
                        data=data, alpha=0.2)
   c <- c + geom_point(aes(generation, value, colour=result_variable))
   c <- c +  geom_line(aes(generation, value, colour=result_variable))
-  c <- c + opts(title=paste("UtilGen, outer=", outerIdx, sep=""))
+  c <- c + opts(title=paste("UtilGen, ext.iter.=", outerIdx, sep=""))
   c
 }
 
@@ -39,7 +39,7 @@ gen.plot.ps <- function(outerIdx, data) {
                        data=data, alpha=0.2)
   c <- c + geom_point(aes(generation, value, colour=result_variable))
   c <- c +  geom_line(aes(generation, value, colour=result_variable))
-  c <- c + opts(title=paste("PrimaryScoreGen, outer=", outerIdx, sep=""))
+  c <- c + opts(title=paste("PrimaryScoreGen, ext.iter.=", outerIdx, sep=""))
   c
 }
 

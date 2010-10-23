@@ -11,7 +11,7 @@ prep.data.util <- function(x) {
   inner <- x[c("generation", "utility")]
   inner$generation <- factor(inner$generation)
   inner <- inner[with(inner, order(generation, utility)), ]
-  inner$ind <- 1:summary(inner$generation)[1]
+  inner$individual <- 1:summary(inner$generation)[1]
   inner
 }
 
@@ -19,21 +19,21 @@ prep.data.ps <- function(x) {
   inner <- x[c("generation", "primary")]
   inner$generation <- factor(inner$generation)
   inner <- inner[with(inner, order(generation, primary)), ]
-  inner$ind <- 1:summary(inner$generation)[1]
+  inner$individual <- 1:summary(inner$generation)[1]
   inner
 }
 
 gen.plot.util <- function(outerIdx, data) {
-  c <- ggplot(data, aes(ind, utility, colour=generation))
+  c <- ggplot(data, aes(individual, utility, colour=generation))
   c <- c + geom_point() + geom_line()
-  c <- c + opts(title=paste("Utility/Individual, outer=", outerIdx, sep=""))
+  c <- c + opts(title=paste("Utility/Individual, ext.iter.=", outerIdx, sep=""))
   c
 }
 
 gen.plot.ps <- function(outerIdx, data) {
-  c <- ggplot(data, aes(ind, primary, colour=generation))
+  c <- ggplot(data, aes(individual, primary, colour=generation))
   c <- c + geom_point() + geom_line()
-  c <- c + opts(title=paste("Primary/Individual, outer=", outerIdx, sep=""))
+  c <- c + opts(title=paste("Primary/Individual, ext.iter.=", outerIdx, sep=""))
   c
 }
 
