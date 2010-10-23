@@ -46,14 +46,14 @@ Q q
 Q q
 BT
 0.000 0.000 0.000 rg
-/F2 1 Tf 14.00 0.00 -0.00 14.00 149.93 475.95 Tm (Utility/Individual, outer=1) Tj
+/F2 1 Tf 14.00 0.00 -0.00 14.00 149.93 475.95 Tm (Utility/Individual, ext.iter.=1) Tj
 ET
 Q q
 Q q
 Q q
 BT
 0.000 0.000 0.000 rg
-/F2 1 Tf 12.00 0.00 -0.00 12.00 218.37 262.80 Tm (ind) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 218.37 262.80 Tm (individual) Tj
 ET
 Q q
 Q q
@@ -1035,14 +1035,14 @@ Q q
 Q q
 BT
 0.000 0.000 0.000 rg
-/F2 1 Tf 14.00 0.00 -0.00 14.00 142.62 223.95 Tm [(Pr) -15 (imar) -30 (y/Individual, outer=1)] TJ
+/F2 1 Tf 14.00 0.00 -0.00 14.00 142.62 223.95 Tm [(Pr) -15 (imar) -30 (y/Individual, ext.iter.=1)] TJ
 ET
 Q q
 Q q
 Q q
 BT
 0.000 0.000 0.000 rg
-/F2 1 Tf 12.00 0.00 -0.00 12.00 218.37 10.80 Tm (ind) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 218.37 10.80 Tm (individual) Tj
 ET
 Q q
 Q q

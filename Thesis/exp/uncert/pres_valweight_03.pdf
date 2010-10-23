@@ -45,7 +45,7 @@ Q q
 Q q
 BT
 0.000 0.000 0.000 rg
-/F2 1 Tf 14.00 0.00 -0.00 14.00 127.35 475.95 Tm (profit_50.0 x time_50.0, outer=3) Tj
+/F2 1 Tf 14.00 0.00 -0.00 14.00 127.35 475.95 Tm (profit_50.0 x time_50.0, ext.iter.=3) Tj
 ET
 Q q
 Q q
