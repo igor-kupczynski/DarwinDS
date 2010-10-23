@@ -73,27 +73,28 @@ algorithms. Methods using these principles are called the evolutionary
 algorithms (EAs) while the whole field of research is the evolutionary
 multi-objective optimization (EMO).
 
-In this paper the author presents the DARWIN method. DARWIN is an acronym for
-Dominance-based rough set Approach to handling Robust Winning solutions in
-INteractive multi-objective optimization. DARWIN is an algorithm proposed by
+In this paper, the author presents a~software implementation of the DARWIN
+method and the first large computational experiment with DARWIN. DARWIN is an
+acronym for Dominance-based rough set Approach to handling Robust Winning
+solutions in INteractive multi-objective optimization. It has been proposed by
 Salvatore Greco, Benedetto Matarazzo and Roman Słowiński in~\cite{GMS10c,
-  GMS10, GMS09, GMS10b} dedicated for solving multi-objective optimization
-problems. It interacts with the decision maker in order to infer his or her
-preferences. The preferences are then stored in the form of decision rules
-guiding the optimization process. An evolutionary algorithm is used as an
-engine for optimization. Therefore DARWIN combines IMO and EMO paradigms. It
+  GMS10, GMS09, GMS10b} for solving multi-objective optimization problems. It
+interacts with the decision maker in order to find the solution which best
+fits his or her preferences. The preferences are represented in the form of
+decision rules. They are used for guiding the search of the most preferred
+solutions in the solution space. An evolutionary algorithm is used as an
+optimization engine. Therefore, DARWIN combines IMO and EMO paradigms. It
 allows an analyst to model uncertainty in the problem definition, thus
 generating robust solutions.
 
 \section{Goal and scope of the thesis}
 
 The thesis consists of six chapters. Firstly, the theoretical background is
-presented. A~more detailed description of the DARWIN algorithm follows in the
-chapter~\ref{darwin-the-idea}. The chapter~\ref{darwin-implementation}
-discusses an implementation on an IBM-PC class computer. Experiment results
-are shown and discussed in the chapter~\ref{exp-results}. Finally, areas of
-further research are indicated along with conclusions and recommendations
-about the method.
+presented. A~detailed description of the DARWIN method is presented in
+Chapter~\ref{darwin-the-idea}. Chapter~\ref{darwin-implementation} discusses
+an implementation on an IBM-PC class computer. Experiment results are shown
+and discussed in Chapter~\ref{exp-results}. Finally, areas of further research
+are indicated along with conclusions and recommendations about the method.
 
 The goal of the thesis is to implement the DARWIN method, evaluate its
 performance on a~few MOO problems and test the influence of method's

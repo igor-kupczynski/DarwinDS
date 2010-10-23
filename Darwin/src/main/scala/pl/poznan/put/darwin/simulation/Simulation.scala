@@ -11,11 +11,12 @@ class Simulation(val config: Config, val problem: Problem) {
   private var fired = false
   private val evolver = new DarwinEvolver()
   private[simulation] var observers: List[SimulationObserver] = List()
-  
+
+  var scenarios: List[Map[String, Double]] = Nil
+
   def run(markedSolutions: List[MarkedSolution]): List[EvaluatedSolution] = {
     if (!fired) {
       fired = true
-      var scenarios: List[Map[String, Double]] = Nil
       for (idx <- 1 to config.SCENARIO_COUNT) {
         scenarios = Scenario.generate(problem) :: scenarios
       }

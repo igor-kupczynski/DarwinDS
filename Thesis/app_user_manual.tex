@@ -1,3 +1,4 @@
+\chapter{User's manual}
 \label{user-manual}
 
 \section*{A graphical user interface for DARWIN}
@@ -11,7 +12,7 @@ Runtime Environment (JRE) 1.5 or later is required. To run the application,
 double click on a~file \texttt{darwin-full.jar} in a~graphical user interface
 or type following command in a terminal:\\
 \texttt{\$ java -jar darwin-full.jar} \\
-The figure~\ref{manual_01_main} shows the main window of DARWIN.
+Figure~\ref{manual_01_main} shows the main window of DARWIN.
 
 \begin{figure}[htb]
   \centering
@@ -26,27 +27,27 @@ distribution.
 \subsection*{Solving exemplary problems}
 
 DARWIN offers an intuitive and easy to use interface for solving MMO
-problems. The main window is presented in figure~\ref{manual_01_main}. To
+problems. The main window is presented in Figure~\ref{manual_01_main}. To
 solve a~problem one need to execute following steps:
 
 \begin{enumerate}
 \item Click the ``Open'' button in the main window.
 \item Choose a problem file using a~provided file selector
-  (fig.~\ref{manual_02_problem_selector}). The problem has to be described in
+  (Figure~\ref{manual_02_problem_selector}). The problem has to be described in
   the DARWIN .mod (model) file format.
 \item The main window now shows a name of the problem
-  (fig.~\ref{manual_03_selected}). Click ``Solve''.
+  (Figure~\ref{manual_03_selected}). Click ``Solve''.
 \item A window presenting generated solutions appears
-  (fig.~\ref{manual_04_mark_as_good}). Mark preferred solutions as ``good''
+  (Figure~\ref{manual_04_mark_as_good}). Mark preferred solutions as ``good''
   using checkboxes in the ``is good'' column.
 \item A window with solution details can be invoked by selecting a~solution
-  and clicking the ``Solution details'' button (fig.~\ref{manual_05_dec_var}).
+  and clicking the ``Solution details'' button (Figure~\ref{manual_05_dec_var}).
 \item After selecting the solutions an evolutionary optimization begins
-  (fig.~\ref{manual_06_evo_loop}). New solutions are generated and one can
+  (Figure~\ref{manual_06_evo_loop}). New solutions are generated and one can
   mark ``good'' solutions from a new set again.
 \item If generated solutions are satisfactory, then one can stop the
   algorithm by clicking ``Mark as good'' when no solutions are selected
-  (fig.~\ref{manual_07_finish}).
+  (Figure~\ref{manual_07_finish}).
 \end{enumerate}
 
 \begin{figure}[htb]
@@ -96,7 +97,7 @@ solve a~problem one need to execute following steps:
 
 The DARWIN GUI offers additional options to customize the process. One can
 modify the algorithm parameters in a~configuration dialog
-(fig.~\ref{manual_08_options}). To open it, click the ``Options'' button in
+(Figure~\ref{manual_08_options}). To open it, click the ``Options'' button in
 the main window. The options are described below.
 
 \begin{table}[htb]
@@ -152,7 +153,7 @@ the main window. The options are described below.
 
 The window presenting a~list of generated solutions offers additional
 features. The list of solutions can be sorted on a given criterion by clicking
-the column header (fig.~\ref{manual_09_sorton}). Another useful option is a
+the column header (Figure~\ref{manual_09_sorton}). Another useful option is a
 history of solutions. The user can review solutions generated in earlier
 iterations, return to them and change his or her selections. This is possible
 using the history toolbar (see\ref{manual_10_history}).
@@ -179,7 +180,7 @@ using the history toolbar (see\ref{manual_10_history}).
 \end{figure}
 
 \clearpage{}
-\section*{The DARWIN .mod file format}
+\chapter{The DARWIN .mod file format}
 
 MMO problems for DARWIN are specified in external files. These files are
 called the DARWIN model files and usually have the \texttt{.mod}
@@ -217,7 +218,7 @@ supposed utility function is using meaningful percentiles
 
 
 
-\section*{Compiling DARWIN from the source code}
+\chapter{Compiling DARWIN from the source code}
 
 It is possible to build a DARWIN binary from the source code. It can be done
 using command line on Windows, Linux and MacOSX.  Instructions are given
@@ -289,7 +290,7 @@ are described below:
   \end{lstlisting}
 
   
-  Required sections and options are described in the table~\ref{t:params}. The
+  Required sections and options are described in Table~\ref{t:params}. The
   test plan specification is a text file with the~following structure:
   \begin{lstlisting}
     >test_name_1/number-of-runs
@@ -338,7 +339,7 @@ are described below:
   not be given should be set to $0$. \texttt{charts-dir} is the directory with
   the \texttt{R} charts to be generated. Finally, \texttt{testplan-out-dir} is
   an output directory of the \texttt{runTestPlan.py} script. Available types
-  of charts are presented in figure~\ref{chart_examples}.
+  of charts are presented in Figure~\ref{chart_examples}.
 
   The script will generate distinct charts for each test run. If one wants a
   comparison between the tests, then \texttt{./genSummaryChart.sh} should be
@@ -350,7 +351,7 @@ are described below:
   task. The usage is: \\
   \texttt{\$ ./genSummaryChart.sh best-val charts-dir testplan-out-dir
     problem-name}\\
-  Available types of charts are presented in figure~\ref{chart_examples2}.
+  Available types of charts are presented in Figure~\ref{chart_examples2}.
 
 
 

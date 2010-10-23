@@ -1,4 +1,4 @@
-\section{Presence of uncertainty}
+\section{The case of uncertainty}
 In the previous sections the algorithm's results were analyzed. It was assumed
 that the problems were well-specified with no room for uncertainty. It was a
 way to test the algorithm's behavior and to get the idea about its properties.
@@ -32,13 +32,14 @@ Before evaluating performances on exemplary problems it is a good idea to
 analyze a single run on a single problem. It can indicate interesting
 properties or potential problems of the algorithm.
 
-The problem being evaluated is a two-criteria mix problem (this a problem
-presented at the original DARWIN lecture given at~[ref]). Note that although
-the problem has only two-criteria in its definition it has to be considered in
-a space with more dimensions. This is because the supposed utility function is
-defined not in the original two-criteria space (\textit{max} profit,
-\textit{min} time) but rather in a quantile space. The function is defined as
-follows:
+The problem being evaluated is a two-criteria mix problem (this the problem
+presented at the original DARWIN lecture given at \textit{5th International
+  Workshop on Preferences and Decisions}, Trento, April 2009). Note that
+although the problem has only two-criteria in its definition it has to be
+considered in a space with more dimensions. This is because the supposed
+utility function is defined not in the original two-criteria space
+(\textit{max} profit, \textit{min} time) but rather in a quantile space. The
+function is defined as follows:
 \begin{equation*}
 \textit{max}: \hspace{0.2cm} \text{profit}^{1\%} + 3 * \text{profit}^{25\%} +
 2 * \text{profit}^{50\%} - \text{time}^{1\%} - 3 * \text{time}^{25\%} - 2 *
@@ -58,7 +59,7 @@ profit.
 \end{figure}
 
 Basic performance of a single run is presented in
-figure~\ref{pres_utilouter}. As one can see the algorithm needs only four
+Figure~\ref{pres_utilouter}. As one can see the algorithm needs only four
 iterations to reach the maximum value --- a point where no further improvement
 occurs\footnote{This is not an optimal solution to the problem. By their
   nature --- intervals and scenarios of uncertainty --- a problem from this
@@ -66,16 +67,16 @@ occurs\footnote{This is not an optimal solution to the problem. By their
 
 Improvements of the supposed utility function and primary score are shown in
 figures~\ref{pres_utilgen_01},~\ref{pres_utilgen_03} whereas the shape of the
-population in fig.~\ref{pres_utilind_01},~\ref{pres_utilind_03}. One can see
+population in Figure~\ref{pres_utilind_01},~\ref{pres_utilind_03}. One can see
 that it is easy to generate a good solution to the problem --- a solution with
 the best result in a given run appears in the first few generations.
 
 Having six-dimensional objective space it is impossible to provide a section
 of this space on a two-dimensional chart. However, these dimensions are not
 completely independent. There is a correlation between the quantiles of the
-same objective. This can be observed in fig.~\ref{pres_valweight} --- showing
+same objective. This can be observed in Figure~\ref{pres_valweight} --- showing
 the movement of population during the generation on a section of objective
-space, or even better in fig.~\ref{pres_dm_choices} --- solutions marked by the
+space, or even better in Figure~\ref{pres_dm_choices} --- solutions marked by the
 decision maker as ``good''.
 
 As expected the solutions chosen by the DM are near the pareto-front. However,
@@ -147,7 +148,7 @@ besides profit$^{50\%}$ and time$^{50\%}$ explains the phenomenon.
 \end{figure}
 \clearpage{}
 
-\subsection{The performance on exemplary problems}
+\subsection{The computational performance on exemplary problems}
 To see how well DARWIN can infer the decision maker's preferences a comparison
 with the supposed utility function is given. For this section the experiments
 were performed on all exemplary problems with interval coefficients --- mix
@@ -245,8 +246,8 @@ function value as an objective in evolutionary optimization.
   \label{t:perf-comp}
 \end{table}
 
-The results are shown in table~\ref{t:perf-comp} and presented in
-figure~\ref{pres_perf}, \ref{dtlz1_c4_perf}, \ref{dtlz1_c10_perf}
+The results are shown in Table~\ref{t:perf-comp} and presented in
+Figure~\ref{pres_perf}, \ref{dtlz1_c4_perf}, \ref{dtlz1_c10_perf}
 and~\ref{dtlz7_c4_perf}. There was almost no difference for the mix problem
 (less than $1\%$) and a minor difference for the dtlz7 problem --- less than
 $5\%$. Unfortunately, differences for dtlz1 problems (both four- and ten
@@ -263,9 +264,9 @@ iteration. The same applies to comparison tables.
 \subsection{The influence of the basic parameters on the method}
 
 The importance of basic parameters was evaluated again in the robust
-environment. The numerical results are presented in the
-table~\ref{t:base2_imp_1} and~\ref{t:base2_imp_2}. Also charts are included to
-visualize the relations (fig.~\ref{params}).
+environment. The numerical results are presented in Table~\ref{t:base2_imp_1}
+and~\ref{t:base2_imp_2}. Also charts are included to visualize the relations
+(Figure~\ref{params}).
 
 Unfortunately, no clear pattern emerges. For a mix problem the solution is
 robust --- changing the basic parameters changes the value of the result no
@@ -348,26 +349,27 @@ these results.
 
 \clearpage{}
 
-\subsection{Noise in the DM's decisions}
+\subsection{DM's decisions inconsistent with supposed utility function}
 \label{noise-dm2}
 
 
-In order to check the impact of a noise in DM's decisions, experiments were
-performed. The results are presented in figure~\ref{noise} and in the
+In order to check the impact of inconsistencies in DM's decisions, experiments
+were performed. The results are presented in Figure~\ref{noise} and in the
 tables~\ref{t:un_noise_1} and~\ref{t:un_noise_2}.
 
 Again one has to analyze the results excluding the DTLZ1 problem. This is
 because of the standard deviation of the series of results --- again it is the
 same order of magnitude as the value itself.
 
-In the Mix and DTLZ7 problems the effect of the noise starts to be an
-important factor only in case of medium- (noise$_5$) --- the results differ
-about $8\%$ and in case of a major-noise (noise$_6$) --- difference about 12\%
-for the mix problem and about 8\% for the DTLZ7 problem.
+In the Mix and DTLZ7 problems the effect of inconsistencies in DM's decisions
+starts to be an important factor only in case of medium- (noise$_5$) --- the
+results differ about $8\%$ and in case of a major-inconsistencies (noise$_6$)
+--- difference about 12\% for the mix problem and about 8\% for the DTLZ7
+problem.
 
 The situation is similar to the impact on problems defined without
 uncertainty. Even if one adds the interval coefficients to the problem, the
-solution is still robust with respect to the noise.
+solution is still robust with respect to the inconsistencies in the DM's decisions.
 
 
 \begin{figure}
@@ -392,7 +394,7 @@ solution is still robust with respect to the noise.
       \label{dtlz7_c4_noise}
     }
   }
-  \caption{Effect of noise in DM's decisions}
+  \caption{Effect of inconsistencies in DM's decisions}
   \label{noise}
 \end{figure}
 
@@ -402,7 +404,7 @@ solution is still robust with respect to the noise.
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{Mix problem} & \multicolumn{3}{c}{DTLZ1 c4} \\
     \hline
-    noise level & mean & sd & improvement & mean & sd & improvement \\
+    test & mean & sd & improvement & mean & sd & improvement \\
     \hline
     \hline
     base & 6678.95 & 53.86 & 0.00\% & -12.81 & 8.38 & 0.00\% \\
@@ -414,7 +416,7 @@ solution is still robust with respect to the noise.
     noise6 & 5858.94 & 924.72 & -12.28\% & -13.72 & 12.45 & -7.09\% \\
     \hline
   \end{tabular}
-  \caption{The impact of noise in robust environment}
+  \caption{The impact of inconsistencies in robust environment}
   \label{t:un_noise_1}
 \end{table}
 
@@ -423,7 +425,7 @@ solution is still robust with respect to the noise.
   \begin{tabular}{r c c c c c c}
     & \multicolumn{3}{c}{DTLZ1 c10} & \multicolumn{3}{c}{DTLZ7 c4} \\
     \hline
-    noise level & mean & sd & improvement & mean & sd & improvement \\
+    test & mean & sd & improvement & mean & sd & improvement \\
     \hline
     \hline
     base & -13.73 & 8.08 & 0.00\% & -108.86 & 4.00 & 0.00\% \\
@@ -435,7 +437,7 @@ solution is still robust with respect to the noise.
     noise6 & -24.89 & 11.79 & -81.21\% & -117.45 & 7.21 & -7.89\% \\
     \hline
   \end{tabular}
-  \caption{The impact of noise in robust environment}
+  \caption{The impact of inconsistencies in robust environment}
   \label{t:un_noise_2}
 \end{table}
 
@@ -591,7 +593,7 @@ domlem multirules &  15 &-17.71 & 10.34 & \textbf{15.86\%} & -110.17 & 5.48 & -1
 The second option for the rule generator is the AllRules algorithm. The
 version used for the paper has no configuration parameter, but one can
 obviously change the number of solutions marked as good. Results are presented
-in the table~\ref{t:un_allrules_1} and charts~\ref{pres_allrules},
+in Table~\ref{t:un_allrules_1} and charts~\ref{pres_allrules},
 \ref{dtlz1_c4_allrules} and \ref{dtlz7_c4_allrules}. For the mix and DTLZ7
 problems the differences between 3 and 15 good solutions are small and
 insignificant. On the other hand, for the DTLZ1 problem the difference is over
@@ -832,9 +834,87 @@ outer & domlem conf=0.8, good=15 & stddev & all rules, good=15 & stddev & improv
 
 
 \clearpage{}
-\subsection{Average in quantiles}
-\textcolor{green}{TODO}
+\subsection{The second-order stochastic dominance}
 
+Stochastic dominance is a~form of partial ordering over a~set of
+gambles. The~gamble is a~probability distribution over possible outcomes. In
+this section the author focuses on first- and second-order stochastic
+dominance.
+
+\begin{description}
+\item[The first-order dominance] \textit{For two gambles, X and Y, the gamble
+    X has first-order stochastic dominance over the gamble Y if for every
+    possible outcome, X gives at least as high a~probability of receiving the
+    outcome as Y does, and at least one possible outcome exists, for which X
+    gives higher probability of receiving at least the outcome. In case of
+    DARWIN, the dominance can be checked by comparing the highest values in
+    meaningful quantiles.}
+
+\item[The second-order dominance] \textit{For two gambles, X and Y, the gamble
+    X has second-order stochastic dominance over the gamble Y if the former
+    has as high the mean value as the latter, and involves less risk. In case
+    of DARWIN, it is comparing mean values in the quantiles instead of the
+    highest ones.}
+\end{description}
+
+An example of different stochastic dominance is shown in
+Figure~\ref{stochdom}. The solution X dominates Y only when second-order
+stochastic dominance is considered. 
+
+\begin{figure}[h]
+  \centering
+    \includegraphics[scale=0.55]{img/stochdom}
+  \caption{First- and second-order stochastic dominance comparison}
+  \label{stochdom}
+\end{figure}
+
+In the second-order dominance, worse scenarios gain on the
+importance. Therefore, this dominance is more risk-averse than the first-order
+one. This is the case, because bad evaluations in mean values of all quantiles
+are taken into account, while good evaluations are taken into account in mean
+values of high quantiles only.
+
+It is possible to setup DARWIN to use mean in quantiles instead of the highest
+value. Thus, one can make use of the second-order stochastic dominance.
+
+\begin{figure}[t]
+  \centering
+    \subfloat{
+      \includegraphics[width=\textwidth]{img/domprof}
+      \label{dom_comparisiona}
+    }\\
+    \subfloat{
+      \includegraphics[width=\textwidth]{img/domtime}
+      \label{dom_comparisionb}
+    }
+    \caption{An exemplary probability distribution of goals' values}
+  \label{dom_comparision}
+\end{figure}
+
+Figure~\ref{dom_comparision} shows probabilities of receiving a~value, on
+a~given criterion, as an outcome for two exemplary solutions to the mix
+problem. The solutions were obtained by running DARWIN with default options
+(especially with the DomLem algorithm). The exterior loop had been run three
+times, i.e. the Decision Maker marked ``good'' solutions three times. The DM
+preferred solutions with the highest profit$^{50\%}$ value. The experiment was
+conducted twice --- the first time with the highest value in quantile
+(first-order dominance) and the other with a~mean in quantiles (second-order
+dominance).
+
+The charts confirm the intuition. In case of profit, the criterion being the
+most important for the DM, it is clear that one can achieve better results
+with the first-order dominance --- the long tail in the right-hand side of the
+distribution. However, the distribution for the second-order dominance has
+less ``bad'' solutions. The distribution is symmetric with the peak value in
+the middle. Therefore, the latter it is better fitted for the risk-averse
+Decision Maker and the former for the risk-seeking one.
+
+In the second-order stochastic dominance the ``bad'' solutions are more
+important, therefore there were eliminated in favor of average ones. This is
+also the case for the time criterion (the lower the better). However,
+minimizing the time was not a~priority for the DM, as a result, there are no
+better solutions in the first-order distribution, because they would imply
+worsening the profit goal.
 
 \clearpage{}
 \subsection{The best results}

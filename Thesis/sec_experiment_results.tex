@@ -2,10 +2,10 @@ DARWIN is a new method and according to the author's knowledge it hasn't been
 implemented before. Experiments are designed to check if the method is working
 at all, what parameters are important for the method and what should be their
 reasonable default values. To make the results repeatable the DM is
-mocked. Noise in his or her decisions is simulated. Unless uncertainty is
-involved, comparisons to the exact optimal solution are provided. In tests
-involving uncertainty results are compared to supposed utility function
-optimization.
+mocked. Inconsistencies in his or her decisions are simulated. Unless
+uncertainty is involved, comparisons to the exact optimal solution are
+provided. In tests involving uncertainty results are compared to supposed
+utility function optimization.
 
 \section{The environment}
 
@@ -17,8 +17,11 @@ for application to 768MB. Tests were performed through CLI batch interface.
 
 Test framework is available in order to automate the experiment process. All
 experiments were repeated at least thirteen times. Data analysis and chart
-generation were performed using an R environment [ref]. The framework is a
-combination of the Python [ref] and Bash [ref] code communicating with main
+generation were performed using an R environment\footnote{The R Project for
+  Statistical Computing --- http://www.r-project.org/}. The framework is
+a~combination of the Python\footnote{The Python Programming Language ---
+  http://python.org/} and Bash\footnote{Bourne-Again SHell ---
+  http://www.gnu.org/software/bash/bash.html} code communicating with main
 DARWIN code and with the modules written in R.
 
 \section{The Decision Maker}
@@ -41,8 +44,8 @@ however this can be configured) solutions with the highest supposed utility.
 
 Unfortunately real decision maker, being a human isn't as predictable and
 repeatable as the described process. In the sections~\ref{dm-noise}
-and~\ref{noise-dm2} the results of introducing noise to DM's decisions are
-presented.
+and~\ref{noise-dm2} the results of introducing inconsistencies to DM's
+decisions are presented.
 
 In the following problems the supposed utility function is also defined.
 
@@ -50,18 +53,19 @@ In the following problems the supposed utility function is also defined.
 
 The area of interest for Multi-Objective Optimization is huge and consists of
 many potential problems to be solved. There are multi-criteria versions of
-classical problems, like minimal spanning tree~[ref], traveling salesman
-problem (TSP)~[ref] or knapsack problem~[ref] as well as an artificially
-generated ones --- like the DTLZ problems [ref]. Some of them are interesting
-because of their real-life applications while the others are good for
-experimenting and testing purposes.
+classical problems, like minimum spanning tree~\cite{GH85}, traveling salesman
+problem (TSP)~\cite{CRS+01} or knapsack problem~\cite{PGP10} as well as an
+artificially generated ones --- like the DTLZ problem~\cite{DTL+02} Some of
+them are interesting because of their real-life applications while the others
+are good for experimenting and testing purposes.
 
 It is worth noting that the ordinary single-criterion versions of the problems
 can be easy to solve. However, in multi-criteria settings one has to infer the
 decision maker's preferences and approximate the supposed utility function
 correctly. The challenge here is not to build the best optimization algorithm
-for all the problems (this is impossible according to no-free-lunch theorem
-[ref]) but rather a framework for preference information extraction.
+for all the problems (this is impossible according to no-free-lunch
+theorem~\cite{WM97}) but rather a framework for preference information
+extraction.
 
 The experiments were performed using following problems:
 \begin{description}
@@ -152,7 +156,7 @@ The experiments were performed using following problems:
     by additional constraints.
 
     This problem was build according to constraint surface approach presented
-    in~[ref].
+    in~\cite{DTL+02}.
 
   \item{\textbf{Two-criteria robust mix problem}}
     \begin{align*}
@@ -179,10 +183,13 @@ The experiments were performed using following problems:
     \end{align*}
     
     
-    The problem was described in a presentation given on ... ([ref])
-    describing the DARWIN method. It contains a lot of coefficients given in
-    the form of intervals. For readability's sake they were named and defined
-    below the criteria.
+    The problem was described in a presentation \textit{DARWIN:
+      Dominance-based rough set Approach to handling Robust Winning solutions
+      in INteractive multiobjective optimization} given at 5th International
+    Workshop on Preferences and Decisions in Trento, 2009) describing the
+    DARWIN method. It contains a lot of coefficients given in the form of
+    intervals. For readability's sake they were named and defined below the
+    criteria.
 
     The goal is to set quantity of each product ($A, B, C$) to be
     produced. One wants to maximize the profit and minimized the total time it
@@ -219,9 +226,10 @@ The experiments were performed using following problems:
       -4 * \text{f}_3^{30\%} -2 * \text{f}_1^{30\%}
     \end{align*}
 
-    This problem is a variation of DTLZ7 problem from [ref] article. The
-    problem was constructed using constraint surface approach described in the
-    article. However, interval coefficients were added to the goals.
+    This problem is a variation of DTLZ7 problem from~~\cite{DTL+02}
+    article. The problem was constructed using constraint surface approach
+    described in the article. However, interval coefficients were added to the
+    goals.
 
 
   \item{\textbf{Robust DTLZ1 problem}}
@@ -245,10 +253,10 @@ The experiments were performed using following problems:
       & \hspace{0.5cm} \sum_{i=1}^M (-M+i-1) * f_i^{25\%} 
     \end{align*}
 
-  Another problem that is suggested in [ref]. It was constructed using
-  bottom-up approach ([ref]). Intervals were added to the goal functions. $M$
-  indicates the number of goals. In the experiments problems with 4 and 10 criteria
-  were used.
+    Another problem that is suggested in~\cite{DTL+02}. It was constructed
+    using bottom-up approach. Intervals were added to the goal functions. $M$
+    indicates the number of goals. In the experiments problems with 4 and 10
+    criteria were used.
 
 \end{description}
 
@@ -258,16 +266,16 @@ The experiments were performed using following problems:
 
 \section{Conclusions}
 
-The experiments performed confirmed that the method proposed in~[ref] can be
-used to solve multi-objective optimization problems even when the problem
-formulation does contain uncertainty in the form of intervals of possible
-values.
+The experiments performed confirmed that the DARWIN method proposed
+in~\cite{GMS10, GMS10b, GMS10c} is a~good too for solving multi-objective
+optimization problems even when the problem formulation does contain
+uncertainty in the form of intervals of possible values.
 
-At the moment of writing according to the author's knowledge there was no
-working implementation of the DARWIN method. The first task was to analyze
-behavior of the algorithm on simple two-criteria problem without
-uncertainty. First evaluations allowed the author to learn the properties and
-to get to know the behavior of the algorithm.
+The presented implementation is the first implementation of the DARWIN method
+which permits performing so large computational experiments. The first task
+was to analyze behavior of the algorithm on simple two-criteria problem
+without uncertainty. First evaluations allowed the author to learn the
+properties and to get to know the behavior of the algorithm.
 
 Having confidence that the DARWIN works it was possible to advance to the next
 task --- to evaluate the performance of a richer set of the problem. It was
@@ -280,24 +288,24 @@ There are a lot of parameters in the algorithm itself, so the next logical
 step was to check the importance of the parameters. Experiments performed so
 far assumed that the decision maker is infallible, consistent and acts
 according to a well-defined utility function. It is not the case in real-life
-situations so the impact of noise in DM's decisions was measured.
+situations so the impact of inconsistencies in DM's decisions was measured.
 
 Knowing the characteristics, performance and impact of the parameters and the
-noise one can check if the algorithm with similar characteristics on problems
-with interval coefficients. Being unsatisfied with the performance on DTLZ1
-problems the author checked the influence of DomLem parameters on the result
-and included a~second rules generating algorithm --- the AllRules
-algorithm. As a result a~rich set of data containing performance
+inconsistent DM's decisions one can check if the algorithm with similar
+characteristics on problems with interval coefficients. Being unsatisfied with
+the performance on DTLZ1 problems the author checked the influence of DomLem
+parameters on the result and included a~second rules generating algorithm ---
+the AllRules algorithm. As a result a~rich set of data containing performance
 characteristics was gathered.
 
-To conclude, the DARWIN method can handle MOO very well problems. A resulting
-solution is robust with respect to algorithm parameters, decision-maker's
-noise and finally to the uncertainty in the problem definition. Nevertheless
-the analyst should be careful and investigate the problem instead of using the
-method blindly. There are some problems which are hard for DARWIN to solve
-(e.g. DTLZ1). Even for these problems satisfactory results can be achieved,
-however one has to fine-tune the parameters and carefully observe their impact
-on the result.
+To conclude, the DARWIN method can handle very well a~large variety of MOO
+problems. A resulting solution is robust with respect to algorithm parameters,
+inconsistencies in Decision Maker's choices and finally to the uncertainty in
+the problem definition. Nevertheless the analyst should be careful and
+investigate the problem instead of using the method blindly. There are some
+problems which are hard for DARWIN to solve (e.g. DTLZ1). Even for these
+problems satisfactory results can be achieved, however, one has to fine-tune
+the parameters and carefully observe their impact on the result.
 
 The method is simple to use for the decision maker even if he or she has no
 knowledge in the decision support field. However for some problems the
