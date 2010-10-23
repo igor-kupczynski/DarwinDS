@@ -23,22 +23,24 @@ prep.data.ps <- function(x) {
 
 gen.plot.util <- function(outerIdx, data) {
   dataM <- melt(data, id=c("generation"))
+  dataM$result_value <- dataM$result_variable
   c <- ggplot(dataM)
   c <- c + geom_ribbon(aes(generation, ymin=utility_min, ymax=utility_max),
                        data=data, alpha=0.2)
-  c <- c + geom_point(aes(generation, value, colour=result_variable))
-  c <- c +  geom_line(aes(generation, value, colour=result_variable))
+  c <- c + geom_point(aes(generation, value, colour=result_value))
+  c <- c +  geom_line(aes(generation, value, colour=result_value))
   c <- c + opts(title=paste("UtilGen, ext.iter.=", outerIdx, sep=""))
   c
 }
 
 gen.plot.ps <- function(outerIdx, data) {
   dataM <- melt(data, id=c("generation"))
+  dataM$result_value <- dataM$result_variable
   c <- ggplot(dataM)
   c <- c + geom_ribbon(aes(generation, ymin=primary_min, ymax=primary_max),
                        data=data, alpha=0.2)
-  c <- c + geom_point(aes(generation, value, colour=result_variable))
-  c <- c +  geom_line(aes(generation, value, colour=result_variable))
+  c <- c + geom_point(aes(generation, value, colour=result_value))
+  c <- c +  geom_line(aes(generation, value, colour=result_value))
   c <- c + opts(title=paste("PrimaryScoreGen, ext.iter.=", outerIdx, sep=""))
   c
 }
