@@ -7,6 +7,7 @@ import pl.poznan.put.darwin.model.solution._
 import java.awt.Cursor
 import collection.mutable.ArrayBuffer
 import javax.swing.{SwingWorker => JSW}
+import com.weiglewilczek.slf4s.Logging
 
 class DarwinWindow(main: Window) extends BorderPanel {
 
@@ -95,7 +96,8 @@ class Controls extends FlowPanel {
 }
 
 class SimRunner(dW: DarwinWindow,
-                marked: List[MarkedSolution]) extends JSW[List[EvaluatedSolution], Any] {
+                marked: List[MarkedSolution]) extends JSW[List[EvaluatedSolution], Any]
+    with Logging {
 
   def doInBackground: scala.List[EvaluatedSolution] = {
     dW.sim.run(marked)
@@ -107,7 +109,10 @@ class SimRunner(dW: DarwinWindow,
       val evaluated = get()
       dW.nextIter(evaluated)
     } catch {
-      case e: Exception => e.printStackTrace
+      case e => {
+        logger.error("An error occured", e)
+        System.exit(-1)
+      }
     }
   }
 }

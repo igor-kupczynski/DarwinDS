@@ -1,10 +1,12 @@
 package pl.poznan.put.darwin.model.problem
 import scala.util.parsing.combinator._
 import pl.poznan.put.darwin.utils.TimeUtils
+import com.weiglewilczek.slf4s.Logging
 
-object Parser {
+object Parser extends Logging {
 
   def fromText(text: String): Problem = {
+    logger info "Parsing problem:\n%s".format(text)
     val result: ProblemParser.ParseResult[Problem] = ProblemParser.parse(text)
     if (result.successful == false) {
       throw new Exception("%s" format result)

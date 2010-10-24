@@ -1,12 +1,13 @@
 package pl.poznan.put.darwin.model
 
-import java.util.Random
+import scala.collection.JavaConversions._
 import org.ini4j.ConfigParser
 import scala.util.matching.Regex
 import pl.poznan.put.cs.idss.jrs.rules.VCDomLem
 import java.io.ByteArrayInputStream
+import com.weiglewilczek.slf4s.{Logging}
 
-object Config {
+object Config extends Logging {
 
   def apply(): Config = new Config(Config.parser)
 
@@ -91,7 +92,9 @@ object Config {
   }
 }
 
-class Config(parser: ConfigParser) {
+class Config(parser: ConfigParser) extends Logging {
+
+  logger info "New config:\n%s".format(parserToString(parser))
 
   var problem_name: String = "problem"
 
@@ -162,6 +165,17 @@ class Config(parser: ConfigParser) {
   private def getListOfInts(str: String): List[Int] = {
     val r = new Regex(",")
     r.split(str).toList.map(x => x.trim.toInt)
+  }
+
+  private def parserToString(parser: ConfigParser): String = {
+    val r = new StringBuilder()
+    for (s <- parser.sections) {
+      r.append("[%s]\n" format s)
+      for(k <- parser.items(s)) {
+        r.append("%s = %s\n" format (k.getKey, k.getValue))
+      }
+    }
+    r.toString
   }
   
 }
