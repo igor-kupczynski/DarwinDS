@@ -4,6 +4,7 @@ import pl.poznan.put.darwin.jrsintegration.AbstractRulesContainer
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.Goal
 import pl.poznan.put.darwin.simulation.Simulation
+import com.weiglewilczek.slf4s.Logging
 
 /**
  * Solution evaluated on set of scenarios and with primary and secondary score calculated.
@@ -50,7 +51,7 @@ class RankedSolution(sim: Simulation, values: Map[String, Double],
  *
  * @author: Igor Kupczynski
  */
-object RankedSolution {
+object RankedSolution extends Logging {
 
   /**
    * Create gang of RankedSolutions from pack of EvaluatedSolutions.
@@ -59,6 +60,9 @@ object RankedSolution {
   def apply(solutions: List[EvaluatedSolution],
             rulesContainer: AbstractRulesContainer):
       List[RankedSolution] = {
+
+    logger info "Ranking the solutions"
+
     val primaryScores: Map[EvaluatedSolution, Double] =
       calculatePrimary(rulesContainer, solutions)
     val crowdingDistances = calculateCrowding(solutions)

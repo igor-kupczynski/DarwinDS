@@ -5,12 +5,11 @@ import event._
 import org.ini4j.ConfigParser
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
-import pl.poznan.put.darwin.utils.TimeUtils
-import java.awt.Cursor
 import java.io.{FileOutputStream, File}
 import pl.poznan.put.darwin.simulation.{FullEvoReportGenerator, DMReportGenerator, EvolutionReportGenerator, Simulation}
+import com.weiglewilczek.slf4s.Logging
 
-class Selectors(main: Window) extends GridPanel(1, 4) {
+class Selectors(main: Window) extends GridPanel(1, 4) with Logging {
   hGap = 3
   vGap = 3
 
@@ -73,7 +72,9 @@ class Selectors(main: Window) extends GridPanel(1, 4) {
         problemFileName = chooser.nameFor(file)
         problemFileLabel.text = problemFileName
         val lines = io.Source.fromFile(file).mkString
-        problem = TimeUtils.time("Parser.fromText", Parser.fromText(lines))
+        logger info "Opening %s".format(problemFileName)
+        problem = Parser.fromText(lines)
+        logger info "Opened %s".format(problemFileName)
       }
     }
   }

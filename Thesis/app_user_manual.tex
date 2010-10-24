@@ -39,15 +39,16 @@ solve a~problem one need to execute following steps:
   (Figure~\ref{manual_03_selected}). Click ``Solve''.
 \item A window presenting generated solutions appears
   (Figure~\ref{manual_04_mark_as_good}). Mark preferred solutions as ``good''
-  using checkboxes in the ``is good'' column.
+  using checkboxes in the ``Is good'' column. Click ``Next iteration'' in
+  order to start evolutionary optimization procedure.
 \item A window with solution details can be invoked by selecting a~solution
   and clicking the ``Solution details'' button (Figure~\ref{manual_05_dec_var}).
 \item After selecting the solutions an evolutionary optimization begins
   (Figure~\ref{manual_06_evo_loop}). New solutions are generated and one can
   mark ``good'' solutions from a new set again.
-\item If generated solutions are satisfactory, then one can stop the
-  algorithm by clicking ``Mark as good'' when no solutions are selected
-  (Figure~\ref{manual_07_finish}).
+\item If generated solutions are satisfactory, then one can stop the algorithm
+  by clicking ``End the algorithm''. It there are solutions marked as good,
+  they will be saved. (Figure~\ref{manual_07_finish}).
 \end{enumerate}
 
 \begin{figure}[htb]
@@ -66,14 +67,14 @@ solve a~problem one need to execute following steps:
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.7]{img/manual/04_marking_solutions}
+  \includegraphics[scale=0.6]{img/manual/04_marking_solutions}
   \caption{Marking the ``good'' subset of generated solutions}
   \label{manual_04_mark_as_good}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.7]{img/manual/05_solution_details}
+  \includegraphics[scale=0.6]{img/manual/05_solution_details}
   \caption{Decision variables for a given solution}
   \label{manual_05_dec_var}
 \end{figure}
@@ -87,7 +88,7 @@ solve a~problem one need to execute following steps:
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.7]{img/manual/07_end_of_run}
+  \includegraphics[scale=0.6]{img/manual/07_end_of_run}
   \caption{Finish the problem analysis}
   \label{manual_07_finish}
 \end{figure}
@@ -167,14 +168,14 @@ using the history toolbar (see\ref{manual_10_history}).
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.7]{img/manual/09_sorton}
+  \includegraphics[scale=0.6]{img/manual/09_sorton}
   \caption{Sorting solutions on a given criterion}
   \label{manual_09_sorton}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.7]{img/manual/10_history}
+  \includegraphics[scale=0.6]{img/manual/10_history}
   \caption{Reviewing the history of generated solutions}
   \label{manual_10_history}
 \end{figure}
@@ -195,7 +196,7 @@ starting with \texttt{\#}, e.g. \texttt{ \#a-line-comment} and (2) block
 comments, enclosed in \texttt{/* */}. Whitespaces are ignored.
 
 A problem file consists of lines, each line contains a~statement ended by
-a~semicolon (\texttt{;}). A statement can define the supposed utility
+a~semicolon (\texttt{;}). A~statement can define the supposed utility
 function, a~variable, a~goal or a~constraint. The variables are defining the
 problem domain. They can be continuous (with double floating point precision),
 binary (indicated by a \texttt{(B)} flag) or integer (\texttt{(I)} flag).

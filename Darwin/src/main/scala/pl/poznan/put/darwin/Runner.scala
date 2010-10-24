@@ -6,8 +6,9 @@ import pl.poznan.put.darwin.simulation.{BriefReportGenerator, EvolutionReportGen
 import pl.poznan.put.darwin.model.problem.{Parser, Problem}
 import pl.poznan.put.darwin.model.solution._
 import org.ini4j.ConfigParser
-  
-class Runner(problemFilename: String, configFilename: String) {
+import com.weiglewilczek.slf4s.Logging
+
+class Runner(problemFilename: String, configFilename: String) extends Logging {
   
   def run() {
 
@@ -17,8 +18,10 @@ class Runner(problemFilename: String, configFilename: String) {
     val config = new Config(parser)
 
     val lines = io.Source.fromFile(problemFilename).mkString
+    logger info "Opening %s".format(problemFilename)
     val problem: Problem = Parser.fromText(lines)
-   
+    logger info "Opened %s".format(problemFilename)
+
     val sim = new Simulation(config, problem)
 
     val evoOut = if (config.EVOLUTION_REPORT != "")

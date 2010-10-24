@@ -7,9 +7,10 @@ import pl.poznan.put.darwin.model.solution._
 import javax.swing.table.AbstractTableModel
 import java.lang.{Class, String}
 import collection.mutable.ArrayBuffer
-import javax.swing.{Box, JTable}
+import javax.swing.{JTable}
 import java.io.{FileWriter, File}
 import javax.swing.filechooser.FileNameExtensionFilter
+import com.weiglewilczek.slf4s.Logging
 
 object DarwinDialog {
   def show(window: Window,
@@ -26,7 +27,7 @@ object DarwinDialog {
   
 class DarwinDialog(window: Window, val sim: Simulation,
                    history: ArrayBuffer[List[EvaluatedSolution]])
-    extends Dialog(window) {
+    extends Dialog(window) with Logging {
 
   var currentRun = history.size - 1
   var evaluated = history(currentRun)
@@ -87,6 +88,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
           "You have not selected any solutions. Click the checkbox in 'Is good?' column to mark.",
           "No solutions are selected")
       } else {
+        logger info "DM marked the solutions"
         visible = false
       }
     }
@@ -99,6 +101,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
             "Do you want to end?", Dialog.Options.YesNo)
         val confirm = (d == Dialog.Result.Yes)
         if (confirm) {
+          logger info "DM wants to end. No solutions selected."
           visible = false
         }
       } else {
@@ -115,6 +118,8 @@ class DarwinDialog(window: Window, val sim: Simulation,
           if (rc == FileChooser.Result.Approve) {
             val file = chooser.selectedFile
             saveSolutions(file)
+            logger info "DM wants to end. Solutions saved in: %s".format(file.getName)
+            marked = Nil
             visible = false
           }
         }

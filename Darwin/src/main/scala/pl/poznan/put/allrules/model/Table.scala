@@ -1,7 +1,6 @@
 package pl.poznan.put.allrules.model
 
 import collection.mutable.ListBuffer
-import pl.poznan.put.darwin.utils.TimeUtils
 import reflect.{ClassManifest, Manifest}
 import collection.immutable.VectorBuilder
 import collection.SortedSet

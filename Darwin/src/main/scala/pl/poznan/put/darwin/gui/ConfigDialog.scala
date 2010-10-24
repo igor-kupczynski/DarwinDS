@@ -185,19 +185,16 @@ object ConfigTab {
 
       private def resetEvReport {
         val evPath = if (evReportCb.selected) "%s/evolution_report.csv" format reportPrefix else ""
-        println("ev <- %s" format evPath)
         parser.set("reports", "evolutionreport", evPath)
       }
 
       private def resetDmReport {
         val dmPath = if (dmReportCb.selected) "%s/dm_report.csv" format reportPrefix else ""
-        println("dm <- %s" format dmPath)
         parser.set("reports", "dmreport", dmPath)
       }
 
       private def resetRules {
         val path = if (rulesCb.selected) rules else ""
-        println("rules <- %s" format path)
         parser.set("reports", "rulesdirectory", path)
       }
 

@@ -5,6 +5,7 @@ import pl.poznan.put.darwin.model.problem.{BinaryConstraint,
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.{Solution, RankedSolution}
 import pl.poznan.put.darwin.utils.RNG
+import com.weiglewilczek.slf4s.Logging
 
 /**
 * CrossOver
@@ -13,10 +14,13 @@ import pl.poznan.put.darwin.utils.RNG
 *
 * @author Igor Kupczynski 
 */
-object CrossOver  {
+object CrossOver extends Logging {
 
   def apply(a: Solution, b: Solution, scenarios: List[Map[String, Double]]):
       Solution = {
+
+    logger info "Crossing the parents over"
+
     var c: Map[String, Double] = null
     while (c == null ||
            !(new Solution(a.sim, c)).isFeasibleOnScenarios(scenarios)) {

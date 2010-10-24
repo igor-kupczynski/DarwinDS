@@ -63,14 +63,15 @@ class EvaluatedSolution(sim: Simulation, values: Map[String, Double],
  *
  * @author: Igor Kupczynski
  */
-object EvaluatedSolution {
+object EvaluatedSolution{
 
   /**
    * Evaluates all the solutions given as arguments
    */
   def apply(solutions: List[Solution], scenarios: List[Map[String, Double]]):
-      List[EvaluatedSolution] =
+      List[EvaluatedSolution] = {
     solutions.map(s => apply(s, scenarios))
+  }
   
   /**
    * Creates one evaluated solution from given solution and scenarios

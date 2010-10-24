@@ -24,6 +24,11 @@ class DarwinProject(info: ProjectInfo) extends DefaultProject(info)
   val junit = "junit" % "junit" % "4.8.1" % "test"
 
   val slf4s = "com.weiglewilczek.slf4s" %% "slf4s" % "1.0.2"
+  val slf4j_log4j12 = "org.slf4j" % "slf4j-log4j12" % "1.6.1"
+  
+  val log4j = "log4j" % "log4j" % "1.2.16"
+
+
 
   override def mainClass = Some("pl.poznan.put.darwin.RunnerGUI")
 

@@ -4,6 +4,7 @@ import scala.Iterator.range
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.solution.RankedSolution
 import pl.poznan.put.darwin.utils.RNG
+import com.weiglewilczek.slf4s.Logging
 
 
 /**
@@ -11,12 +12,15 @@ import pl.poznan.put.darwin.utils.RNG
  *
  * @author Igor Kupczynski
  */
-object SelectionStrategy {
+object SelectionStrategy extends Logging {
 
   /**
    * From list of evaluated solutions return list of parents. Two parents for one child.
    */
   def apply(individuals: List[RankedSolution], childToGenerate: Int): List[RankedSolution] = {
+
+    logger info "Selecting parents to mating pool"
+
     val probabilities: Array[Double] = computeProbabilities(individuals)
 
     // 2*|Children| = |Parent|

@@ -5,8 +5,9 @@ import pl.poznan.put.darwin.model.problem.Problem
 import pl.poznan.put.darwin.model.solution._
 import pl.poznan.put.darwin.model.Config
 import pl.poznan.put.darwin.model.Scenario
-  
-class Simulation(val config: Config, val problem: Problem) {
+import com.weiglewilczek.slf4s.Logging
+
+class Simulation(val config: Config, val problem: Problem) extends Logging {
   
   private var fired = false
   private val evolver = new DarwinEvolver()
@@ -16,17 +17,23 @@ class Simulation(val config: Config, val problem: Problem) {
 
   def run(markedSolutions: List[MarkedSolution]): List[EvaluatedSolution] = {
     if (!fired) {
+      logger info "Firing simulation"
+
       fired = true
       for (idx <- 1 to config.SCENARIO_COUNT) {
         scenarios = Scenario.generate(problem) :: scenarios
       }
+      logger info "Generated scenarios"
       
       var solutions: List[Solution] = Nil
       for (idx <- 1 to config.SOLUTION_COUNT) {
         solutions = Solution.random(this, scenarios) :: solutions
       }
+      logger info "Generated solutions"
+
       EvaluatedSolution(solutions, scenarios)
     } else {
+      logger info "Performing evolution"
       evolver.preformEvolution(markedSolutions)
     }
   }
