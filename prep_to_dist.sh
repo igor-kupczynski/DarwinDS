@@ -28,9 +28,11 @@ unzip one-jar-boot-0.97.jar
 rm one-jar-boot-0.97.jar
 echo "One-Jar-Main-Class: pl.poznan.put.darwin.RunnerGUI" >> boot-manifest.mf
 
+mkdir main
 mkdir lib
 cp ../Darwin/lib_managed/scala_2.8.0/compile/*.jar lib/
 cp ../Darwin/lib/*.jar lib/
+cp ../Darwin/project/boot/scala-2.8.0/lib/scala-library.jar lib/
 
 cd ..
 

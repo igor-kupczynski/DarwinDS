@@ -38,6 +38,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
   private val btnShow = new Button("Solution details")
   private val btnEnd = new Button("End the algorithm")
 
+  private val btnProblemShow = new Button("Show problem file")
   private val btnPrev = new Button("Previous")
   private val btnNext = new Button("Next")
   private val histLabel = new Label()
@@ -55,6 +56,8 @@ class DarwinDialog(window: Window, val sim: Simulation,
 
   val bp =  new BoxPanel(Orientation.Vertical) {
     contents += new FlowPanel {
+      contents += btnProblemShow
+      contents += new Label("                     ")
       contents += new Label("History:")
       contents += btnPrev
       contents += histLabel
@@ -78,7 +81,7 @@ class DarwinDialog(window: Window, val sim: Simulation,
 
   var marked: List[MarkedSolution] = null
 
-  listenTo(btnMark, btnShow, btnEnd, btnPrev, btnNext)
+  listenTo(btnMark, btnShow, btnEnd, btnProblemShow, btnPrev, btnNext)
 
   reactions += {
     case ButtonClicked(`btnMark`) => {
@@ -149,6 +152,12 @@ class DarwinDialog(window: Window, val sim: Simulation,
       resetButtons
       createTable
       bp.changeTable(table)
+    }
+
+    case ButtonClicked(`btnProblemShow`) => {
+      val sd = new ProblemDialog(this, sim.problem.toString)
+      sd.setLocationRelativeTo(this)
+      sd.visible = true
     }
   }
 
@@ -298,3 +307,10 @@ class SolutionPanel(e: EvaluatedSolution) extends GridPanel(0, 2) {
   }
 }
 
+
+class ProblemDialog(window: Window, text: String)
+        extends Dialog(window) {
+  val area = new TextArea(text, 24, 80)
+  area.editable = false 
+  contents = new ScrollPane(area)
+}
