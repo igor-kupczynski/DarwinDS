@@ -44,8 +44,14 @@ class Selectors(main: Window) extends GridPanel(1, 4) with Logging {
 
   def hasProblem = problem != null
 
+  private def trimExtension(s: String): String = {
+    if (s.endsWith(".mod")) {
+      s.substring(0, s.lastIndexOf("."))
+    } else s
+  }
+
   def newSim: Simulation = {
-    config.problem_name = problemFileName
+    config.problem_name = trimExtension(problemFileName)
     val sim = new Simulation(config, problem)
     if (config.EVOLUTION_REPORT != ""  )
       sim.registerObserver(

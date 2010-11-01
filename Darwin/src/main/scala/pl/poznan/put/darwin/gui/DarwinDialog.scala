@@ -226,8 +226,9 @@ class DarwinDialog(window: Window, val sim: Simulation,
     override def getColumnName(column: Int): String = columnNames.get(column)
     override def getColumnClass(columnIndex: Int): Class[_] = getValueAt(0, columnIndex).getClass
 
-    override def isCellEditable(rowIndex: Int, columnIndex: Int): Boolean =
+    override def isCellEditable(rowIndex: Int, columnIndex: Int): Boolean = {
       if (columnIndex == 1) true else false
+    }
     override def setValueAt(aValue: AnyRef, rowIndex: Int, columnIndex: Int): Unit = {
       rowData.get(rowIndex).set(columnIndex, aValue)
     }
