@@ -71,12 +71,22 @@ object Evaluator {
         (exps.foldLeft[Double](Double.MaxValue))(
           (x, exp) => math.min(x, evaluateSim(exp))
         )
+      case AggregateOp("max", exps) =>
+        (exps.foldLeft[Double](Double.MinValue))(
+          (x, exp) => math.max(x, evaluateSim(exp))
+        )
       case AggregateOp("sum", exps) =>
         (exps.foldLeft[Double](0))(
           (x, exp) => x + evaluateSim(exp)
         )
+      case AggregateOp("sin", exps) =>
+        math.sin(evaluateSim(exps(0)))
       case AggregateOp("cos", exps) =>
         math.cos(evaluateSim(exps(0)))
+      case AggregateOp("tg", exps) =>
+        math.tan(evaluateSim(exps(0)))
+      case AggregateOp("ctg", exps) =>
+        (1.0 / math.tan(evaluateSim(exps(0))))
     }
 
   }

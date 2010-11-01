@@ -38,8 +38,11 @@ class EvaluatorTest extends JUnitSuite {
     val e6 = AggregateOp("min", limit :: x :: Constant(25) :: Nil)
     assertEquals(5.0, eval(e6), 0.0)
 
-    val e6b = AggregateOp("sum", limit :: x :: Constant(25) :: Nil)
-    assertEquals(40.0, eval(e6b), 0.0)
+    val e6b = AggregateOp("max", limit :: x :: Constant(25) :: Nil)
+    assertEquals(25.0, eval(e6b), 0.0)
+
+    val e6c = AggregateOp("sum", limit :: x :: Constant(25) :: Nil)
+    assertEquals(40.0, eval(e6c), 0.0)
     
     val one = Constant(1)
     val zero = Constant(0)
@@ -48,6 +51,18 @@ class EvaluatorTest extends JUnitSuite {
     val e7 = BinaryOp("/", BinaryOp("*", BinaryOp("+", Constant(15), zero),
       UnaryOp("-", UnaryOp("-", one))), UnaryOp("+", one))
     assertEquals(15.0, eval(e7), 0.0)
+
+    val e8a = AggregateOp("sin", Constant(10) :: Constant(0) :: Nil)
+    assertEquals(-0.544021111, eval(e8a), 0.0001)
+
+    val e8b = AggregateOp("cos", Constant(10) :: Constant(0) :: Nil)
+    assertEquals(-0.839071529, eval(e8b), 0.0001)
+
+    val e8c = AggregateOp("tg", Constant(10) :: Constant(0) :: Nil)
+    assertEquals(0.648360827, eval(e8c), 0.0001)
+
+    val e8d = AggregateOp("ctg", Constant(10) :: Constant(0) :: Nil)
+    assertEquals(1.542351045, eval(e8d), 0.0001)
   }
 
 }
